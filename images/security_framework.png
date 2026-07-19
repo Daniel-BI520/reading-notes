@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="Arial, sans-serif">
+  <rect width="800" height="500" fill="#F8F9FA" rx="8"/>
+  <text x="400" y="30" text-anchor="middle" font-size="18" font-weight="bold" fill="#1F4E79">图5 金融数据中心网络安全框架</text>
+
+  <!-- 安全管理中心 -->
+  <rect x="250" y="50" width="300" height="70" rx="10" fill="#1F4E79"/>
+  <text x="400" y="78" text-anchor="middle" font-size="16" font-weight="bold" fill="white">安全管理中心</text>
+  <text x="400" y="100" text-anchor="middle" font-size="10" fill="#B0C4DE">统一策略管理 | 态势感知 | 安全审计 | 等保合规</text>
+
+  <!-- 三重防护 -->
+  <!-- 安全通信网络 -->
+  <rect x="50" y="145" width="700" height="85" rx="8" fill="#E8F0FE" stroke="#1F4E79" stroke-width="2"/>
+  <rect x="50" y="145" width="180" height="85" rx="8" fill="#1F4E79" opacity="0.9"/>
+  <text x="140" y="183" text-anchor="middle" font-size="13" font-weight="bold" fill="white">安全通信网络</text>
+  <text x="140" y="200" text-anchor="middle" font-size="9" fill="#B0C4DE">第三重防护</text>
+  <rect x="245" y="155" width="155" height="30" rx="4" fill="white" stroke="#5B8DB8"/>
+  <text x="322" y="175" text-anchor="middle" font-size="10" fill="#333">传输加密(SSL/TLS)</text>
+  <rect x="410" y="155" width="155" height="30" rx="4" fill="white" stroke="#5B8DB8"/>
+  <text x="487" y="175" text-anchor="middle" font-size="10" fill="#333">IPSec VPN隧道</text>
+  <rect x="575" y="155" width="160" height="30" rx="4" fill="white" stroke="#5B8DB8"/>
+  <text x="655" y="175" text-anchor="middle" font-size="10" fill="#333">路由协议认证(BGP)</text>
+  <rect x="245" y="192" width="240" height="28" rx="4" fill="white" stroke="#5B8DB8"/>
+  <text x="365" y="210" text-anchor="middle" font-size="10" fill="#333">国密SM4加密通道</text>
+  <rect x="495" y="192" width="240" height="28" rx="4" fill="white" stroke="#5B8DB8"/>
+  <text x="615" y="210" text-anchor="middle" font-size="10" fill="#333">可信根验证</text>
+
+  <!-- 安全区域边界 -->
+  <rect x="50" y="245" width="700" height="95" rx="8" fill="#EBF5EB" stroke="#2E7D32" stroke-width="2"/>
+  <rect x="50" y="245" width="180" height="95" rx="8" fill="#2E7D32" opacity="0.9"/>
+  <text x="140" y="283" text-anchor="middle" font-size="13" font-weight="bold" fill="white">安全区域边界</text>
+  <text x="140" y="303" text-anchor="middle" font-size="9" fill="#A5D6A7">第二重防护</text>
+  <rect x="245" y="255" width="155" height="30" rx="4" fill="white" stroke="#A5D6A7"/>
+  <text x="322" y="275" text-anchor="middle" font-size="10" fill="#333">NGFW防火墙</text>
+  <rect x="410" y="255" width="155" height="30" rx="4" fill="white" stroke="#A5D6A7"/>
+  <text x="487" y="275" text-anchor="middle" font-size="10" fill="#333">IDS/IPS入侵检测</text>
+  <rect x="575" y="255" width="160" height="30" rx="4" fill="white" stroke="#A5D6A7"/>
+  <text x="655" y="275" text-anchor="middle" font-size="10" fill="#333">Anti-DDoS</text>
+  <rect x="245" y="292" width="155" height="30" rx="4" fill="white" stroke="#A5D6A7"/>
+  <text x="322" y="312" text-anchor="middle" font-size="10" fill="#333">访问控制(ACL)</text>
+  <rect x="410" y="292" width="155" height="30" rx="4" fill="white" stroke="#A5D6A7"/>
+  <text x="487" y="312" text-anchor="middle" font-size="10" fill="#333">共享式安全池</text>
+  <rect x="575" y="292" width="160" height="30" rx="4" fill="white" stroke="#A5D6A7"/>
+  <text x="655" y="312" text-anchor="middle" font-size="10" fill="#333">SFC业务服务链</text>
+
+  <!-- 安全计算环境 -->
+  <rect x="50" y="355" width="700" height="95" rx="8" fill="#FFF3E0" stroke="#D9822B" stroke-width="2"/>
+  <rect x="50" y="355" width="180" height="95" rx="8" fill="#D9822B" opacity="0.9"/>
+  <text x="140" y="393" text-anchor="middle" font-size="13" font-weight="bold" fill="white">安全计算环境</text>
+  <text x="140" y="413" text-anchor="middle" font-size="9" fill="#FFE0B2">第一重防护</text>
+  <rect x="245" y="365" width="155" height="30" rx="4" fill="white" stroke="#FFE0B2"/>
+  <text x="322" y="385" text-anchor="middle" font-size="10" fill="#333">双因子认证(2FA)</text>
+  <rect x="410" y="365" width="155" height="30" rx="4" fill="white" stroke="#FFE0B2"/>
+  <text x="487" y="385" text-anchor="middle" font-size="10" fill="#333">微分段隔离</text>
+  <rect x="575" y="365" width="160" height="30" rx="4" fill="white" stroke="#FFE0B2"/>
+  <text x="655" y="385" text-anchor="middle" font-size="10" fill="#333">主机加固/EDR</text>
+  <rect x="245" y="402" width="240" height="28" rx="4" fill="white" stroke="#FFE0B2"/>
+  <text x="365" y="420" text-anchor="middle" font-size="10" fill="#333">数据加密存储(AES-256/国密)</text>
+  <rect x="495" y="402" width="240" height="28" rx="4" fill="white" stroke="#FFE0B2"/>
+  <text x="615" y="420" text-anchor="middle" font-size="10" fill="#333">最小权限+RBAC</text>
+
+  <!-- 连接线 -->
+  <line x1="400" y1="120" x2="400" y2="145" stroke="#1F4E79" stroke-width="2"/>
+  <line x1="400" y1="230" x2="400" y2="245" stroke="#1F4E79" stroke-width="2"/>
+  <line x1="400" y1="340" x2="400" y2="355" stroke="#1F4E79" stroke-width="2"/>
+
+  <text x="400" y="478" text-anchor="middle" font-size="10" fill="#888">数据来源：《金融数据中心网络架构与技术》第7章 | 等保2.0标准</text>
+</svg>
