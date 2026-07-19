@@ -1,0 +1,1415 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>奇点更近 · 精华解读</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --primary: #7c3aed;
+    --primary-light: #a855f7;
+    --primary-dark: #6d28d9;
+    --primary-darker: #4c1d95;
+    --accent: #c084fc;
+    --accent-light: #d8b4fe;
+    --bg: #faf5ff;
+    --bg-card: #ffffff;
+    --text: #3b0764;
+    --text-secondary: #6b21a8;
+    --text-light: #a78bfa;
+    --border: #e9d5ff;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.8;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* 顶部导航 */
+  .top-nav {
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .top-nav-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 12px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s;
+    font-weight: 500;
+  }
+  .back-link:hover {
+    color: var(--primary-dark);
+    transform: translateX(-2px);
+  }
+  .book-nav {
+    display: flex;
+    gap: 16px;
+    font-size: 13px;
+  }
+  .book-nav a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+  .book-nav a:hover {
+    background: var(--bg);
+    color: var(--primary);
+  }
+  .book-nav a.active {
+    background: #f3e8ff;
+    color: var(--primary-dark);
+    font-weight: 500;
+  }
+
+  /* 头部封面区 */
+  .hero {
+    background: linear-gradient(135deg, #4c1d95 0%, #6d28d9 35%, #7c3aed 65%, #9333ea 100%);
+    color: white;
+    padding: 60px 0 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(192,132,252,0.25) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: pulse 8s ease-in-out infinite;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    left: -20%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(168,85,247,0.2) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: pulse 10s ease-in-out infinite reverse;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.1); opacity: 1; }
+  }
+  .hero .container {
+    position: relative;
+    z-index: 1;
+  }
+  .book-tag {
+    display: inline-block;
+    background: rgba(192,132,252,0.2);
+    color: #e9d5ff;
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 18px;
+    border: 1px solid rgba(216,180,254,0.3);
+  }
+  .hero h1 {
+    font-size: 38px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 12px;
+    letter-spacing: -0.5px;
+  }
+  .hero .subtitle {
+    font-size: 19px;
+    opacity: 0.92;
+    margin-bottom: 28px;
+    font-weight: 300;
+  }
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    font-size: 14px;
+    opacity: 0.88;
+  }
+  .hero-meta span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* 核心摘要卡 */
+  .summary-card {
+    background: white;
+    border-radius: 16px;
+    padding: 32px;
+    margin-top: -40px;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 10px 40px rgba(124,58,237,0.15);
+    margin-bottom: 48px;
+    border: 1px solid var(--border);
+  }
+  .summary-card h2 {
+    font-size: 20px;
+    color: var(--primary-dark);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .summary-card h2::before {
+    content: '🧠';
+    font-size: 24px;
+  }
+  .summary-card p {
+    color: var(--text-secondary);
+    line-height: 1.9;
+    margin-bottom: 16px;
+    font-size: 15px;
+  }
+  .key-points {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 16px;
+    margin-top: 24px;
+  }
+  .key-point {
+    background: linear-gradient(135deg, #faf5ff, #f3e8ff);
+    padding: 18px 20px;
+    border-radius: 12px;
+    border-left: 4px solid var(--primary);
+    transition: transform 0.2s;
+  }
+  .key-point:hover {
+    transform: translateY(-2px);
+  }
+  .key-point h4 {
+    font-size: 14px;
+    color: var(--primary-dark);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .key-point p {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  /* 深度研报链接 */
+  .report-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 24px;
+    padding: 16px 20px;
+    background: linear-gradient(135deg, #f3e8ff, #e9d5ff);
+    border-radius: 12px;
+    text-decoration: none;
+    color: var(--primary-dark);
+    font-weight: 500;
+    font-size: 14px;
+    transition: all 0.2s;
+    border: 1px solid rgba(124, 58, 237, 0.2);
+  }
+  .report-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(124, 58, 237, 0.15);
+  }
+  .report-link .report-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .report-link .report-icon { font-size: 20px; }
+  .report-link .report-title { font-weight: 600; }
+  .report-link .report-desc {
+    font-size: 12px;
+    color: var(--text-secondary);
+    font-weight: normal;
+    margin-top: 2px;
+  }
+  .report-link .report-arrow {
+    font-size: 16px;
+    opacity: 0.6;
+    transition: transform 0.2s;
+  }
+  .report-link:hover .report-arrow {
+    transform: translateX(4px);
+    opacity: 1;
+  }
+
+  /* 章节样式 */
+  .section {
+    margin-bottom: 56px;
+  }
+  .section-title {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--primary-dark);
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 3px solid var(--primary);
+    display: inline-block;
+  }
+  .subsection {
+    margin-bottom: 36px;
+  }
+  .subsection-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 16px;
+    padding-left: 14px;
+    border-left: 4px solid var(--accent);
+  }
+  .sub-subsection {
+    margin-bottom: 24px;
+  }
+  .sub-subsection h4 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 12px;
+  }
+
+  .section p {
+    margin-bottom: 14px;
+    color: #6b21a8;
+  }
+
+  /* 引用块 */
+  blockquote {
+    background: linear-gradient(135deg, #f3e8ff, #e9d5ff);
+    border-left: 4px solid var(--accent);
+    padding: 16px 20px;
+    border-radius: 0 12px 12px 0;
+    margin: 20px 0;
+    color: #581c87;
+    font-style: italic;
+    font-size: 14px;
+  }
+  blockquote strong {
+    font-style: normal;
+    color: var(--primary-dark);
+  }
+
+  /* 表格 */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 14px;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(124,58,237,0.08);
+  }
+  th {
+    background: linear-gradient(135deg, #7c3aed, #6d28d9);
+    color: white;
+    padding: 14px 16px;
+    text-align: left;
+    font-weight: 600;
+  }
+  td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    color: #6b21a8;
+  }
+  tr:last-child td {
+    border-bottom: none;
+  }
+  tr:hover td {
+    background: #faf5ff;
+  }
+
+  /* 金句卡片 */
+  .quote-card {
+    background: linear-gradient(135deg, #f3e8ff, #e9d5ff);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin: 20px 0;
+    position: relative;
+  }
+  .quote-card::before {
+    content: '"';
+    position: absolute;
+    top: 8px;
+    left: 20px;
+    font-size: 60px;
+    color: rgba(124,58,237,0.2);
+    font-family: Georgia, serif;
+    line-height: 1;
+  }
+  .quote-card p {
+    position: relative;
+    z-index: 1;
+    color: var(--primary-dark);
+    font-size: 15px;
+    line-height: 1.8;
+    margin: 0;
+    padding-left: 20px;
+  }
+  .quote-card .quote-source {
+    margin-top: 10px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    text-align: right;
+    font-style: italic;
+  }
+
+  /* 方法论卡片 */
+  .method-card {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    margin: 20px 0;
+    box-shadow: 0 2px 12px rgba(124,58,237,0.08);
+    border-top: 4px solid var(--primary);
+    transition: box-shadow 0.2s;
+  }
+  .method-card:hover {
+    box-shadow: 0 4px 20px rgba(124,58,237,0.12);
+  }
+  .method-card h5 {
+    font-size: 17px;
+    color: var(--primary-dark);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .method-card ul {
+    list-style: none;
+    padding: 0;
+  }
+  .method-card li {
+    padding: 8px 0;
+    padding-left: 28px;
+    position: relative;
+    color: #6b21a8;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+  .method-card li::before {
+    content: '◆';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 12px;
+    top: 11px;
+  }
+
+  /* 可视化图表容器 */
+  .chart-box {
+    background: white;
+    border-radius: 12px;
+    padding: 28px;
+    margin: 24px 0;
+    box-shadow: 0 2px 12px rgba(124,58,237,0.08);
+    border: 1px solid var(--border);
+  }
+  .chart-box .chart-title {
+    font-size: 14px;
+    color: var(--primary-dark);
+    margin-bottom: 20px;
+    font-weight: 600;
+    text-align: center;
+  }
+  .chart-box img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    display: block;
+    margin: 0 auto;
+  }
+
+  /* 章节卡片组 */
+  .chapter-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+  }
+  .chapter-card {
+    background: white;
+    border-radius: 12px;
+    padding: 22px;
+    border: 1px solid var(--border);
+    transition: all 0.25s;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .chapter-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .chapter-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(124,58,237,0.15);
+    border-color: var(--primary-light);
+  }
+  .chapter-card:hover::before {
+    transform: scaleX(1);
+  }
+  .chapter-num {
+    display: inline-block;
+    font-size: 12px;
+    color: var(--primary);
+    background: #f3e8ff;
+    padding: 3px 10px;
+    border-radius: 10px;
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+  .chapter-card h5 {
+    font-size: 16px;
+    color: var(--primary-dark);
+    margin-bottom: 10px;
+    line-height: 1.4;
+  }
+  .chapter-card p {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 0;
+  }
+  .chapter-card .chapter-keywords {
+    margin-top: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .chapter-keyword {
+    font-size: 11px;
+    padding: 2px 8px;
+    background: #faf5ff;
+    color: var(--primary-dark);
+    border-radius: 8px;
+  }
+
+  /* 领导力特质雷达图式卡片 */
+  .leadership-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-top: 20px;
+  }
+  .trait-card {
+    background: linear-gradient(135deg, white, #faf5ff);
+    border-radius: 12px;
+    padding: 18px;
+    text-align: center;
+    border: 1px solid var(--border);
+    transition: transform 0.2s;
+  }
+  .trait-card:hover {
+    transform: translateY(-3px);
+  }
+  .trait-icon {
+    font-size: 32px;
+    margin-bottom: 10px;
+  }
+  .trait-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--primary-dark);
+    margin-bottom: 8px;
+  }
+  .trait-desc {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 8px;
+    line-height: 1.5;
+  }
+
+  /* 反直觉发现 */
+  .counter-intuitive-list {
+    list-style: none;
+    padding: 0;
+  }
+  .ci-item {
+    background: white;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 14px;
+    border-left: 4px solid var(--warning);
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    transition: transform 0.2s;
+    box-shadow: 0 2px 8px rgba(124,58,237,0.05);
+  }
+  .ci-item:hover {
+    transform: translateX(4px);
+  }
+  .ci-num {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 16px;
+  }
+  .ci-content h5 {
+    font-size: 16px;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .ci-content p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  /* 列表样式 */
+  ul, ol {
+    margin: 14px 0;
+    padding-left: 24px;
+    color: #6b21a8;
+  }
+  li {
+    margin-bottom: 8px;
+    line-height: 1.7;
+  }
+
+  /* 强调文字 */
+  .highlight {
+    background: linear-gradient(120deg, #fde68a 0%, #fcd34d 100%);
+    background-repeat: no-repeat;
+    background-size: 100% 40%;
+    background-position: 0 85%;
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  /* 行动建议 */
+  .action-box {
+    background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+    border: 1px solid #6ee7b7;
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin: 24px 0;
+  }
+  .action-box h5 {
+    color: #047857;
+    font-size: 16px;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .action-box ul {
+    list-style: none;
+    padding: 0;
+  }
+  .action-box li {
+    padding: 8px 0 8px 28px;
+    position: relative;
+    color: #065f46;
+    font-size: 14px;
+  }
+  .action-box li::before {
+    content: '✅';
+    position: absolute;
+    left: 0;
+    font-size: 14px;
+  }
+
+  /* 六大纪元时间线 */
+  .epoch-timeline {
+    position: relative;
+    padding: 20px 0;
+  }
+  .epoch-timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(180deg, #4c1d95, #7c3aed, #a855f7, #c084fc);
+    transform: translateX(-50%);
+    border-radius: 2px;
+  }
+  .epoch-item {
+    position: relative;
+    width: 50%;
+    padding: 16px 30px;
+    margin-bottom: 8px;
+  }
+  .epoch-item:nth-child(odd) {
+    left: 0;
+    text-align: right;
+  }
+  .epoch-item:nth-child(even) {
+    left: 50%;
+    text-align: left;
+  }
+  .epoch-dot {
+    position: absolute;
+    top: 24px;
+    width: 20px;
+    height: 20px;
+    background: white;
+    border: 4px solid var(--primary);
+    border-radius: 50%;
+    z-index: 2;
+    box-shadow: 0 0 0 4px rgba(124,58,237,0.15);
+  }
+  .epoch-item:nth-child(odd) .epoch-dot {
+    right: -10px;
+  }
+  .epoch-item:nth-child(even) .epoch-dot {
+    left: -10px;
+  }
+  .epoch-content {
+    background: linear-gradient(135deg, #faf5ff, #f3e8ff);
+    padding: 14px 18px;
+    border-radius: 10px;
+    display: inline-block;
+    transition: transform 0.2s;
+    border: 1px solid var(--border);
+  }
+  .epoch-content:hover {
+    transform: scale(1.02);
+  }
+  .epoch-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--primary-dark);
+    margin-bottom: 4px;
+  }
+  .epoch-desc {
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+  .epoch-tag {
+    display: inline-block;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 8px;
+    margin-top: 6px;
+    font-weight: 500;
+    background: #ede9fe;
+    color: #5b21b6;
+  }
+
+  /* 借鉴指南卡片 */
+  .guide-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+  }
+  .guide-card {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    border: 1px solid var(--border);
+    border-top: 4px solid var(--primary);
+    transition: all 0.2s;
+  }
+  .guide-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(124,58,237,0.12);
+  }
+  .guide-card h5 {
+    font-size: 16px;
+    color: var(--primary-dark);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .guide-card ul {
+    list-style: none;
+    padding: 0;
+  }
+  .guide-card li {
+    font-size: 13px;
+    color: var(--text-secondary);
+    padding: 6px 0;
+    padding-left: 20px;
+    position: relative;
+    line-height: 1.6;
+  }
+  .guide-card li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: bold;
+  }
+
+  /* 结语 */
+  .conclusion {
+    background: linear-gradient(135deg, #4c1d95, #6d28d9, #7c3aed);
+    color: white;
+    border-radius: 16px;
+    padding: 40px;
+    margin-top: 48px;
+    margin-bottom: 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .conclusion::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(192,132,252,0.2) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .conclusion .container-inner {
+    position: relative;
+    z-index: 1;
+  }
+  .conclusion h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  .conclusion p {
+    line-height: 2;
+    opacity: 0.95;
+    margin-bottom: 16px;
+  }
+  .conclusion .final-quote {
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    font-style: italic;
+    opacity: 0.9;
+    text-align: right;
+  }
+
+  /* 个人思考区 */
+  .thought-section {
+    background: white;
+    border-radius: 16px;
+    padding: 32px;
+    margin-bottom: 48px;
+    box-shadow: 0 4px 20px rgba(124,58,237,0.08);
+    border: 2px dashed var(--primary-light);
+  }
+  .thought-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  .thought-header h3 {
+    color: var(--primary-dark);
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .thought-btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 9px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s;
+    font-weight: 500;
+  }
+  .thought-btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(124,58,237,0.3);
+  }
+  .thought-content {
+    width: 100%;
+    min-height: 140px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    font-size: 14px;
+    line-height: 1.7;
+    resize: vertical;
+    font-family: inherit;
+    color: var(--text);
+    background: #faf5ff;
+    transition: all 0.2s;
+  }
+  .thought-content:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: white;
+    box-shadow: 0 0 0 3px rgba(124,58,237,0.1);
+  }
+  .thought-hint {
+    font-size: 13px;
+    color: var(--text-light);
+    margin-top: 10px;
+    text-align: right;
+  }
+  .thought-prompts {
+    margin-bottom: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .thought-prompt {
+    font-size: 12px;
+    padding: 6px 12px;
+    background: #f3e8ff;
+    color: var(--primary-dark);
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+  }
+  .thought-prompt:hover {
+    background: var(--primary);
+    color: white;
+  }
+
+  /* 页脚 */
+  .footer {
+    text-align: center;
+    padding: 40px 0;
+    color: var(--text-light);
+    font-size: 13px;
+    border-top: 1px solid var(--border);
+    background: white;
+  }
+  .footer p {
+    margin: 4px 0;
+  }
+
+  /* 响应式 */
+  @media (max-width: 768px) {
+    .epoch-timeline::before { left: 20px; }
+    .epoch-item { width: 100%; left: 0 !important; text-align: left !important; padding-left: 50px; padding-right: 0; }
+    .epoch-item .epoch-dot { left: 11px !important; right: auto !important; }
+    .hero h1 { font-size: 28px; }
+    .hero { padding: 40px 0 60px; }
+    .summary-card { padding: 24px; margin-top: -30px; }
+    .section-title { font-size: 22px; }
+    .key-points { grid-template-columns: 1fr; }
+    .conclusion { padding: 28px; }
+    .chapter-grid { grid-template-columns: 1fr; }
+    .leadership-grid { grid-template-columns: repeat(2, 1fr); }
+    .guide-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 480px) {
+    .leadership-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="top-nav">
+  <div class="top-nav-inner">
+    <a href="../index.html" class="back-link">← 返回书架</a>
+    <div class="book-nav">
+      <a href="#" class="active">第5本</a>
+    </div>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="container">
+    <span class="book-tag">📚 第 5 本 · AI未来 / 技术战略</span>
+    <h1>奇点更近</h1>
+    <p class="subtitle">未来20年的人工智能神预测</p>
+    <div class="hero-meta">
+      <span>✍️ 雷·库兹韦尔 著</span>
+      <span>📖 湛庐文化 · 2024</span>
+      <span>📄 6章 · 23.9万字</span>
+      <span>📅 研读日期：2026-07-19</span>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 核心摘要 -->
+  <div class="summary-card">
+    <h2>核心摘要</h2>
+    <p>雷·库兹韦尔在《奇点更近》中以<strong class="highlight">"人机融合"</strong>为核心叙事重构了奇点理论体系，重申2029年AI通过图灵测试、2045年技术奇点到来的判断，但将论证重心从"机器超越人类"转向"人类与AI深度共生"。过去20年，单位美元计算能力增长了约<strong class="highlight">11,200倍</strong>，基因测序成本下降了99.997%，两大核心指标的指数级演进为奇点理论提供了坚实的现实支撑。</p>
+    <p>本书的最大价值不在于预测的精确性，而在于提供了一套<strong class="highlight">从宇宙演化到技术迭代的统一思考框架</strong>——加速回报定律、六大纪元、GNR技术共振——帮助技术管理者跳出线性思维陷阱。对于网络与IT基础设施领域而言，2030年代的人脑-云端连接、纳米机器人体内网络、AI原生自组织网络将成为颠覆性的技术拐点。</p>
+    
+    <div class="key-points">
+      <div class="key-point">
+        <h4>⚡ 加速回报定律2.0</h4>
+        <p>从摩尔定律拓展为覆盖宇宙演化、生物DNA、全部信息科技的普适进化规律，正向反馈闭环驱动指数增长。</p>
+      </div>
+      <div class="key-point">
+        <h4>🌌 六大进化纪元</h4>
+        <p>从物理化学→生物DNA→大脑→技术→人机融合→宇宙觉醒，信息处理效率持续数量级跃升的连续曲线。</p>
+      </div>
+      <div class="key-point">
+        <h4>🧬 GNR技术共振</h4>
+        <p>基因技术、纳米技术、人工智能三大领域互相赋能交叉渗透，形成"1+1+1>3"的协同加速效应。</p>
+      </div>
+    </div>
+
+    <a href="book_005_report.html" class="report-link">
+      <div class="report-label">
+        <span class="report-icon">📑</span>
+        <div>
+          <div class="report-title">深度研报完整版</div>
+          <div class="report-desc">8大章节 · 2.3万字 · 完整技术推演</div>
+        </div>
+      </div>
+      <span class="report-arrow">→</span>
+    </a>
+  </div>
+
+  <!-- 核心洞察 -->
+  <div class="section">
+    <h2 class="section-title">💡 三大核心洞察</h2>
+
+    <div class="subsection">
+      <h3 class="subsection-title">洞察一：指数增长的"膝盖弯"已经拐过</h3>
+      <p>大多数人用线性思维预判未来——"未来十年的变化和过去十年差不多"。但加速回报定律告诉我们：<strong>信息技术的增长是指数级的</strong>，越往后越快。过去20年单位美元计算力增长了11,200倍，而我们刚刚拐过指数曲线的"膝盖弯"，接下来的增长会更加陡峭。</p>
+      <div class="quote-card">
+        <p>人类迈向奇点的千年征程已步入冲刺阶段。指数增长的特点是：前99天只覆盖了水面的1%，大多数人都觉得"还早着呢"，但第100天就铺满了整个池塘。</p>
+        <div class="quote-source">—— 库兹韦尔《奇点更近》引言</div>
+      </div>
+      <p>对于技术管理者而言，这意味着<strong class="highlight">战略规划的时间窗口正在从"十年规划"压缩到"三年迭代"</strong>。用过去的经验预判未来，将严重低估变化的幅度。不理解指数思维，就无法为即将到来的技术跃迁做好准备。</p>
+    </div>
+
+    <div class="subsection">
+      <h3 class="subsection-title">洞察二：六大纪元——进化是一条连续的加速曲线</h3>
+      <p>六大纪元框架将技术演化视为生物演化的自然延续，赋予"技术奇点"一种近乎宇宙必然性的地位。从原子到DNA，从DNA到神经，从神经到技术，从技术到人机融合——<strong>每一次范式跃迁都让信息的存储、传输、处理效率提升几个数量级</strong>。</p>
+      
+      <div class="chart-box">
+        <div class="chart-title">六大进化纪元模型</div>
+        <img src="../images/six_epochs.png" alt="六大进化纪元模型">
+      </div>
+
+      <div class="epoch-timeline">
+        <div class="epoch-item">
+          <div class="epoch-dot"></div>
+          <div class="epoch-content">
+            <div class="epoch-name">纪元一：物理与化学</div>
+            <div class="epoch-desc">宇宙大爆炸后，原子形成，分子出现。信息储存在基本粒子结构中。</div>
+            <span class="epoch-tag">138亿年前</span>
+          </div>
+        </div>
+        <div class="epoch-item">
+          <div class="epoch-dot"></div>
+          <div class="epoch-content">
+            <div class="epoch-name">纪元二：生物与DNA</div>
+            <div class="epoch-desc">生命诞生，DNA成为信息载体。进化通过自然选择进行，速度极慢。</div>
+            <span class="epoch-tag">40亿年前</span>
+          </div>
+        </div>
+        <div class="epoch-item">
+          <div class="epoch-dot"></div>
+          <div class="epoch-content">
+            <div class="epoch-name">纪元三：大脑</div>
+            <div class="epoch-desc">神经系统出现，信息储存在神经回路连接中。学习速度远超DNA进化。</div>
+            <span class="epoch-tag">数亿年前</span>
+          </div>
+        </div>
+        <div class="epoch-item">
+          <div class="epoch-dot"></div>
+          <div class="epoch-content">
+            <div class="epoch-name">纪元四：技术</div>
+            <div class="epoch-desc">人类发明工具、文字、计算机。技术进化速度远超生物进化。</div>
+            <span class="epoch-tag">数百万年前起</span>
+          </div>
+        </div>
+        <div class="epoch-item">
+          <div class="epoch-dot"></div>
+          <div class="epoch-content">
+            <div class="epoch-name">纪元五：人机融合</div>
+            <div class="epoch-desc">人类智能与技术智能深度整合。脑机接口、纳米增强、云端新皮质。</div>
+            <span class="epoch-tag">2022年起 → 2029年AGI</span>
+          </div>
+        </div>
+        <div class="epoch-item">
+          <div class="epoch-dot"></div>
+          <div class="epoch-content">
+            <div class="epoch-name">纪元六：宇宙觉醒</div>
+            <div class="epoch-desc">混合智能向宇宙扩散，将物质转化为计算介质。全域智能自我认知。</div>
+            <span class="epoch-tag">2045年后</span>
+          </div>
+        </div>
+      </div>
+
+      <p>核心洞察是：<strong>奇点不是凭空出现的"神迹"，而是138亿年进化曲线自然延伸的结果</strong>。人类正处于第四纪元（技术纪元）的末期和第五纪元（人机融合纪元）的起点——2022年大模型落地标志着第五纪元的正式开启。</p>
+    </div>
+
+    <div class="subsection">
+      <h3 class="subsection-title">洞察三：GNR共振——三大引擎的协同加速</h3>
+      <p>G、N、R分别代表基因技术（Genetics）、纳米技术（Nanotechnology）和机器人/人工智能（Robotics/AI）。这三大领域都是信息技术的延伸，因此都遵循加速回报定律，但它们之间<strong>并非平行发展，而是互相赋能、交叉渗透、协同共振</strong>。</p>
+
+      <div class="chart-box">
+        <div class="chart-title">GNR技术共振模型</div>
+        <img src="../images/gnr_resonance.png" alt="GNR技术共振模型">
+      </div>
+
+      <div class="method-card">
+        <h5>🔄 三大技术的互相赋能</h5>
+        <ul>
+          <li><strong>AI加速基因测序与细胞模拟</strong>：AlphaFold解决蛋白质折叠难题，AI大幅加速药物发现</li>
+          <li><strong>纳米载体实现基因药物精准投递</strong>：从"系统给药"进化为"定点修复"</li>
+          <li><strong>生物技术反向优化AI的仿生神经网络</strong>：从大脑中汲取更多设计灵感</li>
+          <li><strong>共振效应</strong>：整体加速速度远大于任何单一技术的独立发展速度</li>
+        </ul>
+      </div>
+
+      <p>对于技术企业和管理者而言，GNR共振模型最重要的启示是：<strong class="highlight">不要孤立地看待某一项技术趋势，要看到不同技术领域之间的交叉融合效应</strong>。在网络基础设施领域，AI与网络的融合（AI原生网络）、生物技术与通信的融合（体内纳米网络）、纳米技术与边缘计算的融合——这些交叉点往往是颠覆性创新的来源。</p>
+    </div>
+  </div>
+
+  <!-- 章节精要 -->
+  <div class="section">
+    <h2 class="section-title">📖 章节精要</h2>
+    <p style="margin-bottom: 20px; color: var(--text-secondary);">全书分为两大部分、六章，加上引言、结语和两个附录，呈现"理论奠基—现实推演—风险审视"的三层递进结构。以下为6个核心章节的要点提炼。</p>
+    
+    <div class="chapter-grid">
+      <div class="chapter-card">
+        <span class="chapter-num">第1章</span>
+        <h5>六个阶段：我们在哪里</h5>
+        <p>六大进化纪元框架，从宇宙大爆炸到宇宙觉醒。人类正处于第四纪元末期、第五纪元起点。范式转移的S曲线规律：单一技术有S曲线，但新范式持续接棒保证指数增长不中断。</p>
+        <div class="chapter-keywords">
+          <span class="chapter-keyword">六大纪元</span>
+          <span class="chapter-keyword">S曲线</span>
+          <span class="chapter-keyword">范式转移</span>
+        </div>
+      </div>
+
+      <div class="chapter-card">
+        <span class="chapter-num">第2章</span>
+        <h5>重塑智能：AI如何工作</h5>
+        <p>AI两大流派（符号主义vs连接主义）的历史脉络。大脑计算原理：小脑与新皮质。深度学习本质是新皮质魔力的数字化再现。AI尚需跨越的三大里程碑：情绪记忆、常识推理、社交互动。</p>
+        <div class="chapter-keywords">
+          <span class="chapter-keyword">深度学习</span>
+          <span class="chapter-keyword">新皮质</span>
+          <span class="chapter-keyword">图灵测试</span>
+        </div>
+      </div>
+
+      <div class="chapter-card">
+        <span class="chapter-num">第3章</span>
+        <h5>我是谁：意识与身份</h5>
+        <p>意识难题与哲学僵尸思想实验。自由意志的困境。"2号你是你吗"的身份悖论。数字来生技术：基于赛博空间信息+DNA重建人格。身份认同的核心是信息模式而非物质构成。</p>
+        <div class="chapter-keywords">
+          <span class="chapter-keyword">意识哲学</span>
+          <span class="chapter-keyword">身份认同</span>
+          <span class="chapter-keyword">数字永生</span>
+        </div>
+      </div>
+
+      <div class="chapter-card">
+        <span class="chapter-num">第4章</span>
+        <h5>生活正在指数级变好</h5>
+        <p>反驳"世界越来越糟"的认知偏差：新闻负面偏见+大脑负面偏差。数据证明贫困减少、暴力下降、健康改善。长寿逃逸速度（LEV）概念：医学进步速度超过衰老速度。垂直农业、可再生能源的指数级改善。</p>
+        <div class="chapter-keywords">
+          <span class="chapter-keyword">长寿逃逸速度</span>
+          <span class="chapter-keyword">垂直农业</span>
+          <span class="chapter-keyword">可再生能源</span>
+        </div>
+      </div>
+
+      <div class="chapter-card">
+        <span class="chapter-num">第5章</span>
+        <h5>工作的未来：AI抢饭碗？</h5>
+        <p>三次技术失业浪潮：去技能化→技能提升→无需技能。超过一半的职业在2030年代初自动化概率大于50%。但历史每次都消灭旧工作、创造新工作。工作本质从"为了生存"转向"为了意义"。最终不是与AI竞争，而是与AI融合。</p>
+        <div class="chapter-keywords">
+          <span class="chapter-keyword">就业冲击</span>
+          <span class="chapter-keyword">全民基本收入</span>
+          <span class="chapter-keyword">人机融合</span>
+        </div>
+      </div>
+
+      <div class="chapter-card">
+        <span class="chapter-num">第6章</span>
+        <h5>未来30年的健康</h5>
+        <p>通往长寿的四座桥梁：健康寿命延长→AI-生物技术革命→纳米医学→数字备份。2020年代是AI+生物技术，2030-40年代是纳米技术完善。长寿逃逸速度预计2030年左右到来。纳米机器人血液巡检、细胞衰老逆转、全身纳米增强。</p>
+        <div class="chapter-keywords">
+          <span class="chapter-keyword">四座桥梁</span>
+          <span class="chapter-keyword">纳米医学</span>
+          <span class="chapter-keyword">细胞重编程</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 网络/IT基础设施的3大拐点预判 -->
+  <div class="section">
+    <h2 class="section-title">🌐 对网络与IT基础设施的三大拐点预判</h2>
+    
+    <div class="counter-intuitive-list">
+      <div class="ci-item">
+        <div class="ci-num">1</div>
+        <div class="ci-content">
+          <h5>算力需求爆炸 → 数据中心网络架构重构</h5>
+          <p>AI大模型训练算力每代增长10-100倍，推动数据中心从三层架构转向叶脊架构，再向AI集群专用网络演进。RDMA、无损以太网、智能网卡（SmartNIC/DPU）成为标配。电力和冷却能力正在成为数据中心扩建的主要限制因素，推动液冷、光互联、近内存计算等技术发展。</p>
+        </div>
+      </div>
+
+      <div class="ci-item">
+        <div class="ci-num">2</div>
+        <div class="ci-content">
+          <h5>脑机接口 → 边缘计算从"可选"变"必需"</h5>
+          <p>当大脑直接连接云端AI时，网络延迟不再是"影响体验"的问题，而是"影响思维连贯性"的问题。要让云端AI感觉像"自己思维的一部分"，端到端延迟可能需要控制在几十毫秒以内。光速的物理天花板决定了计算资源必须下沉——每个城市、每个社区都需要边缘计算节点。市场重心将从"核心网"向"边缘网"结构性转移。</p>
+        </div>
+      </div>
+
+      <div class="ci-item">
+        <div class="ci-num">3</div>
+        <div class="ci-content">
+          <h5>AI原生网络 → 从"人工配置"到"自组织智能"</h5>
+          <p>网络设计思路从"工程师编写规则"转向"AI自学习自优化"。智能流量调度、自修复自愈能力、预测性维护、AI安全防御——网络的控制面、数据面、管理面都将深度AI化。产品竞争力从硬件参数转向软件和AI能力。安全范式从"防火墙边界防御"转向"分布式免疫系统"。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-box">
+      <div class="chart-title">关键技术预测时间线</div>
+      <img src="../images/singularity_timeline.png" alt="关键技术预测时间线">
+    </div>
+  </div>
+
+  <!-- 行动指南 -->
+  <div class="section">
+    <h2 class="section-title">🎯 技术管理者四维行动指南</h2>
+
+    <div class="guide-grid">
+      <div class="guide-card">
+        <h5>📊 维度一：技术路线判断</h5>
+        <ul>
+          <li><strong>高确定性押注</strong>：AI与网络的深度融合（AI集群网络、AIOps、智能边缘）</li>
+          <li><strong>中期布局</strong>：边缘计算与分布式网络架构（云边端三级协同）</li>
+          <li><strong>长期储备</strong>：体内网络与纳米通信（建立技术眼线和种子）</li>
+          <li><strong>警惕方向</strong>：纯硬件同质化赛道，向"硬件+软件+AI+服务"升级</li>
+        </ul>
+      </div>
+
+      <div class="guide-card">
+        <h5>🚀 维度二：产品战略</h5>
+        <ul>
+          <li><strong>指数思维规划</strong>：三年后产品应是"不同代际"，而非"功能升级版"</li>
+          <li><strong>平台化思维</strong>：打造可扩展技术底座，而非一次性产品</li>
+          <li><strong>场景化创新</strong>：AI+具体场景才是产品，技术是手段而非目的</li>
+          <li><strong>开放生态</strong>：不要试图什么都自己做，在生态中定位核心优势</li>
+        </ul>
+      </div>
+
+      <div class="guide-card">
+        <h5>💬 维度三：客户交流素材</h5>
+        <ul>
+          <li><strong>指数拐点论</strong>："未来十年变化可能是过去的10倍"，升级客户认知</li>
+          <li><strong>架构范式转移</strong>：从"中心"转向"分布"，布局边缘计算</li>
+          <li><strong>安全范式转移</strong>：从"防火墙"转向"免疫系统"，内生安全</li>
+          <li><strong>人机增强论</strong>：AI不是取代人，而是增强人，安抚客户焦虑</li>
+        </ul>
+      </div>
+
+      <div class="guide-card">
+        <h5>👤 维度四：个人职业进化</h5>
+        <ul>
+          <li><strong>指数型学习</strong>：从"学知识"转向"学学习方法"，利用AI放大学习效率</li>
+          <li><strong>人机协作升级</strong>：不与AI竞争，向"技术+业务/管理/创意"复合角色转型</li>
+          <li><strong>技术战略思维</strong>：从"执行者"向"思考者"升级，多问为什么</li>
+          <li><strong>健康投资</strong>：保持健康争取"活过"每一个技术拐点，健康是未来的基础投资</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="action-box">
+      <h5>⚡ 短期行动清单（0-2年）</h5>
+      <ul>
+        <li>启动AI原生网络战略，从AIOps、智能运维、智能安全等成熟场景切入</li>
+        <li>布局边缘计算产品与方案，打造1-2个垂直行业标杆案例</li>
+        <li>建立技术趋势追踪机制，关注交叉领域突破（生物+网络、AI+网络）</li>
+        <li>培训全员AI素养，售前工程师尤其要掌握"用AI提升效率"的技能</li>
+        <li>个人层面：立刻开始用AI工作，从代码辅助、文档撰写、资料检索开始</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 争议与批判性思考 -->
+  <div class="section">
+    <h2 class="section-title">🤔 争议与批判性思考</h2>
+
+    <div class="method-card">
+      <h5>📉 预测准确率：方向性正确 vs 精确性存疑</h5>
+      <ul>
+        <li><strong>方向预测成功率高</strong>：互联网普及、智能手机、AI胜棋王、语音识别等大方向都对了</li>
+        <li><strong>时间预测偏差大</strong>：2010年超级计算机模拟人脑、2025年完全理解大脑等预测已失败</li>
+        <li><strong>机制可能错了</strong>：AI通过深度学习涌现而非"人脑逆向工程"，路径偏差可能影响后续预测</li>
+        <li><strong>定义模糊性</strong>："通过图灵测试""奇点"等概念缺乏精确定义，验证有解释空间</li>
+      </ul>
+    </div>
+
+    <div class="method-card">
+      <h5>⚖️ 方法论局限：指数外推的边界</h5>
+      <ul>
+        <li><strong>体制转换风险</strong>：范式接棒不是必然的，某些技术可能遇到无法突破的物理极限</li>
+        <li><strong>复杂系统不可计划</strong>：AGI不是简单的"更多算力+更多数据"，可能需要关键理论洞见</li>
+        <li><strong>社会适应速度</strong>：技术变革可能快于社会制度调整速度，引发动荡反阻技术进步</li>
+        <li><strong>乐观主义偏见</strong>：库兹韦尔是技术乐观主义者，读者需要平衡吸收其观点</li>
+      </ul>
+    </div>
+
+    <div class="quote-card">
+      <p>正因为它如此有影响力、如此有启发性，才需要被认真审视和批判。库兹韦尔的价值不在于他预测的每一个细节都是对的——这不可能——而在于他提供了一套完整的思考框架，迫使我们去认真思考技术的未来。</p>
+      <div class="quote-source">—— 本报告批判性思考章节</div>
+    </div>
+  </div>
+
+  <!-- 结语 -->
+  <div class="conclusion">
+    <div class="container-inner">
+      <h2>🌟 写在最后</h2>
+      <p>《奇点更近》不是一本"预测未来"的书，而是一本<strong>升级思维方式</strong>的书。它的核心价值不在于告诉你2029年或2045年会发生什么，而在于教你用<strong class="highlight">指数思维</strong>来看待这个世界。</p>
+      <p>对于技术管理者来说，这本书最大的启示是：<strong>我们已经拐过了指数曲线的拐点，未来20年的变革速度将远超历史任何时期</strong>。战略规划的时间窗口在缩短，产品迭代的节奏在加快，技术路线的不确定性在增加。</p>
+      <p>但与其焦虑"会不会被时代抛弃"，不如思考"如何与时代共舞"。人机融合的时代已经开始，最好的策略不是抗拒，而是学会与AI协作、用AI放大自己的能力、保持持续学习的姿态。</p>
+      <div class="final-quote">"指数增长的膝盖弯已经拐过——你准备好了吗？"</div>
+    </div>
+  </div>
+
+  <!-- 深度研报跳转 -->
+  <a href="book_005_report.html" class="report-link" style="margin-bottom: 48px; display: flex;">
+    <div class="report-label">
+      <span class="report-icon">📑</span>
+      <div>
+        <div class="report-title">阅读完整深度研报</div>
+        <div class="report-desc">8大章节 · 2.3万字 · 详细技术推演 + 行动建议</div>
+      </div>
+    </div>
+    <span class="report-arrow">→</span>
+  </a>
+
+  <!-- 个人思考区 -->
+  <div class="thought-section">
+    <div class="thought-header">
+      <h3>✍️ 我的读书思考</h3>
+      <button class="thought-btn" onclick="saveThought()">保存</button>
+    </div>
+    <div class="thought-prompts">
+      <button class="thought-prompt" onclick="insertPrompt('我对加速回报定律的理解是...')">加速回报定律</button>
+      <button class="thought-prompt" onclick="insertPrompt('关于人机融合，我认为...')">人机融合</button>
+      <button class="thought-prompt" onclick="insertPrompt('对我工作的启发是...')">工作启发</button>
+      <button class="thought-prompt" onclick="insertPrompt('我最质疑的一点是...')">质疑与反思</button>
+    </div>
+    <textarea class="thought-content" id="thoughtInput" placeholder="写下你的思考、感悟、质疑... 所有内容保存在本地浏览器中"></textarea>
+    <div class="thought-hint">💾 自动保存到本地 · localStorage 存储</div>
+  </div>
+
+</div>
+
+<!-- 页脚 -->
+<div class="footer">
+  <p>📚 奇点更近 · 精华解读</p>
+  <p>作者：雷·库兹韦尔 · 研读日期：2026-07-19</p>
+  <p style="margin-top: 8px; font-size: 12px;">© 2026 RootUser 的阅读空间</p>
+</div>
+
+<script>
+  // localStorage 键名
+  const STORAGE_KEY = 'book_005_singularity_thought';
+  const thoughtInput = document.getElementById('thoughtInput');
+
+  // 加载保存的内容
+  function loadThought() {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      thoughtInput.value = saved;
+    }
+  }
+
+  // 保存内容
+  function saveThought() {
+    const content = thoughtInput.value;
+    localStorage.setItem(STORAGE_KEY, content);
+    const btn = document.querySelector('.thought-btn');
+    const originalText = btn.textContent;
+    btn.textContent = '✓ 已保存';
+    btn.style.background = '#10b981';
+    setTimeout(() => {
+      btn.textContent = originalText;
+      btn.style.background = '';
+    }, 1500);
+  }
+
+  // 插入提示语
+  function insertPrompt(text) {
+    const current = thoughtInput.value;
+    if (current && !current.endsWith('\n')) {
+      thoughtInput.value = current + '\n\n' + text;
+    } else {
+      thoughtInput.value = current + text;
+    }
+    thoughtInput.focus();
+    thoughtInput.setSelectionRange(thoughtInput.value.length, thoughtInput.value.length);
+  }
+
+  // 自动保存（防抖）
+  let saveTimeout;
+  thoughtInput.addEventListener('input', () => {
+    clearTimeout(saveTimeout);
+    saveTimeout = setTimeout(() => {
+      localStorage.setItem(STORAGE_KEY, thoughtInput.value);
+    }, 1000);
+  });
+
+  // 页面加载时读取
+  loadThought();
+</script>
+
+</body>
+</html>
