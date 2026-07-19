@@ -1,0 +1,1412 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>《科技产品营销基本法》售前精华导读</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  @page {
+    size: A4;
+    margin: 15mm 18mm;
+  }
+
+  /* Top Navigation */
+  .top-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 12px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .nav-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .nav-back {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    font-size: 13px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: all 0.2s;
+  }
+
+  .nav-back:hover {
+    background: rgba(255,255,255,0.1);
+    color: white;
+  }
+
+  .nav-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.9);
+  }
+
+  .nav-actions {
+    display: flex;
+    gap: 8px;
+  }
+
+  .nav-btn {
+    padding: 6px 14px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 6px;
+    color: white;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .nav-btn:hover {
+    background: rgba(255,255,255,0.2);
+  }
+
+  /* My Thoughts Section (editable) */
+  .my-thoughts-section {
+    margin-top: 30px;
+    padding: 20px;
+    background: #f8fafc;
+    border: 2px dashed #cbd5e1;
+    border-radius: 12px;
+  }
+
+  .my-thoughts-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
+  .my-thoughts-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #0f172a;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .thought-edit-btn {
+    padding: 4px 12px;
+    background: #1a56db;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .thought-edit-btn:hover {
+    background: #1e40af;
+  }
+
+  .thought-edit-btn.save {
+    background: #10b981;
+  }
+
+  .thought-edit-btn.save:hover {
+    background: #059669;
+  }
+
+  .thought-content {
+    font-size: 13px;
+    color: #334155;
+    line-height: 1.8;
+    min-height: 60px;
+    white-space: pre-wrap;
+  }
+
+  .thought-content[contenteditable="true"] {
+    background: white;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #cbd5e1;
+    outline: none;
+  }
+
+  .thought-content[contenteditable="true"]:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  }
+
+  .thought-hint {
+    font-size: 11px;
+    color: #94a3b8;
+    margin-top: 8px;
+    text-align: right;
+  }
+
+  body {
+    font-family: "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", sans-serif;
+    color: #1a1a2e;
+    line-height: 1.75;
+    font-size: 13px;
+    background: #f5f5f5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 20px auto;
+    padding: 15mm 18mm;
+    background: white;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    page-break-after: always;
+    position: relative;
+  }
+
+  .page:last-child {
+    page-break-after: auto;
+  }
+
+  /* ===== 封面页 ===== */
+  .cover-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #1a56db 100%);
+    color: white;
+  }
+
+  .cover-badge {
+    display: inline-block;
+    padding: 8px 20px;
+    border: 1px solid rgba(245, 158, 11, 0.5);
+    border-radius: 24px;
+    font-size: 12px;
+    color: #fbbf24;
+    letter-spacing: 3px;
+    margin-bottom: 32px;
+  }
+
+  .cover-title {
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.4;
+    margin-bottom: 12px;
+    letter-spacing: 1px;
+  }
+
+  .cover-subtitle {
+    font-size: 16px;
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 48px;
+  }
+
+  .cover-divider {
+    width: 80px;
+    height: 3px;
+    background: #fbbf24;
+    margin: 0 auto 32px;
+    border-radius: 2px;
+  }
+
+  .cover-meta {
+    font-size: 13px;
+    color: rgba(255,255,255,0.7);
+    line-height: 2;
+  }
+
+  .cover-meta strong {
+    color: #fbbf24;
+    font-weight: 500;
+  }
+
+  /* ===== 通用标题 ===== */
+  .section-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-title::before {
+    content: '';
+    width: 5px;
+    height: 24px;
+    background: #1a56db;
+    border-radius: 2px;
+  }
+
+  .section-en {
+    font-size: 11px;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+    padding-left: 15px;
+  }
+
+  .sub-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1e3a5f;
+    margin: 20px 0 10px;
+    padding-left: 12px;
+    border-left: 4px solid #3b82f6;
+    line-height: 1.4;
+  }
+
+  .sub-title-2 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1a56db;
+    margin: 14px 0 8px;
+  }
+
+  p {
+    margin-bottom: 10px;
+    text-align: justify;
+  }
+
+  strong {
+    color: #1e40af;
+    font-weight: 600;
+  }
+
+  /* ===== 核心数字卡片 ===== */
+  .numbers-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin: 16px 0 20px;
+  }
+
+  .num-card {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border-radius: 8px;
+    padding: 14px 10px;
+    text-align: center;
+    border: 1px solid #bfdbfe;
+  }
+
+  .num-card .num {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1a56db;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .num-card .label {
+    font-size: 11px;
+    color: #1e40af;
+    font-weight: 500;
+  }
+
+  /* ===== 金句框 ===== */
+  .quote-box {
+    background: #fffbeb;
+    border-left: 4px solid #f59e0b;
+    border-radius: 0 6px 6px 0;
+    padding: 12px 16px;
+    margin: 12px 0;
+    font-size: 13px;
+    line-height: 1.8;
+  }
+
+  .quote-box p {
+    margin-bottom: 0;
+    color: #78350f;
+  }
+
+  .quote-box strong {
+    color: #92400e;
+  }
+
+  /* ===== 要点列表 ===== */
+  ul.key-points {
+    list-style: none;
+    padding-left: 0;
+    margin: 10px 0;
+  }
+
+  ul.key-points li {
+    position: relative;
+    padding-left: 22px;
+    margin-bottom: 8px;
+    line-height: 1.7;
+  }
+
+  ul.key-points li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: #1a56db;
+    font-weight: bold;
+  }
+
+  /* ===== 四角色卡片 ===== */
+  .roles-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 14px 0;
+  }
+
+  .role-card {
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 14px;
+    background: #fafbfc;
+  }
+
+  .role-card .role-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .role-card .role-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  .role-card .role-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #0f172a;
+  }
+
+  .role-card .role-en {
+    font-size: 10px;
+    color: #94a3b8;
+  }
+
+  .role-card .role-core {
+    font-size: 12px;
+    color: #1a56db;
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+
+  .role-card .role-desc {
+    font-size: 12px;
+    color: #475569;
+    line-height: 1.6;
+  }
+
+  .role-ambassador .role-icon { background: #dbeafe; }
+  .role-strategist .role-icon { background: #fef3c7; }
+  .role-storyteller .role-icon { background: #fce7f3; }
+  .role-evangelist .role-icon { background: #d1fae5; }
+
+  /* ===== 七工具表格 ===== */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 12px;
+  }
+
+  th {
+    background: #1e3a5f;
+    color: white;
+    padding: 8px 10px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 12px;
+  }
+
+  td {
+    padding: 8px 10px;
+    border-bottom: 1px solid #e2e8f0;
+    vertical-align: top;
+  }
+
+  tr:nth-child(even) td {
+    background: #f8fafc;
+  }
+
+  .tool-name {
+    font-weight: 600;
+    color: #1a56db;
+    white-space: nowrap;
+  }
+
+  /* ===== 方法卡片 ===== */
+  .method-card {
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin-bottom: 10px;
+    background: white;
+  }
+
+  .method-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .method-num {
+    width: 26px;
+    height: 26px;
+    background: linear-gradient(135deg, #1a56db, #3b82f6);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+
+  .method-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #0f172a;
+  }
+
+  .method-desc {
+    font-size: 12px;
+    color: #475569;
+    padding-left: 34px;
+    line-height: 1.7;
+  }
+
+  /* ===== CAST 模型 ===== */
+  .cast-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin: 12px 0;
+  }
+
+  .cast-item {
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 10px 8px;
+    text-align: center;
+    background: #fafbfc;
+  }
+
+  .cast-letter {
+    font-size: 22px;
+    font-weight: 700;
+    color: #1a56db;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .cast-word {
+    font-size: 11px;
+    font-weight: 600;
+    color: #0f172a;
+    margin-bottom: 4px;
+  }
+
+  .cast-desc {
+    font-size: 10px;
+    color: #64748b;
+    line-height: 1.5;
+  }
+
+  /* ===== 三层需求 ===== */
+  .layers-diagram {
+    margin: 14px 0;
+    position: relative;
+  }
+
+  .layer-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+
+  .layer-bar {
+    height: 36px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    font-size: 12px;
+    font-weight: 500;
+    color: white;
+  }
+
+  .layer-1 .layer-bar { width: 35%; background: linear-gradient(to right, #93c5fd, #3b82f6); }
+  .layer-2 .layer-bar { width: 65%; background: linear-gradient(to right, #60a5fa, #1d4ed8); }
+  .layer-3 .layer-bar { width: 100%; background: linear-gradient(to right, #3b82f6, #1e3a8a); }
+
+  .layer-label {
+    margin-left: 12px;
+    font-size: 12px;
+    color: #475569;
+  }
+
+  .layer-label strong {
+    color: #1e3a5f;
+    display: block;
+  }
+
+  /* ===== 对比表 ===== */
+  .compare-section {
+    margin: 12px 0;
+  }
+
+  /* ===== 页脚页码 ===== */
+  .page-footer {
+    position: absolute;
+    bottom: 10mm;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 10px;
+    color: #94a3b8;
+  }
+
+  .page-footer .page-tag {
+    display: inline-block;
+    padding: 2px 12px;
+    border-top: 1px solid #e2e8f0;
+  }
+
+  /* ===== 读书笔记区 ===== */
+  .notes-section {
+    margin-top: 20px;
+    border: 1px dashed #cbd5e1;
+    border-radius: 8px;
+    padding: 14px;
+    background: #f8fafc;
+  }
+
+  .notes-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: #64748b;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .notes-line {
+    height: 24px;
+    border-bottom: 1px dotted #e2e8f0;
+  }
+
+  /* ===== 标签 ===== */
+  .tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 500;
+  }
+
+  .tag-blue { background: #dbeafe; color: #1e40af; }
+  .tag-amber { background: #fef3c7; color: #92400e; }
+  .tag-green { background: #d1fae5; color: #065f46; }
+  .tag-red { background: #fee2e2; color: #991b1b; }
+
+  /* ===== 检查清单 ===== */
+  .checklist {
+    list-style: none;
+    padding-left: 0;
+    margin: 10px 0;
+  }
+
+  .checklist li {
+    position: relative;
+    padding-left: 26px;
+    margin-bottom: 6px;
+    font-size: 12px;
+    line-height: 1.6;
+  }
+
+  .checklist li::before {
+    content: '☐';
+    position: absolute;
+    left: 0;
+    color: #1a56db;
+    font-size: 14px;
+  }
+
+  /* 打印优化 */
+  @media print {
+    body { background: white; font-size: 12px; }
+    .page {
+      width: 100%;
+      min-height: auto;
+      margin: 0;
+      padding: 0;
+      box-shadow: none;
+      page-break-after: always;
+    }
+    .page:last-child { page-break-after: auto; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Top Navigation -->
+<nav class="top-nav">
+  <div class="nav-left">
+    <a href="../index.html" class="nav-back">
+      <span>←</span>
+      <span>返回书架</span>
+    </a>
+    <span class="nav-title">《科技产品营销基本法》</span>
+  </div>
+  <div class="nav-actions">
+    <button class="nav-btn" onclick="window.print()">🖨️ 打印/PDF</button>
+  </div>
+</nav>
+
+<!-- ========== 封面页 ========== -->
+<div class="page cover-page">
+  <div class="cover-badge">PRE-SALES ESSENTIAL GUIDE</div>
+  <div class="cover-title">科技产品营销基本法</div>
+  <div class="cover-subtitle">售前工程师精华导读 · 打印学习版</div>
+  <div class="cover-divider"></div>
+  <div class="cover-meta">
+    原著作者：<strong>玛蒂娜·劳琴科</strong>（Martina Lauchengco）<br>
+    出&nbsp;&nbsp;版&nbsp;&nbsp;社：<strong>硅谷产品集团（SVPG）</strong><br>
+    研读视角：<strong>锐捷网络 · 一线售前工程师</strong><br>
+    整理日期：<strong>2026年7月</strong>
+  </div>
+  <div style="margin-top: 60px; font-size: 11px; color: rgba(255,255,255,0.5); letter-spacing: 1px;">
+    从「技术讲解员」到「价值建筑师」的跃迁
+  </div>
+</div>
+
+<!-- ========== 第2页：全书框架 ========== -->
+<div class="page">
+  <div class="section-title">全书核心框架速览</div>
+  <div class="section-en">CORE FRAMEWORK OVERVIEW</div>
+
+  <p>
+    本书首次系统定义了<strong>"产品营销"</strong>这一独立职能——它不是市场营销的子集，
+    而是连接产品、销售、营销三大板块的战略枢纽。核心可概括为
+    <strong>「四大角色 + 七大工具」</strong>。
+  </p>
+
+  <div class="numbers-grid">
+    <div class="num-card">
+      <div class="num">4</div>
+      <div class="label">核心角色</div>
+    </div>
+    <div class="num-card">
+      <div class="num">7</div>
+      <div class="label">战略工具</div>
+    </div>
+    <div class="num-card">
+      <div class="num">29</div>
+      <div class="label">全书章节</div>
+    </div>
+    <div class="num-card">
+      <div class="num">30年</div>
+      <div class="label">硅谷实战沉淀</div>
+    </div>
+  </div>
+
+  <div class="quote-box">
+    <p>
+      <strong>核心命题：</strong>构建产品的认知，与构建产品本身同等重要，有时甚至更重要。
+      没有被讲述的价值，就等于不存在。
+    </p>
+  </div>
+
+  <div class="sub-title">四大核心角色</div>
+  <div class="roles-grid">
+    <div class="role-card role-ambassador">
+      <div class="role-header">
+        <div class="role-icon">👤</div>
+        <div>
+          <div class="role-name">代言人</div>
+          <div class="role-en">Ambassador</div>
+        </div>
+      </div>
+      <div class="role-core">连接客户与市场洞察</div>
+      <div class="role-desc">在组织内部代表用户声音，影响产品决策。不是"收集反馈"，而是"带回真实市场信号"。</div>
+    </div>
+    <div class="role-card role-strategist">
+      <div class="role-header">
+        <div class="role-icon">🎯</div>
+        <div>
+          <div class="role-name">战略家</div>
+          <div class="role-en">Strategist</div>
+        </div>
+      </div>
+      <div class="role-core">设计可落地的GTM战略</div>
+      <div class="role-desc">时机优先于内容：When → Why → What → How。把握进入市场的最佳节奏。</div>
+    </div>
+    <div class="role-card role-storyteller">
+      <div class="role-header">
+        <div class="role-icon">📖</div>
+        <div>
+          <div class="role-name">叙事者</div>
+          <div class="role-en">Storyteller</div>
+        </div>
+      </div>
+      <div class="role-core">塑造产品的市场认知</div>
+      <div class="role-desc">通过定位+信息传递，用故事建构价值。产品的价值不是客观存在的，是叙事出来的。</div>
+    </div>
+    <div class="role-card role-evangelist">
+      <div class="role-header">
+        <div class="role-icon">📣</div>
+        <div>
+          <div class="role-name">布道者</div>
+          <div class="role-en">Evangelist</div>
+        </div>
+      </div>
+      <div class="role-core">赋能他人替你传播</div>
+      <div class="role-desc">你自己说的话最不重要，别人替你说的话才最重要。找到"原子粒子"让用户自发传播。</div>
+    </div>
+  </div>
+
+  <div class="sub-title">七大战略工具</div>
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 22%;">工具</th>
+        <th style="width: 38%;">核心思想</th>
+        <th>售前应用场景</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="tool-name">GTM计划</td>
+        <td>把握关键营销行动的时机，When优先于What</td>
+        <td>判断客户当前阶段，调整沟通重点</td>
+      </tr>
+      <tr>
+        <td class="tool-name">技术采用曲线</td>
+        <td>不同阶段用户需要完全不同的说服逻辑</td>
+        <td>识别客户是创新者还是大众，调整话术</td>
+      </tr>
+      <tr>
+        <td class="tool-name">品牌策略</td>
+        <td>品牌是客户与公司之间的承诺，由产品体验驱动</td>
+        <td>用交付质量和服务体验建立客户信任</td>
+      </tr>
+      <tr>
+        <td class="tool-name">定价策略</td>
+        <td>"心理账户"决定支付意愿，定价≠成本</td>
+        <td>把方案从"成本账户"移到"风险规避账户"</td>
+      </tr>
+      <tr>
+        <td class="tool-name">势能运营</td>
+        <td>非新品期的增长引擎，持续制造关注</td>
+        <td>平时分享行业洞察，保持客户面前的存在感</td>
+      </tr>
+      <tr>
+        <td class="tool-name">PGTM画布</td>
+        <td>拼图思维代替线性规划，本质是组织共识工具</td>
+        <td>内部对齐客户现实、产品能力和市场策略</td>
+      </tr>
+      <tr>
+        <td class="tool-name">动态配速</td>
+        <td>匹配企业生命周期的GTM节奏</td>
+        <td>不同规模客户用不同方案重点</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="page-footer">
+    <span class="page-tag">— 2 / 8 —</span>
+  </div>
+</div>
+
+<!-- ========== 第3页：核心观点 ========== -->
+<div class="page">
+  <div class="section-title">核心观点深度提炼</div>
+  <div class="section-en">KEY INSIGHTS DEEP DIVE</div>
+
+  <div class="sub-title">观点一：产品营销的本质是「认知翻译」</div>
+  <p>
+    产品营销不是做宣传册、写文案的边缘职能，而是连接产品、销售、营销三大板块的
+    <strong>独立战略职能</strong>。它从"成本中心"升级为"价值创造中心"——
+    不是产品做好之后才介入的推广环节，而是从产品定义阶段就深度参与的战略角色。
+  </p>
+  <div class="quote-box">
+    <p>
+      <strong>微软Word红色波浪线案例：</strong>功能改动最小的一个版本，
+      因为把"实时拼写检查"做到闪电般快，并围绕它设计了完整叙事，
+      反而成为当时评价最高、商业最成功的版本。
+      → 产品的价值不是客观存在的，是通过叙事建构的。
+    </p>
+  </div>
+
+  <div class="sub-title">观点二：时机优先于内容</div>
+  <p>
+    产品战略的逻辑是 <strong>What → How → Why → When</strong>，
+    而GTM战略的逻辑是 <strong>When → Why → What → How</strong>。
+    传统思维是"先想做什么，再想怎么做"，GTM思维要求你反过来——
+    "先想什么时候进入市场最合适，再想做什么能抓住这个时机"。
+  </p>
+  <ul class="key-points">
+    <li>客户在考虑预算时 → 讲ROI分析和同行案例</li>
+    <li>客户在技术选型时 → 讲架构优势和性能指标</li>
+    <li>客户在评估风险时 → 讲案例、稳定性、服务保障</li>
+  </ul>
+
+  <div class="sub-title">观点三：定位 vs 信息传递</div>
+  <table>
+    <thead>
+      <tr>
+        <th>维度</th>
+        <th>定位 Positioning</th>
+        <th>信息传递 Messaging</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>性质</strong></td>
+        <td>长期战略</td>
+        <td>短期语言</td>
+      </tr>
+      <tr>
+        <td><strong>稳定性</strong></td>
+        <td>相对稳定，不宜频繁变动</td>
+        <td>灵活调整，因受众/场景/时机而变</td>
+      </tr>
+      <tr>
+        <td><strong>目标</strong></td>
+        <td>占据客户心智中的独特位置</td>
+        <td>传达定位的具体措辞和话术</td>
+      </tr>
+      <tr>
+        <td><strong>售前映射</strong></td>
+        <td>方案的整体定位和差异化主张</td>
+        <td>面对不同角色时的具体沟通话术</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="sub-title">观点四：研产销割裂的根因与解法</div>
+  <p>
+    割裂的根源不是部门墙本身，而是<strong>缺少一个能够连接三方的共同职能和共同语言</strong>。
+    产品向内看（功能技术）、销售向外看（客户订单）、营销往上看（品牌曝光），
+    三个部门方向不同、KPI不同、语言不同。
+  </p>
+  <ul class="key-points">
+    <li><strong>时间账：</strong>产品埋头做了一年，上线后才发现没人买单</li>
+    <li><strong>效率账：</strong>三方缺乏共同语言，只能不断开会对齐</li>
+    <li><strong>成本账：</strong>定位不清需反复测试卖点，价值不到位靠话术弥补</li>
+  </ul>
+  <p>解法就是建立产品营销职能作为枢纽，用同一套语言与三方对话。</p>
+
+  <div class="page-footer">
+    <span class="page-tag">— 3 / 8 —</span>
+  </div>
+</div>
+
+<!-- ========== 第4页：五大落地方法（上） ========== -->
+<div class="page">
+  <div class="section-title">五大售前落地方法（上）</div>
+  <div class="section-en">5 PRACTICAL METHODS FOR PRE-SALES · PART 1</div>
+
+  <div class="sub-title">方法一：CAST模型检验法</div>
+  <p style="margin-bottom: 8px;">
+    用CAST四要素检验每一份方案的核心价值主张，确保它一击即中。
+  </p>
+  <div class="cast-grid">
+    <div class="cast-item">
+      <div class="cast-letter">C</div>
+      <div class="cast-word">Clear 清晰</div>
+      <div class="cast-desc">易于理解<br>激发好奇心</div>
+    </div>
+    <div class="cast-item">
+      <div class="cast-letter">A</div>
+      <div class="cast-word">Authentic 真实</div>
+      <div class="cast-desc">与客户现实共鸣<br>不夸大不虚构</div>
+    </div>
+    <div class="cast-item">
+      <div class="cast-letter">S</div>
+      <div class="cast-word">Simple 简洁</div>
+      <div class="cast-desc">突出差异化<br>不堆砌功能点</div>
+    </div>
+    <div class="cast-item">
+      <div class="cast-letter">T</div>
+      <div class="cast-word">Tested 验证</div>
+      <div class="cast-desc">真实场景验证<br>有案例有数据</div>
+    </div>
+  </div>
+  <div class="notes-section" style="margin-top: 8px;">
+    <div class="notes-title">✏️ 练习：用CAST检验你最近一份方案的核心价值主张</div>
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+  </div>
+
+  <div class="sub-title">方法二：三层需求挖掘法</div>
+  <p style="margin-bottom: 10px;">
+    客户说出来的需求往往只是冰山一角。真正驱动采购决策的，是水面下的业务痛点和个人诉求。
+  </p>
+  <div class="layers-diagram">
+    <div class="layer-row layer-1">
+      <div class="layer-bar">第一层：功能需求（水面之上）</div>
+      <div class="layer-label">
+        <strong>表现：</strong>"我们要一套网络安全设备"
+        <span style="color: #94a3b8;">→ 直接询问、招标书研读</span>
+      </div>
+    </div>
+    <div class="layer-row layer-2">
+      <div class="layer-bar">第二层：业务痛点（水面之下）</div>
+      <div class="layer-label">
+        <strong>本质：</strong>"去年两次安全事故，领导很重视"
+        <span style="color: #94a3b8;">→ 背景调研、深入访谈</span>
+      </div>
+    </div>
+    <div class="layer-row layer-3">
+      <div class="layer-bar">第三层：个人诉求（冰山底层）</div>
+      <div class="layer-label">
+        <strong>内核：</strong>"项目做好了，我年底就能评先进"
+        <span style="color: #94a3b8;">→ 关系经营、换位思考</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="sub-title">方法三：信息表达画布法</div>
+  <p>把方案内容拆成模块化的"积木"，根据不同受众和场景灵活组合：</p>
+  <table>
+    <thead>
+      <tr>
+        <th>模块</th>
+        <th>内容</th>
+        <th>对谁讲</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="tool-name">核心信息</td>
+        <td>一句话价值主张（定海神针）</td>
+        <td>所有人，所有场景</td>
+      </tr>
+      <tr>
+        <td class="tool-name">支撑信息</td>
+        <td>3-5个核心论据</td>
+        <td>中层管理者、技术负责人</td>
+      </tr>
+      <tr>
+        <td class="tool-name">证据材料</td>
+        <td>案例、数据、测试报告、资质</td>
+        <td>技术专家、评标委员会</td>
+      </tr>
+      <tr>
+        <td class="tool-name">受众适配</td>
+        <td>按角色定制的话术版本</td>
+        <td>技术/业务/财务/高管</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="page-footer">
+    <span class="page-tag">— 4 / 8 —</span>
+  </div>
+</div>
+
+<!-- ========== 第5页：五大落地方法（下） ========== -->
+<div class="page">
+  <div class="section-title">五大售前落地方法（下）</div>
+  <div class="section-en">5 PRACTICAL METHODS FOR PRE-SALES · PART 2</div>
+
+  <div class="sub-title">方法四：用户代言人法</div>
+  <p>
+    售前工程师是离客户最近的人之一。你听到的客户抱怨、看到的竞品弱点、感受到的市场趋势，
+    都是产品团队最宝贵的输入。但很多售前只是被动接收需求，没有主动发挥"代言人"的价值。
+  </p>
+  <div class="quote-box">
+    <p>
+      <strong>Workiva案例启示：</strong>客户反复反映"多屏幕支持很有帮助"，
+      产品团队最初认为只是"锦上添花"。客户成功团队坚持推动，
+      最终这个功能成为了最受关注的特性。
+      → 真正的用户洞察往往藏在一线接触点上。
+    </p>
+  </div>
+
+  <div class="sub-title-2">售前代言人行动清单</div>
+  <ul class="checklist">
+    <li>每次客户拜访后，记录3条有价值的客户洞察（不是需求，是背后的why）</li>
+    <li>每月整理1份竞品弱点分析（基于客户真实反馈，不是自己脑补）</li>
+    <li>遇到被低估的重要需求时，坚持推动至少2次，而不是一次被拒就放弃</li>
+    <li>把客户原话带回产品团队，比你加工过的"需求描述"更有冲击力</li>
+    <li>建立自己的"客户洞察笔记本"，定期复盘更新</li>
+  </ul>
+
+  <div class="sub-title">方法五：心理账户定价法</div>
+  <p>
+    定价不是关于生产成本，而是关于人们对产品的感知价值和支付意愿。
+    同一个产品，放在不同的"心理账户"里，用户愿意支付的价格完全不同。
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>心理账户</th>
+        <th>客户感受</th>
+        <th>价格敏感度</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="tag tag-red">基础设施成本账户</span></td>
+        <td>花钱买设备，能省则省</td>
+        <td>高（100万都嫌贵）</td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-amber">效率提升账户</span></td>
+        <td>投资工具，省人力成本</td>
+        <td>中（看ROI计算）</td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-green">风险规避账户</span></td>
+        <td>买保险，防事故损失</td>
+        <td>低（500万都觉得值）</td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-blue">战略发展账户</span></td>
+        <td>未来竞争力投资</td>
+        <td>极低（看战略价值）</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="sub-title-2">价格谈判实操话术</div>
+  <ul class="key-points">
+    <li>和"出事故的损失"对比：<em>"一次安全事故的损失可能远超这个数"</em></li>
+    <li>和"竞品总拥有成本"对比：<em>"他们看起来便宜20%，但三年运维加起来反而高30%"</em></li>
+    <li>和"客户自己做的成本"对比：<em>"自己组建团队至少3人做一年，人力成本远超这个数"</em></li>
+    <li>和"不做的机会成本"对比：<em>"晚一年上线，损失的业务增长机会远大于投入"</em></li>
+  </ul>
+
+  <div class="quote-box">
+    <p>
+      <strong>落地预期效果：</strong>价格谈判从"砍价博弈"变为"价值讨论"；
+      客户对价格的敏感度降低，更容易接受较高的报价；
+      售前从"卖盒子的"升级为"卖价值的"。
+    </p>
+  </div>
+
+  <div class="page-footer">
+    <span class="page-tag">— 5 / 8 —</span>
+  </div>
+</div>
+
+<!-- ========== 第6页：批判性思辨 ========== -->
+<div class="page">
+  <div class="section-title">核心观点批判性思辨</div>
+  <div class="section-en">CRITICAL THINKING & LOCAL ADAPTATION</div>
+
+  <p style="font-size: 12px; color: #64748b; margin-bottom: 12px;">
+    硅谷方法论不能直接照搬到中国政企市场，必须进行本土化改造。以下从5个维度展开思辨。
+  </p>
+
+  <div class="sub-title">思辨一：理论的适用边界</div>
+  <p>产品营销不是万能药，在以下场景中作用会大打折扣：</p>
+  <ul class="key-points">
+    <li><strong>强关系驱动市场</strong> — 关系和信任权重远高于产品。关系是入场券，价值是通行证</li>
+    <li><strong>强资源垄断市场</strong> — 牌照、渠道、生态壁垒下，产品+营销很难突围</li>
+    <li><strong>极度价格敏感市场</strong> — 决策标准只有"谁便宜买谁"，讲价值客户听不进去</li>
+    <li><strong>产品未达及格线</strong> — 营销越好死得越快，更多人体验到你的糟糕</li>
+  </ul>
+
+  <div class="sub-title">思辨二：中国政企市场的水土不服</div>
+  <table>
+    <thead>
+      <tr>
+        <th>维度</th>
+        <th>硅谷/美国</th>
+        <th>中国政企</th>
+        <th>改造方向</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>决策逻辑</strong></td>
+        <td>ROI驱动</td>
+        <td>政治安全+领导意图</td>
+        <td>经济账+政治账+安全账</td>
+      </tr>
+      <tr>
+        <td><strong>关系权重</strong></td>
+        <td>专业信任基础</td>
+        <td>人情+面子+圈子</td>
+        <td>价值+关系双轨并行</td>
+      </tr>
+      <tr>
+        <td><strong>合规权重</strong></td>
+        <td>相对稳定透明</td>
+        <td>等保信创是入场券</td>
+        <td>合规先行，价值殿后</td>
+      </tr>
+      <tr>
+        <td><strong>客户成熟度</strong></td>
+        <td>知道自己要什么</td>
+        <td>很多不清楚需求</td>
+        <td>教育客户、引导需求</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="quote-box">
+    <p>
+      <strong>本土化核心思路：「双轨制」</strong>
+      —— 价值轨道 + 关系轨道并行。
+      用产品营销方法论打磨价值传递，用中国式关系智慧经营客户信任。
+      两条腿走路，才能在中国市场走得稳。
+    </p>
+  </div>
+
+  <div class="sub-title">思辨三：与传统售前模式的冲突</div>
+  <div class="roles-grid">
+    <div class="role-card" style="background: #fef2f2; border-color: #fecaca;">
+      <div class="role-header">
+        <div class="role-icon" style="background: #fee2e2;">⚔️</div>
+        <div>
+          <div class="role-name" style="color: #991b1b;">三大冲突</div>
+          <div class="role-en">3 Conflicts</div>
+        </div>
+      </div>
+      <div class="role-desc" style="color: #7f1d1d;">
+        • 角色定位：技术跟班 vs 独立战略<br>
+        • 目标导向：赢单至上 vs 长期价值<br>
+        • 能力模型：技术+表达 vs 全栈能力
+      </div>
+    </div>
+    <div class="role-card" style="background: #f0fdf4; border-color: #86efac;">
+      <div class="role-header">
+        <div class="role-icon" style="background: #bbf7d0;">🔀</div>
+        <div>
+          <div class="role-name" style="color: #166534;">融合路径</div>
+          <div class="role-en">Integration Path</div>
+        </div>
+      </div>
+      <div class="role-desc" style="color: #14532d;">
+        • 短期：润物细无声，把方法融入日常<br>
+        • 中期：用结果说话，证明价值<br>
+        • 长期：从技术跟班→价值伙伴
+      </div>
+    </div>
+  </div>
+
+  <div class="sub-title">思辨四：技术价值 vs 认知价值</div>
+  <div class="quote-box">
+    <p>
+      <strong>辩证关系：</strong>技术价值是基础门槛，认知价值是竞争壁垒。
+      产品力是1，认知力是1后面的0。没有1，再多0也没用；
+      但有了1，后面的0越多，价值越大。
+    </p>
+  </div>
+  <p>
+    Gartner数据：B端采购决策中，"技术适配性"只排第三，
+    前两位是"行业案例验证"和"服务响应速度"。
+    技术是入场券，都达标后，认知层面的因素决定胜负。
+  </p>
+
+  <div class="page-footer">
+    <span class="page-tag">— 6 / 8 —</span>
+  </div>
+</div>
+
+<!-- ========== 第7页：行动清单 ========== -->
+<div class="page">
+  <div class="section-title">售前30天行动清单</div>
+  <div class="section-en">30-DAY ACTION PLAN FOR PRE-SALES</div>
+
+  <p style="margin-bottom: 14px;">
+    不要试图一次把所有方法都用上。选1-2个最有价值的，在接下来的一个月里刻意练习。
+  </p>
+
+  <div class="sub-title">第一周：认知升级周</div>
+  <ul class="checklist">
+    <li>快速通读本书，建立四大角色+七大工具的整体框架（第一遍快读）</li>
+    <li>用CAST模型检验你最近写的3份方案，找出价值主张的薄弱环节</li>
+    <li>回想最近一个丢单项目，分析是产品问题还是认知/价值传递问题</li>
+    <li>整理出你负责产品的"一句话价值主张"，不超过20个字</li>
+  </ul>
+
+  <div class="sub-title">第二周：方法落地周</div>
+  <ul class="checklist">
+    <li>选一个正在跟进的项目，尝试"三层需求挖掘法"，挖到第三层</li>
+    <li>做一份你负责产品的"信息表达画布"，拆成4个模块</li>
+    <li>针对不同角色（技术/业务/财务/高管），各写3句核心沟通话术</li>
+    <li>找一个价格谈判困难的项目，用心理账户法重新组织报价话术</li>
+  </ul>
+
+  <div class="sub-title">第三周：代言人实践周</div>
+  <ul class="checklist">
+    <li>每次客户拜访后，记录3条有价值的客户洞察（不是需求，是背后的why）</li>
+    <li>整理1份竞品弱点分析（基于客户真实反馈）</li>
+    <li>向产品团队反馈1条你认为被低估的重要客户需求</li>
+    <li>建立自己的"客户洞察笔记本"，开始持续积累</li>
+  </ul>
+
+  <div class="sub-title">第四周：势能运营周</div>
+  <ul class="checklist">
+    <li>给你的重点客户发1条有价值的行业洞察（不是推销产品）</li>
+    <li>整理2个可以用来做"布道粒子"的客户成功故事</li>
+    <li>在团队内部分享1个你学到的产品营销方法</li>
+    <li>复盘这一个月的实践，写下3条最有价值的收获和改进方向</li>
+  </ul>
+
+  <div class="notes-section">
+    <div class="notes-title">📝 我的30天实践笔记区</div>
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+  </div>
+
+  <div class="page-footer">
+    <span class="page-tag">— 7 / 8 —</span>
+  </div>
+</div>
+
+<!-- ========== 第8页：金句与结语 ========== -->
+<div class="page">
+  <div class="section-title">核心金句 & 结语</div>
+  <div class="section-en">QUOTES & CLOSING</div>
+
+  <div class="sub-title">必须记住的10句话</div>
+
+  <div class="quote-box">
+    <p>❶ 构建产品的认知，与构建产品本身同等重要，有时甚至更重要。</p>
+  </div>
+  <div class="quote-box">
+    <p>❷ 没有被讲述的价值，就等于不存在。</p>
+  </div>
+  <div class="quote-box">
+    <p>❸ 产品的价值不是客观存在的，而是通过叙事建构的。</p>
+  </div>
+  <div class="quote-box">
+    <p>❹ 你自己说的话最不重要，别人替你说的话才最重要。</p>
+  </div>
+  <div class="quote-box">
+    <p>❺ 产品战略是 What→How→Why→When，GTM战略是 When→Why→What→How。</p>
+  </div>
+  <div class="quote-box">
+    <p>❻ 品牌不是logo和口号，品牌是客户与公司之间的承诺。</p>
+  </div>
+  <div class="quote-box">
+    <p>❼ 定价不是关于生产成本，而是关于人们对产品的感知价值和支付意愿。</p>
+  </div>
+  <div class="quote-box">
+    <p>❽ PGTM画布的本质不是规划工具，而是组织共识工具。</p>
+  </div>
+  <div class="quote-box">
+    <p>❾ 好的产品营销不需要专业的营销人员，产品团队每个人都应该学会产品营销思维。</p>
+  </div>
+  <div class="quote-box">
+    <p>❿ 被看见的价值才是真实的价值，被理解的优势才是真正的优势。</p>
+  </div>
+
+  <div class="sub-title">写在最后</div>
+  <p style="text-align: center; font-size: 14px; line-height: 2; margin-top: 16px;">
+    你不是销售的技术跟班，<br>
+    不是产品的传声筒，<br>
+    而是 <strong style="color: #1a56db; font-size: 16px;">客户价值的翻译官</strong>，<br>
+    <strong style="color: #1a56db; font-size: 16px;">市场认知的建筑师</strong>，<br>
+    <strong style="color: #1a56db; font-size: 16px;">技术与商业之间的桥梁</strong>。<br>
+    <br>
+    <span style="color: #64748b; font-size: 12px;">从「售前工程师」到「价值建筑师」的跃迁</span>
+  </p>
+
+  <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #e2e8f0;">
+    <div style="font-size: 11px; color: #94a3b8; letter-spacing: 1px;">
+      《科技产品营销基本法》售前精华导读 · 2026年7月
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span class="page-tag">— 8 / 8 —</span>
+  </div>
+</div>
+
+<!-- My Personal Thoughts (editable) -->
+<div class="page" style="padding-bottom: 40px;">
+  <div class="my-thoughts-section">
+    <div class="my-thoughts-header">
+      <div class="my-thoughts-title">✍️ 我的个人观点</div>
+      <button class="thought-edit-btn" id="thoughtEditBtn" onclick="toggleThoughtEdit()">编辑</button>
+    </div>
+    <div class="thought-content" id="thoughtContent">
+"没有被讲述的价值，就等于不存在"——这本书给我最大的冲击就是这个观点。
+
+作为售前工程师，我们总觉得技术参数、架构设计是最重要的，
+但客户真正决策时，影响他的往往是他"感受到的价值"，
+而不是客观存在的参数。技术好但讲不好，等于不好。
+
+CAST模型和三层需求挖掘法可以立刻用起来，
+下次写方案的时候，先用CAST检验一下价值主张够不够锋利，
+再想想客户说的需求背后，第二层和第三层到底是什么。
+
+中国政企市场的双轨制改造也很重要——价值和关系两条腿走路，
+缺了哪条都走不远。</div>
+    <div class="thought-hint">点击"编辑"按钮可添加你的个人感悟，自动保存到浏览器</div>
+  </div>
+</div>
+
+<script>
+  // My Thoughts editing with localStorage
+  const bookId = 'book_001_tech_product_marketing';
+  const thoughtContent = document.getElementById('thoughtContent');
+  const thoughtEditBtn = document.getElementById('thoughtEditBtn');
+  let isEditing = false;
+
+  // Load saved thought
+  const savedThought = localStorage.getItem(bookId + '_thought');
+  if (savedThought) {
+    thoughtContent.textContent = savedThought;
+  }
+
+  function toggleThoughtEdit() {
+    if (!isEditing) {
+      // Enter edit mode
+      thoughtContent.setAttribute('contenteditable', 'true');
+      thoughtContent.focus();
+      thoughtEditBtn.textContent = '保存';
+      thoughtEditBtn.classList.add('save');
+      isEditing = true;
+    } else {
+      // Save mode
+      thoughtContent.removeAttribute('contenteditable');
+      thoughtEditBtn.textContent = '编辑';
+      thoughtEditBtn.classList.remove('save');
+      isEditing = false;
+      // Save to localStorage
+      localStorage.setItem(bookId + '_thought', thoughtContent.textContent);
+      alert('已保存！');
+    }
+  }
+</script>
+
+</body>
+</html>

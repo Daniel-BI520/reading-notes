@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>我的读书笔记 · RootUser</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --primary: #1a56db;
+    --primary-light: #3b82f6;
+    --primary-dark: #1e40af;
+    --accent: #f59e0b;
+    --accent-light: #fbbf24;
+    --bg: #f1f5f9;
+    --bg-card: #ffffff;
+    --text: #1e293b;
+    --text-secondary: #64748b;
+    --text-light: #94a3b8;
+    --border: #e2e8f0;
+    --success: #10b981;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #1a56db 100%);
+    color: white;
+    padding: 60px 20px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -60%;
+    right: -10%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.25) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -40%;
+    left: -5%;
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, rgba(245, 158, 11, 0.15) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .header-content {
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .header-avatar {
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, #f59e0b, #ef4444);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  .header h1 {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    letter-spacing: -0.5px;
+  }
+
+  .header-subtitle {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.75);
+    margin-bottom: 28px;
+    max-width: 600px;
+  }
+
+  .header-stats {
+    display: flex;
+    gap: 40px;
+  }
+
+  .stat-item {
+    text-align: center;
+  }
+
+  .stat-num {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--accent-light);
+    line-height: 1.2;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
+    letter-spacing: 1px;
+    margin-top: 4px;
+  }
+
+  /* Main Content */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* Toolbar */
+  .toolbar {
+    margin-top: -40px;
+    margin-bottom: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    position: relative;
+    z-index: 10;
+  }
+
+  .search-box {
+    flex: 1;
+    max-width: 320px;
+    position: relative;
+  }
+
+  .search-box input {
+    width: 100%;
+    padding: 12px 16px 12px 42px;
+    border: none;
+    border-radius: 12px;
+    background: var(--bg-card);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    font-size: 14px;
+    color: var(--text);
+    outline: none;
+    transition: box-shadow 0.2s;
+  }
+
+  .search-box input:focus {
+    box-shadow: 0 4px 20px rgba(26, 86, 219, 0.2);
+  }
+
+  .search-box::before {
+    content: '🔍';
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+    opacity: 0.5;
+  }
+
+  .filter-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .filter-tag {
+    padding: 6px 14px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .filter-tag:hover {
+    border-color: var(--primary-light);
+    color: var(--primary);
+  }
+
+  .filter-tag.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: white;
+  }
+
+  /* Section Title */
+  .section-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-title::before {
+    content: '';
+    width: 4px;
+    height: 22px;
+    background: var(--primary);
+    border-radius: 2px;
+  }
+
+  /* Book Shelf Grid */
+  .books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    margin-bottom: 48px;
+  }
+
+  .book-card {
+    background: var(--bg-card);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .book-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+  }
+
+  .book-cover {
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .book-cover::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%);
+  }
+
+  .book-cover-title {
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+    padding: 0 20px;
+    line-height: 1.4;
+    z-index: 1;
+    position: relative;
+  }
+
+  .book-cover-author {
+    position: absolute;
+    bottom: 12px;
+    right: 16px;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 12px;
+    z-index: 1;
+  }
+
+  .book-info {
+    padding: 18px;
+  }
+
+  .book-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 6px;
+    line-height: 1.4;
+  }
+
+  .book-author {
+    font-size: 12px;
+    color: var(--text-light);
+    margin-bottom: 10px;
+  }
+
+  .book-summary {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 14px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .book-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+  }
+
+  .book-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .book-tag {
+    padding: 2px 8px;
+    background: #eff6ff;
+    color: var(--primary);
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 500;
+  }
+
+  .book-tag.biz { background: #fef3c7; color: #92400e; }
+  .book-tag.tech { background: #dbeafe; color: #1e40af; }
+  .book-tag.thinking { background: #fce7f3; color: #9d174d; }
+  .book-tag.history { background: #e0e7ff; color: #3730a3; }
+  .book-tag.sales { background: #d1fae5; color: #065f46; }
+
+  .book-rating {
+    font-size: 12px;
+    color: var(--accent);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+  }
+
+  .book-date {
+    font-size: 11px;
+    color: var(--text-light);
+  }
+
+  /* Cover color variants */
+  .cover-1 { background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #1a56db 100%); }
+  .cover-2 { background: linear-gradient(135deg, #7c2d12 0%, #c2410c 50%, #ea580c 100%); }
+  .cover-3 { background: linear-gradient(135deg, #064e3b 0%, #047857 50%, #10b981 100%); }
+  .cover-4 { background: linear-gradient(135deg, #581c87 0%, #7c3aed 50%, #8b5cf6 100%); }
+  .cover-5 { background: linear-gradient(135deg, #881337 0%, #be123c 50%, #f43f5e 100%); }
+  .cover-6 { background: linear-gradient(135deg, #134e4a 0%, #0d9488 50%, #2dd4bf 100%); }
+  .cover-7 { background: linear-gradient(135deg, #422006 0%, #a16207 50%, #ca8a04 100%); }
+  .cover-8 { background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #60a5fa 100%); }
+
+  /* My Thoughts Section */
+  .thoughts-section {
+    background: var(--bg-card);
+    border-radius: 14px;
+    padding: 24px;
+    margin-bottom: 48px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  }
+
+  .thoughts-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+
+  .thoughts-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .thoughts-list {
+    list-style: none;
+  }
+
+  .thought-item {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    gap: 14px;
+  }
+
+  .thought-item:last-child {
+    border-bottom: none;
+  }
+
+  .thought-book {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--primary);
+    margin-bottom: 4px;
+  }
+
+  .thought-text {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .thought-date {
+    font-size: 11px;
+    color: var(--text-light);
+    margin-top: 6px;
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--text-light);
+    font-size: 13px;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+  }
+
+  .footer-quote {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+    font-style: italic;
+  }
+
+  /* Empty State */
+  .empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-light);
+  }
+
+  .empty-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+  }
+
+  .empty-text {
+    font-size: 14px;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .header {
+      padding: 40px 20px 60px;
+    }
+
+    .header h1 {
+      font-size: 26px;
+    }
+
+    .header-subtitle {
+      font-size: 14px;
+    }
+
+    .header-stats {
+      gap: 24px;
+    }
+
+    .stat-num {
+      font-size: 22px;
+    }
+
+    .books-grid {
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 16px;
+    }
+
+    .book-cover {
+      height: 150px;
+    }
+
+    .book-cover-title {
+      font-size: 15px;
+    }
+
+    .toolbar {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .search-box {
+      max-width: none;
+    }
+  }
+
+  /* Smooth scroll */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Fade in */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+  <div class="header-content">
+    <div class="header-avatar">📚</div>
+    <h1>我的读书笔记</h1>
+    <p class="header-subtitle">
+      每一本读过的书，都是一次认知升级。<br>
+      在这里记录、沉淀、反思，让知识真正内化为能力。
+    </p>
+    <div class="header-stats">
+      <div class="stat-item">
+        <div class="stat-num" id="totalBooks">4</div>
+        <div class="stat-label">已读</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" id="totalNotes">4</div>
+        <div class="stat-label">笔记</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">365</div>
+        <div class="stat-label">阅读天</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- Toolbar -->
+  <div class="toolbar">
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="搜索书名、作者、标签...">
+    </div>
+    <div class="filter-tags" id="filterTags">
+      <span class="filter-tag active" data-tag="all">全部</span>
+      <span class="filter-tag" data-tag="营销">营销</span>
+      <span class="filter-tag" data-tag="销售">销售</span>
+      <span class="filter-tag" data-tag="技术">技术</span>
+      <span class="filter-tag" data-tag="思维">思维</span>
+      <span class="filter-tag" data-tag="历史">历史</span>
+    </div>
+  </div>
+
+  <!-- Books Grid -->
+  <h2 class="section-title">书架</h2>
+  <div class="books-grid" id="booksGrid">
+    <!-- Book Card 1 -->
+    <a href="books/book_001_tech_product_marketing.html" class="book-card fade-in">
+      <div class="book-cover cover-1">
+        <div class="book-cover-title">科技产品营销基本法</div>
+        <div class="book-cover-author">玛蒂娜·劳琴科</div>
+      </div>
+      <div class="book-info">
+        <div class="book-title">科技产品营销基本法</div>
+        <div class="book-author">Martina Lauchengco · SVPG出品</div>
+        <div class="book-summary">
+          硅谷产品集团里程碑式著作，首次系统定义"产品营销"职能。
+          从售前视角拆解四大角色与七大战略工具，
+          教你如何把技术语言翻译为客户价值语言。
+        </div>
+        <div class="book-meta">
+          <div class="book-tags">
+            <span class="book-tag">营销</span>
+            <span class="book-tag sales">销售</span>
+          </div>
+          <div class="book-rating">⭐ 5.0</div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Book Card 2 -->
+    <a href="books/book_002_industry_research.html" class="book-card fade-in">
+      <div class="book-cover" style="background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 50%, #4c1d95 100%);">
+        <div class="book-cover-title">如何快速了解一个行业</div>
+        <div class="book-cover-author">肖璟</div>
+      </div>
+      <div class="book-info">
+        <div class="book-title">如何快速了解一个行业</div>
+        <div class="book-author">肖璟 · 前麦肯锡分析师</div>
+        <div class="book-summary">
+          产业生命周期+七大分析维度+麦肯锡资讯料理法，
+          一套可复制的行业研究方法论。
+          从需求洞察到方案设计，售前能力跃迁的系统框架。
+        </div>
+        <div class="book-meta">
+          <div class="book-tags">
+            <span class="book-tag" style="background: #ede9fe; color: #6d28d9;">方法论</span>
+            <span class="book-tag" style="background: #fef3c7; color: #92400e;">思维</span>
+          </div>
+          <div class="book-rating">⭐ 4.8</div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Book Card 4 -->
+    <a href="books/book_004_hassabis_deepmind.html" class="book-card fade-in">
+      <div class="book-cover" style="background: linear-gradient(135deg, #0c4a6e 0%, #0369a1 50%, #0ea5e9 100%);">
+        <div class="book-cover-title">哈萨比斯：谷歌AI之脑</div>
+        <div class="book-cover-author">塞巴斯蒂安·马拉比</div>
+      </div>
+      <div class="book-info">
+        <div class="book-title">哈萨比斯：谷歌AI之脑</div>
+        <div class="book-author">湛庐文化 · 2026新书</div>
+        <div class="book-summary">
+          DeepMind十五年演进史诗，突击小组管理模式，
+          强化学习路线的螺旋式回归，
+          前沿技术团队管理与战略决策的教科书级案例。
+        </div>
+        <div class="book-meta">
+          <div class="book-tags">
+            <span class="book-tag tech">AI</span>
+            <span class="book-tag" style="background: #dbeafe; color: #1e40af;">传记</span>
+          </div>
+          <div class="book-rating">⭐ 4.9</div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Book Card 3 -->
+    <a href="books/book_003_finance_dc_network.html" class="book-card fade-in">
+      <div class="book-cover" style="background: linear-gradient(135deg, #92400e 0%, #d97706 50%, #f59e0b 100%);">
+        <div class="book-cover-title">金融数据中心网络架构与技术</div>
+        <div class="book-cover-author">张学明 陈乐</div>
+      </div>
+      <div class="book-info">
+        <div class="book-title">金融数据中心网络架构与技术</div>
+        <div class="book-author">华为数据通信系列 · 国之重器出版工程</div>
+        <div class="book-summary">
+          IPO四层模型+三大解耦+七大分区Fabric设计，
+          金融行业网络架构的系统化实战指南。
+          从业务需求倒推技术架构，售前设计人员的核心参考手册。
+        </div>
+        <div class="book-meta">
+          <div class="book-tags">
+            <span class="book-tag tech">网络架构</span>
+            <span class="book-tag biz">金融</span>
+          </div>
+          <div class="book-rating">⭐ 4.9</div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Placeholder for future books -->
+    <div class="book-card fade-in" style="opacity: 0.5; cursor: default;" onclick="return false;">
+      <div class="book-cover" style="background: linear-gradient(135deg, #94a3b8 0%, #cbd5e1 100%);">
+        <div class="book-cover-title" style="opacity: 0.7;">更多书籍<br>敬请期待</div>
+      </div>
+      <div class="book-info">
+        <div class="book-title" style="color: var(--text-light);">下一本正在阅读中...</div>
+        <div class="book-author">持续更新</div>
+        <div class="book-summary" style="color: var(--text-light);">
+          新的读书笔记会陆续添加到这里，见证认知升级的每一步。
+        </div>
+        <div class="book-meta">
+          <div class="book-tags">
+            <span class="book-tag" style="background: #f1f5f9; color: #94a3b8;">待添加</span>
+          </div>
+          <div class="book-date">—</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- My Thoughts -->
+  <div class="thoughts-section">
+    <div class="thoughts-header">
+      <div class="thoughts-title">💡 近期读书感悟</div>
+    </div>
+    <ul class="thoughts-list">
+      <li class="thought-item">
+        <div>
+          <div class="thought-book">《哈萨比斯：谷歌AI之脑》</div>
+          <div class="thought-text">
+            "突击小组模式"——平时给研究员充分自由探索，
+            关键时刻集中全部力量在统一代码库上攻坚。
+            AlphaGo、AlphaFold、Gemini都是这么搞出来的。
+            对技术团队管理的启发：自由不是失控，统一基础设施才是集中力量的前提。
+          </div>
+          <div class="thought-date">2026年7月19日</div>
+        </div>
+      </li>
+      <li class="thought-item">
+        <div>
+          <div class="thought-book">《金融数据中心网络架构与技术》</div>
+          <div class="thought-text">
+            "金融数据中心最大的运维痛点不是带宽，而是防火墙策略变更"——
+            5万+ACL、年变更1万+次、占网络变更60%以上。
+            这个发现彻底改变了SDN方案的ROI论证逻辑：
+            不要从带宽利用率切入，要从安全策略自动化和运维效率切入。
+            做售前的，得先找对客户真正的痛在哪里。
+          </div>
+          <div class="thought-date">2026年7月18日</div>
+        </div>
+      </li>
+      <li class="thought-item">
+        <div>
+          <div class="thought-book">《如何快速了解一个行业》</div>
+          <div class="thought-text">
+            "售前和麦肯锡分析师做的是同一件事：用一周时间，从门外汉变成能跟专家对话的人。"
+            不同的是，分析师靠可复制的方法论，很多售前靠个人悟性和经验积累。
+            肖璟的价值就是把"只可意会"的东西，变成了可以学习、可以训练、可以复用的系统方法。
+          </div>
+          <div class="thought-date">2026年7月18日</div>
+        </div>
+      </li>
+      <li class="thought-item">
+        <div>
+          <div class="thought-book">《科技产品营销基本法》</div>
+          <div class="thought-text">
+            "没有被讲述的价值，就等于不存在"——这句话对售前太扎心了。
+            我们花大量时间研究技术细节，但如果不能用客户听得懂的语言讲清楚，
+            那些技术优势在客户心智里就是不存在的。
+            从"技术讲解员"到"价值建筑师"，这是认知上的一次跃迁。
+          </div>
+          <div class="thought-date">2026年7月14日</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-quote">"读书是在别人思想的帮助下，建立起自己的思想。" —— 鲁巴金</div>
+  <p>持续阅读 · 持续思考 · 持续进化</p>
+  <p style="margin-top: 8px; font-size: 12px;">© 2026 RootUser 的阅读空间</p>
+</footer>
+
+<script>
+  // Search functionality
+  const searchInput = document.getElementById('searchInput');
+  const booksGrid = document.getElementById('booksGrid');
+  const bookCards = booksGrid.querySelectorAll('.book-card');
+
+  searchInput.addEventListener('input', (e) => {
+    const query = e.target.value.toLowerCase();
+    bookCards.forEach(card => {
+      const title = card.querySelector('.book-title').textContent.toLowerCase();
+      const author = card.querySelector('.book-author').textContent.toLowerCase();
+      const summary = card.querySelector('.book-summary').textContent.toLowerCase();
+      const tags = [...card.querySelectorAll('.book-tag')].map(t => t.textContent.toLowerCase()).join(' ');
+
+      if (title.includes(query) || author.includes(query) || summary.includes(query) || tags.includes(query)) {
+        card.style.display = '';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  });
+
+  // Filter tags
+  const filterTags = document.querySelectorAll('.filter-tag');
+  filterTags.forEach(tag => {
+    tag.addEventListener('click', () => {
+      filterTags.forEach(t => t.classList.remove('active'));
+      tag.classList.add('active');
+
+      const filter = tag.dataset.tag;
+      bookCards.forEach(card => {
+        if (filter === 'all') {
+          card.style.display = '';
+          return;
+        }
+        const tags = [...card.querySelectorAll('.book-tag')].map(t => t.textContent.trim());
+        if (tags.includes(filter)) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+
+  // Fade in animation
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => {
+    observer.observe(el);
+  });
+
+  // Update stats
+  const realBooks = [...bookCards].filter(card => !card.style.opacity || card.style.opacity !== '0.5');
+  document.getElementById('totalBooks').textContent = realBooks.length;
+</script>
+
+</body>
+</html>
