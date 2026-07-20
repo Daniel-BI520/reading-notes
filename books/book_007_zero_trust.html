@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>零信任网络 · 精华解读</title>
+<style>
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --primary: #10b981;
+    --primary-light: #34d399;
+    --primary-dark: #047857;
+    --primary-darker: #064e3b;
+    --accent: #6ee7b7;
+    --accent-light: #a7f3d0;
+    --bg: #ecfdf5;
+    --bg-card: #ffffff;
+    --text: #064e3b;
+    --text-secondary: #047857;
+    --text-light: #6ee7b7;
+    --border: #a7f3d0;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.8;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* 顶部导航 */
+  .top-nav {
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .top-nav-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 12px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s;
+    font-weight: 500;
+  }
+  .back-link:hover {
+    color: var(--primary-dark);
+    transform: translateX(-2px);
+  }
+
+  /* 头部封面区 */
+  .hero {
+    background: linear-gradient(135deg, #064e3b 0%, #047857 35%, #10b981 65%, #34d399 100%);
+    color: white;
+    padding: 60px 0 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: pulse 8s ease-in-out infinite;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    left: -20%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: pulse 10s ease-in-out infinite reverse;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.1); opacity: 1; }
+  }
+  .hero .container {
+    position: relative;
+    z-index: 1;
+  }
+  .book-tag {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.9);
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 18px;
+    border: 1px solid rgba(255,255,255,0.25);
+  }
+  .hero h1 {
+    font-size: 38px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 12px;
+    letter-spacing: -0.5px;
+  }
+  .hero .subtitle {
+    font-size: 19px;
+    opacity: 0.92;
+    margin-bottom: 28px;
+    font-weight: 300;
+  }
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    font-size: 14px;
+    opacity: 0.88;
+  }
+  .hero-meta span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* 核心摘要卡 */
+  .summary-card {
+    background: white;
+    border-radius: 16px;
+    padding: 32px;
+    margin-top: -40px;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+    margin-bottom: 48px;
+    border: 1px solid var(--border);
+  }
+  .summary-card h2 {
+    font-size: 20px;
+    color: var(--primary-dark);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .summary-card p {
+    color: var(--text-secondary);
+    line-height: 1.9;
+    margin-bottom: 16px;
+    font-size: 15px;
+  }
+
+  /* 深度研报链接 */
+  .report-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 24px;
+    padding: 16px 20px;
+    background: linear-gradient(135deg, var(--bg), #a7f3d0);
+    border-radius: 12px;
+    text-decoration: none;
+    color: var(--primary-dark);
+    font-weight: 500;
+    font-size: 14px;
+    transition: all 0.2s;
+    border: 1px solid rgba(0,0,0,0.05);
+  }
+  .report-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+  }
+  .report-link .report-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .report-link .report-icon { font-size: 20px; }
+  .report-link .report-title { font-weight: 600; }
+  .report-link .report-desc {
+    font-size: 12px;
+    color: var(--text-secondary);
+    font-weight: normal;
+    margin-top: 2px;
+  }
+  .report-link .report-arrow {
+    font-size: 16px;
+    opacity: 0.6;
+    transition: transform 0.2s;
+  }
+  .report-link:hover .report-arrow {
+    transform: translateX(4px);
+    opacity: 1;
+  }
+
+  /* 章节样式 */
+  .section {
+    margin-bottom: 56px;
+  }
+  .section-title {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--primary-dark);
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 3px solid var(--primary);
+    display: inline-block;
+  }
+  .subsection {
+    margin-bottom: 36px;
+  }
+  .subsection-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 16px;
+    padding-left: 14px;
+    border-left: 4px solid var(--accent);
+  }
+
+  .section p {
+    margin-bottom: 14px;
+    color: var(--text-secondary);
+  }
+
+  /* 引用块 */
+  blockquote {
+    background: linear-gradient(135deg, var(--bg), #a7f3d0);
+    border-left: 4px solid var(--accent);
+    padding: 16px 20px;
+    border-radius: 0 12px 12px 0;
+    margin: 20px 0;
+    color: var(--text-secondary);
+    font-style: italic;
+    font-size: 14px;
+  }
+  blockquote strong {
+    font-style: normal;
+    color: var(--primary-dark);
+  }
+
+  /* 金句卡片 */
+  .quote-card {
+    background: linear-gradient(135deg, var(--bg), #a7f3d0);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin: 20px 0;
+    position: relative;
+  }
+  .quote-card::before {
+    content: '"';
+    position: absolute;
+    top: 8px;
+    left: 20px;
+    font-size: 60px;
+    color: rgba(0,0,0,0.08);
+    font-family: Georgia, serif;
+    line-height: 1;
+  }
+  .quote-card p {
+    position: relative;
+    z-index: 1;
+    color: var(--primary-dark);
+    font-size: 15px;
+    line-height: 1.8;
+    margin: 0;
+    padding-left: 20px;
+  }
+  .quote-card .quote-source {
+    margin-top: 10px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    text-align: right;
+    font-style: italic;
+  }
+
+  /* 方法论卡片 */
+  .method-card {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    margin: 20px 0;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    border-top: 4px solid var(--primary);
+    transition: box-shadow 0.2s;
+  }
+  .method-card:hover {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  }
+  .method-card h5 {
+    font-size: 17px;
+    color: var(--primary-dark);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .method-card ul {
+    list-style: none;
+    padding: 0;
+  }
+  .method-card li {
+    padding: 8px 0;
+    padding-left: 28px;
+    position: relative;
+    color: var(--text-secondary);
+    font-size: 14px;
+    line-height: 1.7;
+  }
+  .method-card li::before {
+    content: '◆';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 12px;
+    top: 11px;
+  }
+
+  /* 可视化图表容器 */
+  .chart-box {
+    background: white;
+    border-radius: 12px;
+    padding: 28px;
+    margin: 24px 0;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    border: 1px solid var(--border);
+  }
+  .chart-box .chart-title {
+    font-size: 14px;
+    color: var(--primary-dark);
+    margin-bottom: 20px;
+    font-weight: 600;
+    text-align: center;
+  }
+  .chart-box img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    display: block;
+    margin: 0 auto;
+  }
+
+  /* 反直觉发现/列表项 */
+  .insight-list {
+    list-style: none;
+    padding: 0;
+  }
+  .insight-item {
+    background: white;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 14px;
+    border-left: 4px solid var(--primary);
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    transition: transform 0.2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .insight-item:hover {
+    transform: translateX(4px);
+  }
+  .insight-num {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 16px;
+  }
+  .insight-content h5 {
+    font-size: 16px;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .insight-content p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  /* 强调文字 */
+  .highlight {
+    background: linear-gradient(120deg, #fde68a 0%, #fcd34d 100%);
+    background-repeat: no-repeat;
+    background-size: 100% 40%;
+    background-position: 0 85%;
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  /* 结语 */
+  .conclusion {
+    background: linear-gradient(135deg, #064e3b 0%, #047857 35%, #10b981 65%, #34d399 100%);
+    color: white;
+    border-radius: 16px;
+    padding: 40px;
+    margin-top: 48px;
+    margin-bottom: 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .conclusion::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .conclusion .container-inner {
+    position: relative;
+    z-index: 1;
+  }
+  .conclusion h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  .conclusion p {
+    line-height: 2;
+    opacity: 0.95;
+    margin-bottom: 16px;
+    color: white;
+  }
+  .conclusion .final-quote {
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    font-style: italic;
+    opacity: 0.9;
+    text-align: right;
+  }
+
+  /* 个人思考区 */
+  .thought-section {
+    background: white;
+    border-radius: 16px;
+    padding: 32px;
+    margin-bottom: 48px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    border: 2px dashed var(--primary-light);
+  }
+  .thought-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  .thought-header h3 {
+    color: var(--primary-dark);
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .thought-btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 9px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s;
+    font-weight: 500;
+  }
+  .thought-btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+  .thought-content {
+    width: 100%;
+    min-height: 140px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    font-size: 14px;
+    line-height: 1.7;
+    resize: vertical;
+    font-family: inherit;
+    color: var(--text);
+    background: var(--bg);
+    transition: all 0.2s;
+  }
+  .thought-content:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: white;
+    box-shadow: 0 0 0 3px rgba(0,0,0,0.08);
+  }
+  .thought-hint {
+    font-size: 13px;
+    color: var(--text-light);
+    margin-top: 10px;
+    text-align: right;
+  }
+  .thought-prompts {
+    margin-bottom: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .thought-prompt {
+    font-size: 12px;
+    padding: 6px 12px;
+    background: var(--bg);
+    color: var(--primary-dark);
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+  }
+  .thought-prompt:hover {
+    background: var(--primary);
+    color: white;
+  }
+
+  /* 售前融合指南模块 */
+  .presales-section {
+    background: white;
+    border-radius: 16px;
+    padding: 32px;
+    margin-bottom: 48px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    border: 2px solid var(--primary);
+    position: relative;
+  }
+  .presales-badge {
+    position: absolute;
+    top: -14px;
+    left: 24px;
+    background: var(--primary);
+    color: white;
+    padding: 4px 16px;
+    border-radius: 16px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .presales-section h3 {
+    color: var(--primary-dark);
+    font-size: 20px;
+    margin-bottom: 20px;
+    margin-top: 8px;
+  }
+  .presales-section h4 {
+    color: var(--text);
+    font-size: 16px;
+    margin: 20px 0 10px;
+  }
+  .presales-section p {
+    color: var(--text-secondary);
+    font-size: 14px;
+    line-height: 1.8;
+    margin-bottom: 10px;
+  }
+  .presales-section ul {
+    color: var(--text-secondary);
+    font-size: 14px;
+    line-height: 1.8;
+    padding-left: 20px;
+    margin: 10px 0;
+  }
+  .presales-section li {
+    margin-bottom: 6px;
+  }
+  .presales-section strong {
+    color: var(--primary-dark);
+  }
+
+  /* 页脚 */
+  .footer {
+    text-align: center;
+    padding: 40px 0;
+    color: var(--text-light);
+    font-size: 13px;
+    border-top: 1px solid var(--border);
+    background: white;
+  }
+  .footer p {
+    margin: 4px 0;
+  }
+
+  /* 时间线样式 */
+  .timeline {
+    position: relative;
+    padding: 20px 0;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 100px;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, var(--primary-dark), var(--primary), var(--accent));
+    border-radius: 2px;
+  }
+  .timeline-item {
+    position: relative;
+    padding: 12px 0 12px 140px;
+    margin-bottom: 8px;
+    min-height: 50px;
+  }
+  .timeline-year {
+    position: absolute;
+    left: 0;
+    top: 14px;
+    width: 80px;
+    text-align: right;
+    font-weight: 700;
+    color: var(--primary-dark);
+    font-size: 14px;
+  }
+  .timeline-dot {
+    position: absolute;
+    left: 94px;
+    top: 18px;
+    width: 15px;
+    height: 15px;
+    background: white;
+    border: 3px solid var(--primary);
+    border-radius: 50%;
+    z-index: 2;
+  }
+  .timeline-content h5 {
+    font-size: 15px;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .timeline-content p {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  /* 核心要点卡片 */
+  .key-points {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 16px;
+    margin-top: 24px;
+  }
+  .key-point {
+    background: linear-gradient(135deg, var(--bg), #a7f3d0);
+    padding: 18px 20px;
+    border-radius: 12px;
+    border-left: 4px solid var(--primary);
+    transition: transform 0.2s;
+  }
+  .key-point:hover {
+    transform: translateY(-2px);
+  }
+  .key-point h4 {
+    font-size: 14px;
+    color: var(--primary-dark);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .key-point p {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  /* 响应式 */
+  @media (max-width: 768px) {
+    .hero h1 { font-size: 28px; }
+    .hero { padding: 40px 0 60px; }
+    .summary-card { padding: 24px; margin-top: -30px; }
+    .section-title { font-size: 22px; }
+    .key-points { grid-template-columns: 1fr; }
+    .conclusion { padding: 28px; }
+    .timeline::before { left: 60px; }
+    .timeline-item { padding-left: 90px; }
+    .timeline-year { width: 50px; font-size: 12px; }
+    .timeline-dot { left: 54px; }
+  }
+
+</style>
+</head>
+<body>
+
+<div class="top-nav">
+  <div class="top-nav-inner">
+    <a href="../index.html" class="back-link">← 返回书架</a>
+    <div style="font-size: 13px; color: var(--text-secondary);">第 7 本</div>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="container">
+    <span class="book-tag">📚 第 7 本 · 网络安全 / 零信任</span>
+    <h1>零信任网络</h1>
+    <p class="subtitle">从边界安全到身份信任，零信任架构的完整方法论与落地路径</p>
+    <div class="hero-meta">
+      <span>✍️ 埃文·吉尔曼 / 道格·巴斯 著</span>
+      <span>📄 14章 · 约4万字</span>
+      <span>📅 研读日期：2026-07-20</span>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  
+  <!-- 核心摘要 -->
+  <div class="summary-card">
+    <h2>🧠 核心摘要</h2>
+    <p>《零信任网络》不是一本产品说明书，而是一次<strong class="highlight">安全范式的根本转向</strong>——将信任的锚点从"网络位置"迁移到"身份+设备+上下文"的动态组合。传统边界安全的失败，本质上不是防火墙技术不够先进，而是信任模型从根上就错了：它把"在不在内网"当成了"可不可信"的判据。当移动办公、云计算、供应链攻击三重冲击消融了物理边界，建立在"内网可信"假设上的整座安全大厦便注定倾覆。</p>
+    <p>本书的最大价值在于提供了一套<strong class="highlight">从零构建零信任架构的完整方法论</strong>——从五大基本假定推导出整个技术体系，从四大信任支柱（设备、用户、应用、流量）构建完整的信任链条，再到渐进式的落地实施路径。对于网络和安全领域的售前工程师来说，这不仅是技术知识的补充，更是安全思维方式的根本升级。</p>
+    
+    <div class="key-points">
+      <div class="key-point">
+        <h4>🛡️ 范式转移</h4>
+        <p>信任锚点从"网络位置"转向"身份+设备+上下文"。不是墙不够厚，而是信任模型错了。七成数据泄露发生在内网横向移动阶段。</p>
+      </div>
+      <div class="key-point">
+        <h4>🔗 信任链条</h4>
+        <p>用户身份是锚点→设备状态是载体→应用授权是边界→流量加密是底线。四者层层递进，缺任何一环，信任判断都是不完整的。</p>
+      </div>
+      <div class="key-point">
+        <h4>📈 渐进落地</h4>
+        <p>不是推倒重来，而是分三阶段演进：基础阶段（3-9个月）→扩展阶段（6-18个月）→优化阶段（12-24个月）。风险可控、投入可量、效果可见。</p>
+      </div>
+    </div>
+
+    <a href="book_007_report.html" class="report-link">
+      <div class="report-label">
+        <span class="report-icon">📑</span>
+        <div>
+          <div class="report-title">深度研报完整版</div>
+          <div class="report-desc">14大章节 · 4万字 · 完整技术体系+落地方案</div>
+        </div>
+      </div>
+      <span class="report-arrow">→</span>
+    </a>
+  </div>
+
+  <!-- 三大核心洞察 -->
+  <div class="section">
+    <h2 class="section-title">💡 三大核心洞察</h2>
+
+    <div class="subsection">
+      <h3 class="subsection-title">洞察一：传统安全的病根在信任模型，不在技术强度</h3>
+      <p>边界安全为什么必然失效？不是因为防火墙不够强，而是因为它的底层假设错了——"内网可信"这个前提，在移动办公、云计算、供应链攻击的三重冲击下，已经彻底不成立了。M&M豆模型（外硬内软）决定了：只要边界被突破一次，内网就成了攻击者的自由王国。</p>
+      <div class="quote-card">
+        <p>边界安全模型试图把攻击者阻挡在可信的内部网络之外，然而零信任模型却认识到这种方法注定会失败，因此，零信任模型首先假设内部网络中同样存在恶意的攻击者，并据此建立安全机制来防范这种威胁。</p>
+        <div class="quote-source">—— 埃文·吉尔曼《零信任网络》第1章</div>
+      </div>
+      <p>有统计显示，<strong class="highlight">全球七成以上的数据泄露发生在内网横向移动阶段</strong>。这个数据意味着什么？意味着企业花在边界防火墙上的每一分钱，只能防住不到三成的攻击路径。而真正决定数据是否安全的那七成，几乎是裸奔状态。问题的根源不是防火墙不够强，而是信任的锚点错了。</p>
+    </div>
+
+    <div class="subsection">
+      <h3 class="subsection-title">洞察二：零信任三大支柱不是并列关系，而是递进关系</h3>
+      <p>很多人把设备信任、用户信任、应用信任理解为三个并列的模块，但原书的深层逻辑是：<strong>三者构成一条层层递进的信任链条</strong>。</p>
+      
+      <div class="chart-box">
+        <div class="chart-title">零信任架构全景因果图</div>
+        <img src="../images/zerotrust_architecture.png" alt="零信任架构全景因果图">
+      </div>
+
+      <div class="method-card">
+        <h5>🔗 信任链条的四层递进</h5>
+        <ul>
+          <li><strong>第一层：用户身份（锚点）</strong>——回答"你是谁"。没有身份就没有信任的主体，是整个体系的地基</li>
+          <li><strong>第二层：设备信任（载体）</strong>——回答"你用什么访问"。只有用户身份，无法区分公司电脑还是个人手机</li>
+          <li><strong>第三层：应用信任（边界）</strong>——回答"你能访问什么"。访问控制的最终粒度落到应用级而非网络级</li>
+          <li><strong>第四层：流量信任（底线）</strong>——回答"传输是否安全"。全流量加密，防止中间人攻击和窃听</li>
+        </ul>
+      </div>
+
+      <p>缺了任何一环，信任判断都是不完整的——只有用户身份，无法区分是公司电脑还是个人手机；只有设备身份，无法区分是正常操作还是恶意程序；只有应用身份，无法确认操作人的合法性。四者缺一不可，构成完整的信任闭环。</p>
+    </div>
+
+    <div class="subsection">
+      <h3 class="subsection-title">洞察三：零信任落地不是推倒重来，而是渐进式替换</h3>
+      <p>零信任最大的误解是"要把现有网络全部推翻重建"。但无论是原书阐述的实施方法论，还是Google BeyondCorp的真实实践，都证明零信任是一种演进式架构。</p>
+
+      <div class="chart-box">
+        <div class="chart-title">零信任实施五阶段路线图</div>
+        <img src="../images/zerotrust_roadmap.png" alt="零信任实施五阶段路线图">
+      </div>
+
+      <div class="method-card">
+        <h5>📊 零信任落地三阶段</h5>
+        <ul>
+          <li><strong>基础阶段（3-9个月）</strong>：资产盘点+身份底座建设。摸清家底，建好统一身份认证和设备管理</li>
+          <li><strong>扩展阶段（6-18个月）</strong>：从高价值资产切入，先观察后执行，部署零信任网关和访问策略</li>
+          <li><strong>优化阶段（12-24个月）</strong>：逐步扩大覆盖范围，优化信任评分模型，自动化安全运营</li>
+        </ul>
+      </div>
+
+      <p>Google BeyondCorp的部署路径就是最好的证明：先集成语关和临时元清单服务，初始策略映射现有基于IP的外网安全模型；随着设备信息增加，逐渐用信任层分配取代基于IP的策略。<strong class="highlight">完全成熟通常需要2-4年时间，但第一个里程碑3-9个月就能达成</strong>。对客户来说，这意味着零信任不是一次性的大投入，而是一条风险可控、投入可量、效果可见的演进路线。</p>
+    </div>
+  </div>
+
+  <!-- 范式对比 -->
+  <div class="section">
+    <h2 class="section-title">⚔️ 范式对比：边界安全 vs 零信任</h2>
+
+    <div class="chart-box">
+      <div class="chart-title">传统边界安全 vs 零信任对比</div>
+      <img src="../images/zerotrust_vs_perimeter.png" alt="传统边界安全 vs 零信任对比">
+    </div>
+
+    <div class="method-card">
+      <h5>🔄 六大维度的根本差异</h5>
+      <ul>
+        <li><strong>信任基础</strong>：网络位置（IP地址）→ 身份+设备+上下文</li>
+        <li><strong>核心假设</strong>：内网可信，外网不可信 → 所有网络都不可信</li>
+        <li><strong>授权模型</strong>：一次性授权，永久有效 → 每次访问都验证，动态授权</li>
+        <li><strong>防护焦点</strong>：边界（网络出入口）→ 每个资源、每次访问</li>
+        <li><strong>默认动作</strong>：默认放行，黑名单拒绝 → 默认拒绝，白名单放行</li>
+        <li><strong>适应场景</strong>：固定办公、物理边界清晰 → 移动办公、云计算、混合环境</li>
+      </ul>
+    </div>
+
+    <p>从这个对比中可以看出，零信任不是对边界安全的简单升级，而是<strong class="highlight">底层范式的根本替换</strong>——就像从地心说到日心说，不是在旧模型上修修补补，而是换了一套全新的坐标系。</p>
+  </div>
+
+  <!-- 五大基本假定 -->
+  <div class="section">
+    <h2 class="section-title">📐 零信任的五大基本假定</h2>
+    
+    <div class="insight-list">
+      <div class="insight-item">
+        <div class="insight-num">1</div>
+        <div class="insight-content">
+          <h5>网络无时无刻不处于危险的环境中</h5>
+          <p>威胁是常态而非例外。安全从"被动防护"转向"主动怀疑"——不相信任何人和任何设备，除非他们证明自己可信。</p>
+        </div>
+      </div>
+
+      <div class="insight-item">
+        <div class="insight-num">2</div>
+        <div class="insight-content">
+          <h5>网络中自始至终存在外部或内部威胁</h5>
+          <p>攻击者可能已经在内网里。零信任的目标不是"不让人进来"，而是"即使有人进来了也寸步难行"。</p>
+        </div>
+      </div>
+
+      <div class="insight-item">
+        <div class="insight-num">3</div>
+        <div class="insight-content">
+          <h5>网络的位置不足以决定网络的可信程度</h5>
+          <p>一句话直接推翻了边界安全的根基。IP地址不能代表信任，能代表信任的是身份——用户身份、设备身份、应用身份。</p>
+        </div>
+      </div>
+
+      <div class="insight-item">
+        <div class="insight-num">4</div>
+        <div class="insight-content">
+          <h5>所有的设备、用户和网络流量都应当经过认证和授权</h5>
+          <p>每一次访问、每一条流量都要验证——就像大楼里的每个房间门口都有一个保安，每次进出都要查证件。</p>
+        </div>
+      </div>
+
+      <div class="insight-item">
+        <div class="insight-num">5</div>
+        <div class="insight-content">
+          <h5>安全策略必须是动态的，并基于尽可能多的数据源计算而来</h5>
+          <p>信任不是一次性授予的，而是持续计算、动态调整的。行为异常了，权限就自动调整。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-box">
+      <div class="chart-title">信任评分模型</div>
+      <img src="../images/trust_score_model.png" alt="信任评分模型">
+    </div>
+  </div>
+
+  <!-- 对售前工程师的价值 -->
+  <div class="section">
+    <h2 class="section-title">🎯 对售前工程师的四大价值</h2>
+
+    <div class="guide-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 20px;">
+      <div class="method-card" style="margin: 0;">
+        <h5>💬 话术框架：五步话术法</h5>
+        <ul>
+          <li><strong>痛点切入</strong>：从等保合规/数据泄露/远程办公开场</li>
+          <li><strong>诊断根因</strong>：不是防火墙不够强，是信任模型错了</li>
+          <li><strong>方案价值</strong>：身份替代位置作为信任锚点</li>
+          <li><strong>路径清晰</strong>：分三步走，风险可控投入可量</li>
+          <li><strong>三重收益</strong>：安全+效率+合规</li>
+        </ul>
+      </div>
+
+      <div class="method-card" style="margin: 0;">
+        <h5>🏗️ 差异化：网络原生的零信任</h5>
+        <ul>
+          <li><strong>网络设备层</strong>：交换机/无线作为策略执行点延伸</li>
+          <li><strong>安全产品层</strong>：防火墙+分布式防火墙协同</li>
+          <li><strong>身份治理层</strong>：Source ID身份中台+OCE认证</li>
+          <li><strong>整合方案</strong>：网络+身份+安全三位一体</li>
+          <li><strong>一句话：</strong>从网络基础设施原生生长的零信任</li>
+        </ul>
+      </div>
+
+      <div class="method-card" style="margin: 0;">
+        <h5>⚖️ 异议处理：六大常见质疑</h5>
+        <ul>
+          <li>已有防火墙 → 不是替代，是补充（大门保安+房间门禁）</li>
+          <li>要换设备 → 不用换，是升级（保护现有投资）</li>
+          <li>影响体验 → 安全与体验平衡（SSO、无感续期）</li>
+          <li>太贵 → 看ROI，分阶段投入（246%三年ROI）</li>
+          <li>中小企业 → 从最基础的开始（方向比对错重要）</li>
+          <li>和VPN区别 → 网络级接入vs应用级访问</li>
+        </ul>
+      </div>
+
+      <div class="method-card" style="margin: 0;">
+        <h5>📋 合规映射：等保2.0对接</h5>
+        <ul>
+          <li><strong>安全通信网络</strong>：全流量加密+双向认证</li>
+          <li><strong>安全区域边界</strong>：微隔离+基于身份的访问控制</li>
+          <li><strong>安全计算环境</strong>：身份鉴别+最小权限+持续审计</li>
+          <li><strong>安全管理中心</strong>：统一策略管理+信任评分+审计分析</li>
+          <li>等保是合规要求，零信任是最佳技术路径</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 成本与ROI -->
+  <div class="section">
+    <h2 class="section-title">💰 成本与ROI</h2>
+
+    <div class="chart-box">
+      <div class="chart-title">零信任成本分配</div>
+      <img src="../images/zerotrust_cost_allocation.png" alt="零信任成本分配">
+    </div>
+
+    <div class="method-card">
+      <h5>📊 客户最关心的几个数字</h5>
+      <ul>
+        <li><strong>平均ROI：</strong>246%（三年），投资回收期约6个月</li>
+        <li><strong>数据泄露成本降低：</strong>42.3%，每次泄露平均节省176万美元</li>
+        <li><strong>部署周期：</strong>完全成熟2-4年，但3-9个月可见第一个里程碑</li>
+        <li><strong>成本结构：</strong>技术工具约40%，实施服务约30%，人员运营约30%</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 结语 -->
+  <div class="conclusion">
+    <div class="container-inner">
+      <h2>🌟 写在最后</h2>
+      <p>《零信任网络》带给我们的最大启示，不是某一项具体的技术，而是一种<strong>思维方式的转变</strong>——从"假设安全"到"假设危险"，从"位置信任"到"身份信任"，从"静态防御"到"动态演进"。这种思维方式的转变，比任何技术都更有价值。</p>
+      <p>对于售前工程师来说，理解这种转变，才能真正理解零信任的价值——不是卖一个新的安全盒子，而是帮客户完成一次安全范式的升级。而这，正是我们这个职业的真正价值所在。</p>
+      <p>零信任不是终点，而是一条持续演进的道路。就像摩尔定律不是一个定律而是一个持续的过程一样——重要的不是到达某个完美的状态，而是持续地朝着更安全、更智能、更灵活的方向前进。</p>
+      <div class="final-quote">"Never Trust, Always Verify" —— 从来不信任，始终在校验。</div>
+    </div>
+  </div>
+
+  <!-- 售前工程师融合指南 -->
+  <div class="presales-section">
+    <span class="presales-badge">🎯 售前工程师融合指南</span>
+    <h3>零信任方案销售的完整工具箱</h3>
+    
+    <h4>💬 五步话术法（面向政企/高校客户）</h4>
+    <p><strong>第一步·痛点切入：</strong>从客户熟悉的问题开场——等保合规压力、远程办公安全、勒索软件攻击、内网横向移动风险。用客户的语言说话，不要一上来就说"零信任"。</p>
+    <p><strong>第二步·诊断根因：</strong>指出传统方案的局限——不是您做得不好，而是信任模型错了。"内网可信"这个前提已经不成立。七成数据泄露发生在内网横向移动阶段——这是铁证。</p>
+    <p><strong>第三步·方案价值：</strong>零信任从根本上解决问题——信任锚点从位置转向身份，控制粒度从网络级转向应用级，授权方式从一次性转向动态。不是替换现有投资，是"加一层"。</p>
+    <p><strong>第四步·路径清晰：</strong>分三阶段落地——基础（3-9月）→扩展（6-18月）→优化（12-24月）。风险可控、投入可量、效果可见。</p>
+    <p><strong>第五步·三重收益：</strong>安全价值（降低42%泄露成本）+效率价值（不用拨VPN、运维自动化）+合规价值（满足等保2.0等要求）。</p>
+    
+    <h4>🏆 锐捷差异化：网络原生的零信任</h4>
+    <ul>
+      <li><strong>网络设备层</strong>：交换机/无线作为策略执行点，从接入层就实现身份化控制</li>
+      <li><strong>安全产品层</strong>：防火墙+分布式防火墙+零信任网关协同，保护现有投资</li>
+      <li><strong>身份治理层</strong>：Source ID身份中台+OCE认证，高校等复杂场景深厚积累</li>
+      <li><strong>一句话：</strong>其他厂商是"在现有网络之上叠加零信任"，锐捷是"从网络基础设施原生生长出零信任"</li>
+    </ul>
+    
+    <h4>⚖️ 六大异议回应</h4>
+    <ul>
+      <li><strong>已有防火墙：</strong>不是替代，是补充。大门保安还要有，但每个房间也要有门禁</li>
+      <li><strong>要换设备：</strong>不用换，是升级。现有设备解锁零信任能力，保护投资</li>
+      <li><strong>影响体验：</strong>单点登录+无感续期+分级认证，安全与体验可以平衡</li>
+      <li><strong>太贵：</strong>看ROI（246%三年回报），分阶段投入，6个月回收期</li>
+      <li><strong>中小企业：</strong>不需要一步到位，从最基础的开始，方向比对错重要</li>
+      <li><strong>和VPN区别：</strong>VPN是网络级接入（给你大楼钥匙），零信任是应用级访问（每个房间单独门禁）</li>
+    </ul>
+  </div>
+
+  
+  <!-- 深度研报跳转 -->
+  <a href="book_007_report.html" class="report-link" style="margin-bottom: 48px; display: flex;">
+    <div class="report-label">
+      <span class="report-icon">📑</span>
+      <div>
+        <div class="report-title">阅读完整深度研报</div>
+        <div class="report-desc">14大章节 · 4万字 · 完整技术体系+落地方案</div>
+      </div>
+    </div>
+    <span class="report-arrow">→</span>
+  </a>
+
+  <!-- 个人思考区 -->
+  <div class="thought-section">
+    <div class="thought-header">
+      <h3>✍️ 我的读书思考</h3>
+      <button class="thought-btn" onclick="saveThought()">保存</button>
+    </div>
+    <div class="thought-prompts">
+      
+      <button class="thought-prompt" onclick="insertPrompt('关于信任模型的范式转移，我认为...')">信任模型</button>
+      <button class="thought-prompt" onclick="insertPrompt('零信任落地的最大困难是...')">落地困难</button>
+      <button class="thought-prompt" onclick="insertPrompt('对售前工作的启发是...')">售前启发</button>
+      <button class="thought-prompt" onclick="insertPrompt('关于锐捷零信任差异化，我觉得...')">差异化思考</button>
+    
+    </div>
+    <textarea class="thought-content" id="thoughtInput" placeholder="写下你的思考、感悟、质疑... 所有内容保存在本地浏览器中"></textarea>
+    <div class="thought-hint">💾 自动保存到本地 · localStorage 存储</div>
+  </div>
+
+</div>
+
+<!-- 页脚 -->
+<div class="footer">
+  <p>📚 零信任网络 · 精华解读</p>
+  <p>作者：埃文·吉尔曼 / 道格·巴斯 · 研读日期：2026-07-20</p>
+  <p style="margin-top: 8px; font-size: 12px;">© 2026 RootUser 的阅读空间</p>
+</div>
+
+<script>
+  const STORAGE_KEY = 'book_007_zero_trust_thought';
+  const thoughtInput = document.getElementById('thoughtInput');
+
+  function loadThought() {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) { thoughtInput.value = saved; }
+  }
+
+  function saveThought() {
+    const content = thoughtInput.value;
+    localStorage.setItem(STORAGE_KEY, content);
+    const btn = document.querySelector('.thought-btn');
+    const originalText = btn.textContent;
+    btn.textContent = '✓ 已保存';
+    btn.style.background = '#10b981';
+    setTimeout(() => {
+      btn.textContent = originalText;
+      btn.style.background = '';
+    }, 1500);
+  }
+
+  function insertPrompt(text) {
+    const current = thoughtInput.value;
+    if (current && !current.endsWith('\n')) {
+      thoughtInput.value = current + '\n\n' + text;
+    } else {
+      thoughtInput.value = current + text;
+    }
+    thoughtInput.focus();
+    thoughtInput.setSelectionRange(thoughtInput.value.length, thoughtInput.value.length);
+  }
+
+  let saveTimeout;
+  thoughtInput.addEventListener('input', () => {
+    clearTimeout(saveTimeout);
+    saveTimeout = setTimeout(() => {
+      localStorage.setItem(STORAGE_KEY, thoughtInput.value);
+    }, 1000);
+  });
+
+  loadThought();
+</script>
+
+</body>
+</html>
