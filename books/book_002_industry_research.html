@@ -604,6 +604,49 @@
     color: var(--primary);
   }
 
+  /* 深度研报链接 */
+  .report-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 48px;
+    padding: 16px 20px;
+    background: linear-gradient(135deg, #f3e8ff, #e9d5ff);
+    border-radius: 12px;
+    text-decoration: none;
+    color: var(--primary-dark);
+    font-weight: 500;
+    font-size: 14px;
+    transition: all 0.2s;
+    border: 1px solid rgba(124, 58, 237, 0.2);
+  }
+  .report-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(124, 58, 237, 0.15);
+  }
+  .report-link .report-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .report-link .report-icon { font-size: 20px; }
+  .report-link .report-title { font-weight: 600; }
+  .report-link .report-desc {
+    font-size: 12px;
+    color: var(--text-secondary);
+    font-weight: normal;
+    margin-top: 2px;
+  }
+  .report-link .report-arrow {
+    font-size: 16px;
+    opacity: 0.6;
+    transition: transform 0.2s;
+  }
+  .report-link:hover .report-arrow {
+    transform: translateX(4px);
+    opacity: 1;
+  }
+
   @media (max-width: 640px) {
     .hero h1 { font-size: 28px; }
     .hero { padding: 40px 0 60px; }
@@ -1318,6 +1361,18 @@
   </div>
 
 </div>
+
+<!-- 深度研报跳转 -->
+<a href="book_002_report.html" class="report-link">
+  <div class="report-label">
+    <span class="report-icon">📑</span>
+    <div>
+      <div class="report-title">深度研报完整版</div>
+      <div class="report-desc">2万字全章节深度解读</div>
+    </div>
+  </div>
+  <span class="report-arrow">→</span>
+</a>
 
 <div class="footer">
   <p>我的读书笔记 · 第2本《如何快速了解一个行业》</p>
