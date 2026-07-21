@@ -1,0 +1,686 @@
+/* ===== Annotation System Styles ===== */
+
+/* Highlight style */
+mark.annot-highlight {
+  background: rgba(255, 235, 59, 0.4);
+  border-radius: 2px;
+  padding: 0 1px;
+  cursor: pointer;
+  transition: background 0.2s;
+  position: relative;
+}
+
+mark.annot-highlight:hover {
+  background: rgba(255, 235, 59, 0.7);
+}
+
+mark.annot-highlight.has-comment {
+  background: rgba(255, 193, 7, 0.45);
+  border-bottom: 2px solid rgba(255, 152, 0, 0.6);
+}
+
+/* Floating toolbar */
+.annot-toolbar {
+  position: absolute;
+  display: none;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 4px;
+  z-index: 10000;
+  gap: 2px;
+  align-items: center;
+  font-size: 13px;
+  animation: annot-fade-in 0.15s ease-out;
+}
+
+.annot-toolbar.show {
+  display: flex;
+}
+
+@keyframes annot-fade-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.annot-toolbar button {
+  border: none;
+  background: transparent;
+  padding: 6px 10px;
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 13px;
+  color: #333;
+  transition: all 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.annot-toolbar button:hover {
+  background: #f5f5f5;
+}
+
+.annot-toolbar .annot-btn-highlight {
+  color: #f59e0b;
+}
+
+.annot-toolbar .annot-btn-comment {
+  color: #3b82f6;
+}
+
+.annot-toolbar .annot-btn-close {
+  color: #999;
+  padding: 6px 8px;
+}
+
+.annot-toolbar .annot-divider {
+  width: 1px;
+  height: 18px;
+  background: #e5e5e5;
+  margin: 0 2px;
+}
+
+/* Annotation popup */
+.annot-popup {
+  position: absolute;
+  display: none;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18), 0 2px 6px rgba(0, 0, 0, 0.08);
+  padding: 14px;
+  z-index: 10001;
+  width: 320px;
+  animation: annot-fade-in 0.15s ease-out;
+}
+
+.annot-popup.show {
+  display: block;
+}
+
+.annot-popup-header {
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.annot-popup-close {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  color: #999;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.annot-popup-close:hover {
+  background: #f5f5f5;
+  color: #666;
+}
+
+.annot-popup textarea {
+  width: 100%;
+  min-height: 80px;
+  border: 1px solid #e5e5e5;
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-size: 13px;
+  resize: vertical;
+  font-family: inherit;
+  color: #333;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.annot-popup textarea:focus {
+  border-color: #3b82f6;
+}
+
+.annot-popup-author {
+  font-size: 12px;
+  color: #999;
+  margin-top: 6px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.annot-popup-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.annot-popup-actions button {
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 12px;
+  cursor: pointer;
+  border: none;
+  transition: all 0.15s;
+}
+
+.annot-btn-cancel {
+  background: #f5f5f5;
+  color: #666;
+}
+
+.annot-btn-cancel:hover {
+  background: #e8e8e8;
+}
+
+.annot-btn-save {
+  background: #3b82f6;
+  color: white;
+}
+
+.annot-btn-save:hover {
+  background: #2563eb;
+}
+
+.annot-btn-delete {
+  background: #fee2e2;
+  color: #dc2626;
+  margin-right: auto;
+}
+
+.annot-btn-delete:hover {
+  background: #fecaca;
+}
+
+/* Tooltip */
+.annot-tooltip {
+  position: absolute;
+  display: none;
+  background: #1f2937;
+  color: #f9fafb;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  line-height: 1.5;
+  max-width: 280px;
+  z-index: 10002;
+  pointer-events: none;
+  word-break: break-word;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.annot-tooltip.show {
+  display: block;
+}
+
+.annot-tooltip-author {
+  color: #9ca3af;
+  font-size: 11px;
+  margin-top: 4px;
+  border-top: 1px solid #374151;
+  padding-top: 4px;
+}
+
+/* Side panel */
+.annot-sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 340px;
+  background: #fafafa;
+  border-left: 1px solid #e5e5e5;
+  z-index: 9999;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.annot-sidebar.open {
+  transform: translateX(0);
+}
+
+.annot-sidebar-toggle {
+  position: fixed;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  z-index: 9998;
+  background: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 6px 0 0 6px;
+  padding: 12px 6px;
+  cursor: pointer;
+  font-size: 14px;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transition: all 0.3s ease;
+  box-shadow: -2px 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.annot-sidebar-toggle:hover {
+  background: #2563eb;
+  padding-right: 10px;
+}
+
+.annot-sidebar.open ~ .annot-sidebar-toggle {
+  right: 340px;
+}
+
+.annot-sidebar-header {
+  padding: 16px 18px;
+  border-bottom: 1px solid #e5e5e5;
+  background: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.annot-sidebar-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.annot-sidebar-count {
+  background: #eff6ff;
+  color: #3b82f6;
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-weight: 500;
+}
+
+.annot-sidebar-close {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: #999;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.annot-sidebar-close:hover {
+  background: #f5f5f5;
+  color: #666;
+}
+
+.annot-sidebar-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px;
+}
+
+.annot-sidebar-empty {
+  text-align: center;
+  padding: 40px 20px;
+  color: #999;
+  font-size: 13px;
+}
+
+.annot-item {
+  background: white;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  border: 1px solid #f0f0f0;
+  transition: all 0.2s;
+}
+
+.annot-item:hover {
+  border-color: #3b82f6;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.1);
+}
+
+.annot-item-text {
+  font-size: 12px;
+  color: #666;
+  line-height: 1.5;
+  margin-bottom: 8px;
+  padding: 6px 8px;
+  background: #fffbeb;
+  border-left: 3px solid #fbbf24;
+  border-radius: 0 4px 4px 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.annot-item-comment {
+  font-size: 13px;
+  color: #333;
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+.annot-item.no-comment .annot-item-comment {
+  color: #999;
+  font-style: italic;
+  font-size: 12px;
+}
+
+.annot-item-meta {
+  font-size: 11px;
+  color: #bbb;
+  margin-top: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.annot-item-author {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.annot-item-actions {
+  display: flex;
+  gap: 4px;
+}
+
+.annot-item-actions button {
+  background: none;
+  border: none;
+  font-size: 12px;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: #999;
+}
+
+.annot-item-actions button:hover {
+  background: #f5f5f5;
+  color: #666;
+}
+
+.annot-item-actions .annot-item-delete:hover {
+  color: #dc2626;
+  background: #fee2e2;
+}
+
+/* Scroll flash effect */
+mark.annot-highlight.flash {
+  animation: annot-flash 1.5s ease;
+}
+
+@keyframes annot-flash {
+  0%, 100% { background: rgba(255, 235, 59, 0.4); }
+  50% { background: rgba(255, 152, 0, 0.7); }
+}
+
+/* ===== Sync Status Indicator ===== */
+.annot-sync-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  padding: inherit;
+  position: relative;
+}
+
+.annot-sync-icon {
+  display: inline-block;
+  font-size: 12px;
+  transition: transform 0.3s;
+}
+
+.annot-sync-icon.syncing {
+  animation: annot-spin 1s linear infinite;
+}
+
+.annot-sync-icon.synced {
+  color: #10b981;
+}
+
+.annot-sync-icon.error {
+  color: #ef4444;
+}
+
+@keyframes annot-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Login Modal */
+.annot-login-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 10003;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  animation: annot-fade-in 0.2s ease;
+}
+
+.annot-login-modal.show {
+  display: flex;
+}
+
+.annot-login-box {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  width: 420px;
+  max-width: 90vw;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.annot-login-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.annot-login-subtitle {
+  font-size: 13px;
+  color: #6b7280;
+  margin-bottom: 18px;
+  line-height: 1.5;
+}
+
+.annot-login-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 6px;
+}
+
+.annot-login-input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 13px;
+  font-family: inherit;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.2s;
+  margin-bottom: 8px;
+}
+
+.annot-login-input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.annot-login-hint {
+  font-size: 11px;
+  color: #9ca3af;
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+.annot-login-hint code {
+  background: #f3f4f6;
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-size: 10px;
+}
+
+.annot-login-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.annot-login-actions button {
+  padding: 8px 18px;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+  border: none;
+  transition: all 0.15s;
+}
+
+.annot-btn-outline {
+  background: white;
+  border: 1px solid #d1d5db !important;
+  color: #6b7280;
+}
+
+.annot-btn-outline:hover {
+  background: #f9fafb;
+}
+
+.annot-btn-primary {
+  background: #3b82f6;
+  color: white;
+}
+
+.annot-btn-primary:hover {
+  background: #2563eb;
+}
+
+.annot-login-status {
+  font-size: 12px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  margin-bottom: 14px;
+  display: none;
+}
+
+.annot-login-status.show {
+  display: block;
+}
+
+.annot-login-status.error {
+  background: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+}
+
+.annot-login-status.success {
+  background: #f0fdf4;
+  color: #16a34a;
+  border: 1px solid #bbf7d0;
+}
+
+.annot-login-logged {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 8px;
+  margin-bottom: 14px;
+  font-size: 13px;
+}
+
+.annot-login-logged span {
+  color: #16a34a;
+  font-weight: 500;
+}
+
+.annot-login-logged button {
+  background: none;
+  border: none;
+  color: #dc2626;
+  cursor: pointer;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.annot-login-logged button:hover {
+  background: #fee2e2;
+}
+
+.annot-reader-section {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.annot-reader-section .annot-login-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.annot-reader-section .annot-login-label span:last-child {
+  font-size: 11px;
+  color: #9ca3af;
+  font-weight: normal;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.annot-reader-section .annot-login-label span:last-child:hover {
+  color: #6b7280;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .annot-sidebar {
+    width: 280px;
+  }
+  
+  .annot-sidebar.open ~ .annot-sidebar-toggle {
+    right: 280px;
+  }
+  
+  .annot-popup {
+    width: 280px;
+  }
+}
+
+/* Print: hide annotation UI */
+@media print {
+  .annot-toolbar,
+  .annot-popup,
+  .annot-tooltip,
+  .annot-sidebar,
+  .annot-sidebar-toggle,
+  .annot-login-modal,
+  .annot-sync-btn {
+    display: none !important;
+  }
+}
