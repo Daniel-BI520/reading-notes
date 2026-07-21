@@ -1935,5 +1935,87 @@
   });
 </script>
 
+
+<!-- 书友互动区 -->
+<style>
+  .interaction-section {
+    max-width: 800px;
+    margin: 40px auto 60px;
+    padding: 28px 24px;
+    background: #f8fafc;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+  }
+  .interaction-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .interaction-title::after {
+    content: '';
+    flex: 0;
+    display: none;
+  }
+  .interaction-underline {
+    width: 48px;
+    height: 3px;
+    background: var(--primary, #3b82f6);
+    border-radius: 2px;
+    margin-bottom: 12px;
+  }
+  .interaction-desc {
+    font-size: 14px;
+    color: #64748b;
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+  .giscus-container {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 16px;
+    border: 1px solid #e2e8f0;
+    min-height: 120px;
+  }
+  @media (max-width: 640px) {
+    .interaction-section {
+      margin: 24px 12px 40px;
+      padding: 20px 16px;
+    }
+    .interaction-title {
+      font-size: 18px;
+    }
+    .giscus-container {
+      padding: 12px 8px;
+    }
+  }
+</style>
+
+<section class="interaction-section">
+  <div class="interaction-title">💬 书友互动</div>
+  <div class="interaction-underline"></div>
+  <p class="interaction-desc">觉得有帮助？点个赞支持一下～有想法也欢迎留言交流</p>
+  <div class="giscus-container">
+    <script src="https://giscus.app/client.js"
+            data-repo="Daniel-BI520/reading-notes"
+            data-repo-id=""
+            data-category="General"
+            data-category-id=""
+            data-mapping="pathname"
+            data-strict="0"
+            data-reactions-enabled="1"
+            data-emit-metadata="0"
+            data-input-position="top"
+            data-theme="light"
+            data-lang="zh-CN"
+            crossorigin="anonymous"
+            async>
+    </script>
+  </div>
+</section>
+
 </body>
 </html>
