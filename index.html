@@ -554,12 +554,11 @@
       <input type="text" id="searchInput" placeholder="搜索书名、作者、标签...">
     </div>
     <div class="filter-tags" id="filterTags">
-      <span class="filter-tag active" data-tag="all">全部</span>
-      <span class="filter-tag" data-tag="营销">营销</span>
-      <span class="filter-tag" data-tag="销售">销售</span>
-      <span class="filter-tag" data-tag="技术">技术</span>
-      <span class="filter-tag" data-tag="思维">思维</span>
-      <span class="filter-tag" data-tag="历史">历史</span>
+      <span class="filter-tag active" data-category="all">全部</span>
+      <span class="filter-tag" data-category="network">网络技术</span>
+      <span class="filter-tag" data-category="ai">AI与未来</span>
+      <span class="filter-tag" data-category="infra">底层基础设施</span>
+      <span class="filter-tag" data-category="business">商业方法论</span>
     </div>
   </div>
 
@@ -567,7 +566,7 @@
   <h2 class="section-title">书架</h2>
   <div class="books-grid" id="booksGrid">
     <!-- Book Card 6  -->
-    <a href="books/book_006_chip_history.html" class="book-card fade-in">
+    <a href="books/book_006_chip_history.html" class="book-card fade-in" data-category="infra">
       <div class="book-cover" style="background: linear-gradient(135deg, #7c2d12 0%, #c2410c 35%, #ea580c 65%, #f97316 100%);">
         <div class="book-cover-title">芯片简史</div>
         <div class="book-cover-author">汪波</div>
@@ -591,7 +590,7 @@
     </a>
 
     <!-- Book Card 7 -->
-    <a href="books/book_007_zero_trust.html" class="book-card fade-in">
+    <a href="books/book_007_zero_trust.html" class="book-card fade-in" data-category="network">
       <div class="book-cover" style="background: linear-gradient(135deg, #064e3b 0%, #047857 35%, #10b981 65%, #34d399 100%);">
         <div class="book-cover-title">零信任网络</div>
         <div class="book-cover-author">吉尔曼 / 巴斯</div>
@@ -615,7 +614,7 @@
     </a>
 
     <!-- Book Card 5 -->
-    <a href="books/book_005_singularity_nearer.html" class="book-card fade-in">
+    <a href="books/book_005_singularity_nearer.html" class="book-card fade-in" data-category="ai">
       <div class="book-cover" style="background: linear-gradient(135deg, #4c1d95 0%, #6d28d9 35%, #7c3aed 65%, #9333ea 100%);">
         <div class="book-cover-title">奇点更近</div>
         <div class="book-cover-author">雷·库兹韦尔</div>
@@ -639,7 +638,7 @@
     </a>
 
     <!-- Book Card 1 -->
-    <a href="books/book_001_tech_product_marketing.html" class="book-card fade-in">
+    <a href="books/book_001_tech_product_marketing.html" class="book-card fade-in" data-category="business">
       <div class="book-cover cover-1">
         <div class="book-cover-title">科技产品营销基本法</div>
         <div class="book-cover-author">玛蒂娜·劳琴科</div>
@@ -663,7 +662,7 @@
     </a>
 
     <!-- Book Card 2 -->
-    <a href="books/book_002_industry_research.html" class="book-card fade-in">
+    <a href="books/book_002_industry_research.html" class="book-card fade-in" data-category="business">
       <div class="book-cover" style="background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 50%, #4c1d95 100%);">
         <div class="book-cover-title">如何快速了解一个行业</div>
         <div class="book-cover-author">肖璟</div>
@@ -687,7 +686,7 @@
     </a>
 
     <!-- Book Card 4 -->
-    <a href="books/book_004_hassabis_deepmind.html" class="book-card fade-in">
+    <a href="books/book_004_hassabis_deepmind.html" class="book-card fade-in" data-category="ai">
       <div class="book-cover" style="background: linear-gradient(135deg, #0c4a6e 0%, #0369a1 50%, #0ea5e9 100%);">
         <div class="book-cover-title">哈萨比斯：谷歌AI之脑</div>
         <div class="book-cover-author">塞巴斯蒂安·马拉比</div>
@@ -711,7 +710,7 @@
     </a>
 
     <!-- Book Card 3 -->
-    <a href="books/book_003_finance_dc_network.html" class="book-card fade-in">
+    <a href="books/book_003_finance_dc_network.html" class="book-card fade-in" data-category="network">
       <div class="book-cover" style="background: linear-gradient(135deg, #92400e 0%, #d97706 50%, #f59e0b 100%);">
         <div class="book-cover-title">金融数据中心网络架构与技术</div>
         <div class="book-cover-author">张学明 陈乐</div>
@@ -859,26 +858,29 @@
 </footer>
 
 <script>
-  // Search functionality
+  // Search + filter state
+  let currentCategory = 'all';
   const searchInput = document.getElementById('searchInput');
   const booksGrid = document.getElementById('booksGrid');
   const bookCards = booksGrid.querySelectorAll('.book-card');
 
-  searchInput.addEventListener('input', (e) => {
-    const query = e.target.value.toLowerCase();
+  function applyFilters() {
+    const query = searchInput.value.toLowerCase();
     bookCards.forEach(card => {
+      // Category filter
+      const matchCategory = currentCategory === 'all' || card.dataset.category === currentCategory;
+      // Search filter
       const title = card.querySelector('.book-title').textContent.toLowerCase();
       const author = card.querySelector('.book-author').textContent.toLowerCase();
       const summary = card.querySelector('.book-summary').textContent.toLowerCase();
       const tags = [...card.querySelectorAll('.book-tag')].map(t => t.textContent.toLowerCase()).join(' ');
+      const matchSearch = !query || title.includes(query) || author.includes(query) || summary.includes(query) || tags.includes(query);
 
-      if (title.includes(query) || author.includes(query) || summary.includes(query) || tags.includes(query)) {
-        card.style.display = '';
-      } else {
-        card.style.display = 'none';
-      }
+      card.style.display = (matchCategory && matchSearch) ? '' : 'none';
     });
-  });
+  }
+
+  searchInput.addEventListener('input', applyFilters);
 
   // Filter tags
   const filterTags = document.querySelectorAll('.filter-tag');
@@ -886,20 +888,8 @@
     tag.addEventListener('click', () => {
       filterTags.forEach(t => t.classList.remove('active'));
       tag.classList.add('active');
-
-      const filter = tag.dataset.tag;
-      bookCards.forEach(card => {
-        if (filter === 'all') {
-          card.style.display = '';
-          return;
-        }
-        const tags = [...card.querySelectorAll('.book-tag')].map(t => t.textContent.trim());
-        if (tags.includes(filter)) {
-          card.style.display = '';
-        } else {
-          card.style.display = 'none';
-        }
-      });
+      currentCategory = tag.dataset.category;
+      applyFilters();
     });
   });
 
