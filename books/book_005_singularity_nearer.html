@@ -951,6 +951,64 @@
   @media (max-width: 480px) {
     .leadership-grid { grid-template-columns: 1fr; }
   }
+
+  /* 原书金句板块 */
+  .golden-quotes-section {
+    margin-bottom: 40px;
+  }
+  .section-desc {
+    color: var(--text-secondary);
+    font-size: 14px;
+    margin-bottom: 20px;
+    padding-left: 4px;
+  }
+  .golden-quotes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .golden-quote-item {
+    background: linear-gradient(135deg, #7c3aed10, #7c3aed18);
+    border-left: 4px solid #7c3aed;
+    border-radius: 0 10px 10px 0;
+    padding: 14px 16px 14px 18px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    transition: all 0.25s ease;
+  }
+  .golden-quote-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px #7c3aed22;
+    background: linear-gradient(135deg, #7c3aed18, #7c3aed25);
+  }
+  .golden-quote-num {
+    width: 26px;
+    height: 26px;
+    min-width: 26px;
+    background: linear-gradient(135deg, #7c3aed, #7c3aeddd);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .golden-quote-text {
+    font-size: 13.5px;
+    line-height: 1.75;
+    color: var(--text);
+    font-weight: 500;
+  }
+  @media (max-width: 768px) {
+    .golden-quotes-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
 </style>
   <link rel="stylesheet" href="../annotation.css">
 </head>
@@ -1116,7 +1174,56 @@
 
   <!-- 章节精要 -->
   <div class="section">
-    <h2 class="section-title">📖 章节精要</h2>
+    
+  <!-- 原书金句 -->
+  <div class="section golden-quotes-section">
+    <h2 class="section-title">💎 原书金句</h2>
+    <p class="section-desc">书中最有价值的核心观点与论断，值得反复品味。</p>
+    <div class="golden-quotes-grid">
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">1</div>
+          <div class="golden-quote-text">技术进步呈指数级增长，人类正处于加速曲线最陡峭的"冲刺阶段"。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">2</div>
+          <div class="golden-quote-text">指数增长的"膝盖弯"已经拐过——前99天只覆盖了水面的1%，但第100天就铺满了整个池塘。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">3</div>
+          <div class="golden-quote-text">进化是一个信息处理能力不断升级的过程，每一次范式跃迁都让信息的存储、传输、处理效率提升几个数量级。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">4</div>
+          <div class="golden-quote-text">奇点不是凭空出现的"神迹"，而是138亿年进化曲线自然延伸的结果。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">5</div>
+          <div class="golden-quote-text">基因技术、纳米技术、人工智能三大领域互相赋能交叉渗透，形成"1+1+1>3"的协同加速效应。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">6</div>
+          <div class="golden-quote-text">战略规划的时间窗口正在从"十年规划"压缩到"三年迭代"。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">7</div>
+          <div class="golden-quote-text">人类的直觉天然习惯线性思维，但技术的进步是指数级的。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">8</div>
+          <div class="golden-quote-text">2022年大模型落地标志着第五纪元（人机融合纪元）的正式开启。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">9</div>
+          <div class="golden-quote-text">不要孤立地看待某一项技术趋势，要看到不同技术领域之间的交叉融合效应。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">10</div>
+          <div class="golden-quote-text">加速回报定律从摩尔定律拓展为覆盖宇宙演化、生物DNA、全部信息科技的普适进化规律。</div>
+        </div>
+    </div>
+  </div>
+
+<h2 class="section-title">📖 章节精要</h2>
     <p style="margin-bottom: 20px; color: var(--text-secondary);">全书分为两大部分、六章，加上引言、结语和两个附录，呈现"理论奠基—现实推演—风险审视"的三层递进结构。以下为6个核心章节的要点提炼。</p>
     
     <div class="chapter-grid">

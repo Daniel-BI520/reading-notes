@@ -1161,6 +1161,64 @@
     .track-row { flex-direction: column; align-items: flex-start; gap: 8px; }
     .track-label { width: 100%; text-align: left; }
   }
+
+  /* 原书金句板块 */
+  .golden-quotes-section {
+    margin-bottom: 40px;
+  }
+  .section-desc {
+    color: var(--text-secondary);
+    font-size: 14px;
+    margin-bottom: 20px;
+    padding-left: 4px;
+  }
+  .golden-quotes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .golden-quote-item {
+    background: linear-gradient(135deg, #0ea5e910, #0ea5e918);
+    border-left: 4px solid #0ea5e9;
+    border-radius: 0 10px 10px 0;
+    padding: 14px 16px 14px 18px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    transition: all 0.25s ease;
+  }
+  .golden-quote-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px #0ea5e922;
+    background: linear-gradient(135deg, #0ea5e918, #0ea5e925);
+  }
+  .golden-quote-num {
+    width: 26px;
+    height: 26px;
+    min-width: 26px;
+    background: linear-gradient(135deg, #0ea5e9, #0ea5e9dd);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .golden-quote-text {
+    font-size: 13.5px;
+    line-height: 1.75;
+    color: var(--text);
+    font-weight: 500;
+  }
+  @media (max-width: 768px) {
+    .golden-quotes-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
 </style>
   <link rel="stylesheet" href="../annotation.css">
 </head>
@@ -1240,6 +1298,59 @@
 
   <!-- 第一章：时间线 -->
   <div class="section" id="sec1">
+
+  <!-- 原书金句 -->
+  <div class="section golden-quotes-section">
+    <h2 class="section-title">💎 原书金句</h2>
+    <p class="section-desc">书中最有价值的核心观点与论断，值得反复品味。</p>
+    <div class="golden-quotes-grid">
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">1</div>
+          <div class="golden-quote-text">顶尖人才的早期经历往往定义了其思维范式。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">2</div>
+          <div class="golden-quote-text">第一性原理思维不是口号——从最基本的判断出发，推导出事物的终极意义。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">3</div>
+          <div class="golden-quote-text">讲故事的天赋与自我欺骗的风险之间，只有一条微妙的界限。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">4</div>
+          <div class="golden-quote-text">顶尖团队的战斗力来自能力互补，而不是技能重叠。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">5</div>
+          <div class="golden-quote-text">只招信徒——在前沿技术领域，相信使命的人比只看薪资的人产出高得多。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">6</div>
+          <div class="golden-quote-text">真正的技术突破往往来自跨领域的组合创新。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">7</div>
+          <div class="golden-quote-text">选择合作伙伴时，不仅要看出价，更要看对方是否真正理解你所做事情的价值。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">8</div>
+          <div class="golden-quote-text">最好的谈判不是围绕价格，而是围绕价值。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">9</div>
+          <div class="golden-quote-text">技术落地的最大障碍往往不是技术本身，而是信任。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">10</div>
+          <div class="golden-quote-text">你的核心优势也可能是你的盲区——最危险的不是你不知道的东西，而是你以为自己知道、但其实错了的东西。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">11</div>
+          <div class="golden-quote-text">理想主义必须与现实主义结合。</div>
+        </div>
+    </div>
+  </div>
+
     <h2 class="section-title">一、DeepMind里程碑时间线</h2>
     <p>从2010年伦敦一间小小的办公室，到谷歌全球AI战略的核心引擎，DeepMind用十五年时间书写了AI行业最传奇的创业故事。以下是影响公司命运的六大关键节点：</p>
 

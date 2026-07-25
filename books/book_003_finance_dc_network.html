@@ -1230,6 +1230,64 @@
     .ipo-layer { flex-direction: column; gap: 8px; text-align: center; }
     .ipo-layer .layer-desc { text-align: center; }
   }
+
+  /* 原书金句板块 */
+  .golden-quotes-section {
+    margin-bottom: 40px;
+  }
+  .section-desc {
+    color: var(--text-secondary);
+    font-size: 14px;
+    margin-bottom: 20px;
+    padding-left: 4px;
+  }
+  .golden-quotes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .golden-quote-item {
+    background: linear-gradient(135deg, #d9770610, #d9770618);
+    border-left: 4px solid #d97706;
+    border-radius: 0 10px 10px 0;
+    padding: 14px 16px 14px 18px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    transition: all 0.25s ease;
+  }
+  .golden-quote-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px #d9770622;
+    background: linear-gradient(135deg, #d9770618, #d9770625);
+  }
+  .golden-quote-num {
+    width: 26px;
+    height: 26px;
+    min-width: 26px;
+    background: linear-gradient(135deg, #d97706, #d97706dd);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .golden-quote-text {
+    font-size: 13.5px;
+    line-height: 1.75;
+    color: var(--text);
+    font-weight: 500;
+  }
+  @media (max-width: 768px) {
+    .golden-quotes-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
 </style>
   <link rel="stylesheet" href="../annotation.css">
 </head>
@@ -1319,6 +1377,55 @@
 
   <!-- 第一章：全书脉络 -->
   <div class="section" id="sec1">
+
+  <!-- 原书金句 -->
+  <div class="section golden-quotes-section">
+    <h2 class="section-title">💎 原书金句</h2>
+    <p class="section-desc">书中最有价值的核心观点与论断，值得反复品味。</p>
+    <div class="golden-quotes-grid">
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">1</div>
+          <div class="golden-quote-text">IPO模型本质上是网络架构的"分层抽象方法论"——每一层只关心本层的能力提供和向上层的接口定义。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">2</div>
+          <div class="golden-quote-text">六大通用属性看似是架构的"边角料"，实则是金融网络能否真正满足业务SLA的关键。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">3</div>
+          <div class="golden-quote-text">从物理与逻辑解耦开始，金融数据中心网络从烟囱式架构走向虚拟化架构。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">4</div>
+          <div class="golden-quote-text">细节决定成败——QoS设计直接决定交易高峰期核心业务的体验。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">5</div>
+          <div class="golden-quote-text">分层解耦的设计原则：一个好的方案应该是分层清晰、接口明确的，每一层都可以独立演进。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">6</div>
+          <div class="golden-quote-text">Fabric是数据中心网络的核心构件，规模设计、接入设计、分区定制缺一不可。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">7</div>
+          <div class="golden-quote-text">多地多中心布局是金融级高可用的必然选择，DCI互联是关键技术挑战。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">8</div>
+          <div class="golden-quote-text">安全不是事后补丁，而是从架构设计之初就要嵌入的基本属性。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">9</div>
+          <div class="golden-quote-text">从传统运维向SDN运维、再向AIOps智能运维演进，是数据中心运维的必然路径。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">10</div>
+          <div class="golden-quote-text">AI Fabric、IDN、MESH²——下一代数据中心网络的三大前沿方向。</div>
+        </div>
+    </div>
+  </div>
+
     <h2 class="section-title">一、全书脉络与核心逻辑</h2>
 
     <div class="subsection">

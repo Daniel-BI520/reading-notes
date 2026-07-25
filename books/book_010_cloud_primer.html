@@ -608,6 +608,64 @@
     .timeline-dot { left: 54px; }
   }
 
+
+  /* 原书金句板块 */
+  .golden-quotes-section {
+    margin-bottom: 40px;
+  }
+  .section-desc {
+    color: var(--text-secondary);
+    font-size: 14px;
+    margin-bottom: 20px;
+    padding-left: 4px;
+  }
+  .golden-quotes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .golden-quote-item {
+    background: linear-gradient(135deg, #f9731610, #f9731618);
+    border-left: 4px solid #f97316;
+    border-radius: 0 10px 10px 0;
+    padding: 14px 16px 14px 18px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    transition: all 0.25s ease;
+  }
+  .golden-quote-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px #f9731622;
+    background: linear-gradient(135deg, #f9731618, #f9731625);
+  }
+  .golden-quote-num {
+    width: 26px;
+    height: 26px;
+    min-width: 26px;
+    background: linear-gradient(135deg, #f97316, #f97316dd);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .golden-quote-text {
+    font-size: 13.5px;
+    line-height: 1.75;
+    color: var(--text);
+    font-weight: 500;
+  }
+  @media (max-width: 768px) {
+    .golden-quotes-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
 </style>
   <link rel="stylesheet" href="../annotation.css">
 </head>
@@ -733,7 +791,56 @@
 
   <!-- 技术架构概览 -->
   <div class="section">
-    <h2 class="section-title">🏗️ 技术体系概览</h2>
+    
+  <!-- 原书金句 -->
+  <div class="section golden-quotes-section">
+    <h2 class="section-title">💎 原书金句</h2>
+    <p class="section-desc">书中最有价值的核心观点与论断，值得反复品味。</p>
+    <div class="golden-quotes-grid">
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">1</div>
+          <div class="golden-quote-text">云计算说穿了就是IT资源的社会化分工——云计算就是IT领域的"自来水厂"。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">2</div>
+          <div class="golden-quote-text">云计算不是一种新的计算技术，而是一种新的计算模式。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">3</div>
+          <div class="golden-quote-text">计算设备和输入/输出设备的分离是云计算的特征之一。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">4</div>
+          <div class="golden-quote-text">这个分离的本质是专业化分工——企业只需要关注自己的核心业务。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">5</div>
+          <div class="golden-quote-text">任何一项技术的出现，都是为了解决一个具体的问题；不理解问题，就不可能真正理解技术。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">6</div>
+          <div class="golden-quote-text">虚拟化就好比把一个大房子用墙隔成很多个小房间——既保持高资源利用率，又维持良好的隔离性。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">7</div>
+          <div class="golden-quote-text">一个云计算中心的延时半径通常为100毫秒——与地理位置没有直接关系，而与网络路径上的转发机构和数目有关。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">8</div>
+          <div class="golden-quote-text">读透云计算的来龙去脉，讲清技术背后的前因后果，把每一个概念都转化成客户能听懂的语言——这就是售前工程师的核心竞争力。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">9</div>
+          <div class="golden-quote-text">云原生，就是根据云的特点专门定制应用——真正享受云带来的好处。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">10</div>
+          <div class="golden-quote-text">传统的应用上云，就像把老家具原封不动搬到新房子里；云原生，是根据新房子的户型专门定制家具。</div>
+        </div>
+    </div>
+  </div>
+
+<h2 class="section-title">🏗️ 技术体系概览</h2>
     <div style="color: var(--text-secondary); font-size: 15px; line-height: 1.9;">
       <h3>5.1 营运模型：云服务商的商业逻辑</h3>
 <p>云平台不仅是一个技术系统，更是一个商业系统。理解云平台的营运模型，才能理解云服务商为什么这么做产品、这么定价。</p>

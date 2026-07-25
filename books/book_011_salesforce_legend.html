@@ -640,6 +640,64 @@
     .bottom-nav { flex-direction: column; }
   }
 
+
+  /* 原书金句板块 */
+  .golden-quotes-section {
+    margin-bottom: 40px;
+  }
+  .section-desc {
+    color: var(--text-secondary);
+    font-size: 14px;
+    margin-bottom: 20px;
+    padding-left: 4px;
+  }
+  .golden-quotes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .golden-quote-item {
+    background: linear-gradient(135deg, #0d6efd10, #0d6efd18);
+    border-left: 4px solid #0d6efd;
+    border-radius: 0 10px 10px 0;
+    padding: 14px 16px 14px 18px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    transition: all 0.25s ease;
+  }
+  .golden-quote-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px #0d6efd22;
+    background: linear-gradient(135deg, #0d6efd18, #0d6efd25);
+  }
+  .golden-quote-num {
+    width: 26px;
+    height: 26px;
+    min-width: 26px;
+    background: linear-gradient(135deg, #0d6efd, #0d6efddd);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .golden-quote-text {
+    font-size: 13.5px;
+    line-height: 1.75;
+    color: var(--text);
+    font-weight: 500;
+  }
+  @media (max-width: 768px) {
+    .golden-quotes-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
 </style>
   <link rel="stylesheet" href="../annotation.css">
 </head>
@@ -752,7 +810,60 @@
 
   <!-- 因果链条时间线 -->
   <div class="section">
-    <h2 class="section-title">📈 从0到千亿美元的因果链条</h2>
+    
+  <!-- 原书金句 -->
+  <div class="section golden-quotes-section">
+    <h2 class="section-title">💎 原书金句</h2>
+    <p class="section-desc">书中最有价值的核心观点与论断，值得反复品味。</p>
+    <div class="golden-quotes-grid">
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">1</div>
+          <div class="golden-quote-text">不要打折，不要降低早期产品的价值。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">2</div>
+          <div class="golden-quote-text">战略的本质是清晰和聚焦——V2MOM写在信封背面就够了。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">3</div>
+          <div class="golden-quote-text">价值观不是一堆好词的堆砌，而是决策的优先级排序。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">4</div>
+          <div class="golden-quote-text">V2MOM的核心力量不在于五个问题本身，而在于级联和透明两个机制。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">5</div>
+          <div class="golden-quote-text">客户嫌贵往往不是因为价格本身，而是因为他没有看到足够的价值——你越降价，他就越觉得你的产品不值钱。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">6</div>
+          <div class="golden-quote-text">SaaS模式是成立的——客户确实愿意为在线软件持续付费。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">7</div>
+          <div class="golden-quote-text">客户信任是硬通货——在最困难的时候，是客户的信任让公司活了下来。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">8</div>
+          <div class="golden-quote-text">No Software不仅是一句口号，它是一整套商业模式、企业文化和用户体验的革命。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">9</div>
+          <div class="golden-quote-text">Parker Harris从第一天就坚持的多租户元数据架构，是SaaS模式、平台化战略、生态系统三者共同的技术地基。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">10</div>
+          <div class="golden-quote-text">伟大的创意往往诞生于放松的时刻——与海豚共泳的那一刻，贝尼奥夫获得了创办Salesforce的灵感。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">11</div>
+          <div class="golden-quote-text">价格谈判中最容易犯的错误就是一遇到阻力就降价，好像降价是解决一切问题的万能钥匙。</div>
+        </div>
+    </div>
+  </div>
+
+<h2 class="section-title">📈 从0到千亿美元的因果链条</h2>
     
     <div class="timeline">
       <div class="timeline-item">

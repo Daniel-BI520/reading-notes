@@ -611,6 +611,64 @@
   }
 
 
+
+  /* 原书金句板块 */
+  .golden-quotes-section {
+    margin-bottom: 40px;
+  }
+  .section-desc {
+    color: var(--text-secondary);
+    font-size: 14px;
+    margin-bottom: 20px;
+    padding-left: 4px;
+  }
+  .golden-quotes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .golden-quote-item {
+    background: linear-gradient(135deg, #10b98110, #10b98118);
+    border-left: 4px solid #10b981;
+    border-radius: 0 10px 10px 0;
+    padding: 14px 16px 14px 18px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    transition: all 0.25s ease;
+  }
+  .golden-quote-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px #10b98122;
+    background: linear-gradient(135deg, #10b98118, #10b98125);
+  }
+  .golden-quote-num {
+    width: 26px;
+    height: 26px;
+    min-width: 26px;
+    background: linear-gradient(135deg, #10b981, #10b981dd);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .golden-quote-text {
+    font-size: 13.5px;
+    line-height: 1.75;
+    color: var(--text);
+    font-weight: 500;
+  }
+  @media (max-width: 768px) {
+    .golden-quotes-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
 </style>
 </head>
 <body>
@@ -688,7 +746,56 @@
 
   
 <div class="section">
-  <h2 class="section-title">🔑 核心概念精选</h2>
+  
+  <!-- 原书金句 -->
+  <div class="section golden-quotes-section">
+    <h2 class="section-title">💎 原书金句</h2>
+    <p class="section-desc">书中最有价值的核心观点与论断，值得反复品味。</p>
+    <div class="golden-quotes-grid">
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">1</div>
+          <div class="golden-quote-text">分段失败的根因在组织不在技术——70%以上的分段项目半途而废，不是因为技术选型错误，而是因为组织性障碍。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">2</div>
+          <div class="golden-quote-text">身份是现代分段的核心锚点——只有以身份为核心编排策略，才能在混合云、移动办公、IoT爆发的环境中保持一致性。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">3</div>
+          <div class="golden-quote-text">传统分段基于IP拓扑，零信任时代的分段必须以身份为核心。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">4</div>
+          <div class="golden-quote-text">策略与治理、身份、漏洞管理、执行、分析——零信任五支柱是分段的指导框架。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">5</div>
+          <div class="golden-quote-text">分段不是一上来就搞微分段，而是从业务对齐开始，循序渐进地推进。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">6</div>
+          <div class="golden-quote-text">为什么分段策略会失败？很重要的一个原因就是团队没有对齐业务目标。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">7</div>
+          <div class="golden-quote-text">从传统VLAN到微分段、再到纳秒分段——分段技术在持续演进，但核心原则始终不变。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">8</div>
+          <div class="golden-quote-text">防火墙是安全的基础设备，但防火墙和分段不是一回事。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">9</div>
+          <div class="golden-quote-text">基于业务对齐的渐进式分段实施路径，填补了"知道要分段但不知道怎么分段"的行业实践空白。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">10</div>
+          <div class="golden-quote-text">很多厂商一上来就给客户推最复杂的微分段，但实际上大多数客户根本用不到那个程度。</div>
+        </div>
+    </div>
+  </div>
+
+<h2 class="section-title">🔑 核心概念精选</h2>
   
   <div class="key-points">
     <div class="key-point">

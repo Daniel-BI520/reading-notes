@@ -713,6 +713,64 @@
     .timeline-dot { left: 54px; }
   }
 
+
+  /* 原书金句板块 */
+  .golden-quotes-section {
+    margin-bottom: 40px;
+  }
+  .section-desc {
+    color: var(--text-secondary);
+    font-size: 14px;
+    margin-bottom: 20px;
+    padding-left: 4px;
+  }
+  .golden-quotes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .golden-quote-item {
+    background: linear-gradient(135deg, #f9731610, #f9731618);
+    border-left: 4px solid #f97316;
+    border-radius: 0 10px 10px 0;
+    padding: 14px 16px 14px 18px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    transition: all 0.25s ease;
+  }
+  .golden-quote-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px #f9731622;
+    background: linear-gradient(135deg, #f9731618, #f9731625);
+  }
+  .golden-quote-num {
+    width: 26px;
+    height: 26px;
+    min-width: 26px;
+    background: linear-gradient(135deg, #f97316, #f97316dd);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .golden-quote-text {
+    font-size: 13.5px;
+    line-height: 1.75;
+    color: var(--text);
+    font-weight: 500;
+  }
+  @media (max-width: 768px) {
+    .golden-quotes-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
 </style>
   <link rel="stylesheet" href="../annotation.css">
 </head>
@@ -834,7 +892,56 @@
 
   <!-- 芯片发展史关键节点时间线 -->
   <div class="section">
-    <h2 class="section-title">📅 芯片发展史七大转折点（因果链）</h2>
+    
+  <!-- 原书金句 -->
+  <div class="section golden-quotes-section">
+    <h2 class="section-title">💎 原书金句</h2>
+    <p class="section-desc">书中最有价值的核心观点与论断，值得反复品味。</p>
+    <div class="golden-quotes-grid">
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">1</div>
+          <div class="golden-quote-text">芯片是人类有史以来最复杂的制造物，也是现代文明的基石。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">2</div>
+          <div class="golden-quote-text">从晶体管到集成电路，从微处理器到SoC——每一次范式跃迁都让算力提升几个数量级。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">3</div>
+          <div class="golden-quote-text">摩尔定律不是物理定律，而是人类创新能力的宣言。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">4</div>
+          <div class="golden-quote-text">芯片发展史不是线性的技术进步史，而是"危机—突破—新危机—再突破"的螺旋上升史。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">5</div>
+          <div class="golden-quote-text">每一次芯片架构的变革，都伴随着整个IT产业格局的重新洗牌。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">6</div>
+          <div class="golden-quote-text">光刻技术是芯片制造皇冠上的明珠，也是最精密的人类制造工艺。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">7</div>
+          <div class="golden-quote-text">芯片产业的全球分工是效率最优的选择，也是地缘政治博弈的焦点。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">8</div>
+          <div class="golden-quote-text">从专用到通用、再从通用到专用——芯片架构的钟摆效应从未停止。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">9</div>
+          <div class="golden-quote-text">芯片是底层基础设施中的基础设施，它的发展速度决定了整个信息产业的发展速度。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">10</div>
+          <div class="golden-quote-text">理解芯片史，才能真正理解为什么"算力就是生产力"。</div>
+        </div>
+    </div>
+  </div>
+
+<h2 class="section-title">📅 芯片发展史七大转折点（因果链）</h2>
     
     <div class="timeline">
       <div class="timeline-item">

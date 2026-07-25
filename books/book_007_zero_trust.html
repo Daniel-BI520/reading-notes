@@ -713,6 +713,64 @@
     .timeline-dot { left: 54px; }
   }
 
+
+  /* 原书金句板块 */
+  .golden-quotes-section {
+    margin-bottom: 40px;
+  }
+  .section-desc {
+    color: var(--text-secondary);
+    font-size: 14px;
+    margin-bottom: 20px;
+    padding-left: 4px;
+  }
+  .golden-quotes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .golden-quote-item {
+    background: linear-gradient(135deg, #10b98110, #10b98118);
+    border-left: 4px solid #10b981;
+    border-radius: 0 10px 10px 0;
+    padding: 14px 16px 14px 18px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    transition: all 0.25s ease;
+  }
+  .golden-quote-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px #10b98122;
+    background: linear-gradient(135deg, #10b98118, #10b98125);
+  }
+  .golden-quote-num {
+    width: 26px;
+    height: 26px;
+    min-width: 26px;
+    background: linear-gradient(135deg, #10b981, #10b981dd);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .golden-quote-text {
+    font-size: 13.5px;
+    line-height: 1.75;
+    color: var(--text);
+    font-weight: 500;
+  }
+  @media (max-width: 768px) {
+    .golden-quotes-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
 </style>
   <link rel="stylesheet" href="../annotation.css">
 </head>
@@ -833,7 +891,60 @@
 
   <!-- 范式对比 -->
   <div class="section">
-    <h2 class="section-title">⚔️ 范式对比：边界安全 vs 零信任</h2>
+    
+  <!-- 原书金句 -->
+  <div class="section golden-quotes-section">
+    <h2 class="section-title">💎 原书金句</h2>
+    <p class="section-desc">书中最有价值的核心观点与论断，值得反复品味。</p>
+    <div class="golden-quotes-grid">
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">1</div>
+          <div class="golden-quote-text">边界安全模型试图把攻击者阻挡在可信的内部网络之外，然而零信任模型认识到这种方法注定会失败。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">2</div>
+          <div class="golden-quote-text">网络无时无刻不处于危险的环境中——这是零信任的第一假定。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">3</div>
+          <div class="golden-quote-text">网络的位置不足以决定网络的可信程度。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">4</div>
+          <div class="golden-quote-text">所有的设备、用户和网络流量都应当经过认证和授权。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">5</div>
+          <div class="golden-quote-text">安全策略必须是动态的，并基于尽可能多的数据来计算信任。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">6</div>
+          <div class="golden-quote-text">最小特权原则：一个实体应该只被授予完成任务所需要的特权，而不是被授予该实体想要得到的权限。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">7</div>
+          <div class="golden-quote-text">问题的根源不是防火墙不够强，而是信任的锚点错了。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">8</div>
+          <div class="golden-quote-text">零信任不是要换掉现有的防火墙，而是在现有安全体系之上，加一层以身份为核心的精细访问控制。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">9</div>
+          <div class="golden-quote-text">零信任落地不需要一步到位——先摸清家底，再建身份底座，最后逐步推进精细化控制。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">10</div>
+          <div class="golden-quote-text">从"假设安全"到"假设危险"，从"位置信任"到"身份信任"，从"静态防御"到"动态演进"——这是思维方式的根本转变。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">11</div>
+          <div class="golden-quote-text">全球七成以上的数据泄露发生在内网横向移动阶段。</div>
+        </div>
+    </div>
+  </div>
+
+<h2 class="section-title">⚔️ 范式对比：边界安全 vs 零信任</h2>
 
     <div class="chart-box">
       <div class="chart-title">传统边界安全 vs 零信任对比</div>

@@ -608,6 +608,64 @@
     .timeline-dot { left: 54px; }
   }
 
+
+  /* 原书金句板块 */
+  .golden-quotes-section {
+    margin-bottom: 40px;
+  }
+  .section-desc {
+    color: var(--text-secondary);
+    font-size: 14px;
+    margin-bottom: 20px;
+    padding-left: 4px;
+  }
+  .golden-quotes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .golden-quote-item {
+    background: linear-gradient(135deg, #0ea5e910, #0ea5e918);
+    border-left: 4px solid #0ea5e9;
+    border-radius: 0 10px 10px 0;
+    padding: 14px 16px 14px 18px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    transition: all 0.25s ease;
+  }
+  .golden-quote-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px #0ea5e922;
+    background: linear-gradient(135deg, #0ea5e918, #0ea5e925);
+  }
+  .golden-quote-num {
+    width: 26px;
+    height: 26px;
+    min-width: 26px;
+    background: linear-gradient(135deg, #0ea5e9, #0ea5e9dd);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .golden-quote-text {
+    font-size: 13.5px;
+    line-height: 1.75;
+    color: var(--text);
+    font-weight: 500;
+  }
+  @media (max-width: 768px) {
+    .golden-quotes-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
 </style>
   <link rel="stylesheet" href="../annotation.css">
 </head>
@@ -746,7 +804,56 @@ VLAN → VXLAN（数据面虚拟化） → EVPN（控制面虚拟化） → 分�
 
   <!-- 技术架构概览 -->
   <div class="section">
-    <h2 class="section-title">🏗️ 技术体系概览</h2>
+    
+  <!-- 原书金句 -->
+  <div class="section golden-quotes-section">
+    <h2 class="section-title">💎 原书金句</h2>
+    <p class="section-desc">书中最有价值的核心观点与论断，值得反复品味。</p>
+    <div class="golden-quotes-grid">
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">1</div>
+          <div class="golden-quote-text">技术的成功不仅取决于技术本身的优劣，更取决于演进成本和生态支持。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">2</div>
+          <div class="golden-quote-text">大数据需要大管道——这是数据中心网络变革的第一驱动力。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">3</div>
+          <div class="golden-quote-text">应用架构的微服务化，使得东西向流量爆发式增长。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">4</div>
+          <div class="golden-quote-text">攻击面从边界转向内部——超过75%的数据中心流量是东西向的。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">5</div>
+          <div class="golden-quote-text">从传统三层架构到Spine-Leaf扁平架构，是数据中心网络的一次范式革命。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">6</div>
+          <div class="golden-quote-text">VXLAN凭借"在三层IP网上构建虚拟二层"的思路，成为了业界的标准选择。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">7</div>
+          <div class="golden-quote-text">EVPN为VXLAN带来了控制面——自动发现、控制面学习、广播抑制三大核心价值。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">8</div>
+          <div class="golden-quote-text">集中式网关到分布式网关的演进，解决了VXLAN性能瓶颈和单点故障问题。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">9</div>
+          <div class="golden-quote-text">自动驾驶网络是数据中心网络的终极目标——管理、控制、分析、优化全由AI驱动。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">10</div>
+          <div class="golden-quote-text">每一分钟的停机都可能对应数十万甚至数百万的经济损失，以及难以估量的声誉影响。</div>
+        </div>
+    </div>
+  </div>
+
+<h2 class="section-title">🏗️ 技术体系概览</h2>
     <div style="color: var(--text-secondary); font-size: 15px; line-height: 1.9;">
       <h3>3.1 架构演进的根本驱动力</h3>
 <p>数据中心网络的架构演进，从来不是为了"炫技"，而是被业务形态、流量模型、部署模式的变化一步步推着走的。</p>

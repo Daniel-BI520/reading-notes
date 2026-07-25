@@ -555,6 +555,64 @@
     .summary-card, .presales-section, .thought-section { padding: 24px; }
     .conclusion { padding: 28px; }
   }
+
+  /* 原书金句板块 */
+  .golden-quotes-section {
+    margin-bottom: 40px;
+  }
+  .section-desc {
+    color: var(--text-secondary);
+    font-size: 14px;
+    margin-bottom: 20px;
+    padding-left: 4px;
+  }
+  .golden-quotes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .golden-quote-item {
+    background: linear-gradient(135deg, #b4530910, #b4530918);
+    border-left: 4px solid #b45309;
+    border-radius: 0 10px 10px 0;
+    padding: 14px 16px 14px 18px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    transition: all 0.25s ease;
+  }
+  .golden-quote-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px #b4530922;
+    background: linear-gradient(135deg, #b4530918, #b4530925);
+  }
+  .golden-quote-num {
+    width: 26px;
+    height: 26px;
+    min-width: 26px;
+    background: linear-gradient(135deg, #b45309, #b45309dd);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .golden-quote-text {
+    font-size: 13.5px;
+    line-height: 1.75;
+    color: var(--text);
+    font-weight: 500;
+  }
+  @media (max-width: 768px) {
+    .golden-quotes-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
 </style>
 </head>
 <body>
@@ -633,7 +691,60 @@
   </div>
 
   <div class="section">
-    <h2 class="section-title">🏛️ 全书知识骨架</h2>
+    
+  <!-- 原书金句 -->
+  <div class="section golden-quotes-section">
+    <h2 class="section-title">💎 原书金句</h2>
+    <p class="section-desc">书中最有价值的核心观点与论断，值得反复品味。</p>
+    <div class="golden-quotes-grid">
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">1</div>
+          <div class="golden-quote-text">任何组织都有"专制化"的天然倾向。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">2</div>
+          <div class="golden-quote-text">资源集中是所有系统的天然趋势，从土地到市场份额都是如此。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">3</div>
+          <div class="golden-quote-text">大公司的"官僚化"是必然趋势，关键是识别并应对。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">4</div>
+          <div class="golden-quote-text">企业也有生命周期，规律和王朝周期律惊人相似。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">5</div>
+          <div class="golden-quote-text">底层的反抗永远是推动变革的终极力量，但底层造反的成功率极低。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">6</div>
+          <div class="golden-quote-text">每个组织里都有"外戚"和"宦官"——那些不靠能力、而靠关系上位的人。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">7</div>
+          <div class="golden-quote-text">做方案就像打天下——"打下来"只是第一步，"守住"才是真正的考验。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">8</div>
+          <div class="golden-quote-text">卖产品的下策是卖功能（暴力），上策是卖理念（意识形态）。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">9</div>
+          <div class="golden-quote-text">大公司的"流程化"和宋代的"文官制度"是一回事——提高了稳定性，降低了战斗力。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">10</div>
+          <div class="golden-quote-text">当一个公司"一言堂"太严重时，要小心——可能是"顶峰"，也可能是"末路"。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">11</div>
+          <div class="golden-quote-text">企业变革的成功率很低，原因和历史上的变法失败如出一辙。</div>
+        </div>
+    </div>
+  </div>
+
+<h2 class="section-title">🏛️ 全书知识骨架</h2>
     
     <div class="subsection">
       <h3 class="subsection-title">封建专制的"三位一体"结构</h3>

@@ -608,6 +608,64 @@
     .timeline-dot { left: 54px; }
   }
 
+
+  /* 原书金句板块 */
+  .golden-quotes-section {
+    margin-bottom: 40px;
+  }
+  .section-desc {
+    color: var(--text-secondary);
+    font-size: 14px;
+    margin-bottom: 20px;
+    padding-left: 4px;
+  }
+  .golden-quotes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .golden-quote-item {
+    background: linear-gradient(135deg, #3b82f610, #3b82f618);
+    border-left: 4px solid #3b82f6;
+    border-radius: 0 10px 10px 0;
+    padding: 14px 16px 14px 18px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    transition: all 0.25s ease;
+  }
+  .golden-quote-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px #3b82f622;
+    background: linear-gradient(135deg, #3b82f618, #3b82f625);
+  }
+  .golden-quote-num {
+    width: 26px;
+    height: 26px;
+    min-width: 26px;
+    background: linear-gradient(135deg, #3b82f6, #3b82f6dd);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .golden-quote-text {
+    font-size: 13.5px;
+    line-height: 1.75;
+    color: var(--text);
+    font-weight: 500;
+  }
+  @media (max-width: 768px) {
+    .golden-quotes-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
 </style>
   <link rel="stylesheet" href="../annotation.css">
 </head>
@@ -729,7 +787,60 @@
 
   <!-- 技术架构概览 -->
   <div class="section">
-    <h2 class="section-title">🏗️ 技术体系概览</h2>
+    
+  <!-- 原书金句 -->
+  <div class="section golden-quotes-section">
+    <h2 class="section-title">💎 原书金句</h2>
+    <p class="section-desc">书中最有价值的核心观点与论断，值得反复品味。</p>
+    <div class="golden-quotes-grid">
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">1</div>
+          <div class="golden-quote-text">"规划先行"是私有云项目成功的关键保障。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">2</div>
+          <div class="golden-quote-text">虚拟化的本质是资源池化——提高资源利用率、简化运维管理。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">3</div>
+          <div class="golden-quote-text">第一次跃迁是从"资源管理"到"服务管理"——从管理员驱动的人工操作模式，到自助服务的服务化交付模式。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">4</div>
+          <div class="golden-quote-text">数据主权与合规可控是私有云最核心的价值主张。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">5</div>
+          <div class="golden-quote-text">性能专属与稳定保障是核心业务系统选择私有云的关键因素。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">6</div>
+          <div class="golden-quote-text">混合云架构的核心枢纽是私有云——"数据在私、计算在公"。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">7</div>
+          <div class="golden-quote-text">稳定性是压倒一切的首要考虑因素——一次意外的宕机可能造成数百万的经济损失。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">8</div>
+          <div class="golden-quote-text">私有云网络规划的核心原则是"三网隔离"——管理网络、业务网络、存储网络必须隔离。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">9</div>
+          <div class="golden-quote-text">为什么三网隔离如此重要？根本原因在于避免流量争抢。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">10</div>
+          <div class="golden-quote-text">vMotion、DRS、HA、FT——集群调度是vCenter最核心的价值所在。</div>
+        </div>
+        <div class="golden-quote-item">
+          <div class="golden-quote-num">11</div>
+          <div class="golden-quote-text">行业方案的设计需要跨界融合——"云网端"一体化是提升方案价值的重要方向。</div>
+        </div>
+    </div>
+  </div>
+
+<h2 class="section-title">🏗️ 技术体系概览</h2>
     <div style="color: var(--text-secondary); font-size: 15px; line-height: 1.9;">
       <h3>3.1 计算虚拟化：私有云的算力基座</h3>
 <p>计算虚拟化是私有云的技术起点，也是整个云平台的算力基座。本书第3章以VMware ESXi为载体，系统介绍了计算虚拟化的实现原理和部署方法。深入理解ESXi的技术本质，是掌握整个私有云架构的第一步。</p>
