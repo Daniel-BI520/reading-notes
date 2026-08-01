@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>《强势》· 精华解读</title>
+<link rel="stylesheet" href="../annotation.css">
+<style>
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --primary: #9f1239;
+    --primary-light: #e11d48;
+    --primary-dark: #881337;
+    --primary-darker: #4c0519;
+    --accent: #fb7185;
+    --accent-light: #fff1f2;
+    --bg: #fff5f5;
+    --bg-card: #ffffff;
+    --text: #4c0519;
+    --text-secondary: #881337;
+    --text-light: #be123c;
+    --border: #fecdd3;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.8;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+
+  .top-nav {
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .top-nav-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 12px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s;
+    font-weight: 500;
+  }
+  .back-link:hover { color: var(--primary-dark); transform: translateX(-2px); }
+
+  .hero {
+    background: linear-gradient(135deg, #4c0519 0%, #881337 30%, #9f1239 60%, #be123c 100%);
+    color: white;
+    padding: 60px 0 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: pulse 8s ease-in-out infinite;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    left: -20%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: pulse 10s ease-in-out infinite reverse;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.1); opacity: 1; }
+  }
+  .hero .container { position: relative; z-index: 1; }
+  .book-tag {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.9);
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 18px;
+    border: 1px solid rgba(255,255,255,0.25);
+  }
+  .hero h1 {
+    font-size: 38px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 12px;
+    letter-spacing: -0.5px;
+  }
+  .hero .subtitle {
+    font-size: 19px;
+    opacity: 0.92;
+    margin-bottom: 28px;
+    font-weight: 300;
+  }
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    font-size: 14px;
+    opacity: 0.88;
+  }
+  .hero-meta span { display: flex; align-items: center; gap: 6px; }
+
+  .summary-card {
+    background: white;
+    border-radius: 16px;
+    padding: 32px;
+    margin-top: -40px;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+    margin-bottom: 48px;
+    border: 1px solid var(--border);
+  }
+  .summary-card h2 {
+    font-size: 20px;
+    color: var(--primary-dark);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .summary-card p {
+    color: var(--text-secondary);
+    line-height: 1.9;
+    margin-bottom: 16px;
+    font-size: 15px;
+  }
+  .summary-card strong { color: var(--primary-dark); }
+
+  .report-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 24px;
+    padding: 16px 20px;
+    background: linear-gradient(135deg, var(--bg), var(--accent-light));
+    border-radius: 12px;
+    text-decoration: none;
+    color: var(--primary-dark);
+    font-weight: 500;
+    font-size: 14px;
+    transition: all 0.2s;
+    border: 1px solid rgba(0,0,0,0.05);
+  }
+  .report-link:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.1); }
+  .report-link .report-label { display: flex; align-items: center; gap: 10px; }
+  .report-link .report-icon { font-size: 20px; }
+  .report-link .report-title { font-weight: 600; }
+  .report-link .report-desc {
+    font-size: 12px;
+    color: var(--text-secondary);
+    font-weight: normal;
+    margin-top: 2px;
+  }
+  .report-link .report-arrow {
+    font-size: 16px;
+    opacity: 0.6;
+    transition: transform 0.2s;
+  }
+  .report-link:hover .report-arrow { transform: translateX(4px); opacity: 1; }
+
+  .section { margin-bottom: 56px; }
+  .section-title {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--primary-dark);
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 3px solid var(--primary);
+    display: inline-block;
+  }
+
+  .subsection { margin-bottom: 36px; }
+  .subsection-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 16px;
+    padding-left: 14px;
+    border-left: 4px solid var(--accent);
+  }
+  .section p { margin-bottom: 14px; color: var(--text-secondary); }
+
+  blockquote {
+    background: linear-gradient(135deg, var(--bg), var(--accent-light));
+    border-left: 4px solid var(--accent);
+    padding: 16px 20px;
+    border-radius: 0 12px 12px 0;
+    margin: 20px 0;
+    color: var(--text-secondary);
+    font-style: italic;
+    font-size: 14px;
+  }
+  blockquote strong { font-style: normal; color: var(--primary-dark); }
+
+  .quote-card {
+    background: linear-gradient(135deg, var(--bg), var(--accent-light));
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin: 20px 0;
+    position: relative;
+  }
+  .quote-card::before {
+    content: '"';
+    position: absolute;
+    top: 8px;
+    left: 20px;
+    font-size: 60px;
+    color: rgba(0,0,0,0.08);
+    font-family: Georgia, serif;
+    line-height: 1;
+  }
+  .quote-card p {
+    position: relative;
+    z-index: 1;
+    color: var(--primary-dark);
+    font-size: 15px;
+    line-height: 1.8;
+    margin: 0;
+    padding-left: 20px;
+  }
+  .quote-card .quote-source {
+    margin-top: 10px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    text-align: right;
+    font-style: italic;
+  }
+
+  .method-card {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    margin: 20px 0;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    border-top: 4px solid var(--primary);
+    transition: box-shadow 0.2s;
+  }
+  .method-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+  .method-card h5 {
+    font-size: 17px;
+    color: var(--primary-dark);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .method-card ul { list-style: none; padding: 0; }
+  .method-card li {
+    padding: 8px 0;
+    padding-left: 28px;
+    position: relative;
+    color: var(--text-secondary);
+    font-size: 14px;
+    line-height: 1.7;
+  }
+  .method-card li::before {
+    content: '◆';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 12px;
+    top: 11px;
+  }
+
+  .key-points {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 16px;
+    margin-top: 24px;
+  }
+  .key-point {
+    background: linear-gradient(135deg, var(--bg), var(--accent-light));
+    padding: 18px 20px;
+    border-radius: 12px;
+    border-left: 4px solid var(--primary);
+    transition: transform 0.2s;
+  }
+  .key-point:hover { transform: translateY(-2px); }
+  .key-point h4 {
+    font-size: 14px;
+    color: var(--primary-dark);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .key-point p {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  .insight-list { list-style: none; padding: 0; }
+  .insight-item {
+    background: white;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 14px;
+    border-left: 4px solid var(--primary);
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    transition: transform 0.2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .insight-item:hover { transform: translateX(4px); }
+  .insight-num {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 16px;
+  }
+  .insight-content h5 {
+    font-size: 16px;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .insight-content p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  .highlight {
+    background: linear-gradient(120deg, #fecdd3 0%, #fda4af 100%);
+    background-repeat: no-repeat;
+    background-size: 100% 40%;
+    background-position: 0 85%;
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  .conclusion {
+    background: linear-gradient(135deg, #4c0519 0%, #881337 30%, #9f1239 60%, #be123c 100%);
+    color: white;
+    border-radius: 16px;
+    padding: 40px;
+    margin-top: 48px;
+    margin-bottom: 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .conclusion::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .conclusion .container-inner { position: relative; z-index: 1; }
+  .conclusion h2 { font-size: 24px; margin-bottom: 20px; }
+  .conclusion p { line-height: 2; opacity: 0.95; margin-bottom: 16px; color: white; }
+  .conclusion .final-quote {
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    font-style: italic;
+    opacity: 0.9;
+    text-align: right;
+  }
+
+  .thought-section {
+    background: white;
+    border-radius: 16px;
+    padding: 32px;
+    margin-bottom: 48px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    border: 2px dashed var(--primary-light);
+  }
+  .thought-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  .thought-header h3 {
+    color: var(--primary-dark);
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .thought-btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 9px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s;
+    font-weight: 500;
+  }
+  .thought-btn:hover { background: var(--primary-dark); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+  .thought-content {
+    width: 100%;
+    min-height: 140px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    font-size: 14px;
+    line-height: 1.7;
+    resize: vertical;
+    font-family: inherit;
+    color: var(--text);
+    background: var(--bg);
+    transition: all 0.2s;
+  }
+  .thought-content:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: white;
+    box-shadow: 0 0 0 3px rgba(0,0,0,0.08);
+  }
+  .thought-hint {
+    font-size: 13px;
+    color: var(--text-light);
+    margin-top: 10px;
+    text-align: right;
+  }
+  .thought-prompts { margin-bottom: 16px; display: flex; flex-wrap: wrap; gap: 8px; }
+  .thought-prompt {
+    font-size: 12px;
+    padding: 6px 12px;
+    background: var(--bg);
+    color: var(--primary-dark);
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+  }
+  .thought-prompt:hover { background: var(--primary); color: white; }
+
+  .presales-section {
+    background: white;
+    border-radius: 16px;
+    padding: 32px;
+    margin-bottom: 48px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    border: 2px solid var(--primary);
+    position: relative;
+  }
+  .presales-badge {
+    position: absolute;
+    top: -14px;
+    left: 24px;
+    background: var(--primary);
+    color: white;
+    padding: 4px 16px;
+    border-radius: 16px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .presales-section h3 {
+    color: var(--primary-dark);
+    font-size: 20px;
+    margin-bottom: 20px;
+    margin-top: 8px;
+  }
+  .presales-section h4 {
+    color: var(--text);
+    font-size: 16px;
+    margin: 20px 0 10px;
+  }
+  .presales-section p {
+    color: var(--text-secondary);
+    font-size: 14px;
+    line-height: 1.8;
+    margin-bottom: 10px;
+  }
+  .presales-section ul {
+    color: var(--text-secondary);
+    font-size: 14px;
+    line-height: 1.8;
+    padding-left: 20px;
+    margin: 10px 0;
+  }
+  .presales-section li { margin-bottom: 6px; }
+  .presales-section strong { color: var(--primary-dark); }
+
+  .footer {
+    text-align: center;
+    padding: 40px 0;
+    color: var(--text-light);
+    font-size: 13px;
+    border-top: 1px solid var(--border);
+    background: white;
+  }
+  .footer p { margin: 4px 0; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 14px;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+  th {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+    padding: 14px 16px;
+    text-align: left;
+    font-weight: 600;
+  }
+  td { padding: 12px 16px; border-bottom: 1px solid var(--border); color: var(--text-secondary); }
+
+  /* 原书金句板块 */
+  .golden-quotes-section {
+    margin-bottom: 40px;
+  }
+  .section-desc {
+    color: var(--text-secondary);
+    font-size: 14px;
+    margin-bottom: 20px;
+    padding-left: 4px;
+  }
+  .golden-quotes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .golden-quote-item {
+    background: linear-gradient(135deg, #9f123910, #9f123918);
+    border-left: 4px solid #9f1239;
+    border-radius: 0 10px 10px 0;
+    padding: 14px 16px 14px 18px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    transition: all 0.25s ease;
+  }
+  .golden-quote-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px #9f123922;
+    background: linear-gradient(135deg, #9f123918, #9f123925);
+  }
+  .golden-quote-num {
+    width: 26px;
+    height: 26px;
+    min-width: 26px;
+    background: linear-gradient(135deg, #9f1239, #9f1239dd);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .golden-quote-text {
+    font-size: 13.5px;
+    line-height: 1.75;
+    color: var(--text);
+  }
+
+  @media (max-width: 768px) {
+    .hero h1 { font-size: 28px; }
+    .hero .subtitle { font-size: 16px; }
+    .section-title { font-size: 22px; }
+    .summary-card, .presales-section, .thought-section { padding: 24px; }
+    .conclusion { padding: 28px; }
+    .golden-quotes-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="top-nav-inner">
+    <a href="../index.html" class="back-link">← 返回书架</a>
+    <button id="likeBtn" onclick="toggleLike()" style="background: none; border: none; cursor: pointer; font-size: 16px; display: flex; align-items: center; gap: 4px; padding: 4px 8px; border-radius: 8px; transition: all 0.2s;">
+      <span id="likeIcon">🤍</span>
+      <span id="likeCount" style="font-size: 13px; color: var(--text-secondary);">0</span>
+    </button>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container">
+    <span class="book-tag">💼 商业方法论 · 第15本</span>
+    <h1>《强势》</h1>
+    <p class="subtitle">如何在工作、恋爱和人际交往中快速取得主导权<br>——售前工程师/技术管理者的强势训练手册</p>
+    <div class="hero-meta">
+      <span>✍️ 曼纽尔·J·史密斯（Manuel J. Smith, Ph.D.）</span>
+      <span>📅 1975年出版 · 畅销近50年</span>
+      <span>📖 全球销量千万+</span>
+      <span>⭐ 断言式训练奠基之作</span>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+
+  <div class="summary-card">
+    <h2>📖 一句话总结</h2>
+    <p>《强势》的核心洞见是：<strong>你是自己行为的最终评判者，没有人有权通过制造焦虑、无知感或负罪感来操控你</strong>。学会用语言而非争斗或逃避来维护自己的权利，是获得心理自由和职业尊严的核心能力。</p>
+    <p>对售前工程师而言，这本书的价值远超一般心理自助读物。传统"客户就是上帝"心态，恰恰是操控的温床。从"老好人售前"到"专业强势售前"的转变，本质上是从"由他人定义价值"到"自我定义专业尊严"的跃迁。<strong>职场中的大部分困境，不是因为沟通不够巧妙，而是因为你放弃了自己的基本权利。</strong></p>
+    
+    <a href="book_015_report.html" class="report-link">
+      <div class="report-label">
+        <span class="report-icon">📑</span>
+        <div>
+          <div class="report-title">阅读完整深度研报</div>
+          <div class="report-desc">9大章节 · 约3.6万字 · 十大法则+七类技巧+12个场景话术模板</div>
+        </div>
+      </div>
+      <span class="report-arrow">→</span>
+    </a>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">🎯 三个核心理念</h2>
+    
+    <div class="insight-list">
+      <div class="insight-item">
+        <div class="insight-num">1</div>
+        <div class="insight-content">
+          <h5>操控的本质是剥夺你的"自我裁判权"</h5>
+          <p>所有心理操控——职场压榨、情感绑架、商业谈判施压——底层机制高度一致，都通过三种情绪杠杆：<strong>焦虑、无知感和负罪感</strong>。操控者创造"外部准则"来审判你的行为，让你怀疑自己的判断。破解操控的第一步，就是重新夺回"我是我自己行为的最终裁判"这一基本权利。</p>
+        </div>
+      </div>
+      <div class="insight-item">
+        <div class="insight-num">2</div>
+        <div class="insight-content">
+          <h5>强势不是攻击，是守住自己</h5>
+          <p>强势（assertiveness）不是攻击性（aggressiveness），也不是被动性（passiveness），而是介于两者之间的第三种状态——<strong>清晰、直接、坚定地表达自己的需求和边界，同时尊重对方的权利</strong>。温和但坚定地守住底线，不解释、不辩护、不道歉，只是不断重复你的立场。</p>
+        </div>
+      </div>
+      <div class="insight-item">
+        <div class="insight-num">3</div>
+        <div class="insight-content">
+          <h5>你不需要为自己的选择向任何人道歉</h5>
+          <p>全书最反直觉也最具解放性的观点：<strong>一旦你开始解释和辩护，你就已经把裁判权交给了对方</strong>。只要你给出一个理由，对方就可以反驳这个理由。而强势的做法是：不给出理由，只是平静地陈述你的决定。区分"沟通"和"审判"——当对方在用"为什么"作为武器时，最聪明的做法就是拒绝进入辩论战场。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 原书金句 -->
+  <div class="section golden-quotes-section">
+    <h2 class="section-title">💎 原书金句</h2>
+    <p class="section-desc">十大强势权利中的核心论述，值得反复品味与实践。</p>
+    <div class="golden-quotes-grid">
+      <div class="golden-quote-item">
+        <div class="golden-quote-num">1</div>
+        <div class="golden-quote-text">不论用什么方式，只要有人限制你决断自己行事的权力，那么他就是在操控你。</div>
+      </div>
+      <div class="golden-quote-item">
+        <div class="golden-quote-num">2</div>
+        <div class="golden-quote-text">你有权坚持自己的行为、想法和情感，并对产生的一切后果负责。</div>
+      </div>
+      <div class="golden-quote-item">
+        <div class="golden-quote-num">3</div>
+        <div class="golden-quote-text">坚持你要做的，不必解释。给出理由来为某个观点辩护，与给出理由来攻击那个观点一样，都是操控性的。</div>
+      </div>
+      <div class="golden-quote-item">
+        <div class="golden-quote-num">4</div>
+        <div class="golden-quote-text">帮不到别人，也不用内疚。如果你不承认自己有权选择只对自己负责，别人就会把他们的问题当作你的问题来操控你。</div>
+      </div>
+      <div class="golden-quote-item">
+        <div class="golden-quote-num">5</div>
+        <div class="golden-quote-text">你有权犯错——并为错误负责。犯错是人的正常状态，关键是为后果负责，而非接受附加的指责和羞辱。</div>
+      </div>
+      <div class="golden-quote-item">
+        <div class="golden-quote-num">6</div>
+        <div class="golden-quote-text">你有权说"我不知道"。敢于承认无知恰恰是自信和专业的表现。</div>
+      </div>
+      <div class="golden-quote-item">
+        <div class="golden-quote-num">7</div>
+        <div class="golden-quote-text">你有权在应对他人之前，独立于他人的善意。你不需要先获得别人的好感，才有资格维护自己的权利。</div>
+      </div>
+      <div class="golden-quote-item">
+        <div class="golden-quote-num">8</div>
+        <div class="golden-quote-text">你有权做出"不合逻辑"的决定。你的决定不需要在每一个细节上都"合理"，你可以凭感觉做事。</div>
+      </div>
+      <div class="golden-quote-item">
+        <div class="golden-quote-num">9</div>
+        <div class="golden-quote-text">你有权说"我不明白"。澄清是专业的表现，不是无能的表现。</div>
+      </div>
+      <div class="golden-quote-item">
+        <div class="golden-quote-num">10</div>
+        <div class="golden-quote-text">你有权说"我不在乎"。强势不是什么都要管、什么都要赢，而是知道什么才重要，并把精力集中在那里。</div>
+      </div>
+      <div class="golden-quote-item">
+        <div class="golden-quote-num">11</div>
+        <div class="golden-quote-text">语言上强势最重要的方面，就是坚持不懈，反复说出你想要的，而不生气、不恼怒、不大声。</div>
+      </div>
+      <div class="golden-quote-item">
+        <div class="golden-quote-num">12</div>
+        <div class="golden-quote-text">只要觉得不会损及你的自尊，向对方提出可行的折中办法，都是合理的。但若最终目标涉及自尊，就不可能达成任何折中。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">🧩 十大强势法则速览</h2>
+    
+    <table>
+      <tr><th>层次</th><th>法则</th><th>核心命题</th></tr>
+      <tr><td>基石层</td><td>法则一</td><td>你是自己行为的最终裁判</td></tr>
+      <tr><td rowspan="2">防御层</td><td>法则二</td><td>坚持你要做的，不必解释</td></tr>
+      <tr><td>法则三</td><td>帮不到别人，也不用内疚</td></tr>
+      <tr><td rowspan="3">弹性层</td><td>法则四</td><td>你有权改变想法</td></tr>
+      <tr><td>法则五</td><td>犯错不可怕，但要承担后果</td></tr>
+      <tr><td>法则六</td><td>你有权说"我不知道"</td></tr>
+      <tr><td rowspan="4">关系层</td><td>法则七</td><td>不必刻意讨好</td></tr>
+      <tr><td>法则八</td><td>你有权做出"不合逻辑"的决定</td></tr>
+      <tr><td>法则九</td><td>你有权说"我不明白"</td></tr>
+      <tr><td>法则十</td><td>你有权说"我不在乎"</td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">🛡️ 七类强势技巧速览</h2>
+    
+    <div class="key-points">
+      <div class="key-point">
+        <h4>🔁 破唱片法</h4>
+        <p>像坏了的唱片一样，无论对方说什么，都平静地、不断重复你的核心立场。不解释、不辩论、不生气。</p>
+        <p style="margin-top:8px;"><strong>适用：</strong>客户压价、不合理要求、反复纠缠</p>
+      </div>
+      <div class="key-point">
+        <h4>🌫️ 迷雾法</h4>
+        <p>像雾一样"接住"对方的批评——承认其中可能有一些道理，但保留自己判断和行动的权利。一拳打在棉花上。</p>
+        <p style="margin-top:8px;"><strong>适用：</strong>应对批评指责、情绪化攻击</p>
+      </div>
+      <div class="key-point">
+        <h4>✅ 否定决断法</h4>
+        <p>直接、坦然地承认自己的缺点或错误——是的，我确实如此。不辩解、不找借口、<strong>无需道歉</strong>。当你对自己的缺点不感到羞耻时，别人就无法用这些缺点来伤害你。</p>
+        <p style="margin-top:8px;"><strong>适用：</strong>被指出错误、缺点被攻击</p>
+      </div>
+      <div class="key-point">
+        <h4>❓ 否定询问法</h4>
+        <p>主动追问批评的细节——"具体哪里不好？""能不能举例？"——把模糊的指责变成具体的讨论。如果批评站不住脚，对方自己会词穷。</p>
+        <p style="margin-top:8px;"><strong>适用：</strong>"你方案不行""你态度有问题"</p>
+      </div>
+      <div class="key-point">
+        <h4>🪞 自我表露法</h4>
+        <p>主动、坦诚地谈论自己的情况——想法、感受、缺点、担忧。当你主动暴露自己时，你就掌握了主动权，操控空间被大幅压缩。</p>
+        <p style="margin-top:8px;"><strong>适用：</strong>建立信任、化解猜疑、降低防御</p>
+      </div>
+      <div class="key-point">
+        <h4>📡 自由信息法</h4>
+        <p>从对方的话语中捕捉"自由信息"——兴趣、需求、价值观的线索——顺着对方兴趣展开对话，打破"自说自话"模式。</p>
+        <p style="margin-top:8px;"><strong>适用：</strong>需求挖掘、建立关系、了解底线</p>
+      </div>
+      <div class="key-point">
+        <h4>🤝 可行折中法</h4>
+        <p>区分"核心问题"和"可妥协问题"。判断标准：<strong>自尊是否受损？</strong>核心问题坚决不让，非核心问题灵活处理，且让步必须有交换。</p>
+        <p style="margin-top:8px;"><strong>适用：</strong>价格谈判、需求变更、跨部门协调</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">💡 六个关键洞察</h2>
+    
+    <div class="insight-list">
+      <div class="insight-item">
+        <div class="insight-num">1</div>
+        <div class="insight-content">
+          <h5>操控的三板斧：焦虑、无知感、负罪感</h5>
+          <p>所有操控都通过这三种情感杠杆运作。焦虑让你来不及理性思考；无知感让你觉得自己"不够好"从而服从"懂的人"；负罪感让你觉得"你有责任"从而被迫"赎罪"。识别这三种杠杆，是反操控的第一步。</p>
+        </div>
+      </div>
+      <div class="insight-item">
+        <div class="insight-num">2</div>
+        <div class="insight-content">
+          <h5>"辩解陷阱"：一旦解释，就输了</h5>
+          <p>你给出的每一个理由都是对方可以进攻的抓手。一旦你开始辩解，你就默认了对方质疑的合理性，对话主动权立刻转移。用"陈述"代替"解释"——陈述你的决定，而不是证明你的"正确性"。</p>
+        </div>
+      </div>
+      <div class="insight-item">
+        <div class="insight-num">3</div>
+        <div class="insight-content">
+          <h5>边界感的本质：区分"我的事"和"你的事"</h5>
+          <p>边界清晰的人知道：我的情绪我负责，你的情绪你负责。边界模糊的人则为别人的情绪过度负责。区分"选择帮忙"和"有义务帮忙"——前者是有尊严的付出，后者是被道德绑架。</p>
+        </div>
+      </div>
+      <div class="insight-item">
+        <div class="insight-num">4</div>
+        <div class="insight-content">
+          <h5>讨好型人格的悖论：越讨好越不被尊重</h5>
+          <p>客户更尊重有原则、有底线的供应商，而不是什么都答应的"好好先生"。阿伦森效应表明：一开始就建立"专业但有原则"的形象，偶尔通融会让人觉得"够意思"；反过来则每一次拒绝都让人觉得"变了"。</p>
+        </div>
+      </div>
+      <div class="insight-item">
+        <div class="insight-num">5</div>
+        <div class="insight-content">
+          <h5>"自尊检验法"：判断底线是否被触碰</h5>
+          <p>可行折中法的核心判断标准："如果在这件事上让步，我的自尊会受损吗？"答案是"会"，就是核心问题，寸步不让；答案是"不会"，就是可妥协问题，可以灵活。这条标准简洁有力，适用于所有谈判场景。</p>
+        </div>
+      </div>
+      <div class="insight-item">
+        <div class="insight-num">6</div>
+        <div class="insight-content">
+          <h5>强势的底气来自"选择的资本"</h5>
+          <p>最强的强势，不是技巧，而是你有选择的资本。你越有价值，就越不需要讨好别人。把精力从"如何让别人喜欢我"转向"如何让自己更有价值"——当你是不可替代的专家时，别人自然尊重你的意见。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="presales-section">
+    <span class="presales-badge">🎯 售前工程师强势实战</span>
+    
+    <h3>12个高频场景精华话术</h3>
+    
+    <div class="key-points">
+      <div class="key-point">
+        <h4>💰 客户压价</h4>
+        <p><strong>核心：</strong>不谈成本谈价值。给三个方案（标准版/精简版/增值版）让客户选，而不是在原价上打折。降价必须有交换——每一次让步都换回一些东西。</p>
+      </div>
+      <div class="key-point">
+        <h4>📝 需求变更</h4>
+        <p><strong>核心：</strong>用否定询问法了解真实需求。合同范围外必须走变更流程——"可以做，加钱加工期"。提供不增加成本的替代方案作为折中。</p>
+      </div>
+      <div class="key-point">
+        <h4>⏰ 不合理加班</h4>
+        <p><strong>核心：</strong>直接陈述，不找理由，不道歉。用破唱片法重复立场。提供替代方案（可行折中法）——工作日每天多一小时，而不是周末全天。</p>
+      </div>
+      <div class="key-point">
+        <h4>🔄 同事甩锅</h4>
+        <p><strong>核心：</strong>保持冷静，不被情绪带偏。用迷雾法接住指责，否定询问法逼出具体内容，书面留痕明确责任。先解决问题，再复盘原因。</p>
+      </div>
+      <div class="key-point">
+        <h4>📋 合同谈判</h4>
+        <p><strong>核心：</strong>作为甲方，你有最终决定权。多问问题摸底，用破唱片法守底线，用可行折中法达成双赢。强势不是"我出钱我是大爷"，而是清晰而坚定。</p>
+      </div>
+      <div class="key-point">
+        <h4>🤝 跨部门协作</h4>
+        <p><strong>核心：</strong>你推动的是"事"不是"人"。用"我们"代替"你"，同步进展而非催进度。该升级就升级，带着方案去求助，不是带情绪去告状。</p>
+      </div>
+      <div class="key-point">
+        <h4>😤 客户投诉</h4>
+        <p><strong>核心：</strong>先处理情绪再处理问题。用迷雾法+否定决断法接住情绪，否定询问法了解细节，自我表露法给出方案。主动提供补偿展现诚意。</p>
+      </div>
+      <div class="key-point">
+        <h4>📊 项目延期</h4>
+        <p><strong>核心：</strong>我的责任我承担，别人的责任我不接。否定决断法承认自己的部分，自我表露法说明全貌，可行折中法给出补救方案。先解决问题再复盘。</p>
+      </div>
+      <div class="key-point">
+        <h4>🎤 技术评审被质疑</h4>
+        <p><strong>核心：</strong>先肯定对方"您提的这个点非常关键"（迷雾法），再追问深层担忧（否定询问法），最后说出你的考量（自我表露法）。赢了辩论输了项目是最亏的买卖。</p>
+      </div>
+      <div class="key-point">
+        <h4>📈 指标不合理</h4>
+        <p><strong>核心：</strong>用数据和事实说话，不用情绪和感觉。先接住目标，再提出合理预期和资源需求。"目标我接，但资源你也要给"。</p>
+      </div>
+      <div class="key-point">
+        <h4>🗡️ PUA式沟通</h4>
+        <p><strong>核心：</strong>识别PUA，建立稳定自我价值感。用迷雾法化解贬低——"您觉得方案还有提升空间"（不承认"不专业"的定性）。黄金不会因为有人说它是石头就变成石头。</p>
+      </div>
+      <div class="key-point">
+        <h4>🏢 内部资源争夺</h4>
+        <p><strong>核心：</strong>争取资源不是"闹"，是"摆事实讲收益"。先展示成绩和价值，再提出需求和预期回报。分步争取——先要一部分，做出成绩后再要下一部分。</p>
+      </div>
+    </div>
+
+    <h4>🔑 身份转变四步法</h4>
+    <ul>
+      <li><strong>第一步：重新定义"专业"</strong>——专业不是"让客户满意"，是"你有清晰的判断和坚定的原则，对自己的专业领域有最终话语权"</li>
+      <li><strong>第二步：接受"被讨厌"的勇气</strong>——你需要的不是"被喜欢"，而是"被尊重"。获得尊重的方式从来不是讨好，而是有原则、有底线、有实力</li>
+      <li><strong>第三步：从小事练起</strong>——从外卖送晚要求赔偿、开会被打断说"等我说完"开始，给"强势肌肉"增加力量</li>
+      <li><strong>第四步：建立价值锚点</strong>——把精力从讨好转向价值提升，当你成为不可替代的专家时，强势不需要刻意</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">🤔 我的三点深度思考</h2>
+    
+    <div class="insight-list">
+      <div class="insight-item">
+        <div class="insight-num">1</div>
+        <div class="insight-content">
+          <h5>甲方乙方，到底是谁求谁？</h5>
+          <p>甲乙双方是平等的交换关系——甲方出钱，乙方出解决方案，双方各取所需。作为专业人士，你对你的专业领域有最终判断权。客户可以选择买不买，但不能要求你违背专业判断做事。你越把自己放在"专家"的位置上，客户越尊重你；你越把自己放在"服务员"的位置上，客户越不把你当回事。</p>
+        </div>
+      </div>
+      <div class="insight-item">
+        <div class="insight-num">2</div>
+        <div class="insight-content">
+          <h5>职业尊严的价格是多少？</h5>
+          <p>"如果在这件事上让步，你的自尊会受损吗？"——这个问题的答案就是你的底线。底线之上的都可以谈，底线之下的没得谈。大多数时候，"退一步海阔天空"实际上是"退一步得寸进尺"。底线越清晰，别人越尊重你。守住底线不仅关乎尊严，也关乎业务。</p>
+        </div>
+      </div>
+      <div class="insight-item">
+        <div class="insight-num">3</div>
+        <div class="insight-content">
+          <h5>技术人的价值，是被定义的，还是自己挣来的？</h5>
+          <p>技术人的价值从来不是"你会不会写代码"，而是"你能不能解决问题"。你的价值不是别人定义的，是一个项目一个项目做出来的，是一本书一本书学出来的。<strong>你不定义自己，就会被别人定义。你不挣来自己的价值，就会等着别人施舍。</strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="conclusion">
+    <div class="container-inner">
+      <h2>🌟 写在最后</h2>
+      <p>真正的强势，是<strong>温柔且有棱角</strong>——待人可以温和，但底线必须清晰；说话可以客气，但原则绝不退让；做事可以灵活，但方向绝不动摇。</p>
+      <p>就像水一样——水是最柔软的东西，但水又能穿石。它不跟你硬碰硬，但它始终知道自己要往哪里流，谁也挡不住。</p>
+      <p>《强势》不是在教你"怎么变凶"，而是在帮你<strong>找回你本来就有的力量</strong>。你本来就有权利判断自己的行为，你本来就有资格为自己的选择负责，你本来就有能力守住自己的边界。</p>
+      <div class="final-quote">"你有权成为自己行为的最终裁判。" —— 曼纽尔·J·史密斯</div>
+    </div>
+  </div>
+
+  <a href="book_015_report.html" class="report-link" style="margin-bottom: 48px; display: flex;">
+    <div class="report-label">
+      <span class="report-icon">📑</span>
+      <div>
+        <div class="report-title">阅读完整深度研报</div>
+        <div class="report-desc">9大章节 · 约3.6万字 · 十大法则+七类技巧+12个场景话术模板</div>
+      </div>
+    </div>
+    <span class="report-arrow">→</span>
+  </a>
+
+  <div class="thought-section">
+    <div class="thought-header">
+      <h3>✍️ 我的读书思考</h3>
+      <button class="thought-btn" onclick="saveThought()">保存</button>
+    </div>
+    <div class="thought-prompts">
+      <button class="thought-prompt" onclick="insertPrompt('关于强势法则的职场应用，我认为...')">职场应用</button>
+      <button class="thought-prompt" onclick="insertPrompt('我最容易被操控的场景是...')">自我觉察</button>
+      <button class="thought-prompt" onclick="insertPrompt('对售前沟通方式的启发是...')">沟通启发</button>
+      <button class="thought-prompt" onclick="insertPrompt('我的底线和边界是...')">边界设定</button>
+    </div>
+    <textarea class="thought-content" id="thoughtInput" placeholder="写下你的思考、感悟、质疑... 所有内容保存在本地浏览器中"></textarea>
+    <div class="thought-hint">💾 自动保存到本地 · localStorage 存储</div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <p>🌱 《强势》· 精华解读</p>
+  <p>作者：曼纽尔·J·史密斯（Manuel J. Smith, Ph.D.）· 研读日期：2026-08-01</p>
+  <p style="margin-top: 8px; font-size: 12px;">© 2026 RootUser 的阅读空间</p>
+</div>
+
+<script>
+  const STORAGE_KEY = 'book_015_qiangshi_thought';
+  const thoughtInput = document.getElementById('thoughtInput');
+
+  function loadThought() {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) { thoughtInput.value = saved; }
+  }
+
+  function saveThought() {
+    const content = thoughtInput.value;
+    localStorage.setItem(STORAGE_KEY, content);
+    const btn = document.querySelector('.thought-btn');
+    const originalText = btn.textContent;
+    btn.textContent = '✓ 已保存';
+    btn.style.background = '#10b981';
+    setTimeout(() => {
+      btn.textContent = originalText;
+      btn.style.background = '';
+    }, 1500);
+  }
+
+  function insertPrompt(text) {
+    const current = thoughtInput.value;
+    if (current && !current.endsWith('\n')) {
+      thoughtInput.value = current + '\n\n' + text;
+    } else {
+      thoughtInput.value = current + text;
+    }
+    thoughtInput.focus();
+    thoughtInput.setSelectionRange(thoughtInput.value.length, thoughtInput.value.length);
+  }
+
+  let saveTimeout;
+  thoughtInput.addEventListener('input', () => {
+    clearTimeout(saveTimeout);
+    saveTimeout = setTimeout(() => {
+      localStorage.setItem(STORAGE_KEY, thoughtInput.value);
+    }, 1000);
+  });
+
+  loadThought();
+
+  // 点赞功能
+  function getBookKey() {
+    const path = window.location.pathname;
+    const filename = path.split('/').pop().replace('.html', '');
+    return 'book_like_' + filename;
+  }
+
+  function initLike() {
+    const key = getBookKey();
+    const data = JSON.parse(localStorage.getItem(key) || '{"count": 0, "liked": false}');
+    updateLikeUI(data.count, data.liked);
+  }
+
+  function toggleLike() {
+    const key = getBookKey();
+    let data = JSON.parse(localStorage.getItem(key) || '{"count": 0, "liked": false}');
+    
+    if (data.liked) {
+      data.count = Math.max(0, data.count - 1);
+      data.liked = false;
+    } else {
+      data.count += 1;
+      data.liked = true;
+    }
+    
+    localStorage.setItem(key, JSON.stringify(data));
+    updateLikeUI(data.count, data.liked);
+  }
+
+  function updateLikeUI(count, liked) {
+    const icon = document.getElementById('likeIcon');
+    const countEl = document.getElementById('likeCount');
+    const btn = document.getElementById('likeBtn');
+    
+    if (icon) { icon.textContent = liked ? '❤️' : '🤍'; }
+    if (countEl) { countEl.textContent = count; }
+    if (btn && liked) {
+      btn.classList.add('liked');
+      setTimeout(() => btn.classList.remove('liked'), 300);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', initLike);
+  if (document.readyState !== 'loading') { initLike(); }
+</script>
+<script src="../annotation.js"></script>
+<script src="../toc.js"></script>
+</body>
+</html>
