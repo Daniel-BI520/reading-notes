@@ -47,14 +47,15 @@
       return true;
     }
 
-    // 给标题加id（确保不重复且稳定）
+    // 给标题加data-toc-id（统一生成标准ID，避免数字开头/特殊字符导致querySelector失效）
+    // 注意：不能直接覆盖原id（可能被其他功能引用），改用data属性存跳转锚点
     let idCounter = 0;
     headings.forEach(function(item) {
-      if (!item.el.id) {
-        const text = item.el.textContent.trim();
-        const slug = text.replace(/[^\w\u4e00-\u9fa5]/g, '').substring(0, 20);
-        item.el.id = 'toc-' + (slug || 'sec') + '-' + idCounter++;
-      }
+      const text = item.el.textContent.trim();
+      const slug = text.replace(/[^\w\u4e00-\u9fa5]/g, '').substring(0, 20);
+      const tocId = 'toc-sec-' + (slug || 'sec') + '-' + idCounter++;
+      item.el.setAttribute('data-toc-id', tocId);
+      item.tocId = tocId;
     });
 
     // 创建侧边栏
@@ -81,9 +82,10 @@
       const li = document.createElement('li');
       li.className = 'auto-toc-item auto-toc-level-' + item.level;
       const a = document.createElement('a');
-      a.href = '#' + item.el.id;
+      a.href = '#' + item.tocId;
       a.className = 'auto-toc-link';
       a.dataset.index = idx;
+      a.dataset.tocTarget = item.tocId;
       a.textContent = item.el.textContent.trim();
       li.appendChild(a);
       list.appendChild(li);
@@ -319,9 +321,9 @@
     function handleTocClick(e) {
       e.preventDefault();
       e.stopPropagation();
-      const href = this.getAttribute('href');
-      if (!href || !href.startsWith('#')) return;
-      const target = document.querySelector(href);
+      const tocTarget = this.getAttribute('data-toc-target');
+      if (!tocTarget) return;
+      const target = document.querySelector('[data-toc-id="' + tocTarget + '"]');
       if (!target) return;
 
       // 计算目标位置（考虑顶部导航等偏移）
@@ -332,6 +334,11 @@
         top: targetTop,
         behavior: 'smooth'
       });
+
+      // 更新URL hash（不触发滚动）
+      if (history.replaceState) {
+        history.replaceState(null, '', '#' + tocTarget);
+      }
 
       // 研报页：点击后自动收起目录
       if (isReportPage && sidebar.classList.contains('toc-collapsible')) {
@@ -378,7 +385,10 @@
 
     // 响应 hash 直接跳转
     if (window.location.hash) {
-      const target = document.querySelector(window.location.hash);
+      const hashVal = window.location.hash.substring(1);
+      // 优先用 data-toc-id 匹配
+      const target = document.querySelector('[data-toc-id="' + hashVal + '"]') ||
+                     document.getElementById(hashVal);
       if (target) {
         setTimeout(function() {
           const targetTop = target.getBoundingClientRect().top + window.scrollY - 80;
