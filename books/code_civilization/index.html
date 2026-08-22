@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>《代码的文明》· 精华解读</title>
+<link rel="stylesheet" href="../../annotation.css">
+<style>
+  :root {
+    --primary: #00d084; --primary-light: #33e0a0; --primary-dark: #00a86b;
+    --accent: #ff8a00; --accent-light: #ffaa33;
+    --bg: #f0f4f8; --bg-card: #ffffff;
+    --text: #1a1a2e; --text-secondary: #3a4a5e; --text-light: #8899aa;
+    --border: #dce4ec;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg); color: var(--text); line-height: 1.8; -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+  .top-nav {
+    background: rgba(10,22,40,0.95); backdrop-filter: blur(12px);
+    border-bottom: 1px solid #1a2d4a; position: sticky; top: 0; z-index: 100;
+  }
+  .top-nav-inner {
+    max-width: 900px; margin: 0 auto; padding: 12px 24px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .back-link {
+    color: var(--primary); text-decoration: none; font-size: 14px;
+    display: flex; align-items: center; gap: 6px; transition: all 0.2s; font-weight: 500;
+  }
+  .back-link:hover { color: var(--primary-light); transform: translateX(-2px); }
+  .like-btn {
+    background: none; border: 1px solid #2a3f5f; border-radius: 20px;
+    padding: 6px 14px; cursor: pointer; font-size: 14px; color: #aaa;
+    display: flex; align-items: center; gap: 4px; transition: all 0.2s;
+  }
+  .hero {
+    background: linear-gradient(135deg, #0a1628 0%, #0f2847 30%, #1a3a5c 55%, #0d4f3d 80%, #0a6b4f 100%);
+    color: white; padding: 70px 0 90px; position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: -30%; right: -5%;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(0,208,132,0.15) 0%, transparent 70%);
+    border-radius: 50%; animation: pulse 7s ease-in-out infinite;
+  }
+  .hero::after {
+    content: ''; position: absolute; bottom: -40%; left: -10%;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(255,138,0,0.08) 0%, transparent 70%);
+    border-radius: 50%; animation: pulse 9s ease-in-out infinite reverse;
+  }
+  @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.7; } 50% { transform: scale(1.15); opacity: 1; } }
+  .hero .container { position: relative; z-index: 1; }
+  .book-tag {
+    display: inline-block; background: rgba(0,208,132,0.15); color: #5fe8b8;
+    padding: 5px 14px; border-radius: 20px; font-size: 13px; font-weight: 500;
+    margin-bottom: 20px; border: 1px solid rgba(0,208,132,0.3);
+  }
+  .hero h1 {
+    font-size: 42px; font-weight: 800; line-height: 1.2;
+    margin-bottom: 14px; letter-spacing: -1px;
+  }
+  .hero h1 span { color: var(--primary); }
+  .hero .subtitle {
+    font-size: 19px; opacity: 0.85; margin-bottom: 30px;
+    font-weight: 300; max-width: 600px;
+  }
+  .hero-meta { display: flex; flex-wrap: wrap; gap: 20px; font-size: 14px; opacity: 0.8; }
+  .hero-meta span { display: flex; align-items: center; gap: 6px; }
+  .essence-content {
+    background: white; border-radius: 16px; padding: 48px 56px; margin-top: -45px;
+    position: relative; z-index: 2; box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+    margin-bottom: 48px; border: 1px solid var(--border);
+  }
+  .section-label {
+    display: inline-block; font-size: 12px; font-weight: 700;
+    letter-spacing: 2px; color: var(--primary); text-transform: uppercase; margin-bottom: 10px;
+  }
+  .essence-section-title {
+    font-size: 26px; font-weight: 700; color: #1a1a2e;
+    margin-bottom: 24px; padding-bottom: 12px;
+    border-bottom: 3px solid var(--primary); display: inline-block;
+  }
+  .essence-sub-title {
+    font-size: 19px; font-weight: 600; color: var(--text);
+    margin: 28px 0 14px; padding-left: 14px; border-left: 4px solid var(--primary);
+  }
+  .essence-content p {
+    color: var(--text-secondary); line-height: 1.9; margin-bottom: 14px; font-size: 15px;
+  }
+  .essence-content strong { color: var(--primary-dark); }
+  .essence-content ul { list-style: none; padding: 0; margin: 16px 0; }
+  .essence-content li {
+    padding: 8px 0; padding-left: 28px; position: relative;
+    color: var(--text-secondary); font-size: 14px; line-height: 1.7;
+  }
+  .essence-content li::before {
+    content: '◆'; position: absolute; left: 0;
+    color: var(--primary); font-size: 12px; top: 11px;
+  }
+  .essence-content hr { border: none; border-top: 1px solid var(--border); margin: 36px 0; }
+  .quotes-section { margin: 24px 0; }
+  .golden-quote {
+    background: linear-gradient(135deg, #0a1628 0%, #0f2847 100%);
+    color: #e0f0ea; padding: 22px 26px; border-radius: 12px;
+    margin: 14px 0; position: relative; border-left: 4px solid var(--primary);
+    font-size: 15px; line-height: 1.8;
+  }
+  .golden-quote .quote-mark {
+    color: var(--primary); font-size: 28px; font-weight: bold;
+    line-height: 0; vertical-align: -8px; margin: 0 4px; font-family: Georgia, serif;
+  }
+  .golden-quote strong { color: var(--primary-light); }
+  .action-card {
+    background: linear-gradient(135deg, #0a1628 0%, #0f2847 100%);
+    border-radius: 16px; padding: 32px; margin: 36px 0 20px;
+    color: white; border: 1px solid rgba(0,208,132,0.3);
+  }
+  .action-title {
+    font-size: 20px; font-weight: 700; margin-bottom: 20px; color: var(--primary);
+  }
+  .action-list p { color: #c0d0e0; font-size: 14px; line-height: 1.8; margin-bottom: 12px; }
+  .action-list strong { color: var(--primary-light); }
+  .report-link {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-top: 28px; padding: 18px 24px;
+    background: linear-gradient(135deg, #0a1628, #00d08422);
+    border-radius: 12px; text-decoration: none; color: white;
+    font-weight: 500; font-size: 15px; transition: all 0.2s;
+    border: 1px solid rgba(0,208,132,0.3);
+  }
+  .report-link:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,208,132,0.2); }
+  .report-link .report-label { display: flex; align-items: center; gap: 12px; }
+  .report-link .report-icon { font-size: 22px; }
+  .report-link .report-title { font-weight: 600; color: white; }
+  .report-link .report-desc { font-size: 12px; color: #aaa; font-weight: normal; margin-top: 3px; }
+  .report-link .report-arrow { font-size: 18px; color: var(--primary); transition: transform 0.2s; }
+  .report-link:hover .report-arrow { transform: translateX(4px); }
+  .thought-section { margin: 32px 0; }
+  .thought-box {
+    background: #f5f9f7; border-radius: 12px; padding: 24px; border: 1px solid var(--border);
+  }
+  .thought-box h3 { font-size: 17px; color: var(--text); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .thought-box textarea {
+    width: 100%; min-height: 100px; border: 1px solid var(--border); border-radius: 8px;
+    padding: 12px; font-family: inherit; font-size: 14px; line-height: 1.7;
+    resize: vertical; color: var(--text); background: white; transition: border-color 0.2s;
+  }
+  .thought-box textarea:focus { outline: none; border-color: var(--primary); }
+  .thought-actions { margin-top: 12px; display: flex; justify-content: flex-end; }
+  .thought-save-btn {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white; border: none; padding: 10px 24px;
+    border-radius: 8px; font-size: 14px; cursor: pointer; transition: all 0.2s;
+  }
+  .thought-save-btn:hover { opacity: 0.9; }
+  @media (max-width: 768px) {
+    .hero h1 { font-size: 30px; }
+    .hero { padding: 45px 0 65px; }
+    .essence-content { padding: 28px 20px; margin-top: -30px; }
+    .essence-section-title { font-size: 22px; }
+    .action-card { padding: 20px; }
+  }
+</style>
+</head>
+<body>
+  <nav class="top-nav">
+    <div class="top-nav-inner">
+      <a href="../../index.html" class="back-link">← 返回书架</a>
+      <button class="like-btn" id="likeBtn" onclick="toggleLike()">
+        <span id="likeIcon">🤍</span> <span id="likeCount">0</span>
+      </button>
+    </div>
+  </nav>
+  <section class="hero">
+    <div class="container">
+      <span class="book-tag">第26本 · 技术与专业 · 精华解读</span>
+      <h1>《<span>代码的文明</span>》</h1>
+      <p class="subtitle">编程语言如何改变世界</p>
+      <div class="hero-meta">
+        <span>✍️ 李杨 著</span>
+        <span>📖 六篇深度研报 · 4.2万字</span>
+        <span>🏷️ 七十年语言演进史</span>
+      </div>
+    </div>
+  </section>
+  <div class="container">
+    <div class="essence-content">
+      <div class="section-label">CORE INSIGHT</div>
+      <h2 class="essence-section-title">核心洞察</h2>
+      <p>李杨著《代码的文明：编程语言如何改变世界》（电子工业出版社，2026年3月，562页）系统梳理了编程语言自1950年代以来七十年的演进脉络。作者以十三年腾讯一线工程师的实战背景，用"多维度交叉分析"方法解读了四十余种语言的兴衰沉浮。</p>
+      <p><strong>本研报的三大核心发现：</strong></p>
+      <p><strong>第一</strong>，编程语言七十年发展史本质上是"自由—约束—新自由"的螺旋上升过程，每一次范式转移都是对前一代语言规模化痛点的工程回应，而非偶然的技术时尚更替。</p>
+      <p><strong>第二</strong>，当代语言版图正经历深刻分化——以Python为代表的胶水层语言与以Go、Rust为代表的系统层语言分工日益清晰，静态类型化浪潮已成为大型项目的确定性趋势。</p>
+      <p><strong>第三</strong>，对售前工程师而言，理解编程语言的演化逻辑比掌握某一门具体语言更重要，因为语言选型背后的权衡思维（性能vs安全、灵活vs可维护、表达力vs心智负担）与方案选型的思维框架高度同构。</p>
+
+      <hr>
+      <div class="section-label">CORE</div>
+      <h2 class="essence-section-title">核心概念精华</h2>
+      <h3 class="essence-sub-title">编程语言的本质：人与机器的契约</h3>
+<p>编程语言不是单纯的"沟通工具"，而是<strong>人与机器之间的契约</strong>——你写下精确的代码，计算机按约定一字不差地执行。这种精确性既是构建大型软件系统的基础，也要求人类将模糊的想法转化为形式化的表达。</p>
+<p>自然语言与编程语言的四大区别：<strong>模糊性vs精确性</strong>、<strong>描述性vs指令性</strong>、<strong>语法容错vs语法严格</strong>、<strong>线性vs结构化</strong>。理解这些区别，才能理解为什么编程难学——它不仅是学语法，更是学一种全新的思维方式。</p>
+      <h3 class="essence-sub-title">五大编程范式深度对比</h3>
+<p><strong>过程式编程</strong>——最朴素的起点，简单直观、贴近硬件，但难以应对复杂性。代表语言：C、FORTRAN。</p>
+<p><strong>结构化编程</strong>——通过顺序、选择、循环三种控制结构取代goto，是第一个真正应对"软件复杂性"的方法论。代表语言：Pascal。</p>
+<p><strong>面向对象编程</strong>——三十年的主流范式，封装、继承、多态三大特征，擅长建模现实世界。但近年来面临继承脆弱、过度设计、状态管理困难等反思。代表语言：Java、C++、Smalltalk。</p>
+<p><strong>函数式编程</strong>——从边缘到主流的回归，纯函数、不可变数据、一等公民函数，可推理性强、并发安全，但学习曲线陡峭。代表语言：Lisp、Haskell、Scala。</p>
+<p><strong>其他范式</strong>——逻辑式（Prolog）、声明式（SQL）、并发范式（Actor/CSP）等各有适用场景。</p>
+<p><strong>核心洞察：没有银弹，但有"最优解区间"</strong>。大多数编程问题用最简单的范式就足够解决了。现代语言的趋势是多范式融合。</p>
+      <h3 class="essence-sub-title">设计权衡三角：为什么不存在完美语言</h3>
+<p>编程语言设计本质上是多目标优化问题，三组核心矛盾构成"权衡三角"：</p>
+<p><strong>第一组：性能 vs 安全</strong>——C语言性能极强但安全风险高，Rust用所有权系统打破了这个权衡（编译期保证安全，运行时零开销），但代价是学习曲线陡峭。</p>
+<p><strong>第二组：灵活 vs 低心智负担</strong>——Perl/Ruby灵活但心智负担重，Go刻意限制特性数量（仅25个关键字），换来代码风格高度一致、阅读成本低。本质是写代码效率和读代码效率的权衡。</p>
+<p><strong>第三组：表达力 vs 可维护性</strong>——Haskell/Lisp表达力极强但可维护性差，Java/Go可维护性好但表达力有限。越高级的抽象，表达力越强，但学习成本越高。</p>
+<p>每门语言都是在三维空间中选一个点。没有"最好的"，只有"最适合场景的"。</p>
+
+      <hr>
+      <div class="section-label">HISTORY</div>
+      <h2 class="essence-section-title">七大时代速览</h2>
+      <h3 class="essence-sub-title">1950s 起源时代：高级语言的黎明</h3>
+<p>四巨头奠定四条基因链：<strong>FORTRAN</strong>→科学计算路线，<strong>Lisp</strong>→函数式与AI路线，<strong>ALGOL</strong>→算法描述与结构化路线（影响后世几乎所有命令式语言语法），<strong>COBOL</strong>→商业数据处理路线。</p>
+<p>FORTRAN证明了高级语言可以和手写汇编一样快，开启了整个高级语言时代。Lisp的S表达式、垃圾回收、递归等概念超前了几十年。ALGOL是"学院派理想主义"的代表——自身未成主流，但影响了所有后来者。</p>
+      <h3 class="essence-sub-title">1970s 系统时代：C语言与Unix革命</h3>
+<p>C语言 + Unix操作系统，是系统编程的基石。C语言简洁强大，直接操作内存，与硬件紧密结合，成为五十年来系统语言的王者。Pascal是结构化编程的教学典范。Smalltalk定义了纯面向对象的理想形态。</p>
+<p>这个时代确立了编程的基本范式：过程式、结构化、面向对象、函数式、逻辑式——五大范式全部登场。</p>
+      <h3 class="essence-sub-title">1990s 互联网时代：生产力大爆发</h3>
+<p><strong>Java</strong>——企业级计算的事实标准，"一次编写，到处运行"，JVM生态极其庞大。</p>
+<p><strong>JavaScript</strong>——浏览器的意外霸主，十天设计出来的语言，因占据Web生态位而成为世界上最流行的语言之一。从"玩具语言"到全栈语言的逆袭之路。</p>
+<p><strong>Python</strong>——"优雅、明确、简单"的设计哲学，在AI时代成为事实标准。成功秘诀是"平衡"——各维度都不差，整体很舒服。</p>
+      <h3 class="essence-sub-title">2010s至今 安全与AI时代</h3>
+<p><strong>Go</strong>——云原生时代的工程语言，"简单即生产力"，刻意减少特性，25个关键字，goroutine+channel的并发模型。Docker、Kubernetes等云原生核心工具都是Go写的。</p>
+<p><strong>Rust</strong>——安全与性能兼得的未来系统语言，所有权系统在编译期保证内存安全，"无畏并发"。正在改变系统编程格局，白宫推荐使用内存安全语言。</p>
+<p><strong>Mojo</strong>——AI计算的统一语言愿景，兼容Python语法，基于MLIR，目标是用一门语言统一AI计算全流程。</p>
+
+      <hr>
+      <div class="section-label">LANGUAGES</div>
+      <h2 class="essence-section-title">关键语言画像精选</h2>
+      <h3 class="essence-sub-title">C语言：系统编程的"通用语"</h3>
+<p>1972年诞生于贝尔实验室，与Unix共生。设计哲学：<strong>信任程序员，给他们最大的自由度</strong>。指针算术、手动内存管理、无边界检查——性能极致，但安全风险也极致。</p>
+<p>C语言的伟大在于它定义了"系统编程"这个领域。五十年来，操作系统内核、网络设备、嵌入式系统、数据库——几乎所有底层基础设施都是用C写的。</p>
+      <h3 class="essence-sub-title">Python：AI时代的通用胶水</h3>
+<p>1991年诞生，Guido van Rossum设计。设计哲学：<strong>优美胜于丑陋，明了胜于晦涩，简单胜于复杂，可读性很重要</strong>。</p>
+<p>Python的胜利不是性能的胜利，而是生态的胜利——数值计算生态（NumPy、SciPy）、深度学习框架（TensorFlow、PyTorch）、数据科学工具链、人才生态，全面领先。</p>
+<p>性能是最大痛点，但Python通常是"胶水"，真正的重活由C扩展完成。AI时代反而让Python的地位更加稳固。</p>
+      <h3 class="essence-sub-title">Go：云原生时代的工程语言</h3>
+<p>2009年Google发布，Ken Thompson + Rob Pike设计。设计哲学：<strong>简单即生产力、软件工程大于语言特性、少即是多</strong>。</p>
+<p>核心特性：goroutine轻量级协程、channel通道（CSP模型）、编译为单二进制文件、极快的编译速度、结构型接口。</p>
+<p>Go重新定义了"系统编程语言"的范围——有GC的语言也可以做系统级编程。云原生生态的核心工具几乎都是Go写的。</p>
+      <h3 class="essence-sub-title">Rust：安全与性能兼得的未来</h3>
+<p>2015年1.0发布，Mozilla赞助。设计哲学：<strong>无畏并发，零成本抽象，安全与性能兼得</strong>。</p>
+<p>核心创新：所有权系统+借用检查器，在编译期消灭内存安全问题，不需要GC，运行时零开销。这是编程语言设计的里程碑式突破。</p>
+<p>影响深远：Linux内核已支持Rust驱动，AWS/Cloudflare/Discord等在用Rust构建高性能服务，前端工具链Rust重写性能大幅提升。</p>
+
+      <hr>
+      <div class="section-label">PRESALES</div>
+      <h2 class="essence-section-title">IT售前工程师视角</h2>
+      <h3 class="essence-sub-title">技术选型的五大规律</h3>
+<p><strong>规律一：性能永远是基础，但性能的定义在变。</strong>从指令数到事务数，到并发请求数，再到Token推理速度。先搞清楚客户的核心性能指标是什么。</p>
+<p><strong>规律二：抽象层次每提升一层，开发效率就跃升一个数量级。</strong>但抽象不是免费的——有性能损耗、有学习曲线、有适用边界。帮客户判断需要哪一层抽象。</p>
+<p><strong>规律三：安全问题永远在"事后"被重视，但"事前"投入ROI最高。</strong>用业务语言而不是技术语言讲安全价值。</p>
+<p><strong>规律四：生态比语言本身更重要。</strong>推荐方案时，不仅看产品技术指标，更看生态和长期维护成本。</p>
+<p><strong>规律五：没有银弹，但有"最优解区间"。</strong>核心竞争力是快速判断客户场景落在哪个最优解区间。</p>
+      <h3 class="essence-sub-title">四种客户技术栈画像</h3>
+<p><strong>类型一：C/C++技术栈——"性能至上派"</strong></p>
+<p>典型：嵌入式、网络设备、高性能计算团队。极度关注性能、对资源开销敏感。沟通关键：用数据说话，深入技术细节，讲"零拷贝""确定性延迟"。</p>
+<p><strong>类型二：Java/Go技术栈——"工程务实派"</strong></p>
+<p>典型：互联网后端、企业级应用团队。重视工程化、关注可维护性、相信方法论。沟通关键：多讲案例，强调可扩展性和生态，用"最佳实践""行业标准"。</p>
+<p><strong>类型三：Python/JS技术栈——"敏捷迭代派"</strong></p>
+<p>典型：创业公司、AI/ML、前端团队。追求快速迭代、重视开发体验。沟通关键：快速演示，强调"开箱即用"，提供SDK和示例代码。</p>
+<p><strong>类型四：运维/基础设施——"稳定可靠派"</strong></p>
+<p>典型：企业IT运维、云平台运维团队。极度厌恶风险、重视稳定性。沟通关键：强调成熟度和现网数据，详细说明故障处理和回滚机制。</p>
+      <h3 class="essence-sub-title">方案选型的"权衡三角"模型</h3>
+<p>任何技术方案都绕不开三个维度的权衡：性能、开发效率、安全可靠。你最多能在两个角上做得很好，第三个角必然有所牺牲。</p>
+<p>拿到客户需求，第一件事就是判断：客户的核心诉求在三角的哪个位置？客户愿意牺牲什么来换取什么？</p>
+<p>金融客户→主推安全可靠的方案；互联网创业公司→主推快速上线弹性扩展的方案；AI训练集群→主推极致性能的方案。</p>
+<p>帮客户找到"最合适"的方案，而不是"最牛"的方案。</p>
+
+      <hr>
+      <div class="section-label">ACTIONS</div>
+      <h2 class="essence-section-title">TOP10行动清单</h2>
+      <h3 class="essence-sub-title">TOP 1-5</h3>
+<p><strong>TOP 1：建立你的"技术选型权衡框架"</strong>——把权衡三角变成思考任何技术问题的第一反应。</p>
+<p><strong>TOP 2：至少深入理解一门编程语言的"设计哲学"</strong>——理解了一门语言的设计哲学，就理解了一类技术方案的思考方式。</p>
+<p><strong>TOP 3：构建你的"行业技术坐标系"</strong>——了解不同行业客户的技术栈特点和决策偏好。</p>
+<p><strong>TOP 4：学会用"业务语言"讲技术价值"</strong>——每个技术特性都要回答"这对您意味着什么"。</p>
+<p><strong>TOP 5：建立你的"技术趋势雷达"</strong>——判断技术是趋势还是炒作，看它解决了什么真实痛点。</p>
+      <h3 class="essence-sub-title">TOP 6-10</h3>
+<p><strong>TOP 6：打磨你的"跨技术栈沟通"能力</strong>——"见人说人话，见鬼说鬼话"，用对方听得懂的语言交流。</p>
+<p><strong>TOP 7：把"全生命周期成本"变成你的标准打法</strong>——帮客户算"大账"，不只是看采购成本。</p>
+<p><strong>TOP 8：研究3个标杆客户的技术选型逻辑</strong>——学习最好的方法，是研究别人怎么做决策的。</p>
+<p><strong>TOP 9：建立你的"反常识清单"</strong>——"性能越强越好"是错的，"最新的技术就是最好的"也是错的。</p>
+<p><strong>TOP 10：每天读10页技术书，坚持一年</strong>——一年3650页，相当于十几本书。坚持三年，超过90%的同行。</p>
+
+      <hr>
+      <div class="section-label">GOLDEN QUOTES</div>
+      <h2 class="essence-section-title">金句速览</h2>
+      <div class="quotes-section">
+        <div class="golden-quote"><span class="quote-mark">"</span>设计模式是面向对象的命题作文。<span class="quote-mark">"</span></div>
+        <div class="golden-quote"><span class="quote-mark">"</span>语言是权衡的艺术。<span class="quote-mark">"</span></div>
+        <div class="golden-quote"><span class="quote-mark">"</span>结构化编程可达80分，达到无招胜有招的境界。<span class="quote-mark">"</span></div>
+        <div class="golden-quote"><span class="quote-mark">"</span>C代码赏心悦目，Java代码让人头晕。<span class="quote-mark">"</span></div>
+        <div class="golden-quote"><span class="quote-mark">"</span>自由与纪律的永恒拉锯。<span class="quote-mark">"</span></div>
+        <div class="golden-quote"><span class="quote-mark">"</span>生态比语言本身更重要。<span class="quote-mark">"</span></div>
+        <div class="golden-quote"><span class="quote-mark">"</span>Rust把安全刻进了语言骨头里。<span class="quote-mark">"</span></div>
+        <div class="golden-quote"><span class="quote-mark">"</span>编程的真正功夫在代码之外。<span class="quote-mark">"</span></div>
+      </div>
+
+      <hr>
+      <div class="action-card">
+        <h3 class="action-title">🔥 IT售前工程师能力升级 TOP10 行动清单</h3>
+        <div class="action-list">
+          <p>读完《代码的文明》，理解了编程语言七十年的演进逻辑，作为IT售前工程师，你具体可以做些什么来提升自己的能力？以下是十条可落地的行动建议，按优先级排序。</p>
+          <p>这份清单的设计原则是：<strong>小步快跑、持续精进、从日常工作的细微处做起</strong>。每一天的选择和行动，都在塑造你的技术判断力和专业深度。</p>
+        </div>
+      </div>
+
+      <a href="report.html" class="report-link">
+        <div class="report-label">
+          <div class="report-icon">📚</div>
+          <div>
+            <div class="report-title">阅读完整深度研报</div>
+            <div class="report-desc">六篇22章 · 4.2万字 · 作者背景 + 核心概念 + 七时代编年史 + 8门语言深度画像 + 金句 + 售前视角</div>
+          </div>
+        </div>
+        <span class="report-arrow">→</span>
+      </a>
+
+      <div class="thought-section">
+        <div class="thought-box">
+          <h3>💭 我的思考笔记</h3>
+          <textarea id="thoughtContent" placeholder="读完这篇精华，你有什么思考和感悟？记录下来吧..."></textarea>
+          <div class="thought-actions">
+            <button class="thought-save-btn" onclick="saveThought()">保存笔记</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<script>
+  function getBookKey() { return location.pathname.split('/').slice(-2, -1)[0]; }
+  function initLike() {
+    const key = getBookKey();
+    let data = JSON.parse(localStorage.getItem(key) || '{"count":0,"liked":false}');
+    updateLikeUI(data.count, data.liked);
+  }
+  function toggleLike() {
+    const key = getBookKey();
+    let data = JSON.parse(localStorage.getItem(key) || '{"count":0,"liked":false}');
+    if (data.liked) { data.count = Math.max(0, data.count - 1); data.liked = false; }
+    else { data.count += 1; data.liked = true; }
+    localStorage.setItem(key, JSON.stringify(data));
+    updateLikeUI(data.count, data.liked);
+  }
+  function updateLikeUI(count, liked) {
+    document.getElementById('likeIcon').textContent = liked ? '❤️' : '🤍';
+    document.getElementById('likeCount').textContent = count;
+    const btn = document.getElementById('likeBtn');
+    if (liked) btn.style.background = 'rgba(0,208,132,0.1)';
+    else btn.style.background = 'none';
+  }
+  function loadThought() {
+    const key = getBookKey() + '_thought';
+    const content = localStorage.getItem(key);
+    if (content) document.getElementById('thoughtContent').value = content;
+  }
+  function saveThought() {
+    const key = getBookKey() + '_thought';
+    const content = document.getElementById('thoughtContent').value;
+    localStorage.setItem(key, content);
+    const btn = event.target;
+    const originalText = btn.textContent;
+    btn.textContent = '✓ 已保存';
+    btn.style.background = '##00a86b';
+    setTimeout(function() { btn.textContent = originalText; btn.style.background = ''; }, 1500);
+  }
+  initLike();
+  loadThought();
+</script>
+<script src="../../annotation.js"></script>
+<script src="../../toc.js"></script>
+</body>
+</html>
