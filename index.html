@@ -1,0 +1,594 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>研报知识库 · 汇总导航</title>
+<style>
+:root {
+  --bg: #F8F6F0;
+  --bg-card: #FFFFFF;
+  --primary: #102A43;
+  --primary-light: #1E3A5F;
+  --data-blue: #2978B5;
+  --accent: #F59E0B;
+  --accent-light: #FEF3C7;
+  --text: #1D2733;
+  --text-secondary: #667085;
+  --text-tertiary: #98A2B3;
+  --border: #E6E1D8;
+  --border-light: #F0EDE5;
+  --success: #059669;
+  --shadow-sm: 0 1px 2px rgba(16,42,67,0.04);
+  --shadow-md: 0 4px 12px rgba(16,42,67,0.06);
+  --shadow-lg: 0 8px 24px rgba(16,42,67,0.08);
+  --font-serif: "Songti SC", "SimSun", Georgia, "Times New Roman", serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  --font-mono: "SF Mono", "JetBrains Mono", "Fira Code", Consolas, Menlo, monospace;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+  --max-width: 1200px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text);
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(rgba(230,225,216,0.4) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(230,225,216,0.4) 1px, transparent 1px);
+  background-size: 28px 28px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+a { color: var(--data-blue); text-decoration: none; transition: all 0.2s; }
+a:hover { color: var(--primary); }
+
+/* ===== 首屏 ===== */
+.hero {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+  color: #fff;
+  padding: 72px 24px 80px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%; right: -10%;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(245,158,11,0.12) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.hero-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+.hero-tag {
+  display: inline-block;
+  padding: 4px 12px;
+  background: rgba(245,158,11,0.15);
+  border: 1px solid rgba(245,158,11,0.3);
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 100px;
+  letter-spacing: 0.5px;
+  margin-bottom: 20px;
+}
+.hero h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 5vw, 42px);
+  font-weight: 700;
+  line-height: 1.25;
+  margin-bottom: 16px;
+}
+.hero-sub {
+  font-size: 16px;
+  color: rgba(255,255,255,0.75);
+  max-width: 600px;
+  line-height: 1.7;
+  margin-bottom: 36px;
+}
+
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  max-width: 700px;
+}
+.stat-card {
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: var(--radius-md);
+  padding: 16px 18px;
+}
+.stat-num {
+  font-family: var(--font-mono);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.stat-label {
+  font-size: 12px;
+  color: rgba(255,255,255,0.65);
+}
+
+/* ===== 主体 ===== */
+.main {
+  max-width: var(--max-width);
+  margin: -40px auto 0;
+  padding: 0 24px 80px;
+  position: relative;
+  z-index: 2;
+}
+
+.section-title {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--primary);
+  margin: 48px 0 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.section-title::before {
+  content: '';
+  width: 4px;
+  height: 22px;
+  background: var(--accent);
+  border-radius: 2px;
+}
+.section-desc {
+  color: var(--text-secondary);
+  font-size: 14px;
+  margin: -12px 0 20px;
+  padding-left: 16px;
+}
+
+/* ===== 研报卡片网格 ===== */
+.report-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 20px;
+}
+.report-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.25s ease;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.report-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--data-blue);
+}
+.report-category {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-bottom: 12px;
+  letter-spacing: 0.3px;
+}
+.cat-palantir { background: rgba(16,42,67,0.08); color: var(--primary); }
+.cat-ai { background: rgba(41,120,181,0.1); color: var(--data-blue); }
+.cat-hardware { background: rgba(245,158,11,0.12); color: #B45309; }
+.cat-ebpf { background: rgba(5,150,105,0.1); color: var(--success); }
+
+.report-title {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--primary);
+  line-height: 1.4;
+  margin-bottom: 10px;
+}
+.report-summary {
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  margin-bottom: 16px;
+  flex: 1;
+}
+.report-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+  font-size: 12px;
+  color: var(--text-tertiary);
+  margin-bottom: 14px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--border-light);
+  font-family: var(--font-mono);
+}
+.report-actions {
+  display: flex;
+  gap: 10px;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.15s;
+  text-decoration: none;
+}
+.btn:hover { text-decoration: none; }
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+.btn-primary:hover {
+  background: var(--primary-light);
+  border-color: var(--primary-light);
+  color: #fff;
+}
+.btn-outline:hover {
+  border-color: var(--data-blue);
+  color: var(--data-blue);
+}
+.btn-icon { font-size: 14px; }
+
+/* ===== 专题区 ===== */
+.topic-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+.topic-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--data-blue);
+  border-radius: var(--radius-md);
+  padding: 18px 20px;
+  transition: all 0.2s;
+}
+.topic-card:hover {
+  border-left-color: var(--accent);
+  box-shadow: var(--shadow-md);
+}
+.topic-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--primary);
+  margin-bottom: 6px;
+}
+.topic-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 10px;
+}
+.topic-meta {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  font-family: var(--font-mono);
+}
+
+/* ===== 标签筛选 ===== */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+.filter-tag {
+  padding: 5px 12px;
+  font-size: 12px;
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  background: #fff;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s;
+  user-select: none;
+}
+.filter-tag:hover { border-color: var(--data-blue); color: var(--data-blue); }
+.filter-tag.active {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+
+/* ===== 底部 ===== */
+.footer {
+  text-align: center;
+  padding: 40px 24px;
+  color: var(--text-tertiary);
+  font-size: 12px;
+  border-top: 1px solid var(--border);
+  margin-top: 40px;
+}
+.footer strong { color: var(--text-secondary); }
+
+/* ===== 响应式 ===== */
+@media (max-width: 768px) {
+  .hero { padding: 48px 20px 60px; }
+  .stats-row { grid-template-columns: repeat(2, 1fr); }
+  .report-grid { grid-template-columns: 1fr; }
+  .topic-grid { grid-template-columns: 1fr; }
+  .main { padding: 0 16px 60px; }
+}
+
+@media print {
+  .hero { background: #fff !important; color: var(--primary) !important; padding: 24px 0; }
+  .hero-tag, .stats-row, .filter-bar, .report-actions { display: none; }
+  .report-card { break-inside: avoid; box-shadow: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- 首屏 -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">📚 个人研报知识库</div>
+    <h1>技术研究报告汇总</h1>
+    <p class="hero-sub">
+      聚焦企业级AI、数据基础设施、前沿技术落地。
+      所有研报坚持数据驱动、来源可溯、场景落地导向，服务政企售前与方案决策。
+    </p>
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-num">6</div>
+        <div class="stat-label">深度研报</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">2</div>
+        <div class="stat-label">配套PPT</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">4</div>
+        <div class="stat-label">专题工具页</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">2026</div>
+        <div class="stat-label">知识沉淀年份</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="main">
+
+  <!-- 深度研报 -->
+  <h2 class="section-title">深度研究报告</h2>
+  <p class="section-desc">系统级、大篇幅、多来源交叉验证的完整研究</p>
+
+  <div class="filter-bar" id="filterBar">
+    <span class="filter-tag active" data-filter="all">全部</span>
+    <span class="filter-tag" data-filter="cat-palantir">Palantir / FDE</span>
+    <span class="filter-tag" data-filter="cat-ai">AI 平台 / 架构</span>
+    <span class="filter-tag" data-filter="cat-hardware">算力 / 硬件</span>
+    <span class="filter-tag" data-filter="cat-ebpf">云原生 / 可观测</span>
+  </div>
+
+  <div class="report-grid" id="reportGrid">
+
+    <!-- AIP -->
+    <div class="report-card" data-cat="cat-ai">
+      <span class="report-category cat-ai">AI平台架构</span>
+      <div class="report-title">AIP企业级AI平台深度研报</div>
+      <p class="report-summary">
+        从概念起源到全球格局，系统剖析企业级AI平台（AIP）的核心架构、Palantir领跑路径、国内外厂商进展、ROI成本分析，以及五大争议的正反思辨。
+      </p>
+      <div class="report-meta">
+        <span>📅 2026-08-30</span>
+        <span>📄 8章 · 3.6万字</span>
+        <span>🔗 60个来源</span>
+      </div>
+      <div class="report-actions">
+        <a href="AIP企业级AI平台深度研报.html" class="btn btn-primary">
+          <span class="btn-icon">📖</span> 在线阅读
+        </a>
+        <a href="AIP企业级AI平台深度研报.pdf" class="btn btn-outline">
+          <span class="btn-icon">📄</span> PDF
+        </a>
+      </div>
+    </div>
+
+    <!-- Ontology -->
+    <div class="report-card" data-cat="cat-palantir">
+      <span class="report-category cat-palantir">Palantir · 核心技术</span>
+      <div class="report-title">Ontology构建方法论深度研报</div>
+      <p class="report-summary">
+        从哲学根源到Palantir工程实践，覆盖四大设计原则、六步构建流程、FDE驻场模式、四重整合架构、国内外差距与未来八大趋势。
+      </p>
+      <div class="report-meta">
+        <span>📅 2026-08-30</span>
+        <span>📄 8章 · 4万字</span>
+        <span>🔗 52个来源</span>
+      </div>
+      <div class="report-actions">
+        <a href="Ontology构建方法论深度研报.html" class="btn btn-primary">
+          <span class="btn-icon">📖</span> 在线阅读
+        </a>
+        <a href="Ontology构建方法论深度研报.pdf" class="btn btn-outline">
+          <span class="btn-icon">📄</span> PDF
+        </a>
+      </div>
+    </div>
+
+    <!-- FDE -->
+    <div class="report-card" data-cat="cat-palantir">
+      <span class="report-category cat-palantir">Palantir · 交付模式</span>
+      <div class="report-title">FDE前沿部署工程师深度研报</div>
+      <p class="report-summary">
+        从FDE工程师第一视角，完整拆解前沿部署模式的方法论、全流程案例、高价值问题定义、以及国内市场落地分析与对标厂商。
+      </p>
+      <div class="report-meta">
+        <span>📅 2026-08-29</span>
+        <span>📄 13章 · 1.4万字</span>
+        <span>🔗 40个来源</span>
+      </div>
+      <div class="report-actions">
+        <a href="FDE前沿部署工程师深度研报.html" class="btn btn-primary">
+          <span class="btn-icon">📖</span> 在线阅读
+        </a>
+        <a href="FDE前沿部署工程师深度研究.pptx.html" class="btn btn-outline">
+          <span class="btn-icon">📊</span> PPT
+        </a>
+      </div>
+    </div>
+
+    <!-- Palantir -->
+    <div class="report-card" data-cat="cat-palantir">
+      <span class="report-category cat-palantir">公司深度研究</span>
+      <div class="report-title">Palantir Technologies深度研报</div>
+      <p class="report-summary">
+        20年发展史全景复盘，涵盖Gotham/Foundry/AIP三大平台、FDE模式拆解、Ontology核心技术、12个量化客户案例及售前落地实操指南。
+      </p>
+      <div class="report-meta">
+        <span>📅 2026-08-29</span>
+        <span>📄 11章</span>
+        <span>🏢 含客户案例</span>
+      </div>
+      <div class="report-actions">
+        <a href="Palantir深度研报.html" class="btn btn-primary">
+          <span class="btn-icon">📖</span> 在线阅读
+        </a>
+        <a href="Palantir深度研究.pptx.html" class="btn btn-outline">
+          <span class="btn-icon">📊</span> PPT
+        </a>
+      </div>
+    </div>
+
+    <!-- AI算力 -->
+    <div class="report-card" data-cat="cat-hardware">
+      <span class="report-category cat-hardware">算力评估</span>
+      <div class="report-title">AI私有化算力评估研报</div>
+      <p class="report-summary">
+        本地化算力评估全流程方法论，覆盖模型选型、显存估算、GPU配置、性能测算、成本对比，服务政企私有化部署方案制定。
+      </p>
+      <div class="report-meta">
+        <span>📅 2026-08-15</span>
+        <span>📄 全流程方法论</span>
+        <span>🏭 政企私有化</span>
+      </div>
+      <div class="report-actions">
+        <a href="AI私有化算力评估研报.html" class="btn btn-primary">
+          <span class="btn-icon">📖</span> 在线阅读
+        </a>
+        <a href="AI私有化算力评估研报.pdf" class="btn btn-outline">
+          <span class="btn-icon">📄</span> PDF
+        </a>
+      </div>
+    </div>
+
+    <!-- NVIDIA GPU -->
+    <div class="report-card" data-cat="cat-hardware">
+      <span class="report-category cat-hardware">GPU产品线</span>
+      <div class="report-title">英伟达GPU产品线全解析</div>
+      <p class="report-summary">
+        覆盖消费级50系、Blackwell B系、中国特供卡共27款主流型号，含参数对比表、2026年8月国内外成交价、政企选型指南。
+      </p>
+      <div class="report-meta">
+        <span>📅 2026-08-17</span>
+        <span>📄 v2.0</span>
+        <span>🃏 27款型号</span>
+      </div>
+      <div class="report-actions">
+        <a href="nvidia_gpu_report.html" class="btn btn-primary">
+          <span class="btn-icon">📖</span> 在线阅读
+        </a>
+        <a href="nvidia_gpu_report.pdf" class="btn btn-outline">
+          <span class="btn-icon">📄</span> PDF
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 专题工具页 -->
+  <h2 class="section-title">专题工具页</h2>
+  <p class="section-desc">轻量级、工具导向、速查速用的专项内容</p>
+
+  <div class="topic-grid">
+    <div class="topic-card">
+      <div class="topic-title">AI算力速算流程图</div>
+      <p class="topic-desc">快速判断AI私有化项目所需GPU数量和配置的决策流程图</p>
+      <div class="topic-meta">
+        <a href="AI算力速算流程图.html">打开工具 →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- PPT汇总 -->
+  <h2 class="section-title">配套演示材料</h2>
+  <p class="section-desc">对应研报的PPT版本，用于汇报和宣讲</p>
+
+  <div class="topic-grid">
+    <div class="topic-card">
+      <div class="topic-title">Palantir深度研究 PPT</div>
+      <p class="topic-desc">深空藏青深蓝底+金色点缀，内容充实版，20页结构</p>
+      <div class="topic-meta">
+        <a href="Palantir深度研究.pptx.html">打开 PPT →</a>
+      </div>
+    </div>
+    <div class="topic-card">
+      <div class="topic-title">FDE前沿部署工程师 PPT</div>
+      <p class="topic-desc">数据风米白+深蓝+橙色高亮，20页，与HTML研报同风格</p>
+      <div class="topic-meta">
+        <a href="FDE前沿部署工程师深度研究.pptx.html">打开 PPT →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <strong>研报知识库</strong> · 持续更新中<br>
+    所有内容仅供学习研究，数据与观点来自公开网络信息，请结合实际场景验证
+  </div>
+
+</div>
+
+<script>
+// 标签筛选
+const filterBar = document.getElementById('filterBar');
+const cards = document.querySelectorAll('.report-card');
+
+filterBar.addEventListener('click', (e) => {
+  if (!e.target.classList.contains('filter-tag')) return;
+  
+  // 切换active
+  filterBar.querySelectorAll('.filter-tag').forEach(t => t.classList.remove('active'));
+  e.target.classList.add('active');
+  
+  const filter = e.target.dataset.filter;
+  
+  cards.forEach(card => {
+    if (filter === 'all' || card.dataset.cat === filter) {
+      card.style.display = 'flex';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+});
+</script>
+
+</body>
+</html>
