@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>《我身上有个不可战胜的夏天》· 精华解读</title>
+<link rel="stylesheet" href="../../annotation.css">
+<style>
+  :root {
+    --primary: #1e6091;
+    --primary-light: #2a8fbd;
+    --primary-dark: #0f3b5f;
+    --accent: #e8a838;
+    --accent-light: #f5c86b;
+    --bg: #f0f4f8;
+    --bg-card: #ffffff;
+    --text: #1e293b;
+    --text-secondary: #475569;
+    --text-light: #94a3b8;
+    --border: #e2e8f0;
+    --success: #10b981;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.8;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+
+  .top-nav {
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .top-nav-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 12px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s;
+    font-weight: 500;
+  }
+  .back-link:hover { color: var(--primary-dark); transform: translateX(-2px); }
+
+  .like-btn {
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 6px 14px;
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: all 0.2s;
+  }
+  .like-btn:hover { background: var(--accent-light); }
+
+  .hero {
+    background: linear-gradient(135deg, #0d2137 0%, #153e5c 20%, #1e6091 45%, #2a8fbd 70%, #e8a838 100%);
+    color: white;
+    padding: 60px 0 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(232,168,56,0.2) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: pulse 8s ease-in-out infinite;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    left: -20%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: pulse 10s ease-in-out infinite reverse;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.1); opacity: 1; }
+  }
+  .hero .container { position: relative; z-index: 1; }
+  .book-tag {
+    display: inline-block;
+    background: rgba(255,255,255,0.18);
+    color: rgba(255,255,255,0.95);
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 18px;
+    border: 1px solid rgba(255,255,255,0.3);
+  }
+  .hero h1 {
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 12px;
+    letter-spacing: -0.5px;
+  }
+  .hero .subtitle {
+    font-size: 18px;
+    opacity: 0.92;
+    margin-bottom: 28px;
+    font-weight: 300;
+  }
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    font-size: 14px;
+    opacity: 0.88;
+  }
+  .hero-meta span { display: flex; align-items: center; gap: 6px; }
+
+  .summary-card {
+    background: white;
+    border-radius: 16px;
+    padding: 32px;
+    margin-top: -40px;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+    margin-bottom: 48px;
+    border: 1px solid var(--border);
+  }
+  .summary-card h2 {
+    font-size: 20px;
+    color: var(--primary-dark);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .summary-card p {
+    color: var(--text-secondary);
+    line-height: 1.9;
+    margin-bottom: 16px;
+    font-size: 15px;
+  }
+  .summary-card strong { color: var(--primary-dark); }
+
+  .report-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 24px;
+    padding: 16px 20px;
+    background: linear-gradient(135deg, var(--bg), var(--accent-light));
+    border-radius: 12px;
+    text-decoration: none;
+    color: var(--primary-dark);
+    font-weight: 500;
+    font-size: 14px;
+    transition: all 0.2s;
+    border: 1px solid rgba(0,0,0,0.05);
+  }
+  .report-link:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.1); }
+  .report-link .report-label { display: flex; align-items: center; gap: 10px; }
+  .report-link .report-icon { font-size: 20px; }
+  .report-link .report-title { font-weight: 600; }
+  .report-link .report-desc {
+    font-size: 12px;
+    color: var(--text-secondary);
+    font-weight: normal;
+    margin-top: 2px;
+  }
+  .report-link .report-arrow {
+    font-size: 16px;
+    opacity: 0.6;
+    transition: transform 0.2s;
+  }
+  .report-link:hover .report-arrow { transform: translateX(4px); opacity: 1; }
+
+  .section { margin-bottom: 56px; }
+  .section-title {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--primary-dark);
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 3px solid var(--primary);
+    display: inline-block;
+  }
+
+  .subsection { margin-bottom: 36px; }
+  .subsection-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 16px;
+    padding-left: 14px;
+    border-left: 4px solid var(--accent);
+  }
+  .section p { margin-bottom: 14px; color: var(--text-secondary); }
+
+  blockquote {
+    background: linear-gradient(135deg, var(--bg), var(--accent-light));
+    border-left: 4px solid var(--accent);
+    padding: 16px 20px;
+    border-radius: 0 12px 12px 0;
+    margin: 20px 0;
+    color: var(--text-secondary);
+    font-style: italic;
+    font-size: 14px;
+  }
+  blockquote strong { font-style: normal; color: var(--primary-dark); }
+
+  .quote-card {
+    background: linear-gradient(135deg, var(--bg), var(--accent-light));
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin: 20px 0;
+    position: relative;
+  }
+  .quote-card::before {
+    content: '"';
+    position: absolute;
+    top: 8px;
+    left: 20px;
+    font-size: 60px;
+    color: rgba(0,0,0,0.08);
+    font-family: Georgia, serif;
+    line-height: 1;
+  }
+  .quote-card p {
+    position: relative;
+    z-index: 1;
+    color: var(--primary-dark);
+    font-size: 15px;
+    line-height: 1.8;
+    margin: 0;
+    padding-left: 20px;
+  }
+  .quote-card .quote-source {
+    margin-top: 10px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    text-align: right;
+    font-style: italic;
+  }
+
+  .key-points {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 16px;
+    margin-top: 24px;
+  }
+  .key-point {
+    background: linear-gradient(135deg, var(--bg), var(--accent-light));
+    padding: 18px 20px;
+    border-radius: 12px;
+    border-left: 4px solid var(--primary);
+    transition: transform 0.2s;
+  }
+  .key-point:hover { transform: translateY(-2px); }
+  .key-point h4 {
+    font-size: 14px;
+    color: var(--primary-dark);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .key-point p {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  /* 金句板块 */
+  .golden-quotes-section { margin-bottom: 40px; }
+  .golden-quotes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .golden-quote-item {
+    background: linear-gradient(135deg, #1e609112, #e8a83822);
+    border-left: 4px solid #1e6091;
+    border-radius: 0 10px 10px 0;
+    padding: 14px 16px 14px 18px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    transition: all 0.25s ease;
+  }
+  .golden-quote-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px #1e609122;
+    background: linear-gradient(135deg, #1e609118, #e8a83830);
+  }
+  .golden-quote-icon {
+    font-size: 18px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .golden-quote-text {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    font-style: italic;
+  }
+  .golden-quote-text strong {
+    font-style: normal;
+    color: var(--primary-dark);
+  }
+
+  /* 行动清单 */
+  .action-list {
+    list-style: none;
+    padding: 0;
+  }
+  .action-item {
+    background: white;
+    border-radius: 10px;
+    padding: 14px 20px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    border: 1px solid var(--border);
+    transition: all 0.2s;
+  }
+  .action-item:hover {
+    transform: translateX(4px);
+    border-color: var(--accent);
+    box-shadow: 0 2px 12px rgba(232,168,56,0.15);
+  }
+  .action-num {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    background: linear-gradient(135deg, var(--accent), #c4871f);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 13px;
+  }
+  .action-text {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  /* 底部思考区 */
+  .thought-section {
+    margin: 48px 0;
+  }
+  .thought-box {
+    background: white;
+    border-radius: 16px;
+    padding: 28px;
+    border: 1px solid var(--border);
+  }
+  .thought-box h3 {
+    font-size: 18px;
+    color: var(--primary-dark);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .thought-box textarea {
+    width: 100%;
+    min-height: 120px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px;
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 1.7;
+    resize: vertical;
+    color: var(--text);
+    background: var(--bg);
+    transition: border-color 0.2s;
+  }
+  .thought-box textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    background: white;
+  }
+  .thought-actions {
+    margin-top: 12px;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .thought-save-btn {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .thought-save-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+
+  @media (max-width: 768px) {
+    .hero h1 { font-size: 26px; }
+    .hero { padding: 40px 0 60px; }
+    .summary-card { padding: 24px; margin-top: -30px; }
+    .section-title { font-size: 22px; }
+    .golden-quotes-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+  <nav class="top-nav">
+    <div class="top-nav-inner">
+      <a href="../../index.html" class="back-link">← 返回书架</a>
+      <button class="like-btn" id="likeBtn" onclick="toggleLike()">
+        <span id="likeIcon">🤍</span> <span id="likeCount">0</span>
+      </button>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="container">
+      <span class="book-tag">第23本 · 历史与思维</span>
+      <h1>《我身上有个不可战胜的夏天》<br>精华解读</h1>
+      <p class="subtitle">加缪的荒诞反抗与售前工程师的盛夏之力</p>
+      <div class="hero-meta">
+        <span>✍️ 阿尔贝·加缪 (Albert Camus)</span>
+        <span>📖 14篇散文</span>
+        <span>🏆 诺贝尔文学奖</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="container">
+    <!-- 一句话总结 -->
+    <div class="summary-card">
+      <h2>🎯 一句话总结</h2>
+      <p>加缪以二十年生命跨度写就的十四篇散文，在阿尔及利亚的阳光、大海与废墟之间，完成了从荒诞的发现、反抗的践行到热爱的抵达——"不可战胜的夏天"不是乐观主义的宣言，而是在隆冬深处依然忠于身体与光明的清醒抉择；对于IT售前工程师而言，这是市场寒冬中重建心理韧性、在荒诞竞争中保持专业尊严的精神原典。</p>
+      <a href="report.html" class="report-link">
+        <div class="report-label">
+          <span class="report-icon">📚</span>
+          <div>
+            <div class="report-title">查看完整深度研报</div>
+            <div class="report-desc">14篇散文逐篇解读 + 售前视角深度融合</div>
+          </div>
+        </div>
+        <span class="report-arrow">→</span>
+      </a>
+    </div>
+
+    <!-- 核心观点 -->
+    <div class="section">
+      <h2 class="section-title">🌊 核心认知框架</h2>
+      <p style="color: var(--text-secondary); margin-bottom: 24px; font-size: 14px;">
+        加缪思想的三个核心维度——荒诞是地基，反抗是脊梁，热爱是血肉。
+      </p>
+      
+      <div class="subsection">
+        <h3 class="subsection-title">一、荒诞：人类与世界的根本断裂</h3>
+        <p>"荒诞"是加缪全部思想的起点，但也是最容易被误解的概念。很多人以为荒诞就是"世界很荒谬""人生没有意义"，这只说对了一半。加缪的荒诞不是一个客观的属性，不是世界本身荒诞，也不是人本身荒诞，而是<strong>人与世界之间的一种关系</strong>——一种根本性的断裂、一种不可调和的矛盾。</p>
+<p>具体来说，荒诞产生于两个因素的碰撞：</p>
+<p><strong>一方面，是人的需求。</strong> 人天生就渴望意义、渴望清晰、渴望秩序、渴望永恒。我们追问"为什么活着""为什么受苦""死亡是什么"。我们希望这个世界是讲道理的、公正的、可理解的。我们需要一个答案，哪怕是一个虚假的答案，也比没有答案要好。</p>
+
+      </div>
+
+      <div class="subsection">
+        <h3 class="subsection-title">二、反抗：在荒诞中挺立的姿态</h3>
+        <p>很多人把加缪的"反抗"理解成一种激烈的对抗——与天斗与地斗与人斗。这是误解。加缪的反抗不是攻击性的，而是尊严性的。它不是要打倒什么，而是要挺立什么。</p>
+<p>在《西西弗神话》中，加缪从荒诞的前提出发，推导出了三个结论：反抗、自由、激情。</p>
+<p><strong>反抗</strong>——就是拒绝自杀、拒绝哲学自杀，就是直面荒诞、承受荒诞、在荒诞中继续前行。西西弗斯就是反抗的化身：他的命运是无意义的苦役，但他接受这个命运，并且在每一步攀登中找到了自己的充实。"登上顶峰的斗争本身足以充实一个人的心灵。"反抗不是为了赢，而是为了不认输——不是不承认失败，而是不承认失败就是全部。</p>
+
+      </div>
+
+      <div class="subsection">
+        <h3 class="subsection-title">三、热爱：从《婚礼集》到《夏天集》的深化</h3>
+        <p>很多人对加缪的理解止步于"荒诞—反抗"，但忽略了他思想中同样重要的第三个维度——热爱。实际上，加缪从来不是一个阴郁的哲学家。他的底色是阳光的、地中海的、热爱生命的。荒诞是他的起点，但热爱才是他的终点。</p>
+<p><strong>在《婚礼集》中，热爱是一种感性的沉醉。</strong> 二十三岁的加缪在阿尔及利亚的阳光和大海中找到了最直接的生命狂喜。他赤身跳进海里，让海水冲刷身体；他躺在罗马废墟间，让阳光浸透每一寸皮肤；他在杰米拉的大风中，感觉自己与自然融为一体。这是一种不加反思的热爱——不需要理由，不需要意义，只是因为活着本身就是好的，身体的快感本身就是充足的。</p>
+<p>这种"身体哲学"是加缪对西方理性主义传统的一种反叛。从柏拉图到黑格尔，西方哲学一直贬低身体、抬高精神，认为感官是不可靠的、肉体是低级的。但加缪说，不——身体比思想更诚实，皮肤比逻辑更接近真理。世界的意义不在天上，不在理念世界，而在大地上，在阳光里，在海水的咸味中，在爱人的体温里。</p>
+
+      </div>
+
+      <div class="subsection">
+        <h3 class="subsection-title">四、三元结构的内在逻辑</h3>
+        <p>荒诞、反抗、热爱——这三者不是孤立的，而是一个辩证的整体：</p>
+<ul>
+  <li><strong>荒诞是地基。</strong> 你必须先承认世界没有意义，人生没有答案，否则你的"热爱"只是自欺欺人，你的"反抗"只是无病呻吟。</li>
+  <li><strong>反抗是脊梁。</strong> 承认荒诞之后，你不能躺倒，不能认输，你必须站起来，继续往前走。这是人的尊严所在。</li>
+  <li><strong>热爱是血肉。</strong> 只有反抗没有热爱，生活会变成一场苦行，一种僵硬的姿态。热爱让反抗有了温度，让荒诞的人生有了色彩。</li>
+</ul>
+<p>这三者的关系，就像一个人的站立：荒诞是你脚下的地面（虽然不平整），反抗是你挺直的腰杆，热爱是你脸上的笑容。你站在不平整的地面上，挺直腰杆，面带笑容——这就是加缪式的人生。</p>
+<p>这也是为什么这本书如此重要。它不是一本哲学论文，而是一本生命之书。你可以在其中看到一个人如何从荒诞出发，走过反抗，最终抵达热爱。这不是一个抽象的哲学论证，而是一段真实的生命旅程——一段持续了二十年的、在阳光与苦难之间反复锤炼的旅程。</p>
+
+      </div>
+
+    </div>
+
+    <!-- 金句集锦 -->
+    <div class="section golden-quotes-section">
+      <h2 class="section-title">☀️ 盛夏金句</h2>
+      <p style="color: var(--text-secondary); margin-bottom: 24px; font-size: 14px;">
+        十句穿越时光的盛夏之光，在隆冬深处唤醒你心中的阳光。
+      </p>
+      <div class="golden-quotes-grid">
+        
+      </div>
+    </div>
+
+    <!-- 售前精华 -->
+    <div class="section">
+      <h2 class="section-title">💻 售前工程师视角</h2>
+      <p style="color: var(--text-secondary); margin-bottom: 24px; font-size: 14px;">
+        当加缪哲学遇上IT售前——市场寒冬中的精神原典，荒诞竞争里的专业尊严。
+      </p>
+      
+      <div class="subsection">
+        <h3 class="subsection-title">一、为什么售前工程师需要加缪？</h3>
+        <p>IT售前工程师，可能是整个科技行业中最接近"荒诞"处境的角色之一。</p>
+<p>我们每天面对的是什么？是永远不合理的客户需求，是永远不够的内部资源，是永远不公的市场竞争，是永远在变的技术趋势，是永远在赶的项目deadline，是永远不够用的PPT模板和话术储备。我们像西西弗斯一样，一个项目接一个项目地推石头——方案写了改、改了写，客户见了又见，标投了一个又一个，中了还好，不中的话，所有的努力仿佛都失去了意义。</p>
+
+      </div>
+
+      <div class="subsection">
+        <h3 class="subsection-title">二、"不可战胜的夏天"与售前心态建设</h3>
+        <p>售前工程师最大的心理挑战，莫过于项目失败。你花了几个星期甚至几个月的时间，写了上百页的方案，做了无数次演示和沟通，结果——客户选择了竞争对手。或者，项目黄了。或者，被内部毙掉了。</p>
+<p>这种时候，你很容易陷入自我怀疑——"是不是我方案写得不好？""是不是我讲标没讲好？""是不是我能力不行？"严重的话，甚至会发展成职业倦怠和自我否定。</p>
+
+      </div>
+
+      <div class="subsection">
+        <h3 class="subsection-title">三、"荒诞-反抗"框架与客户工作</h3>
+        <p>售前工程师最常遇到的荒诞场景之一，就是客户的不合理需求。比如：</p>
+<ul>
+  <li>"我们要用你们最高端的设备，但预算只有三分之一。"</li>
+  <li>"这个项目下周就要上线，但需求文档还没写完。"</li>
+  <li>"我们要做一个全世界最先进的系统，但你们得免费做。"</li>
+  <li>"我们要跟华为/华三一模一样的功能，但价格只要他们的一半。"</li>
+</ul>
+<p>听到这些需求的时候，你的第一反应可能是——"这怎么可能？""客户是不是疯了？""完全不合理！" 这就是荒诞的体验——一个合理的期待（专业的、可行的、有价值的方案），遭遇了一个不合理的现实（客户的异想天开）。两者碰撞，产生荒诞感。</p>
+
+      </div>
+
+      <div class="subsection">
+        <h3 class="subsection-title">四、反与正的辩证——方案优势与劣势的诚实呈现</h3>
+        <p>售前工程师的一个常见误区是——为了赢单，尽量夸大方案的优势，掩盖方案的劣势。客户问什么都说"我们能做"，什么需求都答应，什么问题都回避。以为这样就能赢得客户的信任。</p>
+<p>但实际上呢？客户不是傻子。尤其是企业级客户的决策者，他们见的供应商多了，对各种"忽悠"的套路门儿清。你越是什么都答应，他们越不信任你；你越是完美无缺，他们越是怀疑。</p>
+
+      </div>
+
+    </div>
+
+    <!-- 行动清单 -->
+    <div class="section">
+      <h2 class="section-title">⚡ TOP 10 行动清单</h2>
+      <p style="color: var(--text-secondary); margin-bottom: 24px; font-size: 14px;">
+        售前工程师可立即练习的"加缪式"工作与生活修炼方法
+      </p>
+      <ul class="action-list">
+        
+      <li class="action-item">
+        <span class="action-num">1</span>
+        <span class="action-text">列表A：这次项目中，我做得好的地方（三个）</span>
+      </li>
+
+      <li class="action-item">
+        <span class="action-num">2</span>
+        <span class="action-text">列表B：这次项目中，我可以改进的地方（三个）</span>
+      </li>
+
+      <li class="action-item">
+        <span class="action-num">3</span>
+        <span class="action-text">站直，肩膀向后打开，做三次深呼吸（吸气四秒，屏息四秒，呼气六秒）。</span>
+      </li>
+
+      <li class="action-item">
+        <span class="action-num">4</span>
+        <span class="action-text">活动一下脖子和肩膀，放松身体。</span>
+      </li>
+
+      <li class="action-item">
+        <span class="action-num">5</span>
+        <span class="action-text">对着镜子（或者在心里）微笑一下，对自己说："我是专业的，我准备好了。"</span>
+      </li>
+
+      </ul>
+    </div>
+
+    <!-- 我的思考 -->
+    <div class="section thought-section">
+      <div class="thought-box">
+        <h3>💭 我的思考笔记</h3>
+        <textarea id="thoughtContent" placeholder="读完这本书，你有什么思考和感悟？记录下来吧..."></textarea>
+        <div class="thought-actions">
+          <button class="thought-save-btn" onclick="saveThought()">保存笔记</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+
+  function getBookKey() {
+    return location.pathname.split('/').pop();
+  }
+  function initLike() {
+    const key = getBookKey();
+    let data = JSON.parse(localStorage.getItem(key) || '{"count":0,"liked":false}');
+    updateLikeUI(data.count, data.liked);
+  }
+  function toggleLike() {
+    const key = getBookKey();
+    let data = JSON.parse(localStorage.getItem(key) || '{"count":0,"liked":false}');
+    if (data.liked) {
+      data.count = Math.max(0, data.count - 1);
+      data.liked = false;
+    } else {
+      data.count += 1;
+      data.liked = true;
+    }
+    localStorage.setItem(key, JSON.stringify(data));
+    updateLikeUI(data.count, data.liked);
+  }
+  function updateLikeUI(count, liked) {
+    document.getElementById('likeIcon').textContent = liked ? '❤️' : '🤍';
+    document.getElementById('likeCount').textContent = count;
+    const btn = document.getElementById('likeBtn');
+    if (liked) {
+      btn.style.background = 'rgba(239,68,68,0.1)';
+    } else {
+      btn.style.background = 'none';
+    }
+  }
+  function loadThought() {
+    const key = location.pathname.split('/').pop() + '_thought';
+    const content = localStorage.getItem(key);
+    if (content) {
+      document.getElementById('thoughtContent').value = content;
+    }
+  }
+  function saveThought() {
+    const key = location.pathname.split('/').pop() + '_thought';
+    const content = document.getElementById('thoughtContent').value;
+    localStorage.setItem(key, content);
+    const btn = event.target;
+    const originalText = btn.textContent;
+    btn.textContent = '✓ 已保存';
+    btn.style.background = '#0f3b5f';
+    setTimeout(function() {
+      btn.textContent = originalText;
+      btn.style.background = '';
+    }, 1500);
+  }
+  initLike();
+  loadThought();
+
+</script>
+<script src="../../annotation.js"></script>
+<script src="../../toc.js"></script>
+
+</body>
+</html>

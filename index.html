@@ -1,593 +1,1325 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>研报知识库 · 汇总导航</title>
+<title>Daniel_BI的读书笔记 · RootUser</title>
 <style>
-:root {
-  --bg: #F8F6F0;
-  --bg-card: #FFFFFF;
-  --primary: #102A43;
-  --primary-light: #1E3A5F;
-  --data-blue: #2978B5;
-  --accent: #F59E0B;
-  --accent-light: #FEF3C7;
-  --text: #1D2733;
-  --text-secondary: #667085;
-  --text-tertiary: #98A2B3;
-  --border: #E6E1D8;
-  --border-light: #F0EDE5;
-  --success: #059669;
-  --shadow-sm: 0 1px 2px rgba(16,42,67,0.04);
-  --shadow-md: 0 4px 12px rgba(16,42,67,0.06);
-  --shadow-lg: 0 8px 24px rgba(16,42,67,0.08);
-  --font-serif: "Songti SC", "SimSun", Georgia, "Times New Roman", serif;
-  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-  --font-mono: "SF Mono", "JetBrains Mono", "Fira Code", Consolas, Menlo, monospace;
-  --radius-sm: 4px;
-  --radius-md: 6px;
-  --radius-lg: 10px;
-  --max-width: 1200px;
-}
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body {
-  font-family: var(--font-sans);
-  font-size: 15px;
-  line-height: 1.7;
-  color: var(--text);
-  background-color: var(--bg);
-  background-image:
-    linear-gradient(rgba(230,225,216,0.4) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(230,225,216,0.4) 1px, transparent 1px);
-  background-size: 28px 28px;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-a { color: var(--data-blue); text-decoration: none; transition: all 0.2s; }
-a:hover { color: var(--primary); }
+  :root {
+    --primary: #1a56db;
+    --primary-light: #3b82f6;
+    --primary-dark: #1e40af;
+    --accent: #f59e0b;
+    --accent-light: #fbbf24;
+    --bg: #f1f5f9;
+    --bg-card: #ffffff;
+    --text: #1e293b;
+    --text-secondary: #64748b;
+    --text-light: #94a3b8;
+    --border: #e2e8f0;
+    --success: #10b981;
+  }
 
-/* ===== 首屏 ===== */
-.hero {
-  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-  color: #fff;
-  padding: 72px 24px 80px;
-  position: relative;
-  overflow: hidden;
-}
-.hero::before {
-  content: '';
-  position: absolute;
-  top: -50%; right: -10%;
-  width: 600px; height: 600px;
-  background: radial-gradient(circle, rgba(245,158,11,0.12) 0%, transparent 70%);
-  border-radius: 50%;
-}
-.hero-inner {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  position: relative;
-  z-index: 1;
-}
-.hero-tag {
-  display: inline-block;
-  padding: 4px 12px;
-  background: rgba(245,158,11,0.15);
-  border: 1px solid rgba(245,158,11,0.3);
-  color: var(--accent);
-  font-size: 12px;
-  font-weight: 600;
-  border-radius: 100px;
-  letter-spacing: 0.5px;
-  margin-bottom: 20px;
-}
-.hero h1 {
-  font-family: var(--font-serif);
-  font-size: clamp(28px, 5vw, 42px);
-  font-weight: 700;
-  line-height: 1.25;
-  margin-bottom: 16px;
-}
-.hero-sub {
-  font-size: 16px;
-  color: rgba(255,255,255,0.75);
-  max-width: 600px;
-  line-height: 1.7;
-  margin-bottom: 36px;
-}
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
 
-.stats-row {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-  max-width: 700px;
-}
-.stat-card {
-  background: rgba(255,255,255,0.08);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255,255,255,0.12);
-  border-radius: var(--radius-md);
-  padding: 16px 18px;
-}
-.stat-num {
-  font-family: var(--font-mono);
-  font-size: 28px;
-  font-weight: 700;
-  color: var(--accent);
-  line-height: 1;
-  margin-bottom: 6px;
-}
-.stat-label {
-  font-size: 12px;
-  color: rgba(255,255,255,0.65);
-}
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #1a56db 100%);
+    color: white;
+    padding: 60px 20px 80px;
+    position: relative;
+    overflow: hidden;
+  }
 
-/* ===== 主体 ===== */
-.main {
-  max-width: var(--max-width);
-  margin: -40px auto 0;
-  padding: 0 24px 80px;
-  position: relative;
-  z-index: 2;
-}
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -60%;
+    right: -10%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.25) 0%, transparent 70%);
+    border-radius: 50%;
+  }
 
-.section-title {
-  font-family: var(--font-serif);
-  font-size: 22px;
-  font-weight: 700;
-  color: var(--primary);
-  margin: 48px 0 20px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.section-title::before {
-  content: '';
-  width: 4px;
-  height: 22px;
-  background: var(--accent);
-  border-radius: 2px;
-}
-.section-desc {
-  color: var(--text-secondary);
-  font-size: 14px;
-  margin: -12px 0 20px;
-  padding-left: 16px;
-}
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -40%;
+    left: -5%;
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, rgba(245, 158, 11, 0.15) 0%, transparent 70%);
+    border-radius: 50%;
+  }
 
-/* ===== 研报卡片网格 ===== */
-.report-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-  gap: 20px;
-}
-.report-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 24px;
-  box-shadow: var(--shadow-sm);
-  transition: all 0.25s ease;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-}
-.report-card:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
-  border-color: var(--data-blue);
-}
-.report-category {
-  display: inline-block;
-  font-size: 11px;
-  font-weight: 600;
-  padding: 2px 8px;
-  border-radius: 4px;
-  margin-bottom: 12px;
-  letter-spacing: 0.3px;
-}
-.cat-palantir { background: rgba(16,42,67,0.08); color: var(--primary); }
-.cat-ai { background: rgba(41,120,181,0.1); color: var(--data-blue); }
-.cat-hardware { background: rgba(245,158,11,0.12); color: #B45309; }
-.cat-ebpf { background: rgba(5,150,105,0.1); color: var(--success); }
+  .header-content {
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
 
-.report-title {
-  font-family: var(--font-serif);
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--primary);
-  line-height: 1.4;
-  margin-bottom: 10px;
-}
-.report-summary {
-  font-size: 13.5px;
-  color: var(--text-secondary);
-  line-height: 1.65;
-  margin-bottom: 16px;
-  flex: 1;
-}
-.report-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px 16px;
-  font-size: 12px;
-  color: var(--text-tertiary);
-  margin-bottom: 14px;
-  padding-top: 14px;
-  border-top: 1px dashed var(--border-light);
-  font-family: var(--font-mono);
-}
-.report-actions {
-  display: flex;
-  gap: 10px;
-}
-.btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 14px;
-  font-size: 13px;
-  font-weight: 500;
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--border);
-  background: #fff;
-  color: var(--text);
-  cursor: pointer;
-  transition: all 0.15s;
-  text-decoration: none;
-}
-.btn:hover { text-decoration: none; }
-.btn-primary {
-  background: var(--primary);
-  color: #fff;
-  border-color: var(--primary);
-}
-.btn-primary:hover {
-  background: var(--primary-light);
-  border-color: var(--primary-light);
-  color: #fff;
-}
-.btn-outline:hover {
-  border-color: var(--data-blue);
-  color: var(--data-blue);
-}
-.btn-icon { font-size: 14px; }
+  .header-avatar {
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, #f59e0b, #ef4444);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
 
-/* ===== 专题区 ===== */
-.topic-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 16px;
-}
-.topic-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-left: 3px solid var(--data-blue);
-  border-radius: var(--radius-md);
-  padding: 18px 20px;
-  transition: all 0.2s;
-}
-.topic-card:hover {
-  border-left-color: var(--accent);
-  box-shadow: var(--shadow-md);
-}
-.topic-title {
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--primary);
-  margin-bottom: 6px;
-}
-.topic-desc {
-  font-size: 13px;
-  color: var(--text-secondary);
-  margin-bottom: 10px;
-}
-.topic-meta {
-  font-size: 11px;
-  color: var(--text-tertiary);
-  font-family: var(--font-mono);
-}
+  .header h1 {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    letter-spacing: -0.5px;
+  }
 
-/* ===== 标签筛选 ===== */
-.filter-bar {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 24px;
-}
-.filter-tag {
-  padding: 5px 12px;
-  font-size: 12px;
-  border: 1px solid var(--border);
-  border-radius: 100px;
-  background: #fff;
-  color: var(--text-secondary);
-  cursor: pointer;
-  transition: all 0.15s;
-  user-select: none;
-}
-.filter-tag:hover { border-color: var(--data-blue); color: var(--data-blue); }
-.filter-tag.active {
-  background: var(--primary);
-  color: #fff;
-  border-color: var(--primary);
-}
+  .header-subtitle {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.75);
+    margin-bottom: 28px;
+    max-width: 600px;
+  }
 
-/* ===== 底部 ===== */
-.footer {
-  text-align: center;
-  padding: 40px 24px;
-  color: var(--text-tertiary);
-  font-size: 12px;
-  border-top: 1px solid var(--border);
-  margin-top: 40px;
-}
-.footer strong { color: var(--text-secondary); }
+  .header-stats {
+    display: flex;
+    gap: 40px;
+  }
 
-/* ===== 响应式 ===== */
-@media (max-width: 768px) {
-  .hero { padding: 48px 20px 60px; }
-  .stats-row { grid-template-columns: repeat(2, 1fr); }
-  .report-grid { grid-template-columns: 1fr; }
-  .topic-grid { grid-template-columns: 1fr; }
-  .main { padding: 0 16px 60px; }
-}
+  .stat-item {
+    text-align: center;
+  }
 
-@media print {
-  .hero { background: #fff !important; color: var(--primary) !important; padding: 24px 0; }
-  .hero-tag, .stats-row, .filter-bar, .report-actions { display: none; }
-  .report-card { break-inside: avoid; box-shadow: none; }
-}
+  .stat-num {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--accent-light);
+    line-height: 1.2;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
+    letter-spacing: 1px;
+    margin-top: 4px;
+  }
+
+  /* Main Content */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* Toolbar */
+  .toolbar {
+    margin-top: -40px;
+    margin-bottom: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    position: relative;
+    z-index: 10;
+  }
+
+  .search-box {
+    flex: 1;
+    max-width: 320px;
+    position: relative;
+  }
+
+  .search-box input {
+    width: 100%;
+    padding: 12px 16px 12px 42px;
+    border: none;
+    border-radius: 12px;
+    background: var(--bg-card);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    font-size: 14px;
+    color: var(--text);
+    outline: none;
+    transition: box-shadow 0.2s;
+  }
+
+  .search-box input:focus {
+    box-shadow: 0 4px 20px rgba(26, 86, 219, 0.2);
+  }
+
+  .search-box::before {
+    content: '🔍';
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+    opacity: 0.5;
+  }
+
+  .filter-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .filter-tag {
+    padding: 6px 14px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .filter-tag:hover {
+    border-color: var(--primary-light);
+    color: var(--primary);
+  }
+
+  .filter-tag.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: white;
+  }
+
+  /* Section Title */
+  .section-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-title::before {
+    content: '';
+    width: 4px;
+    height: 22px;
+    background: var(--primary);
+    border-radius: 2px;
+  }
+
+  /* Book Shelf Grid */
+  .books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    margin-bottom: 48px;
+  }
+
+  .book-card {
+    background: var(--bg-card);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .book-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+  }
+
+  .book-cover {
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .book-cover::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%);
+  }
+
+  .book-cover-title {
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+    padding: 0 20px;
+    line-height: 1.4;
+    z-index: 1;
+    position: relative;
+  }
+
+  .book-cover-author {
+    position: absolute;
+    bottom: 12px;
+    right: 16px;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 12px;
+    z-index: 1;
+  }
+
+  .book-info {
+    padding: 18px;
+  }
+
+  .book-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 6px;
+    line-height: 1.4;
+  }
+
+  .book-author {
+    font-size: 12px;
+    color: var(--text-light);
+    margin-bottom: 10px;
+  }
+
+  .book-summary {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 14px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .book-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+  }
+
+  .book-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .book-tag {
+    padding: 2px 8px;
+    background: #eff6ff;
+    color: var(--primary);
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 500;
+  }
+
+  .book-tag.biz { background: #fef3c7; color: #92400e; }
+  .book-tag.tech { background: #dbeafe; color: #1e40af; }
+  .book-tag.thinking { background: #fce7f3; color: #9d174d; }
+  .book-tag.history { background: #e0e7ff; color: #3730a3; }
+  .book-tag.sales { background: #d1fae5; color: #065f46; }
+
+  .book-rating {
+    font-size: 12px;
+    color: var(--accent);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+  }
+
+  .book-date {
+    font-size: 11px;
+    color: var(--text-light);
+  }
+
+  /* Cover color variants */
+  .cover-1 { background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #1a56db 100%); }
+  .cover-2 { background: linear-gradient(135deg, #7c2d12 0%, #c2410c 50%, #ea580c 100%); }
+  .cover-3 { background: linear-gradient(135deg, #064e3b 0%, #047857 50%, #10b981 100%); }
+  .cover-4 { background: linear-gradient(135deg, #581c87 0%, #7c3aed 50%, #8b5cf6 100%); }
+  .cover-5 { background: linear-gradient(135deg, #881337 0%, #be123c 50%, #f43f5e 100%); }
+  .cover-6 { background: linear-gradient(135deg, #134e4a 0%, #0d9488 50%, #2dd4bf 100%); }
+  .cover-7 { background: linear-gradient(135deg, #422006 0%, #a16207 50%, #ca8a04 100%); }
+  .cover-8 { background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #60a5fa 100%); }
+
+  /* My Thoughts Section */
+  .thoughts-section {
+    background: var(--bg-card);
+    border-radius: 14px;
+    padding: 24px;
+    margin-bottom: 48px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  }
+
+  .thoughts-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+
+  .thoughts-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .thoughts-list {
+    list-style: none;
+  }
+
+  .thought-item {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    gap: 14px;
+  }
+
+  .thought-item:last-child {
+    border-bottom: none;
+  }
+
+  .thought-book {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--primary);
+    margin-bottom: 4px;
+  }
+
+  .thought-text {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .thought-date {
+    font-size: 11px;
+    color: var(--text-light);
+    margin-top: 6px;
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--text-light);
+    font-size: 13px;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+  }
+
+  .footer-quote {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+    font-style: italic;
+  }
+
+  /* Empty State */
+  .empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-light);
+  }
+
+  .empty-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+  }
+
+  .empty-text {
+    font-size: 14px;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .header {
+      padding: 40px 20px 60px;
+    }
+
+    .header h1 {
+      font-size: 26px;
+    }
+
+    .header-subtitle {
+      font-size: 14px;
+    }
+
+    .header-stats {
+      gap: 24px;
+    }
+
+    .stat-num {
+      font-size: 22px;
+    }
+
+    .books-grid {
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 16px;
+    }
+
+    .book-cover {
+      height: 150px;
+    }
+
+    .book-cover-title {
+      font-size: 15px;
+    }
+
+    .toolbar {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .search-box {
+      max-width: none;
+    }
+  }
+
+  /* Smooth scroll */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Fade in */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
 </style>
 </head>
 <body>
 
-<!-- 首屏 -->
-<section class="hero">
-  <div class="hero-inner">
-    <div class="hero-tag">📚 个人研报知识库</div>
-    <h1>技术研究报告汇总</h1>
-    <p class="hero-sub">
-      聚焦企业级AI、数据基础设施、前沿技术落地。
-      所有研报坚持数据驱动、来源可溯、场景落地导向，服务政企售前与方案决策。
+<!-- Header -->
+<header class="header">
+  <div class="header-content">
+    <div class="header-avatar">📚</div>
+    <h1>Daniel_BI的读书笔记</h1>
+    <p class="header-subtitle">
+      每一本读过的书，都是一次认知升级。<br>
+      在这里记录、沉淀、反思，让知识真正内化为能力。
     </p>
-    <div class="stats-row">
-      <div class="stat-card">
-        <div class="stat-num">6</div>
-        <div class="stat-label">深度研报</div>
+    <div class="header-stats">
+      <div class="stat-item">
+        <div class="stat-num" id="totalBooks">20</div>
+        <div class="stat-label">已读</div>
       </div>
-      <div class="stat-card">
-        <div class="stat-num">2</div>
-        <div class="stat-label">配套PPT</div>
+      <div class="stat-item">
+        <div class="stat-num" id="totalNotes">12</div>
+        <div class="stat-label">笔记</div>
       </div>
-      <div class="stat-card">
-        <div class="stat-num">4</div>
-        <div class="stat-label">专题工具页</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-num">2026</div>
-        <div class="stat-label">知识沉淀年份</div>
+      <div class="stat-item">
+        <div class="stat-num">365</div>
+        <div class="stat-label">阅读天</div>
       </div>
     </div>
   </div>
-</section>
+</header>
 
-<div class="main">
+<div class="container">
 
-  <!-- 深度研报 -->
-  <h2 class="section-title">深度研究报告</h2>
-  <p class="section-desc">系统级、大篇幅、多来源交叉验证的完整研究</p>
-
-  <div class="filter-bar" id="filterBar">
-    <span class="filter-tag active" data-filter="all">全部</span>
-    <span class="filter-tag" data-filter="cat-palantir">Palantir / FDE</span>
-    <span class="filter-tag" data-filter="cat-ai">AI 平台 / 架构</span>
-    <span class="filter-tag" data-filter="cat-hardware">算力 / 硬件</span>
-    <span class="filter-tag" data-filter="cat-ebpf">云原生 / 可观测</span>
-  </div>
-
-  <div class="report-grid" id="reportGrid">
-
-    <!-- AIP -->
-    <div class="report-card" data-cat="cat-ai">
-      <span class="report-category cat-ai">AI平台架构</span>
-      <div class="report-title">AIP企业级AI平台深度研报</div>
-      <p class="report-summary">
-        从概念起源到全球格局，系统剖析企业级AI平台（AIP）的核心架构、Palantir领跑路径、国内外厂商进展、ROI成本分析，以及五大争议的正反思辨。
-      </p>
-      <div class="report-meta">
-        <span>📅 2026-08-30</span>
-        <span>📄 8章 · 3.6万字</span>
-        <span>🔗 60个来源</span>
-      </div>
-      <div class="report-actions">
-        <a href="AIP企业级AI平台深度研报.html" class="btn btn-primary">
-          <span class="btn-icon">📖</span> 在线阅读
-        </a>
-        <a href="AIP企业级AI平台深度研报.pdf" class="btn btn-outline">
-          <span class="btn-icon">📄</span> PDF
-        </a>
-      </div>
+  <!-- Toolbar -->
+  <div class="toolbar">
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="搜索书名、作者、标签...">
     </div>
-
-    <!-- Ontology -->
-    <div class="report-card" data-cat="cat-palantir">
-      <span class="report-category cat-palantir">Palantir · 核心技术</span>
-      <div class="report-title">Ontology构建方法论深度研报</div>
-      <p class="report-summary">
-        从哲学根源到Palantir工程实践，覆盖四大设计原则、六步构建流程、FDE驻场模式、四重整合架构、国内外差距与未来八大趋势。
-      </p>
-      <div class="report-meta">
-        <span>📅 2026-08-30</span>
-        <span>📄 8章 · 4万字</span>
-        <span>🔗 52个来源</span>
-      </div>
-      <div class="report-actions">
-        <a href="Ontology构建方法论深度研报.html" class="btn btn-primary">
-          <span class="btn-icon">📖</span> 在线阅读
-        </a>
-        <a href="Ontology构建方法论深度研报.pdf" class="btn btn-outline">
-          <span class="btn-icon">📄</span> PDF
-        </a>
-      </div>
-    </div>
-
-    <!-- FDE -->
-    <div class="report-card" data-cat="cat-palantir">
-      <span class="report-category cat-palantir">Palantir · 交付模式</span>
-      <div class="report-title">FDE前沿部署工程师深度研报</div>
-      <p class="report-summary">
-        从FDE工程师第一视角，完整拆解前沿部署模式的方法论、全流程案例、高价值问题定义、以及国内市场落地分析与对标厂商。
-      </p>
-      <div class="report-meta">
-        <span>📅 2026-08-29</span>
-        <span>📄 13章 · 1.4万字</span>
-        <span>🔗 40个来源</span>
-      </div>
-      <div class="report-actions">
-        <a href="FDE前沿部署工程师深度研报.html" class="btn btn-primary">
-          <span class="btn-icon">📖</span> 在线阅读
-        </a>
-        <a href="FDE前沿部署工程师深度研究.pptx.html" class="btn btn-outline">
-          <span class="btn-icon">📊</span> PPT
-        </a>
-      </div>
-    </div>
-
-    <!-- Palantir -->
-    <div class="report-card" data-cat="cat-palantir">
-      <span class="report-category cat-palantir">公司深度研究</span>
-      <div class="report-title">Palantir Technologies深度研报</div>
-      <p class="report-summary">
-        20年发展史全景复盘，涵盖Gotham/Foundry/AIP三大平台、FDE模式拆解、Ontology核心技术、12个量化客户案例及售前落地实操指南。
-      </p>
-      <div class="report-meta">
-        <span>📅 2026-08-29</span>
-        <span>📄 11章</span>
-        <span>🏢 含客户案例</span>
-      </div>
-      <div class="report-actions">
-        <a href="Palantir深度研报.html" class="btn btn-primary">
-          <span class="btn-icon">📖</span> 在线阅读
-        </a>
-        <a href="Palantir深度研究.pptx.html" class="btn btn-outline">
-          <span class="btn-icon">📊</span> PPT
-        </a>
-      </div>
-    </div>
-
-    <!-- AI算力 -->
-    <div class="report-card" data-cat="cat-hardware">
-      <span class="report-category cat-hardware">算力评估</span>
-      <div class="report-title">AI私有化算力评估研报</div>
-      <p class="report-summary">
-        本地化算力评估全流程方法论，覆盖模型选型、显存估算、GPU配置、性能测算、成本对比，服务政企私有化部署方案制定。
-      </p>
-      <div class="report-meta">
-        <span>📅 2026-08-15</span>
-        <span>📄 全流程方法论</span>
-        <span>🏭 政企私有化</span>
-      </div>
-      <div class="report-actions">
-        <a href="AI私有化算力评估研报.html" class="btn btn-primary">
-          <span class="btn-icon">📖</span> 在线阅读
-        </a>
-        <a href="AI私有化算力评估研报.pdf" class="btn btn-outline">
-          <span class="btn-icon">📄</span> PDF
-        </a>
-      </div>
-    </div>
-
-    <!-- NVIDIA GPU -->
-    <div class="report-card" data-cat="cat-hardware">
-      <span class="report-category cat-hardware">GPU产品线</span>
-      <div class="report-title">英伟达GPU产品线全解析</div>
-      <p class="report-summary">
-        覆盖消费级50系、Blackwell B系、中国特供卡共27款主流型号，含参数对比表、2026年8月国内外成交价、政企选型指南。
-      </p>
-      <div class="report-meta">
-        <span>📅 2026-08-17</span>
-        <span>📄 v2.0</span>
-        <span>🃏 27款型号</span>
-      </div>
-      <div class="report-actions">
-        <a href="nvidia_gpu_report.html" class="btn btn-primary">
-          <span class="btn-icon">📖</span> 在线阅读
-        </a>
-        <a href="nvidia_gpu_report.pdf" class="btn btn-outline">
-          <span class="btn-icon">📄</span> PDF
-        </a>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- 专题工具页 -->
-  <h2 class="section-title">专题工具页</h2>
-  <p class="section-desc">轻量级、工具导向、速查速用的专项内容</p>
-
-  <div class="topic-grid">
-    <div class="topic-card">
-      <div class="topic-title">AI算力速算流程图</div>
-      <p class="topic-desc">快速判断AI私有化项目所需GPU数量和配置的决策流程图</p>
-      <div class="topic-meta">
-        <a href="AI算力速算流程图.html">打开工具 →</a>
-      </div>
+    <div class="filter-tags" id="filterTags">
+      <span class="filter-tag active" data-category="all">全部</span>
+      <span class="filter-tag" data-category="aitech">AI与技术前沿</span>
+      <span class="filter-tag" data-category="banxiaoshi">半小时系列</span>
+      <span class="filter-tag" data-category="network">网络技术</span>
+      <span class="filter-tag" data-category="ai">AI与未来</span>
+      <span class="filter-tag" data-category="infra">底层基础设施</span>
+      <span class="filter-tag" data-category="business">商业方法论</span>
+      <span class="filter-tag" data-category="finance">财税与管理</span>
+      <span class="filter-tag" data-category="history">历史与思维</span>
     </div>
   </div>
 
-  <!-- PPT汇总 -->
-  <h2 class="section-title">配套演示材料</h2>
-  <p class="section-desc">对应研报的PPT版本，用于汇报和宣讲</p>
-
-  <div class="topic-grid">
-    <div class="topic-card">
-      <div class="topic-title">Palantir深度研究 PPT</div>
-      <p class="topic-desc">深空藏青深蓝底+金色点缀，内容充实版，20页结构</p>
-      <div class="topic-meta">
-        <a href="Palantir深度研究.pptx.html">打开 PPT →</a>
+  <!-- Books Grid -->
+  <h2 class="section-title">书架</h2>
+  <div class="books-grid" id="booksGrid">
+    <!-- Book Card 6  -->
+    <a href="books/book_006_chip_history.html" class="book-card fade-in" data-category="infra">
+      <div class="book-cover" style="background: linear-gradient(135deg, #7c2d12 0%, #c2410c 35%, #ea580c 65%, #f97316 100%);">
+        <div class="book-cover-title">芯片简史</div>
+        <div class="book-cover-author">汪波</div>
       </div>
-    </div>
-    <div class="topic-card">
-      <div class="topic-title">FDE前沿部署工程师 PPT</div>
-      <p class="topic-desc">数据风米白+深蓝+橙色高亮，20页，与HTML研报同风格</p>
-      <div class="topic-meta">
-        <a href="FDE前沿部署工程师深度研究.pptx.html">打开 PPT →</a>
+      <div class="book-info">
+        <div class="book-title">《芯片简史》</div>
+        <div class="book-author">汪波 · 芯片产业史</div>
+        <div class="book-summary">
+          从晶体管到AI芯片，60年创新史的因果逻辑。
+          创新即叛逆，摩尔定律是信心定律，
+          从空间缩微到时间缩微的范式转移。
+        </div>
+        <div class="book-meta">
+          <div class="book-tags">
+            <span class="book-tag" style="background: #ffedd5; color: #c2410c;">芯片技术</span>
+            <span class="book-tag history">产业史</span>
+          </div>
+          <div class="book-rating">⭐ 4.9</div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Book Card 7 -->
+    <a href="books/book_007_zero_trust.html" class="book-card fade-in" data-category="network">
+      <div class="book-cover" style="background: linear-gradient(135deg, #064e3b 0%, #047857 35%, #10b981 65%, #34d399 100%);">
+        <div class="book-cover-title">零信任网络</div>
+        <div class="book-cover-author">吉尔曼 / 巴斯</div>
+      </div>
+      <div class="book-info">
+        <div class="book-title">《零信任网络》</div>
+        <div class="book-author">埃文·吉尔曼 · 安全经典</div>
+        <div class="book-summary">
+          从边界安全到身份驱动的安全范式革命。
+          四大信任支柱+渐进式落地路径，
+          售前工程师的零信任方案销售完整工具箱。
+        </div>
+        <div class="book-meta">
+          <div class="book-tags">
+            <span class="book-tag" style="background: #d1fae5; color: #065f46;">网络安全</span>
+            <span class="book-tag" style="background: #ecfdf5; color: #047857;">零信任</span>
+          </div>
+          <div class="book-rating">⭐ 4.8</div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Book Card 5 -->
+    <a href="books/book_005_singularity_nearer.html" class="book-card fade-in" data-category="ai">
+      <div class="book-cover" style="background: linear-gradient(135deg, #4c1d95 0%, #6d28d9 35%, #7c3aed 65%, #9333ea 100%);">
+        <div class="book-cover-title">奇点更近</div>
+        <div class="book-cover-author">雷·库兹韦尔</div>
+      </div>
+      <div class="book-info">
+        <div class="book-title">《奇点更近》</div>
+        <div class="book-author">雷·库兹韦尔 · 未来学经典</div>
+        <div class="book-summary">
+          从加速回报定律到人机融合奇点，
+          六大进化纪元与GNR技术共振，
+          技术管理者的指数思维升级手册。
+        </div>
+        <div class="book-meta">
+          <div class="book-tags">
+            <span class="book-tag" style="background: #ede9fe; color: #6d28d9;">AI未来</span>
+            <span class="book-tag thinking">技术战略</span>
+          </div>
+          <div class="book-rating">⭐ 4.9</div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Book Card 1 -->
+    <a href="books/book_001_tech_product_marketing.html" class="book-card fade-in" data-category="business">
+      <div class="book-cover cover-1">
+        <div class="book-cover-title">科技产品营销基本法</div>
+        <div class="book-cover-author">玛蒂娜·劳琴科</div>
+      </div>
+      <div class="book-info">
+        <div class="book-title">《科技产品营销基本法》</div>
+        <div class="book-author">Martina Lauchengco · SVPG出品</div>
+        <div class="book-summary">
+          硅谷产品集团里程碑式著作，首次系统定义"产品营销"职能。
+          从售前视角拆解四大角色与七大战略工具，
+          教你如何把技术语言翻译为客户价值语言。
+        </div>
+        <div class="book-meta">
+          <div class="book-tags">
+            <span class="book-tag">营销</span>
+            <span class="book-tag sales">销售</span>
+          </div>
+          <div class="book-rating">⭐ 5.0</div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Book Card 2 -->
+    <a href="books/book_002_industry_research.html" class="book-card fade-in" data-category="business">
+      <div class="book-cover" style="background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 50%, #4c1d95 100%);">
+        <div class="book-cover-title">如何快速了解一个行业</div>
+        <div class="book-cover-author">肖璟</div>
+      </div>
+      <div class="book-info">
+        <div class="book-title">《如何快速了解一个行业》</div>
+        <div class="book-author">肖璟 · 前麦肯锡分析师</div>
+        <div class="book-summary">
+          产业生命周期+七大分析维度+麦肯锡资讯料理法，
+          一套可复制的行业研究方法论。
+          从需求洞察到方案设计，售前能力跃迁的系统框架。
+        </div>
+        <div class="book-meta">
+          <div class="book-tags">
+            <span class="book-tag" style="background: #ede9fe; color: #6d28d9;">方法论</span>
+            <span class="book-tag" style="background: #fef3c7; color: #92400e;">思维</span>
+          </div>
+          <div class="book-rating">⭐ 4.8</div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Book Card 4 -->
+    <a href="books/book_004_hassabis_deepmind.html" class="book-card fade-in" data-category="ai">
+      <div class="book-cover" style="background: linear-gradient(135deg, #0c4a6e 0%, #0369a1 50%, #0ea5e9 100%);">
+        <div class="book-cover-title">哈萨比斯：谷歌AI之脑</div>
+        <div class="book-cover-author">塞巴斯蒂安·马拉比</div>
+      </div>
+      <div class="book-info">
+        <div class="book-title">《哈萨比斯：谷歌AI之脑》</div>
+        <div class="book-author">湛庐文化 · 2026新书</div>
+        <div class="book-summary">
+          DeepMind十五年演进史诗，突击小组管理模式，
+          强化学习路线的螺旋式回归，
+          前沿技术团队管理与战略决策的教科书级案例。
+        </div>
+        <div class="book-meta">
+          <div class="book-tags">
+            <span class="book-tag tech">AI</span>
+            <span class="book-tag" style="background: #dbeafe; color: #1e40af;">传记</span>
+          </div>
+          <div class="book-rating">⭐ 4.9</div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Book Card 3 -->
+    <a href="books/book_003_finance_dc_network.html" class="book-card fade-in" data-category="network">
+      <div class="book-cover" style="background: linear-gradient(135deg, #92400e 0%, #d97706 50%, #f59e0b 100%);">
+        <div class="book-cover-title">金融数据中心网络架构与技术</div>
+        <div class="book-cover-author">张学明 陈乐</div>
+      </div>
+      <div class="book-info">
+        <div class="book-title">《金融数据中心网络架构与技术》</div>
+        <div class="book-author">华为数据通信系列 · 国之重器出版工程</div>
+        <div class="book-summary">
+          IPO四层模型+三大解耦+七大分区Fabric设计，
+          金融行业网络架构的系统化实战指南。
+          从业务需求倒推技术架构，售前设计人员的核心参考手册。
+        </div>
+        <div class="book-meta">
+          <div class="book-tags">
+            <span class="book-tag tech">网络架构</span>
+            <span class="book-tag biz">金融</span>
+          </div>
+          <div class="book-rating">⭐ 4.9</div>
+        </div>
+      </div>
+    </a>
+
+    
+    <!-- Book Card 010 -->
+    <a href="books/book_010_cloud_primer.html" class="book-card fade-in" data-category="infra">
+      <div class="book-cover" style="background: linear-gradient(135deg, #7c2d12 0%, #c2410c 30%, #f97316 60%, #fb923c 100%);">
+        <div class="book-cover-title">云计算通俗讲义</div>
+        <div class="book-cover-author">王良明</div>
+      </div>
+      <div class="book-info">
+        <div class="book-title">《云计算通俗讲义》</div>
+        <div class="book-author">云计算入门经典</div>
+        <div class="book-summary">
+          用通俗类比把云计算讲透——水电站、披萨、房子等经典类比，抽象层不断上移的演进逻辑，售前工程师"把技术翻译成客户语言"的方法论宝库。
+        </div>
+        <div class="book-meta">
+          <div class="book-tags">
+            <span class="book-tag" style="background: #ffedd5; color: #c2410c;">云计算</span><span class="book-tag" style="background: #fef3c7; color: #92400e;">入门经典</span>
+          </div>
+          <div class="book-rating">⭐ 4.8</div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Book Card 009 -->
+    <a href="books/book_009_private_cloud.html" class="book-card fade-in" data-category="infra">
+      <div class="book-cover" style="background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 30%, #3b82f6 60%, #60a5fa 100%);">
+        <div class="book-cover-title">私有云平台部署与管理</div>
+        <div class="book-cover-author">VMware技术栈</div>
+      </div>
+      <div class="book-info">
+        <div class="book-title">《私有云平台部署与管理》</div>
+        <div class="book-author">企业级云计算实践</div>
+        <div class="book-summary">
+          VMware技术栈为主线，从计算存储网络三层架构到vCSA管控，从vMotion/HA/FT三级高可用到Horizon云桌面，私有云从规划到运维的完整落地方法论。
+        </div>
+        <div class="book-meta">
+          <div class="book-tags">
+            <span class="book-tag" style="background: #dbeafe; color: #1e40af;">私有云</span><span class="book-tag" style="background: #e0e7ff; color: #3730a3;">VMware</span>
+          </div>
+          <div class="book-rating">⭐ 4.8</div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Book Card 008 -->
+    <a href="books/book_008_cloud_dc_network.html" class="book-card fade-in" data-category="network">
+      <div class="book-cover" style="background: linear-gradient(135deg, #0c4a6e 0%, #0369a1 30%, #0ea5e9 60%, #38bdf8 100%);">
+        <div class="book-cover-title">云数据中心网络架构与技术</div>
+        <div class="book-cover-author">徐文伟 / 张磊 / 陈乐</div>
+      </div>
+      <div class="book-info">
+        <div class="book-title">《云数据中心网络架构与技术》</div>
+        <div class="book-author">华为数据通信系列</div>
+        <div class="book-summary">
+          华为数据通信系列，云数据中心网络架构的系统实战指南。从五大挑战到六阶段演进，Underlay/Overlay双栈技术体系，多DC/多云互联，AI无损网络，售前方案设计全流程工具箱。
+        </div>
+        <div class="book-meta">
+          <div class="book-tags">
+            <span class="book-tag" style="background: #e0f2fe; color: #0369a1;">数据中心</span><span class="book-tag" style="background: #dbeafe; color: #1e40af;">网络架构</span>
+          </div>
+          <div class="book-rating">⭐ 4.9</div>
+        </div>
+      </div>
+    </a>
+
+    
+    <!-- Book Card 014 -->
+    <a href="books/book_014_atomic_habits.html" class="book-card fade-in" data-category="business">
+      <div class="book-cover" style="background: linear-gradient(135deg, #0f766e 0%, #0d9488 30%, #14b8a6 60%, #2dd4bf 100%);">
+        <div class="book-cover-title">原子习惯</div>
+        <div class="book-cover-author">詹姆斯·克利尔</div>
+      </div>
+      <div class="book-info">
+        <div class="book-title">《原子习惯》</div>
+        <div class="book-author">习惯工程 · 复利成长</div>
+        <div class="book-summary">
+          用1%的微小改变构建复利式成长系统。
+          四大行为改变法则、12个核心概念、
+          售前工程师的习惯工程落地指南。
+        </div>
+        <div class="book-meta">
+          <div class="book-tags">
+            <span class="book-tag biz">商业方法论</span><span class="book-tag" style="background: #ccfbf1; color: #0f766e;">自我管理</span>
+          </div>
+          <div class="book-rating">⭐ 5.0</div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Book Card 011 -->
+    <a href="books/book_011_salesforce_legend.html" class="book-card fade-in" data-category="business">
+      <div class="book-cover" style="background: linear-gradient(135deg, #002D5E 0%, #004182 25%, #0A66C2 55%, #117BD6 80%, #3B95E8 100%);">
+        <div class="book-cover-title">Salesforce传奇</div>
+        <div class="book-cover-author">马克·贝尼奥夫</div>
+      </div>
+      <div class="book-info">
+        <div class="book-title">《Salesforce传奇》</div>
+        <div class="book-author">SaaS开山鼻祖 · 创业史诗</div>
+        <div class="book-summary">
+          从"No Software"宣言到千亿美元帝国，
+          多租户架构、客户成功运动、平台化跃迁，
+          售前工程师的ToB商业思维升级必修课。
+        </div>
+        <div class="book-meta">
+          <div class="book-tags">
+            <span class="book-tag" style="background: #dbeafe; color: #1e40af;">SaaS</span><span class="book-tag biz">商业方法论</span>
+          </div>
+          <div class="book-rating">⭐ 5.0</div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Book Card 012 -->
+    <a href="books/book_012_segmentation_blueprint.html" class="book-card fade-in" data-category="network">
+      <div class="book-cover" style="background: linear-gradient(135deg, #064e3b 0%, #065f46 30%, #10b981 60%, #34d399 100%);">
+        <div class="book-cover-title">The Segmentation Blueprint</div>
+        <div class="book-cover-author">Cisco Press</div>
+      </div>
+      <div class="book-info">
+        <div class="book-title">《The Segmentation Blueprint》</div>
+        <div class="book-author">分段架构蓝图 · Cisco Press</div>
+        <div class="book-summary">
+          从零信任五支柱到纳秒分段，网络安全架构的系统性落地指南。四位Cisco资深专家联袂撰写，12章完整方法论体系，售前工程师的分段架构设计必修课。
+        </div>
+        <div class="book-meta">
+          <div class="book-tags">
+            <span class="book-tag" style="background: #d1fae5; color: #065f46;">网络技术</span><span class="book-tag" style="background: #d1fae5; color: #065f46;">安全架构</span>
+          </div>
+          <div class="book-rating">⭐ 4.9</div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Book Card 013 -->
+    <a href="books/book_013_erqiannianjian.html" class="book-card fade-in" data-category="history">
+      <div class="book-cover" style="background: linear-gradient(135deg, #78350f 0%, #92400e 30%, #b45309 60%, #d97706 100%);">
+        <div class="book-cover-title">二千年间</div>
+        <div class="book-cover-author">胡绳</div>
+      </div>
+      <div class="book-info">
+        <div class="book-title">《二千年间》</div>
+        <div class="book-author">封建专制解剖 · 历史思维</div>
+        <div class="book-summary">
+          从两千年封建史看组织本质与权力博弈。
+          皇权-官僚-军队三位一体结构，
+          王朝周期律与售前工程师的战略思维。
+        </div>
+        <div class="book-meta">
+          <div class="book-tags">
+            <span class="book-tag" style="background: #ffedd5; color: #92400e;">历史思维</span><span class="book-tag" style="background: #fef3c7; color: #92400e;">组织洞察</span>
+          </div>
+          <div class="book-rating">⭐ 5.0</div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Book Card 015 -->
+    <a href="books/book_015_qiangshi.html" class="book-card fade-in" data-category="business">
+      <div class="book-cover" style="background: linear-gradient(135deg, #4c0519 0%, #881337 30%, #9f1239 60%, #be123c 100%);">
+        <div class="book-cover-title">强势</div>
+        <div class="book-cover-author">曼纽尔·J·史密斯</div>
+      </div>
+      <div class="book-info">
+        <div class="book-title">《强势》</div>
+        <div class="book-author">断言式训练奠基之作 · 畅销近50年</div>
+        <div class="book-summary">
+          十大强势权利+七类实战技巧+12个售前场景话术。
+          从"老好人"到"专业强势"的身份转变，
+          售前工程师心理防线建设的必读手册。
+        </div>
+        <div class="book-meta">
+          <div class="book-tags">
+            <span class="book-tag biz">商业方法论</span><span class="book-tag" style="background: #ffe4e6; color: #9f1239;">沟通边界</span>
+          </div>
+          <div class="book-rating">⭐ 5.0</div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Book Card 016 -->
+    <!-- Book Card 024 第24本《2049》- AI与技术前沿分类首位 -->
+    <a href="books/kk2049/index.html" class="book-card fade-in" data-category="aitech">
+      <div class="book-cover" style="background: linear-gradient(135deg, #312e81 0%, #4338ca 30%, #4f46e5 55%, #8b5cf6 100%);">
+        <div class="book-cover-title" style="font-size: 28px; font-weight: 700; letter-spacing: 1px;">2049<br><span style="font-size: 14px; font-weight: 400; opacity: 0.85;">未来10000天的可能</span></div>
+        <div class="book-cover-author">凯文·凯利 / 吴晨</div>
+      </div>
+      <div class="book-info">
+        <div class="book-title">《2049：未来10000天的可能》</div>
+        <div class="book-author">凯文·凯利 著 / 吴晨 编 · 第24本</div>
+        <div class="book-summary">
+          镜像世界·异人智能·十大科技浪潮。
+          KK对未来25年的系统性预判，
+          IT售前工程师的未来技术路线图与行动指南。
+        </div>
+        <div class="book-meta">
+          <div class="book-tags">
+            <span class="book-tag" style="background: #ede9fe; color: #6d28d9;">AI前沿</span><span class="book-tag" style="background: #e0e7ff; color: #3730a3;">未来学</span>
+          </div>
+          <div class="book-rating">⭐ 5.0</div>
+        </div>
+      </div>
+    </a>
+
+    <a href="books/book_016_fde.html" class="book-card fade-in" data-category="aitech">
+      <div class="book-cover" style="background: linear-gradient(135deg, #0c4a6e 0%, #0369a1 30%, #0ea5e9 60%, #38bdf8 100%);">
+        <div class="book-cover-title">半小时讲透AI时代的新职业FDE</div>
+        <div class="book-cover-author">樊中恺</div>
+      </div>
+      <div class="book-info">
+        <div class="book-title">《半小时讲透AI时代的新职业FDE》</div>
+        <div class="book-author">樊中恺 · 百度主任架构师</div>
+        <div class="book-summary">
+          95% AI项目失败率的深层原因，FDE三维能力模型，
+          售前工程师6个月转型路线图，
+          IT集成商三级转型模式与趋势研判。
+        </div>
+        <div class="book-meta">
+          <div class="book-tags">
+            <span class="book-tag" style="background: #e0f2fe; color: #0369a1;">AI前沿</span><span class="book-tag" style="background: #cffafe; color: #0e7490;">职业发展</span>
+          </div>
+          <div class="book-rating">⭐ 5.0</div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Book Card 017 -->
+    <a href="books/book_017_chip.html" class="book-card fade-in" data-category="banxiaoshi">
+      <div class="book-cover" style="background: linear-gradient(135deg, #7c2d12 0%, #c2410c 35%, #d97706 65%, #f59e0b 100%);">
+        <div class="book-cover-title">半小时讲透芯片</div>
+        <div class="book-cover-author">樊中恺</div>
+      </div>
+      <div class="book-info">
+        <div class="book-title">《半小时讲透芯片》</div>
+        <div class="book-author">樊中恺 · 百度主任架构师</div>
+        <div class="book-summary">
+          从沙子到芯片的全流程拆解，全球产业链格局，
+          国产替代真实水平研判，
+          IT集成商算力选型指南与商业机会。
+        </div>
+        <div class="book-meta">
+          <div class="book-tags">
+            <span class="book-tag" style="background: #ffedd5; color: #c2410c;">芯片技术</span><span class="book-tag" style="background: #fef3c7; color: #92400e;">算力基建</span>
+          </div>
+          <div class="book-rating">⭐ 4.9</div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Book Card 018 -->
+    <a href="books/book_018_firstprinciple.html" class="book-card fade-in" data-category="banxiaoshi">
+      <div class="book-cover" style="background: linear-gradient(135deg, #312e81 0%, #4338ca 35%, #6366f1 65%, #818cf8 100%);">
+        <div class="book-cover-title">半小时讲透第一性原理</div>
+        <div class="book-cover-author">樊中恺</div>
+      </div>
+      <div class="book-info">
+        <div class="book-title">《半小时讲透第一性原理》</div>
+        <div class="book-author">樊中恺 · 百度主任架构师</div>
+        <div class="book-summary">
+          切开经验脂肪、露出效率肌肉的思维手术刀，
+          四步方法论框架+IT售前实战应用，
+          从类比思维到本质思考的跃迁路径。
+        </div>
+        <div class="book-meta">
+          <div class="book-tags">
+            <span class="book-tag" style="background: #e0e7ff; color: #4338ca;">思维方法</span><span class="book-tag" style="background: #ede9fe; color: #6d28d9;">认知升级</span>
+          </div>
+          <div class="book-rating">⭐ 4.9</div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Book Card 019 -->
+    <a href="books/book_019_aiwealth.html" class="book-card fade-in" data-category="banxiaoshi">
+      <div class="book-cover" style="background: linear-gradient(135deg, #064e3b 0%, #047857 35%, #059669 65%, #10b981 100%);">
+        <div class="book-cover-title">AI时代的财富密码</div>
+        <div class="book-cover-author">樊中恺 等</div>
+      </div>
+      <div class="book-info">
+        <div class="book-title">《AI时代的财富密码》</div>
+        <div class="book-author">樊中恺 / 魏思理 / 张其来 合著</div>
+        <div class="book-summary">
+          从芯片到Agent的11个底层认知，
+          AI产业链财富分布全景图，
+          IT售前/集成商/创业者的行动指南。
+        </div>
+        <div class="book-meta">
+          <div class="book-tags">
+            <span class="book-tag" style="background: #d1fae5; color: #065f46;">AI认知</span><span class="book-tag" style="background: #ecfdf5; color: #047857;">财富逻辑</span>
+          </div>
+          <div class="book-rating">⭐ 4.9</div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Book Card 023: 一本书读懂财报 -->
+    <a href="books/book_023_financial_statements_xiaoxing.html" class="book-card fade-in" data-category="finance">
+      <div class="book-cover" style="background: linear-gradient(135deg, #1a365d 0%, #2b6cb0 35%, #3182ce 65%, #63b3ed 100%);">
+        <div class="book-cover-title">一本书读懂财报<br>售前视角解读</div>
+        <div class="book-cover-author">肖星</div>
+      </div>
+      <div class="book-info">
+        <div class="book-title">《一本书读懂财报》</div>
+        <div class="book-author">肖星 · 清华大学会计系主任 · 第23本</div>
+        <div class="book-summary">
+          从三大报表透视客户商业逻辑，
+          资产负债表读"家底"、利润表读"赚钱能力"、现金流量表读"付款实力"，
+          售前工程师的财务必修课。
+        </div>
+        <div class="book-meta">
+          <div class="book-tags">
+            <span class="book-tag" style="background: #ebf8ff; color: #2b6cb0;">财报基础</span><span class="book-tag" style="background: #bee3f8; color: #2c5282;">杜邦分析</span>
+          </div>
+          <div class="book-rating">⭐ 4.9</div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Book Card 024: 从报表看企业 -->
+    <a href="books/book_024_financial_reports_zhangxinmin.html" class="book-card fade-in" data-category="finance">
+      <div class="book-cover" style="background: linear-gradient(135deg, #1a4731 0%, #276749 35%, #2f855a 65%, #48bb78 100%);">
+        <div class="book-cover-title">从报表看企业<br>八看框架透视战略</div>
+        <div class="book-cover-author">张新民</div>
+      </div>
+      <div class="book-info">
+        <div class="book-title">《从报表看企业》</div>
+        <div class="book-author">张新民 · 对外经贸大学副校长 · 第24本</div>
+        <div class="book-summary">
+          独创"八看"分析框架：看战略→看经营→看效益→看价值→看成本→看质量→看风险→看前景，
+          从管理视角读懂财报背后的企业战略。
+        </div>
+        <div class="book-meta">
+          <div class="book-tags">
+            <span class="book-tag" style="background: #f0fff4; color: #276749;">八看框架</span><span class="book-tag" style="background: #c6f6d5; color: #22543d;">战略分析</span>
+          </div>
+          <div class="book-rating">⭐ 4.9</div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Book Card 025: 中小企业财税一本通 -->
+    <a href="books/book_025_sme_finance_tax.html" class="book-card fade-in" data-category="finance">
+      <div class="book-cover" style="background: linear-gradient(135deg, #7c2d12 0%, #c05621 35%, #dd6b20 65%, #ed8936 100%);">
+        <div class="book-cover-title">中小企业财税一本通<br>售前税务筹划指南</div>
+        <div class="book-cover-author">聂桃</div>
+      </div>
+      <div class="book-info">
+        <div class="book-title">《中小企业财税一本通》</div>
+        <div class="book-author">聂桃 · 实战派财务专家 · 第25本</div>
+        <div class="book-summary">
+          IT集成商必备的财税知识手册，
+          增值税13%vs6%差异、合同拆分策略、产品vs服务税务筹划，
+          从报价到签约的全链路财税指南。
+        </div>
+        <div class="book-meta">
+          <div class="book-tags">
+            <span class="book-tag" style="background: #fffaf0; color: #c05621;">税务筹划</span><span class="book-tag" style="background: #feebc8; color: #9c4221;">增值税</span>
+          </div>
+          <div class="book-rating">⭐ 4.8</div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Book Card 026: 边际利润 -->
+    <a href="books/book_026_marginal_profit.html" class="book-card fade-in" data-category="finance">
+      <div class="book-cover" style="background: linear-gradient(135deg, #742a2a 0%, #9b2c2c 35%, #c53030 65%, #e53e3e 100%);">
+        <div class="book-cover-title">边际利润<br>从毛利幻觉到真实盈利</div>
+        <div class="book-cover-author">张楠</div>
+      </div>
+      <div class="book-info">
+        <div class="book-title">《边际利润》</div>
+        <div class="book-author">张楠 · 吴裕泰董事长 · 第26本</div>
+        <div class="book-summary">
+          为什么毛利率50%还在亏损？把"三费"拆成变动成本和固定成本，
+          用边际利润模型找出真正赚钱的业务，
+          IT集成商报价与经营的核心武器。
+        </div>
+        <div class="book-meta">
+          <div class="book-tags">
+            <span class="book-tag" style="background: #fff5f5; color: #9b2c2c;">边际利润</span><span class="book-tag" style="background: #fed7d7; color: #742a2a;">盈亏分析</span>
+          </div>
+          <div class="book-rating">⭐ 4.9</div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Book Card 027: 四书联动·财税统一分析 -->
+    <a href="books/book_027_finance_tax_unified.html" class="book-card fade-in" data-category="finance">
+      <div class="book-cover" style="background: linear-gradient(135deg, #44337a 0%, #6b46c1 35%, #805ad5 65%, #b794f4 100%);">
+        <div class="book-cover-title">四书联动<br>售前财税全链路指南</div>
+        <div class="book-cover-author">专题整合</div>
+      </div>
+      <div class="book-info">
+        <div class="book-title">《四书联动 · 售前财税全链路指南》</div>
+        <div class="book-author">专题整合 · 四书精华串联 · 第27本</div>
+        <div class="book-summary">
+          从读财报到算清利润，IT集成商售前的财税全链路。
+          客户端财务画像×渠道端财务模型×产品vs服务税务差异×报价实战计算，
+          一本书打通四本核心知识。
+        </div>
+        <div class="book-meta">
+          <div class="book-tags">
+            <span class="book-tag" style="background: #faf5ff; color: #6b46c1;">知识整合</span><span class="book-tag" style="background: #e9d8fd; color: #553c9a;">财税实战</span>
+          </div>
+          <div class="book-rating">⭐ 5.0</div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Placeholder for future books -->
+    <div class="book-card fade-in" style="opacity: 0.5; cursor: default;" onclick="return false;">
+      <div class="book-cover" style="background: linear-gradient(135deg, #94a3b8 0%, #cbd5e1 100%);">
+        <div class="book-cover-title" style="opacity: 0.7;">更多书籍<br>敬请期待</div>
+      </div>
+      <div class="book-info">
+        <div class="book-title" style="color: var(--text-light);">下一本正在阅读中...</div>
+        <div class="book-author">持续更新</div>
+        <div class="book-summary" style="color: var(--text-light);">
+          新的读书笔记会陆续添加到这里，见证认知升级的每一步。
+        </div>
+        <div class="book-meta">
+          <div class="book-tags">
+            <span class="book-tag" style="background: #f1f5f9; color: #94a3b8;">待添加</span>
+          </div>
+          <div class="book-date">—</div>
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="footer">
-    <strong>研报知识库</strong> · 持续更新中<br>
-    所有内容仅供学习研究，数据与观点来自公开网络信息，请结合实际场景验证
+  <!-- My Thoughts -->
+  <div class="thoughts-section">
+    <div class="thoughts-header">
+      <div class="thoughts-title">💡 近期读书感悟</div>
+    </div>
+    <ul class="thoughts-list">
+      <li class="thought-item">
+        <div>
+          <div class="thought-book">《芯片简史》</div>
+          <div class="thought-text">
+            "空间缩微→时间缩微"——芯片产业的这个范式转移，对网络基础设施同样适用。
+            过去60年，核心矛盾是"能塞下多少晶体管"（空间）；
+            现在核心矛盾变成"数据搬运有多快"（时间）。
+            内存墙、IO墙、功耗墙——这些时间维度的瓶颈，恰恰是网络和存储的价值所在。
+            谁能解决"时间缩微"的问题，谁就是下一个时代的主角。
+          </div>
+          <div class="thought-date">2026年7月20日</div>
+        </div>
+      </li>
+      <li class="thought-item">
+        <div>
+          <div class="thought-book">《零信任网络》</div>
+          <div class="thought-text">
+            信任的锚点从"位置"转向"身份"——这不是一次技术升级，而是一次范式革命。
+            就像货币从"金银本位"转向"信用本位"，信任的基础变了，整个体系都要跟着变。
+            对售前来说，卖零信任不是在卖一个安全产品，而是在帮助客户完成一次信任模型的迁移。
+            理解了这一点，就理解了为什么零信任不是买一台设备就能解决的事。
+          </div>
+          <div class="thought-date">2026年7月20日</div>
+        </div>
+      </li>
+      <li class="thought-item">
+        <div>
+          <div class="thought-book">《奇点更近》</div>
+          <div class="thought-text">
+            "指数增长的膝盖弯已经拐过"——这句话彻底改变了我做技术战略的方式。
+            以前做规划总是按"每年增长30%"的线性思维，但库兹韦尔的加速回报定律提醒我：
+            在AI驱动的技术领域，变化速度本身也在加速。未来三年的变化，可能比过去十年还大。
+            对技术管理者来说，最大的风险不是做错了什么，而是用线性思维预判指数变化，导致战略上的低估和迟缓。
+          </div>
+          <div class="thought-date">2026年7月19日</div>
+        </div>
+      </li>
+      <li class="thought-item">
+        <div>
+          <div class="thought-book">《哈萨比斯：谷歌AI之脑》</div>
+          <div class="thought-text">
+            "突击小组模式"——平时给研究员充分自由探索，
+            关键时刻集中全部力量在统一代码库上攻坚。
+            AlphaGo、AlphaFold、Gemini都是这么搞出来的。
+            对技术团队管理的启发：自由不是失控，统一基础设施才是集中力量的前提。
+          </div>
+          <div class="thought-date">2026年7月19日</div>
+        </div>
+      </li>
+      <li class="thought-item">
+        <div>
+          <div class="thought-book">《金融数据中心网络架构与技术》</div>
+          <div class="thought-text">
+            "金融数据中心最大的运维痛点不是带宽，而是防火墙策略变更"——
+            5万+ACL、年变更1万+次、占网络变更60%以上。
+            这个发现彻底改变了SDN方案的ROI论证逻辑：
+            不要从带宽利用率切入，要从安全策略自动化和运维效率切入。
+            做售前的，得先找对客户真正的痛在哪里。
+          </div>
+          <div class="thought-date">2026年7月18日</div>
+        </div>
+      </li>
+      <li class="thought-item">
+        <div>
+          <div class="thought-book">《如何快速了解一个行业》</div>
+          <div class="thought-text">
+            "售前和麦肯锡分析师做的是同一件事：用一周时间，从门外汉变成能跟专家对话的人。"
+            不同的是，分析师靠可复制的方法论，很多售前靠个人悟性和经验积累。
+            肖璟的价值就是把"只可意会"的东西，变成了可以学习、可以训练、可以复用的系统方法。
+          </div>
+          <div class="thought-date">2026年7月18日</div>
+        </div>
+      </li>
+      <li class="thought-item">
+        <div>
+          <div class="thought-book">《科技产品营销基本法》</div>
+          <div class="thought-text">
+            "没有被讲述的价值，就等于不存在"——这句话对售前太扎心了。
+            我们花大量时间研究技术细节，但如果不能用客户听得懂的语言讲清楚，
+            那些技术优势在客户心智里就是不存在的。
+            从"技术讲解员"到"价值建筑师"，这是认知上的一次跃迁。
+          </div>
+          <div class="thought-date">2026年7月14日</div>
+        </div>
+      </li>
+    </ul>
   </div>
 
 </div>
 
-<script>
-// 标签筛选
-const filterBar = document.getElementById('filterBar');
-const cards = document.querySelectorAll('.report-card');
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-quote">"读书是在别人思想的帮助下，建立起自己的思想。" —— 鲁巴金</div>
+  <p>持续阅读 · 持续思考 · 持续进化</p>
+  <p style="margin-top: 8px; font-size: 12px;">© 2026 RootUser 的阅读空间</p>
+</footer>
 
-filterBar.addEventListener('click', (e) => {
-  if (!e.target.classList.contains('filter-tag')) return;
-  
-  // 切换active
-  filterBar.querySelectorAll('.filter-tag').forEach(t => t.classList.remove('active'));
-  e.target.classList.add('active');
-  
-  const filter = e.target.dataset.filter;
-  
-  cards.forEach(card => {
-    if (filter === 'all' || card.dataset.cat === filter) {
-      card.style.display = 'flex';
-    } else {
-      card.style.display = 'none';
-    }
+<script>
+  // Search + filter state
+  let currentCategory = 'all';
+  const searchInput = document.getElementById('searchInput');
+  const booksGrid = document.getElementById('booksGrid');
+  const bookCards = booksGrid.querySelectorAll('.book-card');
+
+  function applyFilters() {
+    const query = searchInput.value.toLowerCase();
+    bookCards.forEach(card => {
+      // Category filter
+      const matchCategory = currentCategory === 'all' || card.dataset.category === currentCategory;
+      // Search filter
+      const title = card.querySelector('.book-title').textContent.toLowerCase();
+      const author = card.querySelector('.book-author').textContent.toLowerCase();
+      const summary = card.querySelector('.book-summary').textContent.toLowerCase();
+      const tags = [...card.querySelectorAll('.book-tag')].map(t => t.textContent.toLowerCase()).join(' ');
+      const matchSearch = !query || title.includes(query) || author.includes(query) || summary.includes(query) || tags.includes(query);
+
+      card.style.display = (matchCategory && matchSearch) ? '' : 'none';
+    });
+  }
+
+  searchInput.addEventListener('input', applyFilters);
+
+  // Filter tags
+  const filterTags = document.querySelectorAll('.filter-tag');
+  filterTags.forEach(tag => {
+    tag.addEventListener('click', () => {
+      filterTags.forEach(t => t.classList.remove('active'));
+      tag.classList.add('active');
+      currentCategory = tag.dataset.category;
+      applyFilters();
+    });
   });
-});
+
+  // Fade in animation
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => {
+    observer.observe(el);
+  });
+
+  // Update stats
+  const realBooks = [...bookCards].filter(card => !card.style.opacity || card.style.opacity !== '0.5');
+  document.getElementById('totalBooks').textContent = realBooks.length;
 </script>
 
 </body>

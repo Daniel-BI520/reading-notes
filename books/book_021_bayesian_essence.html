@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>《行为贝叶斯》· 精华解读</title>
+<link rel="stylesheet" href="../annotation.css">
+<style>
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --primary: #4a148c;
+    --primary-light: #7c43bd;
+    --primary-dark: #311b92;
+    --primary-darker: #1a0a4a;
+    --accent: #9575cd;
+    --accent-light: #ede7f6;
+    --bg: #f3eefc;
+    --bg-card: #ffffff;
+    --text: #1a0a4a;
+    --text-secondary: #4a148c;
+    --text-light: #4a148c;
+    --border: #d1c4e9;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.8;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+
+  .top-nav {
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .top-nav-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 12px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s;
+    font-weight: 500;
+  }
+  .back-link:hover { color: var(--primary-dark); transform: translateX(-2px); }
+
+  .hero {
+    background: linear-gradient(135deg, #1a0a4a 0%, #311b92 30%, #4a148c 60%, #7c43bd 100%);
+    color: white;
+    padding: 60px 0 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: pulse 8s ease-in-out infinite;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    left: -20%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: pulse 10s ease-in-out infinite reverse;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.1); opacity: 1; }
+  }
+  .hero .container { position: relative; z-index: 1; }
+  .book-tag {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.9);
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 18px;
+    border: 1px solid rgba(255,255,255,0.25);
+  }
+  .hero h1 {
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 12px;
+    letter-spacing: -0.5px;
+  }
+  .hero .subtitle {
+    font-size: 18px;
+    opacity: 0.92;
+    margin-bottom: 28px;
+    font-weight: 300;
+  }
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    font-size: 14px;
+    opacity: 0.88;
+  }
+  .hero-meta span { display: flex; align-items: center; gap: 6px; }
+
+  .summary-card {
+    background: white;
+    border-radius: 16px;
+    padding: 32px;
+    margin-top: -40px;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+    margin-bottom: 48px;
+    border: 1px solid var(--border);
+  }
+  .summary-card h2 {
+    font-size: 20px;
+    color: var(--primary-dark);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .summary-card p {
+    color: var(--text-secondary);
+    line-height: 1.9;
+    margin-bottom: 16px;
+    font-size: 15px;
+  }
+  .summary-card strong { color: var(--primary-dark); }
+
+  .report-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 24px;
+    padding: 16px 20px;
+    background: linear-gradient(135deg, var(--bg), var(--accent-light));
+    border-radius: 12px;
+    text-decoration: none;
+    color: var(--primary-dark);
+    font-weight: 500;
+    font-size: 14px;
+    transition: all 0.2s;
+    border: 1px solid rgba(0,0,0,0.05);
+  }
+  .report-link:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.1); }
+  .report-link .report-label { display: flex; align-items: center; gap: 10px; }
+  .report-link .report-icon { font-size: 20px; }
+  .report-link .report-title { font-weight: 600; }
+  .report-link .report-desc {
+    font-size: 12px;
+    color: var(--text-secondary);
+    font-weight: normal;
+    margin-top: 2px;
+  }
+  .report-link .report-arrow {
+    font-size: 16px;
+    opacity: 0.6;
+    transition: transform 0.2s;
+  }
+  .report-link:hover .report-arrow { transform: translateX(4px); opacity: 1; }
+
+  .section { margin-bottom: 56px; }
+  .section-title {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--primary-dark);
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 3px solid var(--primary);
+    display: inline-block;
+  }
+
+  .subsection { margin-bottom: 36px; }
+  .subsection-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 16px;
+    padding-left: 14px;
+    border-left: 4px solid var(--accent);
+  }
+  .section p { margin-bottom: 14px; color: var(--text-secondary); }
+
+  blockquote {
+    background: linear-gradient(135deg, var(--bg), var(--accent-light));
+    border-left: 4px solid var(--accent);
+    padding: 16px 20px;
+    border-radius: 0 12px 12px 0;
+    margin: 20px 0;
+    color: var(--text-secondary);
+    font-style: italic;
+    font-size: 14px;
+  }
+  blockquote strong { font-style: normal; color: var(--primary-dark); }
+
+  .quote-card {
+    background: linear-gradient(135deg, var(--bg), var(--accent-light));
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin: 20px 0;
+    position: relative;
+  }
+  .quote-card::before {
+    content: '"';
+    position: absolute;
+    top: 8px;
+    left: 20px;
+    font-size: 60px;
+    color: rgba(0,0,0,0.08);
+    font-family: Georgia, serif;
+    line-height: 1;
+  }
+  .quote-card p {
+    position: relative;
+    z-index: 1;
+    color: var(--primary-dark);
+    font-size: 15px;
+    line-height: 1.8;
+    margin: 0;
+    padding-left: 20px;
+  }
+  .quote-card .quote-source {
+    margin-top: 10px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    text-align: right;
+    font-style: italic;
+  }
+
+  .method-card {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    margin: 20px 0;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    border-top: 4px solid var(--primary);
+    transition: box-shadow 0.2s;
+  }
+  .method-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+  .method-card h5 {
+    font-size: 17px;
+    color: var(--primary-dark);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .method-card ul { list-style: none; padding: 0; }
+  .method-card li {
+    padding: 8px 0;
+    padding-left: 28px;
+    position: relative;
+    color: var(--text-secondary);
+    font-size: 14px;
+    line-height: 1.7;
+  }
+  .method-card li::before {
+    content: '◆';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 12px;
+    top: 11px;
+  }
+
+  .key-points {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 16px;
+    margin-top: 24px;
+  }
+  .key-point {
+    background: linear-gradient(135deg, var(--bg), var(--accent-light));
+    padding: 18px 20px;
+    border-radius: 12px;
+    border-left: 4px solid var(--primary);
+    transition: transform 0.2s;
+  }
+  .key-point:hover { transform: translateY(-2px); }
+  .key-point h4 {
+    font-size: 14px;
+    color: var(--primary-dark);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .key-point p {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  .insight-list { list-style: none; padding: 0; }
+  .insight-item {
+    background: white;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 14px;
+    border-left: 4px solid var(--primary);
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    transition: transform 0.2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .insight-item:hover { transform: translateX(4px); }
+  .insight-num {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 16px;
+  }
+  .insight-content h5 {
+    font-size: 16px;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .insight-content p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  .highlight {
+    background: linear-gradient(120deg, var(--border) 0%, var(--primary-light) 100%);
+    background-repeat: no-repeat;
+    background-size: 100% 40%;
+    background-position: 0 85%;
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  .section-desc {
+    color: var(--text-secondary);
+    font-size: 14px;
+    margin-bottom: 20px;
+    padding-left: 4px;
+  }
+
+  /* 金句板块 */
+  .golden-quotes-section { margin-bottom: 40px; }
+  .golden-quotes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .golden-quote-item {
+    background: linear-gradient(135deg, #4a148c10, #4a148c20);
+    border-left: 4px solid #4a148c;
+    border-radius: 0 10px 10px 0;
+    padding: 14px 16px 14px 18px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    transition: all 0.25s ease;
+  }
+  .golden-quote-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px #4a148c22;
+    background: linear-gradient(135deg, #4a148c18, #4a148c30);
+  }
+  .golden-quote-num {
+    flex-shrink: 0;
+    font-size: 12px;
+    font-weight: 700;
+    color: #4a148c;
+    background: #ede7f6;
+    padding: 4px 8px;
+    border-radius: 6px;
+    margin-top: 2px;
+  }
+  .golden-quote-text {
+    font-size: 13.5px;
+    color: var(--primary-dark);
+    line-height: 1.65;
+    font-weight: 500;
+  }
+
+  /* 结论区 */
+  .conclusion {
+    background: linear-gradient(135deg, #1a0a4a 0%, #311b92 30%, #4a148c 60%, #7c43bd 100%);
+    color: white;
+    padding: 60px 0;
+    margin-top: 60px;
+    border-radius: 20px 20px 0 0;
+  }
+  .container-inner { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+  .conclusion h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .conclusion p {
+    font-size: 15px;
+    line-height: 2;
+    opacity: 0.95;
+    margin-bottom: 16px;
+  }
+  .final-quote {
+    margin-top: 28px;
+    padding: 20px 24px;
+    background: rgba(255,255,255,0.12);
+    border-left: 4px solid white;
+    border-radius: 0 10px 10px 0;
+    font-size: 16px;
+    font-weight: 600;
+    font-style: italic;
+  }
+
+  /* 读书思考 */
+  .thought-section {
+    background: white;
+    border-radius: 16px;
+    padding: 28px;
+    margin-top: 40px;
+    border: 1px solid var(--border);
+  }
+  .thought-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  .thought-header h3 { color: var(--primary-dark); font-size: 18px; }
+  .thought-btn {
+    padding: 8px 18px;
+    border-radius: 8px;
+    border: none;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .thought-btn:hover { opacity: 0.9; }
+  .thought-content {
+    width: 100%;
+    min-height: 120px;
+    padding: 14px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 1.7;
+    resize: vertical;
+    color: var(--text);
+  }
+  .thought-content:focus { outline: none; border-color: var(--primary); }
+  .thought-hint { font-size: 12px; color: var(--text-secondary); margin-top: 8px; opacity: 0.7; }
+
+  /* 底部导航 */
+  .bottom-nav {
+    display: flex;
+    gap: 12px;
+    margin: 30px 0 0;
+  }
+  .bottom-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+  .bottom-btn.shelf {
+    background: white;
+    color: var(--primary);
+    border: 1px solid var(--border);
+  }
+  .bottom-btn.report {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+  }
+  .bottom-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(74,20,140,0.2); }
+
+  .footer {
+    text-align: center;
+    padding: 40px 24px;
+    color: var(--text-secondary);
+    font-size: 13px;
+    opacity: 0.7;
+  }
+  .footer p { margin: 4px 0; }
+
+  .like-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: white;
+    color: var(--primary);
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .like-btn:hover { border-color: var(--primary); }
+
+  @media (max-width: 600px) {
+    .golden-quotes-grid { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 28px; }
+  }
+
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="top-nav-inner">
+    <a href="../index.html" class="back-link">← 返回书架</a>
+    <button class="like-btn" id="likeBtn" onclick="toggleLike()">
+      <span id="likeIcon">🤍</span>
+      <span id="likeCount">0</span>
+    </button>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container">
+    <span class="book-tag">第21本 · 历史与思维</span>
+    <h1>《行为贝叶斯》· 精华解读</h1>
+    <p class="subtitle">看得懂的幸运算法 聪明人的生活指南</p>
+    <div class="hero-meta">
+      <span>✍️ 作者：王珞</span>
+      <span>📅 2026年5月</span>
+      <span>🏢 中译出版社</span>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+  <div class="summary-card">
+    <h2>📋 内容概览</h2>
+    <p>《行为贝叶斯》将贝叶斯定理从抽象的数学公式，转化为一套面向<strong>有限理性决策者</strong>的行为操作系统。作者王珞——从IBM/Ariba高管转型为博弈论教授的学者，以"杨小凯超边际分析→博弈论→行为经济学→行为贝叶斯"的学术脉络，构建了<strong>"承认不完美、拥抱不确定性、用新证据持续修正信念"</strong>的决策范式。</p>
+    <p>对于每天都在与模糊需求、多方博弈、结果不确定打交道的IT售前工程师而言，这本书不是一本科普读物，而是一份<strong>将客户洞察、方案设计、投标决策、风险管控全部装进"先验—后验"迭代框架的实战手册</strong>。</p>
+    <a href="book_021_bayesian_report.html" class="report-link">
+      <div class="report-label">
+        <span class="report-icon">📑</span>
+        <div>
+          <div class="report-title">查看完整深度研报</div>
+          <div class="report-desc">6大章节 · 3.5万字 · IT售前视角深度解读</div>
+        </div>
+      </div>
+      <span class="report-arrow">→</span>
+    </a>
+  </div>
+
+  <!-- 核心洞察 -->
+  <div class="section">
+    <h2 class="section-title">🎯 核心洞察</h2>
+    <p class="section-desc">全书最值得深入理解的五大反直觉认知</p>
+
+    <div class="insight-list">
+      <div class="insight-item">
+        <div class="insight-num">1</div>
+        <div class="insight-content">
+          <h5>决策的质量不取决于一次猜对的概率，而取决于持续修正错误的速度</h5>
+          <p>传统思维追求"方案完美、一次通过"，而贝叶斯思维追求"持续迭代、快速纠错"。今天的后验就是明天的先验，决策是一个永不停止的更新过程。</p>
+        </div>
+      </div>
+      <div class="insight-item">
+        <div class="insight-num">2</div>
+        <div class="insight-content">
+          <h5>行为贝叶斯 = 贝叶斯定理 × 行为经济学 × 复杂系统思维</h5>
+          <p>承认信息不对称、理性有局限、未来不确定——在三重约束下，用贝叶斯式的持续更新来逼近最优决策，而不是假装自己是理性计算的机器。</p>
+        </div>
+      </div>
+      <div class="insight-item">
+        <div class="insight-num">3</div>
+        <div class="insight-content">
+          <h5>不是所有证据都有同等价值——关键在于"似然比"</h5>
+          <p>客户说"你们方案不错"的诊断价值很低（似然比接近1），客户主动邀请你参与内部评审的诊断价值很高。高手能精准识别高价值证据，而不是被客气话冲昏头脑。</p>
+        </div>
+      </div>
+      <div class="insight-item">
+        <div class="insight-num">4</div>
+        <div class="insight-content">
+          <h5>优选的战略是生长出来的，不是设计出来的</h5>
+          <p>在复杂系统中，你不可能一开始就设计好完美方案。先建立初始假设（先验），用市场反馈验证（证据），验证通过就加码（后验更新）——这就是贝叶斯式的战略进化。</p>
+        </div>
+      </div>
+      <div class="insight-item">
+        <div class="insight-num">5</div>
+        <div class="insight-content">
+          <h5>确定性让人作恶，概率让人投机，不确定性引发敬畏之心</h5>
+          <p>真正的决策都是不确定性决策。接受你可能是错的，对不确定性保持敬畏，然后用可纠错的反馈闭环来持续逼近正确——这才是聪明人的决策方式。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 四大支柱 -->
+  <div class="section">
+    <h2 class="section-title">🏛️ 四大支柱</h2>
+    <p class="section-desc">行为贝叶斯决策体系的底层假设</p>
+
+    <div class="key-points">
+      <div class="key-point">
+        <h4>🔍 信息不对称</h4>
+        <p>你永远不可能知道全部真相。但信息不对称不完全是坏事——它是分工的必然结果，也是企业核心竞争力的来源。</p>
+      </div>
+      <div class="key-point">
+        <h4>🧠 有限理性</h4>
+        <p>人不是理性计算的机器，而是"先有结论，再找证据"的有限理性决策者。用制度和方法来弥补理性的不足。</p>
+      </div>
+      <div class="key-point">
+        <h4>🌊 不确定性</h4>
+        <p>真正的决策都是关于未来的，而未来没有标准答案。风险可以计算概率，不确定性连概率分布都不知道。</p>
+      </div>
+      <div class="key-point">
+        <h4>💎 知识无形化</h4>
+        <p>真正重要的东西往往无法量化。核心竞争力是那些"讲不清楚"的东西——它们可以作为先验信念的来源。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 金句 -->
+  <div class="section golden-quotes-section">
+    <h2 class="section-title">💡 金句摘录</h2>
+    <p class="section-desc">书中最值得反复品味的10句话</p>
+    <div class="golden-quotes-grid">
+      <div class="golden-quote-item">
+        <span class="golden-quote-num">01</span>
+        <span class="golden-quote-text">决策，不是试图预测不可知的未来，而是诚实评估我们的机会成本。</span>
+      </div>
+      <div class="golden-quote-item">
+        <span class="golden-quote-num">02</span>
+        <span class="golden-quote-text">确定性让人作恶，概率让人投机，不确定性引发敬畏之心。</span>
+      </div>
+      <div class="golden-quote-item">
+        <span class="golden-quote-num">03</span>
+        <span class="golden-quote-text">今天的后验，就是明天的先验——贝叶斯系统天然就是持续进化的。</span>
+      </div>
+      <div class="golden-quote-item">
+        <span class="golden-quote-num">04</span>
+        <span class="golden-quote-text">在没有听到不同意见之前，不要做决策。</span>
+      </div>
+      <div class="golden-quote-item">
+        <span class="golden-quote-num">05</span>
+        <span class="golden-quote-text">优选的战略不是设计出来的，而是生长出来的。</span>
+      </div>
+      <div class="golden-quote-item">
+        <span class="golden-quote-num">06</span>
+        <span class="golden-quote-text">确保你有一个可纠错的反馈闭环。</span>
+      </div>
+      <div class="golden-quote-item">
+        <span class="golden-quote-num">07</span>
+        <span class="golden-quote-text">接受人的有限理性，是认识自己的第一步。</span>
+      </div>
+      <div class="golden-quote-item">
+        <span class="golden-quote-num">08</span>
+        <span class="golden-quote-text">决策，是在复杂世界中寻找平衡，这是生活的态度，更是生存的智慧。</span>
+      </div>
+      <div class="golden-quote-item">
+        <span class="golden-quote-num">09</span>
+        <span class="golden-quote-text">如果别人知道你厉害，但又说不清你为什么厉害，那你的企业就真的厉害了。</span>
+      </div>
+      <div class="golden-quote-item">
+        <span class="golden-quote-num">10</span>
+        <span class="golden-quote-text">手里只有锤子的人，看什么都像钉子。</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- IT售前核心价值 -->
+  <div class="section">
+    <h2 class="section-title">💼 IT售前视角价值</h2>
+    <p class="section-desc">贝叶斯思维如何改变售前工程师的工作方式</p>
+
+    <div class="subsection">
+      <h3 class="subsection-title">方案设计：从"一次完美"到"迭代逼近"</h3>
+      <div class="method-card">
+        <h5>🔄 贝叶斯式方案设计流程</h5>
+        <ul>
+          <li><strong>初始阶段（先验建立）：</strong>基于行业经验和客户公开信息，设计"最小可行方案"（MVP）</li>
+          <li><strong>迭代阶段（贝叶斯更新）：</strong>每一轮客户交流都是获得新证据的机会，相应调整需求理解和方案</li>
+          <li><strong>收敛阶段（后验收敛）：</strong>多轮迭代后增量信息越来越少，方案趋于稳定</li>
+          <li><strong>核心区别：</strong>传统思路追求"一开始就完美"，贝叶斯思路追求"最终逼近正确"</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3 class="subsection-title">需求洞察：每一次沟通都是认知升级</h3>
+      <div class="method-card">
+        <h5>🔍 贝叶斯式客户沟通法</h5>
+        <ul>
+          <li><strong>带着假设去沟通：</strong>每次沟通前明确——我想验证哪个假设？需要什么证据？</li>
+          <li><strong>收集反证据：</strong>主动关注和自己假设不符的信号，而不是只听想听的</li>
+          <li><strong>识别伪需求：</strong>客户说的"需求"只是一个证据，不是事实本身，要用似然比评估</li>
+          <li><strong>多源交叉验证：</strong>问不同的人、看不同的信号，多维度证据收窄真实痛点范围</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3 class="subsection-title">投标决策：用期望值代替凭感觉</h3>
+      <div class="method-card">
+        <h5>📊 胜率估算与资源优化</h5>
+        <ul>
+          <li><strong>先验胜率：</strong>从外部视角找基准（历史中标率），再用内部视角调整</li>
+          <li><strong>持续更新：</strong>每获得关键信息就调整胜率估计，强证据大幅调，弱证据小幅调</li>
+          <li><strong>期望值计算：</strong>期望值 = 胜率 × 预期收益 - 投入成本 - 失败成本</li>
+          <li><strong>弃标决策：</strong>用"白纸测试""换将测试"克服沉没成本谬误</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 高手实践 -->
+  <div class="section">
+    <h2 class="section-title">🌟 高手的实践</h2>
+    <p class="section-desc">芒格、凯恩斯、马斯克——三位不同领域高手的贝叶斯智慧</p>
+
+    <div class="key-points">
+      <div class="key-point">
+        <h4>📚 查理·芒格</h4>
+        <p>多元思维模型与概率校准。先验来自多个学科的基础理论，持续用新事实校准认知，强调"基础概率"和"能力圈"。</p>
+      </div>
+      <div class="key-point">
+        <h4>📈 凯恩斯</h4>
+        <p>不确定性、动物精神与概率权重。区分"概率"和"概率的可信度"——高可信度的50%和低可信度的50%，决策权重完全不同。</p>
+      </div>
+      <div class="key-point">
+        <h4>🚀 埃隆·马斯克</h4>
+        <p>可纠错的反馈闭环。既有坚定的核心信念（先验的框架），又有灵活的证据更新（参数的调整）——核心原则不动摇，具体判断随时调。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 行动清单 -->
+  <div class="section">
+    <h2 class="section-title">✅ 行动清单 / Takeaway</h2>
+    <p class="section-desc">读完这本书，可以立即落地的8个贝叶斯思维训练法</p>
+
+    <div class="insight-list">
+      <div class="insight-item">
+        <div class="insight-num">1</div>
+        <div class="insight-content">
+          <h5>建立"先验概率笔记本"</h5>
+          <p>每个新项目开始前，写下你的胜率估计、三个主要依据和最大不确定因素。项目结束后复盘校准。</p>
+        </div>
+      </div>
+      <div class="insight-item">
+        <div class="insight-num">2</div>
+        <div class="insight-content">
+          <h5>每次客户沟通后做"后验更新"</h5>
+          <p>花10分钟总结：获得了哪些关键信息？支持还是反对之前的判断？强度多大？胜率应该调多少？</p>
+        </div>
+      </div>
+      <div class="insight-item">
+        <div class="insight-num">3</div>
+        <div class="insight-content">
+          <h5>主动寻找反对意见</h5>
+          <p>重要决策前，找一个观点不同的人聊聊。不要急着反驳，先想：如果他是对的，意味着什么？</p>
+        </div>
+      </div>
+      <div class="insight-item">
+        <div class="insight-num">4</div>
+        <div class="insight-content">
+          <h5>用外部视角校准内部视角</h5>
+          <p>不要只看自己项目的细节，跳出来看同类事情的基础概率。外部视角的预测远比内部视角准确。</p>
+        </div>
+      </div>
+      <div class="insight-item">
+        <div class="insight-num">5</div>
+        <div class="insight-content">
+          <h5>胜率量化训练</h5>
+          <p>建立个人"预测校准表"——你说80%把握的事情，实际发生的比例是多少？系统性过度自信需要系统性修正。</p>
+        </div>
+      </div>
+      <div class="insight-item">
+        <div class="insight-num">6</div>
+        <div class="insight-content">
+          <h5>建立个人决策复盘机制</h5>
+          <p>每个项目结束后花30分钟复盘：当初判断是什么？实际结果是什么？哪里对了哪里错了？下次该怎么改进？</p>
+        </div>
+      </div>
+      <div class="insight-item">
+        <div class="insight-num">7</div>
+        <div class="insight-content">
+          <h5>小步试错快速迭代</h5>
+          <p>不要一次出完整方案，先出框架跟客户对一对。不要直接承诺大方案，先做POC验证。把每一步都当收集证据。</p>
+        </div>
+      </div>
+      <div class="insight-item">
+        <div class="insight-num">8</div>
+        <div class="insight-content">
+          <h5>构建多元思维模型工具箱</h5>
+          <p>每年学习一个新领域的核心模型。心理学、经济学、复杂系统、统计学、生物学——模型越多，先验质量越高。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="conclusion">
+    <div class="container-inner">
+      <h2>🎯 一句话总结</h2>
+      <p>贝叶斯思维的核心不是数学公式，而是一种思维习惯——<strong>对不确定性保持敬畏，对新证据保持开放，对自己的判断保持怀疑，对认知升级保持饥渴</strong>。它不是让你每次都猜对，而是让你建立一套持续纠错的机制，通过不断更新来逼近最优决策。</p>
+      <p>对于IT售前工程师而言，从"方案搬运工"升级为"概率决策者"，意味着你的价值会从"信息加工者"转向"任务指挥官"——从"追求一次做对"到"持续迭代优化"。谁先建立贝叶斯式的决策系统，谁就能在下一轮竞争中掌握定价权。</p>
+      <div class="final-quote">决策的质量不取决于一次猜对的概率，而取决于持续修正错误的速度。</div>
+    </div>
+  </div>
+
+  <!-- 读书思考 -->
+  <div class="thought-section">
+    <div class="thought-header">
+      <h3>💭 读书思考</h3>
+      <button class="thought-btn" onclick="saveThought()">保存笔记</button>
+    </div>
+    <textarea id="thoughtContent" class="thought-content" placeholder="读完这本书，你有什么感悟？哪些观点让你印象最深？可以记录下来..."></textarea>
+    <div class="thought-hint">💡 笔记保存在你的浏览器本地，换设备不会同步</div>
+  </div>
+
+  <!-- 底部导航 -->
+  <div class="bottom-nav">
+    <a href="../index.html" class="bottom-btn shelf">
+      <span>📚</span> 返回书架
+    </a>
+    <a href="book_021_bayesian_report.html" class="bottom-btn report">
+      <span>📑</span> 查看完整研报
+    </a>
+  </div>
+
+</div>
+
+<footer class="footer">
+  <p>📚 Daniel_BI的读书笔记 · RootUser</p>
+  <p>基于「行为贝叶斯」书籍的深度研读报告</p>
+</footer>
+
+<script>
+  function getBookKey() {
+    return location.pathname.split('/').pop() + '_like';
+  }
+  function initLike() {
+    const key = getBookKey();
+    const data = JSON.parse(localStorage.getItem(key) || '{"count":0,"liked":false}');
+    updateLikeUI(data.count, data.liked);
+  }
+  function toggleLike() {
+    const key = getBookKey();
+    let data = JSON.parse(localStorage.getItem(key) || '{"count":0,"liked":false}');
+    if (data.liked) {
+      data.count = Math.max(0, data.count - 1);
+      data.liked = false;
+    } else {
+      data.count += 1;
+      data.liked = true;
+    }
+    localStorage.setItem(key, JSON.stringify(data));
+    updateLikeUI(data.count, data.liked);
+  }
+  function updateLikeUI(count, liked) {
+    document.getElementById('likeIcon').textContent = liked ? '❤️' : '🤍';
+    document.getElementById('likeCount').textContent = count;
+    const btn = document.getElementById('likeBtn');
+    if (liked) {
+      btn.style.background = 'rgba(239,68,68,0.1)';
+    } else {
+      btn.style.background = 'none';
+    }
+  }
+  function loadThought() {
+    const key = location.pathname.split('/').pop() + '_thought';
+    const content = localStorage.getItem(key);
+    if (content) {
+      document.getElementById('thoughtContent').value = content;
+    }
+  }
+  function saveThought() {
+    const key = location.pathname.split('/').pop() + '_thought';
+    const content = document.getElementById('thoughtContent').value;
+    localStorage.setItem(key, content);
+    const btn = event.target;
+    const originalText = btn.textContent;
+    btn.textContent = '✓ 已保存';
+    btn.style.background = '#4a148c';
+    setTimeout(function() {
+      btn.textContent = originalText;
+      btn.style.background = '';
+    }, 1500);
+  }
+  initLike();
+  loadThought();
+</script>
+<script src="../annotation.js"></script>
+<script src="../toc.js"></script>
+
+</body>
+</html>

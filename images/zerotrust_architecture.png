@@ -1,0 +1,223 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 780" width="1100" height="780" font-family="Noto Sans CJK SC, Microsoft YaHei, sans-serif">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#f8fafc;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#eef2f7;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="navyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1F4E79;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2c5f8a;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="tealGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2A9D8F;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#38b2a3;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="amberGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#D9822B;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e89340;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="2" dy="3" stdDeviation="3" flood-color="#00000030"/>
+    </filter>
+    <marker id="arrowMain" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1F4E79"/>
+    </marker>
+    <marker id="arrowAmber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#D9822B"/>
+    </marker>
+    <marker id="arrowTeal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2A9D8F"/>
+    </marker>
+  </defs>
+  
+  <rect width="1100" height="780" fill="url(#bgGrad)" rx="8"/>
+  
+  <!-- Title -->
+  <text x="550" y="35" text-anchor="middle" font-size="20" font-weight="bold" fill="#1F4E79">零信任架构全景因果图</text>
+  <text x="550" y="55" text-anchor="middle" font-size="12" fill="#6B7280">从「边界防御」到「身份驱动」的范式跃迁</text>
+  
+  <!-- ===== TOP: Problem Side (Traditional Security) ===== -->
+  <g transform="translate(40, 80)">
+    <rect x="0" y="0" width="300" height="42" rx="6" fill="#A7B3C2" filter="url(#shadow)"/>
+    <text x="150" y="27" text-anchor="middle" font-size="14" font-weight="bold" fill="white">传统边界安全（问题侧）</text>
+    
+    <rect x="0" y="55" width="300" height="70" rx="6" fill="white" stroke="#CBD5E1" stroke-width="1.5"/>
+    <text x="150" y="78" text-anchor="middle" font-size="12" font-weight="bold" fill="#374151">「城堡护城河」模型</text>
+    <text x="150" y="98" text-anchor="middle" font-size="10" fill="#6B7280">内网可信 / 外网不可信</text>
+    <text x="150" y="114" text-anchor="middle" font-size="10" fill="#6B7280">防火墙 / VPN / 边界隔离</text>
+    
+    <rect x="0" y="140" width="300" height="80" rx="6" fill="#FEF3E6" stroke="#D9822B" stroke-width="1.5"/>
+    <text x="150" y="163" text-anchor="middle" font-size="12" font-weight="bold" fill="#D9822B">三重冲击导致边界失效</text>
+    <text x="20" y="183" font-size="10" fill="#92400E">① 移动办公 & BYOD → 边界模糊</text>
+    <text x="20" y="200" font-size="10" fill="#92400E">② 云计算 & 微服务 → 资产分散</text>
+    <text x="20" y="217" font-size="10" fill="#92400E">③ 供应链 & 内部威胁 → 信任滥用</text>
+    
+    <rect x="0" y="235" width="300" height="65" rx="6" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.5"/>
+    <text x="150" y="258" text-anchor="middle" font-size="12" font-weight="bold" fill="#DC2626">根本缺陷：M&amp;M模型</text>
+    <text x="150" y="278" text-anchor="middle" font-size="10" fill="#991B1B">外壳坚硬，内心柔软</text>
+    <text x="150" y="294" text-anchor="middle" font-size="10" fill="#991B1B">一破即溃，横向移动无阻碍</text>
+  </g>
+  
+  <!-- ===== ARROW: Problem to Solution ===== -->
+  <g>
+    <path d="M355 290 L430 290" stroke="#1F4E79" stroke-width="3" fill="none" marker-end="url(#arrowMain)"/>
+    <text x="392" y="278" text-anchor="middle" font-size="11" fill="#1F4E79" font-weight="bold">范式跃迁</text>
+    <text x="392" y="312" text-anchor="middle" font-size="10" fill="#6B7280">永不信任</text>
+    <text x="392" y="326" text-anchor="middle" font-size="10" fill="#6B7280">始终验证</text>
+  </g>
+  
+  <!-- ===== RIGHT: Zero Trust Core ===== -->
+  <g transform="translate(450, 80)">
+    <rect x="0" y="0" width="280" height="42" rx="6" fill="url(#navyGrad)" filter="url(#shadow)"/>
+    <text x="140" y="27" text-anchor="middle" font-size="14" font-weight="bold" fill="white">零信任架构（方案侧）</text>
+    
+    <!-- Core Principle -->
+    <rect x="0" y="55" width="280" height="60" rx="6" fill="white" stroke="#1F4E79" stroke-width="2"/>
+    <text x="140" y="78" text-anchor="middle" font-size="13" font-weight="bold" fill="#1F4E79">核心原则：动态信任</text>
+    <text x="140" y="98" text-anchor="middle" font-size="10" fill="#4B5563">信任 = f(身份, 设备, 环境, 行为)</text>
+    
+    <!-- Control Plane -->
+    <rect x="0" y="130" width="280" height="36" rx="6" fill="url(#tealGrad)"/>
+    <text x="140" y="154" text-anchor="middle" font-size="12" font-weight="bold" fill="white">控制平面（决策中心）</text>
+    
+    <!-- Trust Engine -->
+    <rect x="10" y="175" width="125" height="85" rx="6" fill="white" stroke="#2A9D8F" stroke-width="1.5"/>
+    <text x="72" y="196" text-anchor="middle" font-size="11" font-weight="bold" fill="#2A9D8F">信任引擎</text>
+    <text x="72" y="214" text-anchor="middle" font-size="9" fill="#6B7280">动态评分计算</text>
+    <text x="72" y="229" text-anchor="middle" font-size="9" fill="#6B7280">风险行为分析</text>
+    <text x="72" y="244" text-anchor="middle" font-size="9" fill="#6B7280">信任积累与衰减</text>
+    
+    <!-- Policy Engine -->
+    <rect x="145" y="175" width="125" height="85" rx="6" fill="white" stroke="#2A9D8F" stroke-width="1.5"/>
+    <text x="207" y="196" text-anchor="middle" font-size="11" font-weight="bold" fill="#2A9D8F">策略引擎</text>
+    <text x="207" y="214" text-anchor="middle" font-size="9" fill="#6B7280">RBAC + ABAC混合</text>
+    <text x="207" y="229" text-anchor="middle" font-size="9" fill="#6B7280">最小权限授予</text>
+    <text x="207" y="244" text-anchor="middle" font-size="9" fill="#6B7280">动态策略下发</text>
+    
+    <!-- Data Plane -->
+    <rect x="0" y="275" width="280" height="36" rx="6" fill="url(#amberGrad)"/>
+    <text x="140" y="299" text-anchor="middle" font-size="12" font-weight="bold" fill="white">数据平面（执行层）</text>
+    
+    <!-- PEP -->
+    <rect x="10" y="320" width="260" height="60" rx="6" fill="white" stroke="#D9822B" stroke-width="1.5"/>
+    <text x="140" y="342" text-anchor="middle" font-size="11" font-weight="bold" fill="#D9822B">策略执行点（PEP）</text>
+    <text x="140" y="360" text-anchor="middle" font-size="9" fill="#6B7280">零信任网关 / 终端Agent / 应用代理</text>
+    <text x="140" y="375" text-anchor="middle" font-size="9" fill="#6B7280">拦截→查询→执行→审计</text>
+  </g>
+  
+  <!-- ===== RIGHT: Three Pillars ===== -->
+  <g transform="translate(770, 80)">
+    <rect x="0" y="0" width="290" height="42" rx="6" fill="url(#navyGrad)" filter="url(#shadow)"/>
+    <text x="145" y="27" text-anchor="middle" font-size="14" font-weight="bold" fill="white">三大信任支柱</text>
+    
+    <!-- User Identity -->
+    <rect x="0" y="55" width="290" height="70" rx="6" fill="white" stroke="#1F4E79" stroke-width="2"/>
+    <circle cx="35" cy="90" r="22" fill="#1F4E79"/>
+    <text x="35" y="96" text-anchor="middle" font-size="16" fill="white">人</text>
+    <text x="75" y="78" font-size="12" font-weight="bold" fill="#1F4E79">用户身份信任</text>
+    <text x="75" y="95" font-size="9" fill="#6B7280">MFA / SSO / 身份治理</text>
+    <text x="75" y="110" font-size="9" fill="#6B7280">行为基线 / 风险自适应</text>
+    
+    <!-- Device Trust -->
+    <rect x="0" y="140" width="290" height="70" rx="6" fill="white" stroke="#5B8DB8" stroke-width="2"/>
+    <circle cx="35" cy="175" r="22" fill="#5B8DB8"/>
+    <text x="35" y="181" text-anchor="middle" font-size="16" fill="white">机</text>
+    <text x="75" y="163" font-size="12" font-weight="bold" fill="#5B8DB8">设备身份信任</text>
+    <text x="75" y="180" font-size="9" fill="#6B7280">设备证书 / 健康度检查</text>
+    <text x="75" y="195" font-size="9" fill="#6B7280">MDM / EDR / 合规基线</text>
+    
+    <!-- App Trust -->
+    <rect x="0" y="225" width="290" height="70" rx="6" fill="white" stroke="#2A9D8F" stroke-width="2"/>
+    <circle cx="35" cy="260" r="22" fill="#2A9D8F"/>
+    <text x="35" y="266" text-anchor="middle" font-size="16" fill="white">用</text>
+    <text x="75" y="248" font-size="12" font-weight="bold" fill="#2A9D8F">应用信任</text>
+    <text x="75" y="265" font-size="9" fill="#6B7280">微隔离 / mTLS / API安全</text>
+    <text x="75" y="280" font-size="9" fill="#6B7280">运行时安全 / 服务间认证</text>
+  </g>
+  
+  <!-- ===== BOTTOM: Implementation Path ===== -->
+  <g transform="translate(40, 520)">
+    <rect x="0" y="0" width="1020" height="36" rx="6" fill="url(#navyGrad)"/>
+    <text x="510" y="24" text-anchor="middle" font-size="13" font-weight="bold" fill="white">实施路径：渐进式演进（而非推倒重来）</text>
+    
+    <!-- Step 1 -->
+    <rect x="10" y="50" width="190" height="90" rx="6" fill="white" stroke="#A7B3C2" stroke-width="1.5"/>
+    <rect x="10" y="50" width="190" height="24" rx="6" fill="#A7B3C2"/>
+    <text x="105" y="67" text-anchor="middle" font-size="11" font-weight="bold" fill="white">① 资产盘点</text>
+    <text x="105" y="92" text-anchor="middle" font-size="9" fill="#4B5563">理解现有网络流量</text>
+    <text x="105" y="108" text-anchor="middle" font-size="9" fill="#4B5563">识别高价值保护面</text>
+    <text x="105" y="124" text-anchor="middle" font-size="9" fill="#6B7280">输出：资产清单 + 流量图谱</text>
+    
+    <path d="M210 95 L235 95" stroke="#6B7280" stroke-width="2" fill="none" marker-end="url(#arrowMain)"/>
+    
+    <!-- Step 2 -->
+    <rect x="245" y="50" width="190" height="90" rx="6" fill="white" stroke="#D9822B" stroke-width="1.5"/>
+    <rect x="245" y="50" width="190" height="24" rx="6" fill="url(#amberGrad)"/>
+    <text x="340" y="67" text-anchor="middle" font-size="11" font-weight="bold" fill="white">② 身份基座</text>
+    <text x="340" y="92" text-anchor="middle" font-size="9" fill="#4B5563">统一身份目录 + MFA</text>
+    <text x="340" y="108" text-anchor="middle" font-size="9" fill="#4B5563">设备信任体系建立</text>
+    <text x="340" y="124" text-anchor="middle" font-size="9" fill="#6B7280">输出：可信身份源 + 设备库</text>
+    
+    <path d="M445 95 L470 95" stroke="#6B7280" stroke-width="2" fill="none" marker-end="url(#arrowAmber)"/>
+    
+    <!-- Step 3 -->
+    <rect x="480" y="50" width="190" height="90" rx="6" fill="white" stroke="#2A9D8F" stroke-width="1.5"/>
+    <rect x="480" y="50" width="190" height="24" rx="6" fill="url(#tealGrad)"/>
+    <text x="575" y="67" text-anchor="middle" font-size="11" font-weight="bold" fill="white">③ 策略定义</text>
+    <text x="575" y="92" text-anchor="middle" font-size="9" fill="#4B5563">最小权限策略建模</text>
+    <text x="575" y="108" text-anchor="middle" font-size="9" fill="#4B5563">信任评分体系搭建</text>
+    <text x="575" y="124" text-anchor="middle" font-size="9" fill="#6B7280">输出：策略库 + 信任模型</text>
+    
+    <path d="M680 95 L705 95" stroke="#6B7280" stroke-width="2" fill="none" marker-end="url(#arrowTeal)"/>
+    
+    <!-- Step 4 -->
+    <rect x="715" y="50" width="190" height="90" rx="6" fill="white" stroke="#5B8DB8" stroke-width="1.5"/>
+    <rect x="715" y="50" width="190" height="24" rx="6" fill="#5B8DB8"/>
+    <text x="810" y="67" text-anchor="middle" font-size="11" font-weight="bold" fill="white">④ 代理部署</text>
+    <text x="810" y="92" text-anchor="middle" font-size="9" fill="#4B5563">ZTNA网关 / 终端Agent</text>
+    <text x="810" y="108" text-anchor="middle" font-size="9" fill="#4B5563">核心应用试点接入</text>
+    <text x="810" y="124" text-anchor="middle" font-size="9" fill="#6B7280">输出：零信任访问通道</text>
+    
+    <path d="M915 95 L940 95" stroke="#6B7280" stroke-width="2" fill="none" marker-end="url(#arrowMain)"/>
+    
+    <!-- Step 5 -->
+    <rect x="950" y="50" width="70" height="90" rx="6" fill="white" stroke="#1F4E79" stroke-width="2"/>
+    <rect x="950" y="50" width="70" height="24" rx="6" fill="url(#navyGrad)"/>
+    <text x="985" y="67" text-anchor="middle" font-size="10" font-weight="bold" fill="white">⑤ 持续</text>
+    <text x="985" y="92" text-anchor="middle" font-size="9" fill="#4B5563">行为分析</text>
+    <text x="985" y="108" text-anchor="middle" font-size="9" fill="#4B5563">策略优化</text>
+    <text x="985" y="124" text-anchor="middle" font-size="9" fill="#6B7280">成熟演进</text>
+  </g>
+  
+  <!-- ===== BOTTOM: Value Outcome ===== -->
+  <g transform="translate(40, 640)">
+    <rect x="0" y="0" width="1020" height="36" rx="6" fill="url(#navyGrad)"/>
+    <text x="510" y="24" text-anchor="middle" font-size="13" font-weight="bold" fill="white">最终价值：安全与效率的双重提升</text>
+    
+    <rect x="10" y="48" width="245" height="75" rx="6" fill="#F0FDFA" stroke="#2A9D8F" stroke-width="1.5"/>
+    <text x="132" y="68" text-anchor="middle" font-size="11" font-weight="bold" fill="#2A9D8F">🔒 安全价值</text>
+    <text x="132" y="88" text-anchor="middle" font-size="9" fill="#4B5563">攻击面缩小70%+，横向移动阻断</text>
+    <text x="132" y="104" text-anchor="middle" font-size="9" fill="#4B5563">数据泄露成本降低约42%（IBM 2025）</text>
+    
+    <rect x="265" y="48" width="245" height="75" rx="6" fill="#EFF6FF" stroke="#1F4E79" stroke-width="1.5"/>
+    <text x="387" y="68" text-anchor="middle" font-size="11" font-weight="bold" fill="#1F4E79">⚡ 效率价值</text>
+    <text x="387" y="88" text-anchor="middle" font-size="9" fill="#4B5563">远程办公体验提升，免VPN直达应用</text>
+    <text x="387" y="104" text-anchor="middle" font-size="9" fill="#4B5563">运维自动化，人工配置减少75%</text>
+    
+    <rect x="520" y="48" width="245" height="75" rx="6" fill="#FFF7ED" stroke="#D9822B" stroke-width="1.5"/>
+    <text x="642" y="68" text-anchor="middle" font-size="11" font-weight="bold" fill="#D9822B">📋 合规价值</text>
+    <text x="642" y="88" text-anchor="middle" font-size="9" fill="#4B5563">满足等保2.0、数据安全法要求</text>
+    <text x="642" y="104" text-anchor="middle" font-size="9" fill="#4B5563">全链路审计，合规证据链完整</text>
+    
+    <rect x="775" y="48" width="255" height="75" rx="6" fill="#F5F3FF" stroke="#7C3AED" stroke-width="1.5"/>
+    <text x="902" y="68" text-anchor="middle" font-size="11" font-weight="bold" fill="#7C3AED">💰 商业价值</text>
+    <text x="902" y="88" text-anchor="middle" font-size="9" fill="#4B5563">投资回报率ROI约246%（Forrester TEI）</text>
+    <text x="902" y="104" text-anchor="middle" font-size="9" fill="#4B5563">3年收回成本，持续降低安全投入</text>
+  </g>
+  
+  <!-- Causal flow arrows -->
+  <path d="M590 200 L770 90" stroke="#1F4E79" stroke-width="1.5" fill="none" stroke-dasharray="4,3" opacity="0.5"/>
+  <path d="M590 220 L770 175" stroke="#5B8DB8" stroke-width="1.5" fill="none" stroke-dasharray="4,3" opacity="0.5"/>
+  <path d="M590 240 L770 260" stroke="#2A9D8F" stroke-width="1.5" fill="none" stroke-dasharray="4,3" opacity="0.5"/>
+  
+</svg>

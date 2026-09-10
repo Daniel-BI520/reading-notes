@@ -1,0 +1,1352 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>《半小时讲透AI时代的新职业FDE》· 精华解读</title>
+<link rel="stylesheet" href="../annotation.css">
+<style>
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --primary: #0ea5e9;
+    --primary-light: #38bdf8;
+    --primary-dark: #0284c7;
+    --primary-darker: #0c4a6e;
+    --accent: #06b6d4;
+    --accent-light: #cffafe;
+    --bg: #f0f9ff;
+    --bg-card: #ffffff;
+    --text: #0c4a6e;
+    --text-secondary: #0369a1;
+    --text-light: #0284c7;
+    --border: #bae6fd;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.8;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+
+  .top-nav {
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .top-nav-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 12px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .back-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s;
+    font-weight: 500;
+  }
+  .back-link:hover { color: var(--primary-dark); transform: translateX(-2px); }
+
+  .hero {
+    background: linear-gradient(135deg, #0c4a6e 0%, #0369a1 30%, #0ea5e9 60%, #38bdf8 100%);
+    color: white;
+    padding: 60px 0 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: pulse 8s ease-in-out infinite;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    left: -20%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: pulse 10s ease-in-out infinite reverse;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.1); opacity: 1; }
+  }
+  .hero .container { position: relative; z-index: 1; }
+  .book-tag {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.9);
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 18px;
+    border: 1px solid rgba(255,255,255,0.25);
+  }
+  .hero h1 {
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 12px;
+    letter-spacing: -0.5px;
+  }
+  .hero .subtitle {
+    font-size: 18px;
+    opacity: 0.92;
+    margin-bottom: 28px;
+    font-weight: 300;
+  }
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    font-size: 14px;
+    opacity: 0.88;
+  }
+  .hero-meta span { display: flex; align-items: center; gap: 6px; }
+
+  .summary-card {
+    background: white;
+    border-radius: 16px;
+    padding: 32px;
+    margin-top: -40px;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+    margin-bottom: 48px;
+    border: 1px solid var(--border);
+  }
+  .summary-card h2 {
+    font-size: 20px;
+    color: var(--primary-dark);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .summary-card p {
+    color: var(--text-secondary);
+    line-height: 1.9;
+    margin-bottom: 16px;
+    font-size: 15px;
+  }
+  .summary-card strong { color: var(--primary-dark); }
+
+  .report-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 24px;
+    padding: 16px 20px;
+    background: linear-gradient(135deg, var(--bg), var(--accent-light));
+    border-radius: 12px;
+    text-decoration: none;
+    color: var(--primary-dark);
+    font-weight: 500;
+    font-size: 14px;
+    transition: all 0.2s;
+    border: 1px solid rgba(0,0,0,0.05);
+  }
+  .report-link:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.1); }
+  .report-link .report-label { display: flex; align-items: center; gap: 10px; }
+  .report-link .report-icon { font-size: 20px; }
+  .report-link .report-title { font-weight: 600; }
+  .report-link .report-desc {
+    font-size: 12px;
+    color: var(--text-secondary);
+    font-weight: normal;
+    margin-top: 2px;
+  }
+  .report-link .report-arrow {
+    font-size: 16px;
+    opacity: 0.6;
+    transition: transform 0.2s;
+  }
+  .report-link:hover .report-arrow { transform: translateX(4px); opacity: 1; }
+
+  .section { margin-bottom: 56px; }
+  .section-title {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--primary-dark);
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 3px solid var(--primary);
+    display: inline-block;
+  }
+
+  .subsection { margin-bottom: 36px; }
+  .subsection-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 16px;
+    padding-left: 14px;
+    border-left: 4px solid var(--accent);
+  }
+  .section p { margin-bottom: 14px; color: var(--text-secondary); }
+
+  blockquote {
+    background: linear-gradient(135deg, var(--bg), var(--accent-light));
+    border-left: 4px solid var(--accent);
+    padding: 16px 20px;
+    border-radius: 0 12px 12px 0;
+    margin: 20px 0;
+    color: var(--text-secondary);
+    font-style: italic;
+    font-size: 14px;
+  }
+  blockquote strong { font-style: normal; color: var(--primary-dark); }
+
+  .quote-card {
+    background: linear-gradient(135deg, var(--bg), var(--accent-light));
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin: 20px 0;
+    position: relative;
+  }
+  .quote-card::before {
+    content: '"';
+    position: absolute;
+    top: 8px;
+    left: 20px;
+    font-size: 60px;
+    color: rgba(0,0,0,0.08);
+    font-family: Georgia, serif;
+    line-height: 1;
+  }
+  .quote-card p {
+    position: relative;
+    z-index: 1;
+    color: var(--primary-dark);
+    font-size: 15px;
+    line-height: 1.8;
+    margin: 0;
+    padding-left: 20px;
+  }
+  .quote-card .quote-source {
+    margin-top: 10px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    text-align: right;
+    font-style: italic;
+  }
+
+  .method-card {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    margin: 20px 0;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    border-top: 4px solid var(--primary);
+    transition: box-shadow 0.2s;
+  }
+  .method-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+  .method-card h5 {
+    font-size: 17px;
+    color: var(--primary-dark);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .method-card ul { list-style: none; padding: 0; }
+  .method-card li {
+    padding: 8px 0;
+    padding-left: 28px;
+    position: relative;
+    color: var(--text-secondary);
+    font-size: 14px;
+    line-height: 1.7;
+  }
+  .method-card li::before {
+    content: '◆';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 12px;
+    top: 11px;
+  }
+
+  .key-points {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 16px;
+    margin-top: 24px;
+  }
+  .key-point {
+    background: linear-gradient(135deg, var(--bg), var(--accent-light));
+    padding: 18px 20px;
+    border-radius: 12px;
+    border-left: 4px solid var(--primary);
+    transition: transform 0.2s;
+  }
+  .key-point:hover { transform: translateY(-2px); }
+  .key-point h4 {
+    font-size: 14px;
+    color: var(--primary-dark);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .key-point p {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  .insight-list { list-style: none; padding: 0; }
+  .insight-item {
+    background: white;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 14px;
+    border-left: 4px solid var(--primary);
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    transition: transform 0.2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .insight-item:hover { transform: translateX(4px); }
+  .insight-num {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 16px;
+  }
+  .insight-content h5 {
+    font-size: 16px;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .insight-content p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  .highlight {
+    background: linear-gradient(120deg, #bae6fd 0%, #7dd3fc 100%);
+    background-repeat: no-repeat;
+    background-size: 100% 40%;
+    background-position: 0 85%;
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  .conclusion {
+    background: linear-gradient(135deg, #0c4a6e 0%, #0369a1 30%, #0ea5e9 60%, #38bdf8 100%);
+    color: white;
+    border-radius: 16px;
+    padding: 40px;
+    margin-top: 48px;
+    margin-bottom: 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .conclusion::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .conclusion .container-inner { position: relative; z-index: 1; }
+  .conclusion h2 { font-size: 24px; margin-bottom: 20px; }
+  .conclusion p { line-height: 2; opacity: 0.95; margin-bottom: 16px; color: white; }
+  .conclusion .final-quote {
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    font-style: italic;
+    opacity: 0.9;
+    text-align: right;
+  }
+
+  .thought-section {
+    background: white;
+    border-radius: 16px;
+    padding: 32px;
+    margin-bottom: 48px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    border: 2px dashed var(--primary-light);
+  }
+  .thought-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  .thought-header h3 {
+    color: var(--primary-dark);
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .thought-btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 9px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s;
+    font-weight: 500;
+  }
+  .thought-btn:hover { background: var(--primary-dark); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+  .thought-content {
+    width: 100%;
+    min-height: 140px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    font-size: 14px;
+    line-height: 1.7;
+    resize: vertical;
+    font-family: inherit;
+    color: var(--text);
+    background: var(--bg);
+    transition: all 0.2s;
+  }
+  .thought-content:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: white;
+    box-shadow: 0 0 0 3px rgba(0,0,0,0.08);
+  }
+  .thought-hint {
+    font-size: 13px;
+    color: var(--text-light);
+    margin-top: 10px;
+    text-align: right;
+  }
+  .thought-prompts { margin-bottom: 16px; display: flex; flex-wrap: wrap; gap: 8px; }
+  .thought-prompt {
+    font-size: 12px;
+    padding: 6px 12px;
+    background: var(--bg);
+    color: var(--primary-dark);
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+  }
+  .thought-prompt:hover { background: var(--primary); color: white; }
+
+  .presales-section {
+    background: white;
+    border-radius: 16px;
+    padding: 32px;
+    margin-bottom: 48px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    border: 2px solid var(--primary);
+    position: relative;
+  }
+  .presales-badge {
+    position: absolute;
+    top: -14px;
+    left: 24px;
+    background: var(--primary);
+    color: white;
+    padding: 4px 16px;
+    border-radius: 16px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .presales-section h3 {
+    color: var(--primary-dark);
+    font-size: 20px;
+    margin-bottom: 20px;
+    margin-top: 8px;
+  }
+  .presales-section h4 {
+    color: var(--text);
+    font-size: 16px;
+    margin: 20px 0 10px;
+  }
+  .presales-section p {
+    color: var(--text-secondary);
+    font-size: 14px;
+    line-height: 1.8;
+    margin-bottom: 10px;
+  }
+  .presales-section ul {
+    color: var(--text-secondary);
+    font-size: 14px;
+    line-height: 1.8;
+    padding-left: 20px;
+    margin: 10px 0;
+  }
+  .presales-section li { margin-bottom: 6px; }
+  .presales-section strong { color: var(--primary-dark); }
+
+  .footer {
+    text-align: center;
+    padding: 40px 0;
+    color: var(--text-light);
+    font-size: 13px;
+    border-top: 1px solid var(--border);
+    background: white;
+  }
+  .footer p { margin: 4px 0; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 14px;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+  th {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+    padding: 14px 16px;
+    text-align: left;
+    font-weight: 600;
+  }
+  td { padding: 12px 16px; border-bottom: 1px solid var(--border); color: var(--text-secondary); }
+
+  /* 原书金句板块 */
+  .golden-quotes-section {
+    margin-bottom: 40px;
+  }
+  .section-desc {
+    color: var(--text-secondary);
+    font-size: 14px;
+    margin-bottom: 20px;
+    padding-left: 4px;
+  }
+  .golden-quotes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .golden-quote-item {
+    background: linear-gradient(135deg, #0ea5e910, #0ea5e920);
+    border-left: 4px solid #0ea5e9;
+    border-radius: 0 10px 10px 0;
+    padding: 14px 16px 14px 18px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    transition: all 0.25s ease;
+  }
+  .golden-quote-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px #0ea5e922;
+    background: linear-gradient(135deg, #0ea5e918, #0ea5e930);
+  }
+  .golden-quote-num {
+    width: 26px;
+    height: 26px;
+    min-width: 26px;
+    background: linear-gradient(135deg, #0ea5e9, #0284c7);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .golden-quote-text {
+    font-size: 13.5px;
+    line-height: 1.75;
+    color: var(--text);
+  }
+
+  /* 能力模型三栏卡片 */
+  .capability-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 24px;
+  }
+  .cap-card {
+    background: white;
+    border-radius: 14px;
+    padding: 24px 20px;
+    text-align: center;
+    border-top: 4px solid var(--primary);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    transition: transform 0.2s;
+  }
+  .cap-card:hover { transform: translateY(-4px); }
+  .cap-icon {
+    font-size: 32px;
+    margin-bottom: 12px;
+  }
+  .cap-card h4 {
+    color: var(--primary-dark);
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+  .cap-card ul {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+  }
+  .cap-card li {
+    font-size: 13px;
+    color: var(--text-secondary);
+    padding: 6px 0;
+    padding-left: 16px;
+    position: relative;
+    line-height: 1.6;
+  }
+  .cap-card li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--primary);
+    font-weight: bold;
+  }
+
+  /* 时间轴样式 */
+  .timeline {
+    position: relative;
+    margin-top: 24px;
+    padding-left: 40px;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 14px;
+    top: 8px;
+    bottom: 8px;
+    width: 2px;
+    background: linear-gradient(180deg, var(--primary-light), var(--primary), var(--primary-dark));
+  }
+  .timeline-item {
+    position: relative;
+    margin-bottom: 28px;
+    background: white;
+    border-radius: 12px;
+    padding: 18px 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    border-left: 3px solid var(--primary);
+  }
+  .timeline-item:last-child { margin-bottom: 0; }
+  .timeline-dot {
+    position: absolute;
+    left: -33px;
+    top: 22px;
+    width: 14px;
+    height: 14px;
+    background: var(--primary);
+    border-radius: 50%;
+    border: 3px solid white;
+    box-shadow: 0 0 0 2px var(--primary-light);
+  }
+  .timeline-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--primary-dark);
+    margin-bottom: 6px;
+  }
+  .timeline-sub {
+    font-size: 12px;
+    color: var(--text-light);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  .timeline-desc {
+    font-size: 13.5px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+
+  /* 三级转型模式卡片 */
+  .transform-modes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 24px;
+  }
+  .mode-card {
+    background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+    border-radius: 14px;
+    padding: 22px 20px;
+    border-top: 4px solid var(--primary);
+    position: relative;
+  }
+  .mode-level {
+    position: absolute;
+    top: -10px;
+    right: 16px;
+    background: var(--primary);
+    color: white;
+    padding: 2px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .mode-card h4 {
+    color: var(--primary-dark);
+    font-size: 15px;
+    margin-bottom: 10px;
+  }
+  .mode-card p {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.65;
+    margin-bottom: 8px;
+  }
+  .mode-card .mode-ability {
+    font-size: 12px;
+    color: var(--primary-dark);
+    background: rgba(14,165,233,0.1);
+    padding: 6px 10px;
+    border-radius: 6px;
+    margin-top: 8px;
+  }
+
+  /* 岗位对比表样式 */
+  .compare-table { font-size: 13px; }
+  .compare-table th { text-align: center; font-size: 13px; }
+  .compare-table td { text-align: center; padding: 10px 12px; }
+  .compare-table td:first-child { text-align: left; font-weight: 500; color: var(--primary-dark); }
+
+  @media (max-width: 768px) {
+    .hero h1 { font-size: 26px; }
+    .hero .subtitle { font-size: 15px; }
+    .section-title { font-size: 22px; }
+    .summary-card, .presales-section, .thought-section { padding: 24px; }
+    .conclusion { padding: 28px; }
+    .golden-quotes-grid { grid-template-columns: 1fr; }
+    .capability-cards { grid-template-columns: 1fr; }
+    .transform-modes { grid-template-columns: 1fr; }
+  }
+
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="top-nav-inner">
+    <a href="../index.html" class="back-link">← 返回书架</a>
+    <button id="likeBtn" onclick="toggleLike()" style="background: none; border: none; cursor: pointer; font-size: 16px; display: flex; align-items: center; gap: 4px; padding: 4px 8px; border-radius: 8px; transition: all 0.2s;">
+      <span id="likeIcon">🤍</span>
+      <span id="likeCount" style="font-size: 13px; color: var(--text-secondary);">0</span>
+    </button>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container">
+    <span class="book-tag">💡 AI与技术前沿 · 第16本</span>
+    <h1>《半小时讲透AI时代的新职业FDE》</h1>
+    <p class="subtitle">前沿部署工程师——AI时代最稀缺的复合型岗位<br>——IT行业专家 × 资深售前工程师 × 集成商老板三重视角解读</p>
+    <div class="hero-meta">
+      <span>✍️ 樊中恺（百度主任架构师）</span>
+      <span>📅 图灵通识 · 半小时·看世界系列</span>
+      <span>📊 95% AI项目失败率</span>
+      <span>🚀 岗位增速729%</span>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+
+  <div class="summary-card">
+    <h2>📖 一句话核心结论</h2>
+    <p>FDE（前沿部署工程师）的核心命题可以凝练为一句话：<strong>AI的能力已经过剩，把能力变成价值的人却严重短缺</strong>。95%的AI项目无法产生可衡量的业务价值，瓶颈不在技术，而在"最后一公里"的落地能力。</p>
+    <p>FDE就是那个能把标准化的AI能力，翻译进非标准化的业务场景里的人——<strong>驻扎客户现场、既懂AI技术又懂客户业务、还能亲手写代码做集成</strong>。对售前工程师来说，这可能是AI时代最好的职业跃迁方向；对IT集成商来说，这是从"硬件搬运工"转向"AI价值转化商"的关键机遇。</p>
+    
+    <a href="book_016_report.html" class="report-link">
+      <div class="report-label">
+        <span class="report-icon">📑</span>
+        <div>
+          <div class="report-title">阅读完整深度研报</div>
+          <div class="report-desc">10大章节 · 约6.3万字 · 全景定义+能力模型+转型路径+趋势研判</div>
+        </div>
+      </div>
+      <span class="report-arrow">→</span>
+    </a>
+  </div>
+
+  <!-- 三个核心理念 -->
+  <div class="section">
+    <h2 class="section-title">🎯 三个核心理念</h2>
+    
+    <div class="insight-list">
+      <div class="insight-item">
+        <div class="insight-num">1</div>
+        <div class="insight-content">
+          <h5>95%失败率的真问题：不是技术不行，而是解决了错误的问题</h5>
+          <p>MIT NANDA团队2025年报告显示，全球95%的AI项目无法对企业利润表产生正向影响。失败的根本原因不是模型不够强，而是<strong>模型和业务之间缺少一个翻译层、一个落地层、一个集成层</strong>。客户说"我要AI客服"，但他真正的需求可能是"降低客服成本"——而降低成本的最优方案可能不是AI客服。FDE的核心价值，就是在动手写代码之前，先帮客户想清楚"这个问题值不值得用AI解决"。</p>
+        </div>
+      </div>
+      <div class="insight-item">
+        <div class="insight-num">2</div>
+        <div class="insight-content">
+          <h5>FDE不是外包、不是售前、不是咨询——是一个全新的物种</h5>
+          <p>FDE和外包的区别：<strong>需求定义权</strong>。外包只对交付物负责，FDE有需求决策权，可以说"这个需求不值得做"。FDE和售前的区别：售前是"卖方案"，FDE是"做方案"。FDE和咨询的区别：咨询出报告，FDE出结果。<strong>FDE = 工程师的手 + 顾问的脑 + 项目经理的嘴</strong>——三者缺一，能力就会有明显短板。</p>
+        </div>
+      </div>
+      <div class="insight-item">
+        <div class="insight-num">3</div>
+        <div class="insight-content">
+          <h5>驻场的本质不是物理在场，而是信息密度和信任密度的指数级提升</h5>
+          <p>很多人问：为什么一定要驻场？远程不行吗？答案是：<strong>AI落地的最大阻力往往不是技术，而是组织。</strong>业务部门愿不愿意配合？IT部门愿不愿意开放接口？管理层愿不愿意推动？这些事情远程搞不定。驻场让你能在会议上当场拍板，能立刻找到关键人协调，能和客户建立信任关系。FDE的工作时间大致分配：25%写代码、50%集成调试、25%开会沟通——四分之三的时间在和人打交道。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 核心金句 -->
+  <div class="section golden-quotes-section">
+    <h2 class="section-title">💎 核心金句</h2>
+    <p class="section-desc">来自研报中的关键洞察，值得反复品味。</p>
+    <div class="golden-quotes-grid">
+      <div class="golden-quote-item">
+        <div class="golden-quote-num">1</div>
+        <div class="golden-quote-text">AI的能力已经过剩，把能力变成价值的人却严重短缺。</div>
+      </div>
+      <div class="golden-quote-item">
+        <div class="golden-quote-num">2</div>
+        <div class="golden-quote-text">95%的AI项目失败，不是因为技术不行，而是因为解决了错误的问题。</div>
+      </div>
+      <div class="golden-quote-item">
+        <div class="golden-quote-num">3</div>
+        <div class="golden-quote-text">FDE不是外包，不是驻场，不是售前——核心区别在于需求定义权。</div>
+      </div>
+      <div class="golden-quote-item">
+        <div class="golden-quote-num">4</div>
+        <div class="golden-quote-text">FDE = 工程师的手 + 顾问的脑 + 项目经理的嘴。</div>
+      </div>
+      <div class="golden-quote-item">
+        <div class="golden-quote-num">5</div>
+        <div class="golden-quote-text">驻场的本质不是物理在场，而是信息密度和信任密度的指数级提升。</div>
+      </div>
+      <div class="golden-quote-item">
+        <div class="golden-quote-num">6</div>
+        <div class="golden-quote-text">方向错了，技术越强，错得越远。</div>
+      </div>
+      <div class="golden-quote-item">
+        <div class="golden-quote-num">7</div>
+        <div class="golden-quote-text">FDE的价值不是"用AI替代人"，而是"用AI放大人的能力"。</div>
+      </div>
+      <div class="golden-quote-item">
+        <div class="golden-quote-num">8</div>
+        <div class="golden-quote-text">你的价值从"人月"变成了"可复制的能力"，才是真正的跃迁。</div>
+      </div>
+      <div class="golden-quote-item">
+        <div class="golden-quote-num">9</div>
+        <div class="golden-quote-text">售前转FDE，最大的门槛是技术能力和动手能力——从"卖方案"到"做方案"。</div>
+      </div>
+      <div class="golden-quote-item">
+        <div class="golden-quote-num">10</div>
+        <div class="golden-quote-text">行业深度 + AI技术 = 不可替代的竞争力。</div>
+      </div>
+      <div class="golden-quote-item">
+        <div class="golden-quote-num">11</div>
+        <div class="golden-quote-text">AI项目失败的根本原因是"组织免疫"——企业的架构、流程、文化、KPI都在本能地排斥AI。</div>
+      </div>
+      <div class="golden-quote-item">
+        <div class="golden-quote-num">12</div>
+        <div class="golden-quote-text">FDE不是终点，而是AI时代的第一张船票。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FDE全景速览 -->
+  <div class="section">
+    <h2 class="section-title">🌐 FDE全景速览</h2>
+    
+    <div class="subsection">
+      <h3 class="subsection-title">FDE的定义</h3>
+      <p><strong>FDE（Forward Deployed Engineer，前沿部署工程师）</strong>是驻扎在客户现场、将AI能力转化为真实业务价值的复合型工程师。</p>
+      <p>四个关键词：</p>
+      <div class="key-points">
+        <div class="key-point">
+          <h4>🎯 前沿（Forward）</h4>
+          <p>不是在总部写代码，而是驻扎在客户业务第一线</p>
+        </div>
+        <div class="key-point">
+          <h4>🔧 部署（Deployed）</h4>
+          <p>不是做研究，而是把AI能力部署进真实业务流程</p>
+        </div>
+        <div class="key-point">
+          <h4>💻 工程师（Engineer）</h4>
+          <p>不是纯咨询、不是纯销售，核心身份是写代码做集成</p>
+        </div>
+        <div class="key-point">
+          <h4>🔄 复合型</h4>
+          <p>技术+业务+沟通，三栖能力缺一不可</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3 class="subsection-title">与相近岗位对比</h3>
+      <table class="compare-table">
+        <tr>
+          <th>能力维度</th>
+          <th>FDE</th>
+          <th>售前工程师</th>
+          <th>后端工程师</th>
+          <th>咨询顾问</th>
+        </tr>
+        <tr>
+          <td>编程开发</td>
+          <td>★★★★</td>
+          <td>★★☆</td>
+          <td>★★★★★</td>
+          <td>★☆</td>
+        </tr>
+        <tr>
+          <td>AI技术深度</td>
+          <td>★★★★</td>
+          <td>★★☆</td>
+          <td>★★☆</td>
+          <td>★☆</td>
+        </tr>
+        <tr>
+          <td>业务理解</td>
+          <td>★★★★</td>
+          <td>★★★★☆</td>
+          <td>★★☆</td>
+          <td>★★★★★</td>
+        </tr>
+        <tr>
+          <td>客户沟通</td>
+          <td>★★★★</td>
+          <td>★★★★★</td>
+          <td>★★☆</td>
+          <td>★★★★☆</td>
+        </tr>
+        <tr>
+          <td>代码交付</td>
+          <td>★★★★</td>
+          <td>★☆</td>
+          <td>★★★★★</td>
+          <td>★☆</td>
+        </tr>
+        <tr>
+          <td>驻场能力</td>
+          <td>★★★★★</td>
+          <td>★★★☆</td>
+          <td>★★☆</td>
+          <td>★★★★</td>
+        </tr>
+        <tr>
+          <td>需求决策权</td>
+          <td>✅ 有</td>
+          <td>❌ 无</td>
+          <td>❌ 无</td>
+          <td>⚠️ 建议权</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- FDE三维能力模型 -->
+  <div class="section">
+    <h2 class="section-title">🧩 FDE三维能力模型</h2>
+    <p class="section-desc">工程落地 + 业务拆解 + 驻场交付，三者相互叠加、相互放大。</p>
+    
+    <div class="capability-cards">
+      <div class="cap-card">
+        <div class="cap-icon">⚙️</div>
+        <h4>工程落地能力</h4>
+        <ul>
+          <li>Python编程与工程基础</li>
+          <li>RAG全链路开发</li>
+          <li>Tool Calling工具调用</li>
+          <li>Agent框架应用</li>
+          <li>评估体系（Evals）</li>
+          <li>Docker与部署基础</li>
+          <li>AI基础设施认知</li>
+        </ul>
+      </div>
+      <div class="cap-card">
+        <div class="cap-icon">📊</div>
+        <h4>业务拆解能力</h4>
+        <ul>
+          <li>业务价值验证</li>
+          <li>AI适用性判断</li>
+          <li>场景优先级排序</li>
+          <li>需求精确定义</li>
+          <li>MVP方案设计</li>
+          <li>ROI计算与衡量</li>
+          <li>行业知识积累</li>
+        </ul>
+      </div>
+      <div class="cap-card">
+        <div class="cap-icon">🤝</div>
+        <h4>驻场交付能力</h4>
+        <ul>
+          <li>快速建立信任</li>
+          <li>跨部门协调</li>
+          <li>管理客户预期</li>
+          <li>抗压与适应</li>
+          <li>组织政治敏感度</li>
+          <li>用户采用推动</li>
+          <li>产品化沉淀思维</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="method-card" style="margin-top: 24px;">
+      <h5>💡 能力组合与适配</h5>
+      <ul>
+        <li><strong>技术型FDE</strong>（工程★★★★★ / 业务★★★ / 驻场★★）：适合技术复杂度高的深度定制项目</li>
+        <li><strong>业务型FDE</strong>（工程★★★ / 业务★★★★★ / 驻场★★★）：适合业务复杂度高的行业场景</li>
+        <li><strong>交付型FDE</strong>（工程★★★ / 业务★★★ / 驻场★★★★★）：适合大型客户、复杂组织环境</li>
+        <li><strong>全能型FDE</strong>（各维度★★★★）：FDE Tech Lead，小团队独立负责大客户</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 六大典型场景精华 -->
+  <div class="section">
+    <h2 class="section-title">🏭 六大典型场景精华</h2>
+    
+    <div class="insight-list">
+      <div class="insight-item">
+        <div class="insight-num">1</div>
+        <div class="insight-content">
+          <h5>企业知识库RAG系统</h5>
+          <p><strong>一句话：</strong>从"找信息费劲"到"智能问答"，FDE最常见的入门级项目。</p>
+          <p><strong>关键要点：</strong>先做业务发现再动手；文档切分策略决定检索质量；引用溯源+置信度解决"胡说八道"；权限控制是企业级必备。</p>
+        </div>
+      </div>
+      <div class="insight-item">
+        <div class="insight-num">2</div>
+        <div class="insight-content">
+          <h5>智能客服升级Agent</h5>
+          <p><strong>一句话：</strong>从关键词匹配到自然语言理解，涉及多工具调用与人机协作。</p>
+          <p><strong>关键要点：</strong>Tool Calling是核心技术挑战；意图识别与路由决定用户体验；转人工机制不是认输，是专业；上线初期人工兜底比例要留足。</p>
+        </div>
+      </div>
+      <div class="insight-item">
+        <div class="insight-num">3</div>
+        <div class="insight-content">
+          <h5>制造业质量检测AI辅助</h5>
+          <p><strong>一句话：</strong>不是"用AI替代质检员"，而是"AI辅助+人工复检"的人机协作模式。</p>
+          <p><strong>关键要点：</strong>重新定义问题是成功的一半；AI做初筛、人做复检的分工模式；持续学习闭环让系统越用越准；边缘案例处理机制是难点。</p>
+        </div>
+      </div>
+      <div class="insight-item">
+        <div class="insight-num">4</div>
+        <div class="insight-content">
+          <h5>金融行业智能投研助手</h5>
+          <p><strong>一句话：</strong>高净值行业场景，准确性和合规要求极高，客户粘性极强。</p>
+          <p><strong>关键要点：</strong>多源数据采集与结构化是基础；每一个数据点都要有来源（引用溯源）；多Agent协作提升分析深度；合规侧要求是硬约束。</p>
+        </div>
+      </div>
+      <div class="insight-item">
+        <div class="insight-num">5</div>
+        <div class="insight-content">
+          <h5>AI私有化部署与本地化改造</h5>
+          <p><strong>一句话：</strong>国内FDE最有特色的场景——国产算力+国产模型的适配本身就是大工程。</p>
+          <p><strong>关键要点：</strong>私有化部署成本远不止硬件（软件+实施+运维才是大头）；10B以内模型几十万可搞定，70B级大几百万起；国产算力生态是核心门槛。</p>
+        </div>
+      </div>
+      <div class="insight-item">
+        <div class="insight-num">6</div>
+        <div class="insight-content">
+          <h5>Copilot嵌入业务系统</h5>
+          <p><strong>一句话：</strong>把AI能力嵌入现有业务流程，用户感知最自然的落地方式。</p>
+          <p><strong>关键要点：</strong>不是做一个独立的AI系统，而是在已有系统里加AI辅助功能；"人在回路"是设计哲学；价值衡量看效率提升率，不是看DAU。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 售前工程师转型路径 -->
+  <div class="section">
+    <h2 class="section-title">🚀 售前工程师转型路径速览</h2>
+    <p class="section-desc">6个月路线图——从"卖方案"到"做方案"的跃迁。</p>
+    
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-sub">第1-2个月</div>
+        <div class="timeline-title">补工程底座</div>
+        <div class="timeline-desc">
+          Python编程进阶、SQL与数据库、HTTP/API与Web开发基础、Git版本控制、Docker与部署基础。<br>
+          <strong>实践项目：</strong>用Python写一个命令行工具 + FastAPI Todo服务 + Docker打包部署。
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-sub">第3-4个月</div>
+        <div class="timeline-title">做一个完整的AI应用</div>
+        <div class="timeline-desc">
+          大模型API使用、RAG全链路（文档解析→切分→向量化→检索→生成）、Tool Calling工具调用、评估体系（Evals）。<br>
+          <strong>实践项目：</strong>从0到1搭建完整的知识库问答系统，支持文档上传、自然语言问答、引用溯源。
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-sub">第5-6个月</div>
+        <div class="timeline-title">积累项目经验，找机会转型</div>
+        <div class="timeline-desc">
+          Agent框架（ReAct、LangGraph、多Agent协作）、系统设计与工程化、业务分析能力。<br>
+          <strong>实践项目：</strong>在公司内部做AI助手（售前/客服）+ 开源项目/个人作品集 + 主动参与公司AI项目。
+        </div>
+      </div>
+    </div>
+
+    <div class="method-card">
+      <h5>🌟 售前转FDE的四大独特优势</h5>
+      <ul>
+        <li><strong>客户思维</strong>：天生懂"客户视角"，知道怎么把技术翻译成业务价值——纯技术出身的FDE最缺的就是这个</li>
+        <li><strong>方案设计能力</strong>：需求调研→方案设计→讲标能力，这套能力迁移过来就是FDE的业务发现+系统设计能力</li>
+        <li><strong>行业知识</strong>：行业深度是FDE最核心的壁垒，大模型厂商的FDE技术再强也不可能比你懂这个行业</li>
+        <li><strong>商务敏感度</strong>：知道项目怎么拿、客户关系怎么维护、机会在哪里——FDE在现场需要能敏锐察觉新业务机会</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- IT集成商三级转型模式 -->
+  <div class="section">
+    <h2 class="section-title">🏢 IT集成商三级转型模式</h2>
+    <p class="section-desc">从"硬件搬运工"到"AI价值转化商"的演进路径。</p>
+    
+    <div class="transform-modes">
+      <div class="mode-card">
+        <span class="mode-level">入门级</span>
+        <h4>产品分销 + FDE增值</h4>
+        <p>在现有产品分销基础上，增加FDE驻场增值服务——卖算力卖模型的同时，派工程师帮客户把系统跑起来。</p>
+        <p><strong>营收结构：</strong>产品收入为主，FDE服务占20%以下</p>
+        <p><strong>适合：</strong>传统硬件集成商，转型初期</p>
+        <div class="mode-ability">🔑 关键：选人 + 培训 + 找POC项目练手</div>
+      </div>
+      <div class="mode-card">
+        <span class="mode-level">进阶级</span>
+        <h4>解决方案 + FDE驻场</h4>
+        <p>基于所在行业开发AI解决方案，以"解决方案+FDE驻场交付"模式卖给客户。卖的不是"算力+模型"，而是"行业AI能力"。</p>
+        <p><strong>营收结构：</strong>解决方案+服务收入各半</p>
+        <p><strong>适合：</strong>有行业积累的SI/ISV</p>
+        <div class="mode-ability">🔑 关键：聚焦行业 + 标杆案例 + 标准化方案模板</div>
+      </div>
+      <div class="mode-card">
+        <span class="mode-level">高级模式</span>
+        <h4>FDE服务 + 产品化</h4>
+        <p>把FDE服务中的可复用部分产品化——技术组件、实施流程、行业知识资产化，从人力驱动转向产品驱动。</p>
+        <p><strong>营收结构：</strong>FDE服务为主，产品化收入占30%+</p>
+        <p><strong>适合：</strong>转型成熟的AI服务公司</p>
+        <div class="mode-ability">🔑 关键：组件库 + 方法论标准化 + 低代码平台</div>
+      </div>
+    </div>
+
+    <div class="quote-card" style="margin-top: 32px;">
+      <p>产品化"1-3-4原则"：前1-3个客户可以深度定制，从第4个客户起定制度必须单调递减、复用度单调递增。目标是把复用率逐步提到60%→80%→90%以上。</p>
+      <div class="quote-source">—— 行业经验法则</div>
+    </div>
+  </div>
+
+  <!-- 三点深度思考 -->
+  <div class="section">
+    <h2 class="section-title">🤔 三点深度思考</h2>
+    
+    <div class="insight-list">
+      <div class="insight-item">
+        <div class="insight-num">1</div>
+        <div class="insight-content">
+          <h5>FDE的本质是"AI时代的翻译官"，而不是"AI时代的超级工程师"</h5>
+          <p>很多人把FDE神化成全能战士——既要懂算法、又要懂工程、又要懂业务。但FDE的本质是<strong>翻译官</strong>：一端是标准化的AI能力，另一端是非标准化的业务场景，FDE的工作就是在这两端之间做翻译。翻译官的核心竞争力，不是某一端的深度，而是两端的连接能力。不要陷入"技术焦虑"——你不需要成为AI技术专家，你需要成为"AI技术+业务场景"的连接专家。</p>
+        </div>
+      </div>
+      <div class="insight-item">
+        <div class="insight-num">2</div>
+        <div class="insight-content">
+          <h5>95%失败率的真正原因不是技术，而是"组织免疫"</h5>
+          <p>AI项目失败的根本原因不是技术不行，而是<strong>组织免疫</strong>——企业的组织架构、流程、文化、KPI，都在本能地排斥AI这个新事物。一个AI系统能让客服效率提升50%，意味着客服团队要裁员50%——客服经理会真心支持吗？每一个AI项目，本质上都是一次组织变革。FDE模式为什么成功率高？因为FDE不是站在外面往里推，而是进到组织内部，和客户一起面对这些阻力。</p>
+        </div>
+      </div>
+      <div class="insight-item">
+        <div class="insight-num">3</div>
+        <div class="insight-content">
+          <h5>FDE的终极命运——从"职业"到"能力"，然后消失？</h5>
+          <p>FDE作为一个独立的职业，可能只会存在5-10年。但FDE作为一种能力，会成为未来所有工程师和职场人的标配。就像"电脑操作员"这个职业消失了——不是因为电脑不重要了，而是因为每个人都会用电脑了。<strong>所以不要把FDE当成终极职业，而要把它当成一个跳板。</strong>通过FDE学会AI时代的核心技能、积累行业深度、建立客户关系，然后往更高处走。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="conclusion">
+    <div class="container-inner">
+      <h2>🌟 写在最后</h2>
+      <p>FDE不是一个遥不可及的新职业，而是一个<strong>已经爆发、正在快速扩容、未来5-10年持续有红利</strong>的职业赛道。</p>
+      <p>对售前工程师来说，这是你把"懂业务、懂客户、懂方案"的优势，加上AI技术引擎的最佳时机——进可攻（转FDE），退可守（做懂AI的售前，也比不懂AI的值钱）。</p>
+      <p>对集成商老板来说，这是从"卖盒子"到"卖结果"的转型机遇——你的核心优势从来不是产品，而是客户关系和行业理解，FDE模式正好能把这个优势最大化。</p>
+      <p>机会窗口不会永远开着。越早行动，越早积累，越早建立先发优势。</p>
+      <div class="final-quote">"FDE不是终点，而是AI时代的第一张船票。" —— 樊中恺</div>
+    </div>
+  </div>
+
+  <a href="book_016_report.html" class="report-link" style="margin-bottom: 48px; display: flex;">
+    <div class="report-label">
+      <span class="report-icon">📑</span>
+      <div>
+        <div class="report-title">阅读完整深度研报</div>
+        <div class="report-desc">10大章节 · 约6.3万字 · 全景定义+能力模型+转型路径+趋势研判</div>
+      </div>
+    </div>
+    <span class="report-arrow">→</span>
+  </a>
+
+  <div class="thought-section">
+    <div class="thought-header">
+      <h3>✍️ 我的读书思考</h3>
+      <button class="thought-btn" onclick="saveThought()">保存</button>
+    </div>
+    <div class="thought-prompts">
+      <button class="thought-prompt" onclick="insertPrompt('关于FDE这个职业，我的判断是...')">职业判断</button>
+      <button class="thought-prompt" onclick="insertPrompt('我距离FDE还有多大差距...')">自我评估</button>
+      <button class="thought-prompt" onclick="insertPrompt('对我所在行业/公司的启发是...')">行业启发</button>
+      <button class="thought-prompt" onclick="insertPrompt('我的转型计划是...')">转型计划</button>
+    </div>
+    <textarea class="thought-content" id="thoughtInput" placeholder="写下你的思考、感悟、质疑... 所有内容保存在本地浏览器中"></textarea>
+    <div class="thought-hint">💾 自动保存到本地 · localStorage 存储</div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <p>🌱 《半小时讲透AI时代的新职业FDE》· 精华解读</p>
+  <p>作者：樊中恺 · 研读日期：2026-08-07</p>
+  <p style="margin-top: 8px; font-size: 12px;">© 2026 RootUser 的阅读空间</p>
+</div>
+
+<script>
+  const STORAGE_KEY = 'book_016_fde_thought';
+  const thoughtInput = document.getElementById('thoughtInput');
+
+  function loadThought() {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) { thoughtInput.value = saved; }
+  }
+
+  function saveThought() {
+    const content = thoughtInput.value;
+    localStorage.setItem(STORAGE_KEY, content);
+    const btn = document.querySelector('.thought-btn');
+    const originalText = btn.textContent;
+    btn.textContent = '✓ 已保存';
+    btn.style.background = '#10b981';
+    setTimeout(() => {
+      btn.textContent = originalText;
+      btn.style.background = '';
+    }, 1500);
+  }
+
+  function insertPrompt(text) {
+    const current = thoughtInput.value;
+    if (current && !current.endsWith('\n')) {
+      thoughtInput.value = current + '\n\n' + text;
+    } else {
+      thoughtInput.value = current + text;
+    }
+    thoughtInput.focus();
+    thoughtInput.setSelectionRange(thoughtInput.value.length, thoughtInput.value.length);
+  }
+
+  let saveTimeout;
+  thoughtInput.addEventListener('input', () => {
+    clearTimeout(saveTimeout);
+    saveTimeout = setTimeout(() => {
+      localStorage.setItem(STORAGE_KEY, thoughtInput.value);
+    }, 1000);
+  });
+
+  loadThought();
+
+  // 点赞功能
+  function getBookKey() {
+    const path = window.location.pathname;
+    const filename = path.split('/').pop().replace('.html', '');
+    return 'book_like_' + filename;
+  }
+
+  function initLike() {
+    const key = getBookKey();
+    const data = JSON.parse(localStorage.getItem(key) || '{"count": 0, "liked": false}');
+    updateLikeUI(data.count, data.liked);
+  }
+
+  function toggleLike() {
+    const key = getBookKey();
+    let data = JSON.parse(localStorage.getItem(key) || '{"count": 0, "liked": false}');
+    
+    if (data.liked) {
+      data.count = Math.max(0, data.count - 1);
+      data.liked = false;
+    } else {
+      data.count += 1;
+      data.liked = true;
+    }
+    
+    localStorage.setItem(key, JSON.stringify(data));
+    updateLikeUI(data.count, data.liked);
+  }
+
+  function updateLikeUI(count, liked) {
+    const icon = document.getElementById('likeIcon');
+    const countEl = document.getElementById('likeCount');
+    const btn = document.getElementById('likeBtn');
+    
+    if (icon) { icon.textContent = liked ? '❤️' : '🤍'; }
+    if (countEl) { countEl.textContent = count; }
+    if (btn && liked) {
+      btn.classList.add('liked');
+      setTimeout(() => btn.classList.remove('liked'), 300);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', initLike);
+  if (document.readyState !== 'loading') { initLike(); }
+</script>
+<script src="../annotation.js"></script>
+<script src="../toc.js"></script>
+</body>
+</html>
