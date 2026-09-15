@@ -1,0 +1,2220 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>煤炭行业的IT运维洞察 — 锐捷网络售前培训资料站</title>
+<style>
+:root{
+--primary-dark:#0f172a;--primary:#1e3a5f;--primary-light:#1a56db;
+--accent:#f59e0b;--accent-dark:#d97706;
+--bg:#f8fafc;--surface:#ffffff;--surface-alt:#f1f5f9;
+--text:#1e293b;--text-secondary:#64748b;--text-muted:#94a3b8;
+--border:#e2e8f0;--border-dark:#cbd5e1;
+--success:#10b981;--danger:#ef4444;--info:#3b82f6;--warning:#f59e0b;
+--radius:8px;--shadow:0 1px 3px rgba(0,0,0,.1),0 1px 2px rgba(0,0,0,.06);
+--shadow-md:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -1px rgba(0,0,0,.06);
+--font:-apple-system,"PingFang SC","Microsoft YaHei","Helvetica Neue",sans-serif;
+--font-mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:15px;scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.7}
+
+/* Header */
+.site-header{background:linear-gradient(135deg,var(--primary-dark) 0%,var(--primary) 50%,var(--primary-light) 100%);color:#fff;padding:24px 0 0;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.3)}
+.header-inner{max-width:1400px;margin:0 auto;padding:0 24px}
+.header-title{font-size:1.5rem;font-weight:800;letter-spacing:-.5px}
+.header-sub{font-size:.85rem;opacity:.8;margin-top:4px}
+.header-meta{display:flex;gap:16px;margin-top:8px;font-size:.78rem;opacity:.7}
+.header-meta span::before{content:'●';color:var(--accent);margin-right:4px;font-size:.6rem}
+
+/* Tabs */
+.tab-nav{display:flex;gap:0;margin-top:16px;border-bottom:none}
+.tab-btn{background:transparent;border:none;color:rgba(255,255,255,.7);padding:10px 20px;font-size:.88rem;font-weight:600;cursor:pointer;border-bottom:3px solid transparent;transition:all .2s;font-family:var(--font)}
+.tab-btn:hover{color:#fff;background:rgba(255,255,255,.08)}
+.tab-btn.active{color:var(--accent);border-bottom-color:var(--accent);background:rgba(255,255,255,.05)}
+
+/* Tab Content */
+.tab-content{display:none;max-width:1400px;margin:0 auto;padding:32px 24px}
+.tab-content.active{display:block}
+
+/* Cards */
+.card{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px;margin-bottom:20px;border:1px solid var(--border)}
+.card-title{font-size:1.1rem;font-weight:700;color:var(--primary-dark);margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid var(--accent)}
+.card-subtitle{font-size:.95rem;font-weight:600;color:var(--primary);margin:16px 0 8px}
+
+/* Tables */
+.table-wrap{overflow-x:auto;border-radius:var(--radius);border:1px solid var(--border);margin:12px 0}
+table{width:100%;border-collapse:collapse;font-size:.85rem}
+th{background:var(--primary-dark);color:#fff;text-align:left;padding:10px 14px;font-weight:600;font-size:.8rem;white-space:nowrap}
+td{padding:10px 14px;border-top:1px solid var(--border);vertical-align:top}
+tr:hover td{background:rgba(245,158,11,.04)}
+td:first-child{font-weight:500}
+
+/* Term Cards */
+.term-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px;margin:12px 0}
+.term-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px;transition:box-shadow .2s}
+.term-card:hover{box-shadow:var(--shadow-md)}
+.term-name{font-weight:700;color:var(--primary-dark);font-size:.9rem}
+.term-en{font-size:.78rem;color:var(--accent-dark);font-weight:600;margin-left:6px}
+.term-def{font-size:.82rem;color:var(--text-secondary);margin-top:6px;line-height:1.5}
+.term-label{font-size:.72rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;margin-top:8px}
+.term-it{font-size:.8rem;color:var(--primary);margin-top:2px;padding:6px 8px;background:rgba(26,86,219,.04);border-radius:4px;border-left:3px solid var(--primary-light)}
+
+/* Sub tabs */
+.sub-tabs{display:flex;flex-wrap:wrap;gap:6px;margin:16px 0}
+.sub-tab{background:var(--surface-alt);border:1px solid var(--border);padding:6px 14px;border-radius:20px;font-size:.8rem;cursor:pointer;font-weight:500;transition:all .2s;font-family:var(--font)}
+.sub-tab:hover{border-color:var(--primary-light);color:var(--primary)}
+.sub-tab.active{background:var(--primary-dark);color:#fff;border-color:var(--primary-dark)}
+
+/* Search */
+.search-box{width:100%;padding:10px 16px;border:2px solid var(--border);border-radius:var(--radius);font-size:.9rem;margin:12px 0;transition:border-color .2s;font-family:var(--font)}
+.search-box:focus{outline:none;border-color:var(--primary-light)}
+.search-box::placeholder{color:var(--text-muted)}
+
+/* Flow Process */
+.flow-box{background:var(--primary-dark);color:#e2e8f0;padding:16px 20px;border-radius:var(--radius);font-family:var(--font-mono);font-size:.8rem;line-height:1.8;overflow-x:auto;white-space:pre-wrap;margin:12px 0}
+
+/* Collapsible */
+.collapsible{margin:8px 0}
+.coll-header{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 20px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-weight:600;font-size:.92rem;transition:background .2s}
+.coll-header:hover{background:var(--surface-alt)}
+.coll-header .arrow{transition:transform .3s;color:var(--accent)}
+.coll-header.open .arrow{transform:rotate(90deg)}
+.coll-body{display:none;padding:16px 20px;border:1px solid var(--border);border-top:none;border-radius:0 0 var(--radius) var(--radius);background:var(--surface)}
+.coll-body.open{display:block}
+
+/* Highlight box */
+.highlight-box{background:rgba(245,158,11,.06);border-left:4px solid var(--accent);padding:14px 18px;border-radius:0 var(--radius) var(--radius) 0;margin:12px 0}
+.highlight-box strong{color:var(--accent-dark)}
+
+/* Warning */
+.warn-box{background:rgba(239,68,68,.04);border-left:4px solid var(--danger);padding:14px 18px;border-radius:0 var(--radius) var(--radius) 0;margin:12px 0}
+.warn-box .wrong{color:var(--danger);font-weight:600}
+.warn-box .right{color:var(--success);font-weight:600}
+
+/* Q&A */
+details.qa{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin:8px 0;overflow:hidden}
+details.qa summary{padding:12px 18px;font-weight:600;font-size:.88rem;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center}
+details.qa summary::after{content:'▸';color:var(--text-muted);transition:transform .2s}
+details.qa[open] summary::after{transform:rotate(90deg)}
+details.qa .answer{padding:0 18px 14px;font-size:.85rem;color:var(--text-secondary);line-height:1.7}
+
+/* Formula */
+.formula{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 18px;margin:8px 0}
+.formula-name{font-weight:700;color:var(--accent-dark);font-size:.88rem}
+.formula-expr{font-family:var(--font-mono);font-size:.82rem;color:var(--primary-dark);margin:4px 0}
+.formula-example{font-size:.8rem;color:var(--text-muted)}
+
+/* Day section */
+.day-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:20px;overflow:hidden}
+.day-header{background:linear-gradient(135deg,var(--primary-dark),var(--primary));color:#fff;padding:16px 20px;display:flex;align-items:center;gap:16px}
+.day-num{font-size:2rem;font-weight:800;font-family:var(--font-mono);color:var(--accent)}
+.day-info h3{font-size:1rem;font-weight:700}
+.day-info p{font-size:.8rem;opacity:.8;margin-top:2px}
+.day-body{padding:20px}
+
+/* Knowledge Graph */
+.kg-layer{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin:10px 0}
+.kg-title{font-weight:700;color:var(--accent-dark);font-size:.9rem;margin-bottom:8px}
+.kg-tags{display:flex;flex-wrap:wrap;gap:6px}
+.kg-tag{background:var(--surface-alt);padding:4px 10px;border-radius:4px;font-size:.78rem;color:var(--text-secondary);border:1px solid var(--border)}
+.kg-tag.primary{border-color:var(--accent);color:var(--accent-dark);font-weight:600}
+
+/* Responsive */
+@media(max-width:768px){
+.tab-btn{padding:8px 12px;font-size:.8rem}
+.term-grid{grid-template-columns:1fr}
+.header-title{font-size:1.2rem}
+table{font-size:.78rem}
+th,td{padding:8px 10px}
+}
+
+/* Print */
+@media print{
+.site-header{position:static;background:var(--primary-dark)}
+.tab-content{display:block!important;page-break-before:always}
+.tab-btn{display:none}
+.card,.day-card,.coll-body{break-inside:avoid}
+body{font-size:12px}
+}
+</style>
+</head>
+<body>
+<header class="site-header">
+<div class="header-inner">
+<div class="header-title">🏭 煤炭行业的IT运维洞察</div>
+<div class="header-sub">锐捷网络售前团队 · 煤炭行业培训背景资料站</div>
+<div class="header-meta">
+<span>客户：陕煤集团陕北矿业信息技术运维分公司</span>
+<span>版本：2026-09</span>
+<span>来源：研报+术语词典+运维流程+培训框架</span>
+</div>
+<nav class="tab-nav">
+<button class="tab-btn active" data-tab="overview">行业概览</button>
+<button class="tab-btn" data-tab="glossary">术语词典</button>
+<button class="tab-btn" data-tab="process">运维流程</button>
+<button class="tab-btn" data-tab="training">培训框架</button>
+<button class="tab-btn" data-tab="solution">锐捷方案对接</button>
+</nav>
+</div>
+</header>
+
+<!-- TAB 1: 行业概览 -->
+<div class="tab-content active" id="overview">
+
+<div class="card">
+<div class="card-title">陕煤集团与陕北矿业简介</div>
+<div class="table-wrap"><table>
+<thead><tr><th>层级</th><th>关键数字</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><strong>陕煤集团</strong></td><td>2025年煤炭产量2.58亿吨；营收641亿美元；521家子分公司、6家上市公司、约14万员工</td><td>建成34座智能煤矿，智能开采占比97%</td></tr>
+<tr><td><strong>陕西煤业（601225）</strong></td><td>21处煤矿，核定总产能约1.62亿吨/年；2025年营收1581.79亿元</td><td>归母净利润167.65亿元；煤炭采掘业占营收87.75%</td></tr>
+<tr><td><strong>陕北矿业公司</strong></td><td>8000万吨/年优质煤炭产能</td><td>陕北矿区核心布局主体，法定代表人张宏</td></tr>
+<tr><td><strong>信息技术运维分公司</strong></td><td>约125人（机关21+四个智维中心104）</td><td>2021年12月16日成立，平均年龄32岁，本科以上占比90%以上</td></tr>
+</tbody>
+</table></div>
+</div>
+
+<div class="card">
+<div class="card-title">五家单位六对矿井</div>
+<div class="table-wrap"><table>
+<thead><tr><th>矿井</th><th>核定产能（万吨/年）</th><th>核心特征</th></tr></thead>
+<tbody>
+<tr><td><strong>红柳林</strong></td><td>1500→1800</td><td>2012年建成全国第一个7m大采高智能化综采面；煤质特低硫特低灰</td></tr>
+<tr><td><strong>柠条塔</strong></td><td>1200→1800</td><td>机器人协同调度平台，40+种岗位机器人；2025年入选国家能源局智能掘进试点</td></tr>
+<tr><td><strong>张家峁</strong></td><td>1000</td><td>2021年10月成为全国首个全矿井智能化示范标杆单位；集成92个在用系统</td></tr>
+<tr><td><strong>韩家湾</strong></td><td>400</td><td>全国首例智能化"110工法"综采工作面；薄煤层开采</td></tr>
+<tr><td><strong>涌鑫（安山+沙梁）</strong></td><td>安山120→390；沙梁120</td><td>安山部署首套低矮型智能掘锚一体机；沙梁2020年联合试运转</td></tr>
+</tbody>
+</table></div>
+</div>
+
+<div class="card">
+<div class="card-title">运维分公司介绍</div>
+<div class="highlight-box"><strong>服务范围：</strong>承揽红柳林、柠条塔、张家峁、韩家湾、涌鑫5家单位6对矿井的智能矿井信息化系统运维业务。</div>
+
+<p style="margin:12px 0"><strong>组织架构：</strong></p>
+<div class="flow-box">陕西省国资委（实际控制人）
+└─ 陕煤集团
+   └─ 陕北矿业有限公司
+      ├─ 信息技术运维分公司 ★
+      │   ├─ 机关四部室：信息运维管理部 / 安全技术管理部 / 综合管理部 / 经营管理部
+      │   └─ 四个驻矿智维中心：红柳林 / 柠条塔 / 张家峁 / 韩家湾涌鑫
+      ├─ 红柳林矿业公司
+      ├─ 柠条塔矿业公司
+      ├─ 张家峁矿业公司
+      ├─ 韩家湾煤炭公司
+      └─ 涌鑫矿业公司（含安山、沙梁两矿）</div>
+
+<p style="margin:16px 0 8px"><strong>四个智维中心代表数据（红柳林）：</strong></p>
+<div class="table-wrap"><table>
+<thead><tr><th>指标</th><th>数值</th></tr></thead>
+<tbody>
+<tr><td>管理设备</td><td>5套万兆环网交换机 + 138台融合基站 + 293台工业视频</td></tr>
+<tr><td>故障诊断时间</td><td>从2小时缩短至35分钟</td></tr>
+<tr><td>设备完好率</td><td>提升11.2个百分点</td></tr>
+<tr><td>线缆优化</td><td>单月浪费从500米降至100米（"五步法"）</td></tr>
+<tr><td>年故障处置</td><td>145次，熔接光缆19处，应急响应及时率100%</td></tr>
+</tbody>
+</table></div>
+
+<div class="card-subtitle">17项团体标准</div>
+<div class="highlight-box">联合中煤科工开采研究院编制《智能化煤矿运行与维护管理标准体系》，<strong>4大类17项</strong>，2023-11-15经中国煤炭学会批准公告，2024-01-13在煤矿智能化重大进展发布会发布。<br><br>
+四大类：<strong>共性基础</strong> | <strong>信息网络平台</strong> | <strong>智能控制系统与装备</strong> | <strong>支持保障</strong><br><br>
+解决问题："使以往依赖老师傅个人经验的'手艺活'，转变为可复制、可考核、可追溯的标准化作业流程"；"有效解决了不同系统与厂商设备在井下协同作业时的'语言障碍'与'责任推诿'"。</div>
+</div>
+
+<div class="card">
+<div class="card-title">商业模式与结算方式</div>
+<p style="margin:8px 0"><strong>业务链条：建→管→维→训→标准输出</strong></p>
+<div class="table-wrap"><table>
+<thead><tr><th>环节</th><th>具体做法</th></tr></thead>
+<tbody>
+<tr><td><strong>建</strong></td><td>参与智慧矿区建设、智能矿井部分项目建设，提供方案策划、技术评审、效果评价</td></tr>
+<tr><td><strong>管</strong></td><td>智能化煤矿运维管理平台承载全部服务需求，平台是"中枢"</td></tr>
+<tr><td><strong>维</strong></td><td>"工单驱动、三级协同"服务闭环</td></tr>
+<tr><td><strong>训</strong></td><td>定期组织行业专家对从业人员开展智能化专业技术培训</td></tr>
+<tr><td><strong>标准输出</strong></td><td>17项团体标准 + 《综采工作面智能化装备安装、维护与回撤作业规范》</td></tr>
+</tbody>
+</table></div>
+
+<div class="card-subtitle">"工单驱动、三级协同"闭环</div>
+<div class="highlight-box">所有矿方服务需求汇入智能化运维平台并生成电子工单。工单如同<strong>"病历本"</strong>，全程记录故障现象、发生时间、处理过程、备件使用、处理结果及矿方评价，实现服务全流程可追溯、责任可锁定。<br><br>
+系统根据问题性质、影响范围与复杂程度<strong>自动触发分级响应</strong>：常见故障由驻矿智维中心现场运维师快速处理（分钟/小时级）；疑难问题升级至公司后端远程专家团队（视频会诊/远程接入）。</div>
+
+<div class="card-subtitle">"五维"运维模式</div>
+<div class="table-wrap"><table>
+<thead><tr><th>维度</th><th>内核</th><th>已做工作</th></tr></thead>
+<tbody>
+<tr><td><strong>做标准</strong></td><td>为智能化系统立规矩、通语言</td><td>17项团标，4大类</td></tr>
+<tr><td><strong>强服务</strong></td><td>工单驱动、三级协同</td><td>电子工单"病历本"，自动分级响应</td></tr>
+<tr><td><strong>搭平台</strong></td><td>智能化运维平台</td><td>具备感知、远程管控、流程分析、数据汇聚、指标展示、AI辅助决策等模块</td></tr>
+<tr><td><strong>育人才</strong></td><td>队伍能力建设</td><td>4个煤炭行业技能大师工作室、17名技能大师、13名全国技术能手</td></tr>
+<tr><td><strong>创价值</strong></td><td>降本创效</td><td>2025年认定685项创新项目，创效超2000万元</td></tr>
+</tbody>
+</table></div>
+</div>
+
+<div class="card">
+<div class="card-title">智能化建设全景</div>
+<div class="card-subtitle">客户核心成绩</div>
+<div class="table-wrap"><table>
+<thead><tr><th>指标</th><th>数值</th></tr></thead>
+<tbody>
+<tr><td>红柳林全国首个7m大采高智能化综采面</td><td>2012年建成</td></tr>
+<tr><td>综采工作面单班作业人员</td><td>14-16人 → 5人</td></tr>
+<tr><td>煤机自动化割煤速度</td><td>平均7m/min</td></tr>
+<tr><td>工作面推采速度</td><td>8m/min</td></tr>
+<tr><td>自动化开机率</td><td>90%以上</td></tr>
+<tr><td>回采率</td><td>98%</td></tr>
+<tr><td>单面日产</td><td>高达3.5万吨</td></tr>
+<tr><td>3个智能化综采面自动化生产率</td><td>平均90.79%，回采工效提高80%</td></tr>
+<tr><td>韩家湾"110工法"</td><td>单班19人→6人，每工作面多回收煤柱约8万吨，增收约2400万元</td></tr>
+<tr><td>全矿智能化采掘面</td><td>12个智能化采掘面，11套快掘系统，效率提升2倍以上</td></tr>
+</tbody>
+</table></div>
+
+<div class="card-subtitle">井下信息基础设施现状</div>
+<div class="table-wrap"><table>
+<thead><tr><th>系统/平台</th><th>客户事实</th></tr></thead>
+<tbody>
+<tr><td>万兆工业环网</td><td>红柳林5套万兆环网交换机</td></tr>
+<tr><td>4G/5G融合基站</td><td>红柳林138台</td></tr>
+<tr><td>工业视频</td><td>红柳林293台</td></tr>
+<tr><td>"1+8"管控云平台</td><td>2019年搭建，8个矿井人机物跨域互联互通</td></tr>
+<tr><td>张家峁全矿井智能化</td><td>集成92个在用系统</td></tr>
+<tr><td>5G+MEC边缘云</td><td>张家峁2019年部署，国内首个矿井5G+MEC边缘云</td></tr>
+<tr><td>网络安全态势感知</td><td>联合360开发，保护7630个网络设备资产，拦截威胁56万+次，零入侵</td></tr>
+<tr><td>智能化运维平台</td><td>自研，承载标准运维管控、智能状态分析、远程故障诊断、AI辅助决策</td></tr>
+</tbody>
+</table></div>
+
+<div class="card-subtitle"> geological条件画像（榆神府矿区）</div>
+<div class="table-wrap"><table>
+<thead><tr><th>维度</th><th>事实</th><th>运维影响</th></tr></thead>
+<tbody>
+<tr><td><strong>浅埋深+薄基岩</strong></td><td>开采深度多70-100m（＜150m）</td><td>地表沉降、采动裂缝风险→光缆可能被"压坏"</td></tr>
+<tr><td><strong>大采高</strong></td><td>红柳林7m、张家峁8m</td><td>设备大、停产损失惊人</td></tr>
+<tr><td><strong>Ⅰ类容易自燃</strong></td><td>煤层多属Ⅰ类容易自燃</td><td>束管监测/注氮/灌浆系统不可中断</td></tr>
+<tr><td><strong>低瓦斯</strong></td><td>瓦斯含量低</td><td>灾害重心转向顶板+煤尘+火灾</td></tr>
+<tr><td><strong>近水平煤层</strong></td><td>倾角＜3°</td><td>智能化门槛低，地质红利</td></tr>
+</tbody>
+</table></div>
+</div>
+
+<div class="card">
+<div class="card-title">行业对标</div>
+<div class="card-subtitle">对标神东</div>
+<div class="table-wrap"><table>
+<thead><tr><th>标杆</th><th>数据</th></tr></thead>
+<tbody>
+<tr><td>中煤科工"煤海蛟龙"</td><td>2014年在神东创造煤巷掘进月进尺3088米世界纪录</td></tr>
+<tr><td>柠条塔（2024-10）</td><td>半煤岩巷道最高日进尺43m、月进尺1050m</td></tr>
+</tbody>
+</table></div>
+<div class="card-subtitle">行业硬约束</div>
+<div class="highlight-box">
+• 全国每年需掘约<strong>1.3万km</strong>巷道才能保证约40亿吨产量<br>
+• 全国掘进工作面平均掘进速度仅约<strong>200m/月</strong><br>
+• 掘进作业人员是回采人员的<strong>3倍</strong><br>
+• 采掘接续是煤矿最硬的时间约束
+</div>
+</div>
+</div>
+
+<!-- TAB 2: 术语词典 -->
+<div class="tab-content" id="glossary">
+<div class="card">
+<div class="card-title">煤矿运维术语词典（150+术语）</div>
+<p style="color:var(--text-secondary);margin-bottom:12px">覆盖地质测量、采煤工艺、掘进支护、通风安全、机电运输、IT网络运维、运维管理七大领域。每条含：术语名、英文/缩写、定义、运维含义、IT关联点。</p>
+
+<input type="text" class="search-box" id="termSearch" placeholder="🔍 搜索术语…输入关键词过滤（如：液压、瓦斯、环网、传感器…）">
+
+<div class="sub-tabs" id="glossaryTabs">
+<button class="sub-tab active" data-target="gcat0">地质与测量</button>
+<button class="sub-tab" data-target="gcat1">采煤工艺</button>
+<button class="sub-tab" data-target="gcat2">掘进与支护</button>
+<button class="sub-tab" data-target="gcat3">通风与安全</button>
+<button class="sub-tab" data-target="gcat4">机电与运输</button>
+<button class="sub-tab" data-target="gcat5">网络与IT</button>
+<button class="sub-tab" data-target="gcat6">运维管理</button>
+</div>
+<div class="term-group" id="gcat0" style="display:block">
+<div class="term-grid">
+<div class="term-card" data-search="断层 Fault 岩层沿断裂面发生明显位移的地质构造 断层是采掘工作面最大的地质障碍，遇断层需重新规划巷道布置，可能导致工作面搬家，直接影响产能和设备周转 三维地质建模系统需将断层数据纳入数字孪生底座；GIS平台需实时更新断层揭露信息供采掘决策">
+<div><span class="term-name">断层</span><span class="term-en">Fault</span></div>
+<div class="term-def">岩层沿断裂面发生明显位移的地质构造</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">断层是采掘工作面最大的地质障碍，遇断层需重新规划巷道布置，可能导致工作面搬家，直接影响产能和设备周转</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">三维地质建模系统需将断层数据纳入数字孪生底座；GIS平台需实时更新断层揭露信息供采掘决策</div>
+</div>
+<div class="term-card" data-search="褶皱 Fold 岩层受挤压形成的弯曲变形构造 褶皱影响煤层厚度和走向变化，向斜轴部易积聚瓦斯，背斜轴部顶板破碎，运维需重点关注瓦斯监测和顶板管理 地质测量数据导入矿井GIS后，自动识别褶皱区域并推送预警至智能开采平台">
+<div><span class="term-name">褶皱</span><span class="term-en">Fold</span></div>
+<div class="term-def">岩层受挤压形成的弯曲变形构造</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">褶皱影响煤层厚度和走向变化，向斜轴部易积聚瓦斯，背斜轴部顶板破碎，运维需重点关注瓦斯监测和顶板管理</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">地质测量数据导入矿井GIS后，自动识别褶皱区域并推送预警至智能开采平台</div>
+</div>
+<div class="term-card" data-search="陷落柱 Collapse Column 岩溶空洞导致上覆岩层塌陷形成的柱状破碎体 陷落柱穿越煤层时造成煤厚骤减甚至缺失，综采面遇陷落柱需绕行或强制推过，严重影响设备安全和生产连续性 物探（三维地震）数据与采掘工程平面图叠加，GIS系统标注陷落柱边界，辅助智能开采路径规划">
+<div><span class="term-name">陷落柱</span><span class="term-en">Collapse Column</span></div>
+<div class="term-def">岩溶空洞导致上覆岩层塌陷形成的柱状破碎体</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">陷落柱穿越煤层时造成煤厚骤减甚至缺失，综采面遇陷落柱需绕行或强制推过，严重影响设备安全和生产连续性</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">物探（三维地震）数据与采掘工程平面图叠加，GIS系统标注陷落柱边界，辅助智能开采路径规划</div>
+</div>
+<div class="term-card" data-search="夹矸 Gangue Parting / Dirt Band 煤层中夹杂的岩层（如泥岩、砂岩） 夹矸厚度直接影响煤质和采煤机截割效率，厚夹矸需分层开采或留顶底煤，增加设备磨损和生产成本 采煤机记忆截割系统需结合煤岩识别传感器（如伽马射线探测器）实时调整截割高度">
+<div><span class="term-name">夹矸</span><span class="term-en">Gangue Parting / Dirt Band</span></div>
+<div class="term-def">煤层中夹杂的岩层（如泥岩、砂岩）</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">夹矸厚度直接影响煤质和采煤机截割效率，厚夹矸需分层开采或留顶底煤，增加设备磨损和生产成本</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">采煤机记忆截割系统需结合煤岩识别传感器（如伽马射线探测器）实时调整截割高度</div>
+</div>
+<div class="term-card" data-search="煤层结构（简单/复杂） Coal Seam Structure 简单结构煤层无夹矸，复杂结构煤层含多层夹矸 简单结构煤层适合大采高一次采全高，复杂结构煤层需分层开采或放顶煤工艺，直接决定工作面设备选型 煤层结构数据是智能化开采系统初始化割煤曲线的关键输入参数">
+<div><span class="term-name">煤层结构（简单/复杂）</span><span class="term-en">Coal Seam Structure</span></div>
+<div class="term-def">简单结构煤层无夹矸，复杂结构煤层含多层夹矸</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">简单结构煤层适合大采高一次采全高，复杂结构煤层需分层开采或放顶煤工艺，直接决定工作面设备选型</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">煤层结构数据是智能化开采系统初始化割煤曲线的关键输入参数</div>
+</div>
+<div class="term-card" data-search="底板比压 Floor Bearing Capacity 底板单位面积承受的最大压力（MPa） 底板比压不足时液压支架会"压入底板"（扎底），导致移架困难、底座下沉，运维需监测底板条件并选型合适底座面积 支架电液控制系统可集成底板压力传感器，实时监测底板承载状态并预警">
+<div><span class="term-name">底板比压</span><span class="term-en">Floor Bearing Capacity</span></div>
+<div class="term-def">底板单位面积承受的最大压力（MPa）</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">底板比压不足时液压支架会"压入底板"（扎底），导致移架困难、底座下沉，运维需监测底板条件并选型合适底座面积</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">支架电液控制系统可集成底板压力传感器，实时监测底板承载状态并预警</div>
+</div>
+<div class="term-card" data-search="含水层 Aquifer 含地下水并能透水的岩层 含水层是矿井水害的主要威胁源，采掘接近含水层时必须探放水，直接影响工作面布置和防排水系统设计 水文监测系统（水位、水压、水量传感器）数据接入智维中心，实现水害实时预警和联动控制">
+<div><span class="term-name">含水层</span><span class="term-en">Aquifer</span></div>
+<div class="term-def">含地下水并能透水的岩层</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">含水层是矿井水害的主要威胁源，采掘接近含水层时必须探放水，直接影响工作面布置和防排水系统设计</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">水文监测系统（水位、水压、水量传感器）数据接入智维中心，实现水害实时预警和联动控制</div>
+</div>
+<div class="term-card" data-search="隔水层 Aquiclude 不透水或极弱透水的岩层（如泥岩、黏土层） 隔水层是保护煤层免受上部含水层威胁的天然屏障，其厚度和完整性决定防水煤柱留设方案 水文地质数据库管理隔水层厚度分布数据，与采掘工程图层叠加分析">
+<div><span class="term-name">隔水层</span><span class="term-en">Aquiclude</span></div>
+<div class="term-def">不透水或极弱透水的岩层（如泥岩、黏土层）</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">隔水层是保护煤层免受上部含水层威胁的天然屏障，其厚度和完整性决定防水煤柱留设方案</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">水文地质数据库管理隔水层厚度分布数据，与采掘工程图层叠加分析</div>
+</div>
+<div class="term-card" data-search="导水裂缝带 Water-Conducting Fracture Zone 采空区上覆岩层冒落和裂缝发育形成的含水通道 导水裂缝带高度决定"两带"（冒落带、导水裂缝带）范围，是防水煤柱设计和顶板水害防治的核心参数 数值模拟（FLAC3D/UDEC）计算结果纳入地质数据库，辅助智能决策防水方案">
+<div><span class="term-name">导水裂缝带</span><span class="term-en">Water-Conducting Fracture Zone</span></div>
+<div class="term-def">采空区上覆岩层冒落和裂缝发育形成的含水通道</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">导水裂缝带高度决定"两带"（冒落带、导水裂缝带）范围，是防水煤柱设计和顶板水害防治的核心参数</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">数值模拟（FLAC3D/UDEC）计算结果纳入地质数据库，辅助智能决策防水方案</div>
+</div>
+<div class="term-card" data-search="防水煤柱 Waterproof Coal Pillar 为隔离水源而留设的不采煤层区域 防水煤柱尺寸直接影响矿井资源回收率和安全系数，运维需确保煤柱不被破坏，定期监测煤柱完整性 GIS系统标注防水煤柱边界，采掘越界时自动触发报警">
+<div><span class="term-name">防水煤柱</span><span class="term-en">Waterproof Coal Pillar</span></div>
+<div class="term-def">为隔离水源而留设的不采煤层区域</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">防水煤柱尺寸直接影响矿井资源回收率和安全系数，运维需确保煤柱不被破坏，定期监测煤柱完整性</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">GIS系统标注防水煤柱边界，采掘越界时自动触发报警</div>
+</div>
+<div class="term-card" data-search="探放水 Water Exploration and Drainage 使用钻探手段探测前方水体并提前疏放 "预测预报、有疑必探、先探后掘、先治后采"是煤矿防治水十六字原则，探放水是采掘前的强制工序 探放水钻孔数据（方位、倾角、深度、出水量）录入地质数据库，形成探放水成果台账">
+<div><span class="term-name">探放水</span><span class="term-en">Water Exploration and Drainage</span></div>
+<div class="term-def">使用钻探手段探测前方水体并提前疏放</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">"预测预报、有疑必探、先探后掘、先治后采"是煤矿防治水十六字原则，探放水是采掘前的强制工序</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">探放水钻孔数据（方位、倾角、深度、出水量）录入地质数据库，形成探放水成果台账</div>
+</div>
+<div class="term-card" data-search="水文地质类型 Hydrogeological Classification 按矿井充水条件划分的类型（简单/中等/复杂/极复杂） 直接决定矿井防排水标准等级，极复杂类型矿井需配备强排系统和专业防治水队伍 水文监测数据自动采集上传至省级监管平台，数据类型与监测频率由分类等级决定">
+<div><span class="term-name">水文地质类型</span><span class="term-en">Hydrogeological Classification</span></div>
+<div class="term-def">按矿井充水条件划分的类型（简单/中等/复杂/极复杂）</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">直接决定矿井防排水标准等级，极复杂类型矿井需配备强排系统和专业防治水队伍</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">水文监测数据自动采集上传至省级监管平台，数据类型与监测频率由分类等级决定</div>
+</div>
+<div class="term-card" data-search="煤层倾角 Seam Dip Angle 煤层与水平面的夹角 倾角决定采煤工艺选型：近水平（<8°）适合综采，倾斜（8°-25°）需防倒防滑，急倾斜（>45°）需特殊采法 倾角数据是液压支架选型（防倒千斤顶配置）、采煤机牵引力计算的关键参数，影响自动化开采方案">
+<div><span class="term-name">煤层倾角</span><span class="term-en">Seam Dip Angle</span></div>
+<div class="term-def">煤层与水平面的夹角</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">倾角决定采煤工艺选型：近水平（<8°）适合综采，倾斜（8°-25°）需防倒防滑，急倾斜（>45°）需特殊采法</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">倾角数据是液压支架选型（防倒千斤顶配置）、采煤机牵引力计算的关键参数，影响自动化开采方案</div>
+</div>
+<div class="term-card" data-search="走向 Strike 煤层层面与水平面交线的方向 工作面沿走向布置称为走向长壁工作面，走向长度决定工作面推进距离和搬家频率 矿井坐标系统（CGCS2000）中走向是基础方位参数，所有测量和GIS数据依赖统一坐标系">
+<div><span class="term-name">走向</span><span class="term-en">Strike</span></div>
+<div class="term-def">煤层层面与水平面交线的方向</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">工作面沿走向布置称为走向长壁工作面，走向长度决定工作面推进距离和搬家频率</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">矿井坐标系统（CGCS2000）中走向是基础方位参数，所有测量和GIS数据依赖统一坐标系</div>
+</div>
+<div class="term-card" data-search="倾向 Dip Direction 垂直于走向、沿煤层倾斜面向下的方向 倾向决定工作面推进方向，上山/下山开采的通风、排水、运输方案截然不同 智能开采系统根据倾向角度自动调整支架姿态和采煤机截割参数">
+<div><span class="term-name">倾向</span><span class="term-en">Dip Direction</span></div>
+<div class="term-def">垂直于走向、沿煤层倾斜面向下的方向</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">倾向决定工作面推进方向，上山/下山开采的通风、排水、运输方案截然不同</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">智能开采系统根据倾向角度自动调整支架姿态和采煤机截割参数</div>
+</div>
+<div class="term-card" data-search="标高 Elevation 某点相对于海平面的垂直高度（m） 标高决定矿井水平划分（如-50m水平、-200m水平），影响提升运输距离和排水扬程 三维地质模型中所有巷道和煤层数据均含标高信息，是空间分析的基础">
+<div><span class="term-name">标高</span><span class="term-en">Elevation</span></div>
+<div class="term-def">某点相对于海平面的垂直高度（m）</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">标高决定矿井水平划分（如-50m水平、-200m水平），影响提升运输距离和排水扬程</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">三维地质模型中所有巷道和煤层数据均含标高信息，是空间分析的基础</div>
+</div>
+<div class="term-card" data-search="采区 Mining District / Panel Area 阶段内沿走向划分为若干独立开采单元 采区是生产组织的基本单元，每个采区有独立的通风、运输、排水系统，运维管理的最小完整单元 采区级数据采集与监控系统（SCADA）独立运行，数据汇总至矿井集控中心">
+<div><span class="term-name">采区</span><span class="term-en">Mining District / Panel Area</span></div>
+<div class="term-def">阶段内沿走向划分为若干独立开采单元</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">采区是生产组织的基本单元，每个采区有独立的通风、运输、排水系统，运维管理的最小完整单元</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">采区级数据采集与监控系统（SCADA）独立运行，数据汇总至矿井集控中心</div>
+</div>
+<div class="term-card" data-search="带区 Strip Area 沿煤层走向划分的长条形开采区域 带区开采适用于倾斜长壁工作面，每个带区对应一个工作面，简化运输和通风系统 带区编号是生产调度系统和MES中的关键组织维度">
+<div><span class="term-name">带区</span><span class="term-en">Strip Area</span></div>
+<div class="term-def">沿煤层走向划分的长条形开采区域</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">带区开采适用于倾斜长壁工作面，每个带区对应一个工作面，简化运输和通风系统</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">带区编号是生产调度系统和MES中的关键组织维度</div>
+</div>
+<div class="term-card" data-search="阶段 Level / Stage 沿煤层倾斜方向按标高划分的开采层次 阶段划分决定矿井开采深度和水平大巷布置，直接影响提升、通风、排水等系统设计 矿井三维模型以阶段为分层基准，各阶段传感器数据按层级组织">
+<div><span class="term-name">阶段</span><span class="term-en">Level / Stage</span></div>
+<div class="term-def">沿煤层倾斜方向按标高划分的开采层次</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">阶段划分决定矿井开采深度和水平大巷布置，直接影响提升、通风、排水等系统设计</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">矿井三维模型以阶段为分层基准，各阶段传感器数据按层级组织</div>
+</div>
+<div class="term-card" data-search="煤层层间距 Inter-seam Spacing 相邻煤层之间的岩层距离 层间距决定是否可以近距离煤层群开采，影响保护层开采方案和重复采动影响 多煤层开采时需建立层间应力传递模型，数据纳入智能开采决策系统">
+<div><span class="term-name">煤层层间距</span><span class="term-en">Inter-seam Spacing</span></div>
+<div class="term-def">相邻煤层之间的岩层距离</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">层间距决定是否可以近距离煤层群开采，影响保护层开采方案和重复采动影响</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">多煤层开采时需建立层间应力传递模型，数据纳入智能开采决策系统</div>
+</div>
+<div class="term-card" data-search="基岩厚度 Bedrock Thickness 煤层上方基岩层的厚度 基岩厚度影响地表移动变形量和导水裂缝带是否沟通地表，是安全开采的关键参数 数值模拟所需的基础地质参数，纳入矿井数字孪生底座">
+<div><span class="term-name">基岩厚度</span><span class="term-en">Bedrock Thickness</span></div>
+<div class="term-def">煤层上方基岩层的厚度</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">基岩厚度影响地表移动变形量和导水裂缝带是否沟通地表，是安全开采的关键参数</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">数值模拟所需的基础地质参数，纳入矿井数字孪生底座</div>
+</div>
+<div class="term-card" data-search="覆盖层厚度 Overburden Thickness 煤层上方所有岩层（含松散层）的总厚度 浅埋深矿区（覆盖层<100m）矿压显现剧烈，需特殊支护方案，也是地表沉降评估的基础 浅埋深条件对智能开采系统的矿压监测频率和预警阈值有特殊要求">
+<div><span class="term-name">覆盖层厚度</span><span class="term-en">Overburden Thickness</span></div>
+<div class="term-def">煤层上方所有岩层（含松散层）的总厚度</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">浅埋深矿区（覆盖层<100m）矿压显现剧烈，需特殊支护方案，也是地表沉降评估的基础</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">浅埋深条件对智能开采系统的矿压监测频率和预警阈值有特殊要求</div>
+</div>
+<div class="term-card" data-search="煤层厚度 Coal Seam Thickness 煤层的垂直厚度（m） 煤层厚度直接决定采高选择和开采工艺，薄煤层（<1.3m）需薄煤耙矿机或刨煤机，厚煤层（>3.5m）需放顶煤或大采高 采煤机选型和液压支架采高范围的核心依据，智能化系统据此匹配截割模板">
+<div><span class="term-name">煤层厚度</span><span class="term-en">Coal Seam Thickness</span></div>
+<div class="term-def">煤层的垂直厚度（m）</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">煤层厚度直接决定采高选择和开采工艺，薄煤层（<1.3m）需薄煤耙矿机或刨煤机，厚煤层（>3.5m）需放顶煤或大采高</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">采煤机选型和液压支架采高范围的核心依据，智能化系统据此匹配截割模板</div>
+</div>
+</div></div>
+<div class="term-group" id="gcat1" style="display:none">
+<div class="term-grid">
+<div class="term-card" data-search="支撑式液压支架 Supported Roof Support 依靠立柱支撑力直接维护顶板的支架类型 适用于顶板稳定的薄-中厚煤层，结构简单但防矸能力差，运维重点在立柱密封性和初撑力保持 支架压力传感器采集初撑力和工作阻力数据，上传至矿压监测系统">
+<div><span class="term-name">支撑式液压支架</span><span class="term-en">Supported Roof Support</span></div>
+<div class="term-def">依靠立柱支撑力直接维护顶板的支架类型</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">适用于顶板稳定的薄-中厚煤层，结构简单但防矸能力差，运维重点在立柱密封性和初撑力保持</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">支架压力传感器采集初撑力和工作阻力数据，上传至矿压监测系统</div>
+</div>
+<div class="term-card" data-search="掩护式液压支架 Shield Roof Support 带有掩护梁隔绝采空区矸石的支架类型 适用于顶板破碎、来压强烈的条件，防矸性能好但支护效率较低，运维重点在掩护梁连接件和推移装置 电液控制系统控制移架顺序和速度，与采煤机定位联动">
+<div><span class="term-name">掩护式液压支架</span><span class="term-en">Shield Roof Support</span></div>
+<div class="term-def">带有掩护梁隔绝采空区矸石的支架类型</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">适用于顶板破碎、来压强烈的条件，防矸性能好但支护效率较低，运维重点在掩护梁连接件和推移装置</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">电液控制系统控制移架顺序和速度，与采煤机定位联动</div>
+</div>
+<div class="term-card" data-search="支撑掩护式液压支架 Supported Shield 兼具支撑和掩护功能的复合型支架 现代综采面主流架型，适用范围广，运维关注立柱、掩护梁、底座等关键结构件的疲劳损伤 支架全生命周期管理系统记录每台支架的累计工作阻力循环次数，预测大修时间">
+<div><span class="term-name">支撑掩护式液压支架</span><span class="term-en">Supported Shield</span></div>
+<div class="term-def">兼具支撑和掩护功能的复合型支架</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">现代综采面主流架型，适用范围广，运维关注立柱、掩护梁、底座等关键结构件的疲劳损伤</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">支架全生命周期管理系统记录每台支架的累计工作阻力循环次数，预测大修时间</div>
+</div>
+<div class="term-card" data-search="放顶煤开采 Top Coal Caving / LTC 厚煤层先采底分层，再利用矿压破碎上部煤层从支架后方放出 一次采全厚（6-16m），效率高但煤质控制难，运维需监控放煤口开度和矸石混入率 放煤口电动/液压控制系统接收煤岩识别信号，实现智能放煤">
+<div><span class="term-name">放顶煤开采</span><span class="term-en">Top Coal Caving / LTC</span></div>
+<div class="term-def">厚煤层先采底分层，再利用矿压破碎上部煤层从支架后方放出</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">一次采全厚（6-16m），效率高但煤质控制难，运维需监控放煤口开度和矸石混入率</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">放煤口电动/液压控制系统接收煤岩识别信号，实现智能放煤</div>
+</div>
+<div class="term-card" data-search="端头支护 Gate Road Support 工作面两端（机头/机尾）与顺槽衔接处的特殊支护 端头是顶板管理最薄弱区域，需使用端头支架或十字铰接顶梁，运维需保证端头安全出口畅通 端头区域视频AI监控人员闯入和支护变形">
+<div><span class="term-name">端头支护</span><span class="term-en">Gate Road Support</span></div>
+<div class="term-def">工作面两端（机头/机尾）与顺槽衔接处的特殊支护</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">端头是顶板管理最薄弱区域，需使用端头支架或十字铰接顶梁，运维需保证端头安全出口畅通</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">端头区域视频AI监控人员闯入和支护变形</div>
+</div>
+<div class="term-card" data-search="端部斜切进刀 Oblique Web Cutting 采煤机在工作面端头以斜切方式切入煤壁的进刀方法 斜切进刀是最常用的进刀方式，进刀距离一般15-25m，运维需确保运输顺槽和回风顺槽的端头维护到位 采煤机自动进刀程序需精确计算斜切轨迹和速度">
+<div><span class="term-name">端部斜切进刀</span><span class="term-en">Oblique Web Cutting</span></div>
+<div class="term-def">采煤机在工作面端头以斜切方式切入煤壁的进刀方法</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">斜切进刀是最常用的进刀方式，进刀距离一般15-25m，运维需确保运输顺槽和回风顺槽的端头维护到位</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">采煤机自动进刀程序需精确计算斜切轨迹和速度</div>
+</div>
+<div class="term-card" data-search="割三角煤 Triangular Web Cutting 采煤机在工作面端头割出三角形缺口的进刀方式 割三角煤进刀工序多、效率低，但适用于端头条件复杂的场景，运维需关注三角煤区域顶板安全 自动化开采系统中三角煤割煤为预编程轨迹">
+<div><span class="term-name">割三角煤</span><span class="term-en">Triangular Web Cutting</span></div>
+<div class="term-def">采煤机在工作面端头割出三角形缺口的进刀方式</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">割三角煤进刀工序多、效率低，但适用于端头条件复杂的场景，运维需关注三角煤区域顶板安全</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">自动化开采系统中三角煤割煤为预编程轨迹</div>
+</div>
+<div class="term-card" data-search="刀式截齿 Pick / Conical Bit 安装在采煤机滚筒上的锥形刀具 截齿是采煤机最核心的消耗件，磨损直接影响截割效率和能耗，运维需建立截齿更换台账和库存管理 截齿磨损可通过采煤机截割电流变化间接监测，触发预警">
+<div><span class="term-name">刀式截齿</span><span class="term-en">Pick / Conical Bit</span></div>
+<div class="term-def">安装在采煤机滚筒上的锥形刀具</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">截齿是采煤机最核心的消耗件，磨损直接影响截割效率和能耗，运维需建立截齿更换台账和库存管理</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">截齿磨损可通过采煤机截割电流变化间接监测，触发预警</div>
+</div>
+<div class="term-card" data-search="滚筒直径 Drum Diameter 采煤机截割滚筒的外径（mm） 滚筒直径决定一次截割高度（通常为采高的50%-70%），选型需匹配煤层厚度 智能化系统根据采高自动调整滚筒高度和转速">
+<div><span class="term-name">滚筒直径</span><span class="term-en">Drum Diameter</span></div>
+<div class="term-def">采煤机截割滚筒的外径（mm）</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">滚筒直径决定一次截割高度（通常为采高的50%-70%），选型需匹配煤层厚度</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">智能化系统根据采高自动调整滚筒高度和转速</div>
+</div>
+<div class="term-card" data-search="牵引速度 Haulage Speed 采煤机沿工作面移动的速度（m/min） 牵引速度直接影响产量和设备负荷，正常范围4-12m/min，过快导致煤块度大、装煤不充分 记忆截割系统存储不同煤质条件下的最优牵引速度曲线">
+<div><span class="term-name">牵引速度</span><span class="term-en">Haulage Speed</span></div>
+<div class="term-def">采煤机沿工作面移动的速度（m/min）</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">牵引速度直接影响产量和设备负荷，正常范围4-12m/min，过快导致煤块度大、装煤不充分</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">记忆截割系统存储不同煤质条件下的最优牵引速度曲线</div>
+</div>
+<div class="term-card" data-search="装煤率 Coal Loading Rate 截落煤被刮板输送机装走的比例（%） 装煤率不足（通常要求>90%）需人工清理浮煤，增加劳动强度和安全风险 通过刮板机负荷传感器和采煤机位置数据计算实时装煤率">
+<div><span class="term-name">装煤率</span><span class="term-en">Coal Loading Rate</span></div>
+<div class="term-def">截落煤被刮板输送机装走的比例（%）</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">装煤率不足（通常要求>90%）需人工清理浮煤，增加劳动强度和安全风险</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">通过刮板机负荷传感器和采煤机位置数据计算实时装煤率</div>
+</div>
+<div class="term-card" data-search="卧底量 Gouging Depth 采煤机滚筒切入底板的深度（mm） 卧底保证底板平整，过大加速截齿和底板磨损，过小留底煤影响推进 自动化截割控制系统根据底板标高实时调整滚筒下切量">
+<div><span class="term-name">卧底量</span><span class="term-en">Gouging Depth</span></div>
+<div class="term-def">采煤机滚筒切入底板的深度（mm）</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">卧底保证底板平整，过大加速截齿和底板磨损，过小留底煤影响推进</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">自动化截割控制系统根据底板标高实时调整滚筒下切量</div>
+</div>
+<div class="term-card" data-search="初撑力 Setting Load 液压支架升柱后对顶板的初始支撑力（kN） 初撑力不足是顶板事故的主要原因之一，规定初撑力不低于额定值的80%，运维需定期校验泵站压力 支架电液控系统实时监测每台支架初撑力，低于阈值自动报警并记录">
+<div><span class="term-name">初撑力</span><span class="term-en">Setting Load</span></div>
+<div class="term-def">液压支架升柱后对顶板的初始支撑力（kN）</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">初撑力不足是顶板事故的主要原因之一，规定初撑力不低于额定值的80%，运维需定期校验泵站压力</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">支架电液控系统实时监测每台支架初撑力，低于阈值自动报警并记录</div>
+</div>
+<div class="term-card" data-search="工作阻力 Working Resistance 支架在正常工作中承受的最大载荷（kN） 工作阻力是支架选型的核心参数，通常为额定阻力的60%-80%，来压期间可达额定值 矿压监测系统实时采集工作阻力曲线，识别周期来压规律">
+<div><span class="term-name">工作阻力</span><span class="term-en">Working Resistance</span></div>
+<div class="term-def">支架在正常工作中承受的最大载荷（kN）</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">工作阻力是支架选型的核心参数，通常为额定阻力的60%-80%，来压期间可达额定值</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">矿压监测系统实时采集工作阻力曲线，识别周期来压规律</div>
+</div>
+<div class="term-card" data-search="让压特性 Yielding Characteristic 支架在超载时通过安全阀卸压保护结构的能力 来压剧烈时支架需"让压不讓顶"，安全阀开启压力设定是运维关键参数 安全阀开启数据纳入矿压分析，优化支护参数">
+<div><span class="term-name">让压特性</span><span class="term-en">Yielding Characteristic</span></div>
+<div class="term-def">支架在超载时通过安全阀卸压保护结构的能力</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">来压剧烈时支架需"让压不讓顶"，安全阀开启压力设定是运维关键参数</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">安全阀开启数据纳入矿压分析，优化支护参数</div>
+</div>
+<div class="term-card" data-search="支架间距 Support Spacing 相邻两台支架中心线之间的距离（mm） 标准间距通常为1.5m或1.75m，间距过大留空顶影响安全，过小降低推进效率 支架编号与位置映射关系是智能开采定位的基础数据">
+<div><span class="term-name">支架间距</span><span class="term-en">Support Spacing</span></div>
+<div class="term-def">相邻两台支架中心线之间的距离（mm）</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">标准间距通常为1.5m或1.75m，间距过大留空顶影响安全，过小降低推进效率</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">支架编号与位置映射关系是智能开采定位的基础数据</div>
+</div>
+<div class="term-card" data-search="移架步距 Web Advancing Distance 每次移架支架前移的距离（mm） 通常等于截深（630mm或800mm），与采煤机截割进度同步 电液控系统自动计算移架时序，保证跟机移架安全距离">
+<div><span class="term-name">移架步距</span><span class="term-en">Web Advancing Distance</span></div>
+<div class="term-def">每次移架支架前移的距离（mm）</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">通常等于截深（630mm或800mm），与采煤机截割进度同步</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">电液控系统自动计算移架时序，保证跟机移架安全距离</div>
+</div>
+<div class="term-card" data-search="推溜距离 AFC Pushing Distance 推移刮板输送机的滞后距离 推溜滞后采煤机12-18m，过早推溜影响煤壁稳定，过晚造成输送机弯曲过度 推溜动作纳入支架电液控制自动化序列">
+<div><span class="term-name">推溜距离</span><span class="term-en">AFC Pushing Distance</span></div>
+<div class="term-def">推移刮板输送机的滞后距离</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">推溜滞后采煤机12-18m，过早推溜影响煤壁稳定，过晚造成输送机弯曲过度</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">推溜动作纳入支架电液控制自动化序列</div>
+</div>
+<div class="term-card" data-search="刮板机链条规格 AFC Chain Specification 刮板输送机使用的圆环链尺寸和等级 常见规格如φ34×126、φ38×137等，链条磨损伸长率是运维监测重点，超过3%需更换 链速传感器和张力传感器数据接入设备状态监测平台">
+<div><span class="term-name">刮板机链条规格</span><span class="term-en">AFC Chain Specification</span></div>
+<div class="term-def">刮板输送机使用的圆环链尺寸和等级</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">常见规格如φ34×126、φ38×137等，链条磨损伸长率是运维监测重点，超过3%需更换</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">链速传感器和张力传感器数据接入设备状态监测平台</div>
+</div>
+<div class="term-card" data-search="破碎机类型 Stage Loader/Crusher Type 转载机上用于破碎大块煤的装置类型 常见有颚式、锤式、齿辊式，选型取决于煤块硬度和处理量，运维需定期检查锤头/齿板磨损 破碎机电流监测可判断大块煤量和堵塞情况">
+<div><span class="term-name">破碎机类型</span><span class="term-en">Stage Loader/Crusher Type</span></div>
+<div class="term-def">转载机上用于破碎大块煤的装置类型</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">常见有颚式、锤式、齿辊式，选型取决于煤块硬度和处理量，运维需定期检查锤头/齿板磨损</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">破碎机电流监测可判断大块煤量和堵塞情况</div>
+</div>
+<div class="term-card" data-search="转载机搭桥长度 Stage Loader Bridge Length 转载机与带式输送机的搭接长度 搭桥长度影响卸载点和缓冲能力，一般8-15m，运维需关注搭接处的煤流顺畅性 卸载点安装堵塞传感器和视频AI监控">
+<div><span class="term-name">转载机搭桥长度</span><span class="term-en">Stage Loader Bridge Length</span></div>
+<div class="term-def">转载机与带式输送机的搭接长度</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">搭桥长度影响卸载点和缓冲能力，一般8-15m，运维需关注搭接处的煤流顺畅性</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">卸载点安装堵塞传感器和视频AI监控</div>
+</div>
+<div class="term-card" data-search="泵站压力 Pumping Station Pressure 乳化液泵站输出压力（MPa） 泵站压力（31.5MPa或37.5MPa）直接决定支架初撑力，运维需定期检查泵组、滤芯和管路泄漏 泵站PLC监控压力、液位、温度，异常自动切换备用泵">
+<div><span class="term-name">泵站压力</span><span class="term-en">Pumping Station Pressure</span></div>
+<div class="term-def">乳化液泵站输出压力（MPa）</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">泵站压力（31.5MPa或37.5MPa）直接决定支架初撑力，运维需定期检查泵组、滤芯和管路泄漏</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">泵站PLC监控压力、液位、温度，异常自动切换备用泵</div>
+</div>
+<div class="term-card" data-search="乳化液浓度 Emulsion Concentration 乳化油与水的配比浓度（%） 标准浓度3%-5%，浓度过低润滑和防锈性能下降，加速液压系统磨损 浓度在线传感器接入泵站控制系统，自动补油调节">
+<div><span class="term-name">乳化液浓度</span><span class="term-en">Emulsion Concentration</span></div>
+<div class="term-def">乳化油与水的配比浓度（%）</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">标准浓度3%-5%，浓度过低润滑和防锈性能下降，加速液压系统磨损</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">浓度在线传感器接入泵站控制系统，自动补油调节</div>
+</div>
+</div></div>
+<div class="term-group" id="gcat2" style="display:none">
+<div class="term-grid">
+<div class="term-card" data-search="树脂锚杆 Resin Bolt 使用树脂药卷锚固的巷道支护杆件 最常用的锚杆类型，锚固速度快、成本低，运维需关注锚固剂保质期和搅拌时间 锚杆施工记录（孔深、锚固剂数量、搅拌时间）录入掘进管理系统">
+<div><span class="term-name">树脂锚杆</span><span class="term-en">Resin Bolt</span></div>
+<div class="term-def">使用树脂药卷锚固的巷道支护杆件</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">最常用的锚杆类型，锚固速度快、成本低，运维需关注锚固剂保质期和搅拌时间</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">锚杆施工记录（孔深、锚固剂数量、搅拌时间）录入掘进管理系统</div>
+</div>
+<div class="term-card" data-search="金属锚杆 Steel Bolt / Mechanical Bolt 使用机械膨胀端头锚固的金属杆件 适用于锚固力要求高或树脂锚固困难的岩层，运维关注预紧力施加和防松措施 与树脂锚杆统一管理，纳入巷道支护台账">
+<div><span class="term-name">金属锚杆</span><span class="term-en">Steel Bolt / Mechanical Bolt</span></div>
+<div class="term-def">使用机械膨胀端头锚固的金属杆件</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">适用于锚固力要求高或树脂锚固困难的岩层，运维关注预紧力施加和防松措施</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">与树脂锚杆统一管理，纳入巷道支护台账</div>
+</div>
+<div class="term-card" data-search="锚索 Cable Bolt 高强度钢绞线制成的深部锚固件 锚固深度6-12m，用于大断面巷道和顶板破碎区域，运维需监测预紧力损失 锚索预紧力监测数据纳入矿压监测系统">
+<div><span class="term-name">锚索</span><span class="term-en">Cable Bolt</span></div>
+<div class="term-def">高强度钢绞线制成的深部锚固件</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">锚固深度6-12m，用于大断面巷道和顶板破碎区域，运维需监测预紧力损失</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">锚索预紧力监测数据纳入矿压监测系统</div>
+</div>
+<div class="term-card" data-search="金属网 Wire Mesh 铺设在巷道表面的金属编织网 防止碎石掉落和锚杆间岩石剥落，常见菱形网和焊接网，运维关注搭接长度和连接质量 无直接IT关联，但喷浆机器人需识别金属网位置">
+<div><span class="term-name">金属网</span><span class="term-en">Wire Mesh</span></div>
+<div class="term-def">铺设在巷道表面的金属编织网</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">防止碎石掉落和锚杆间岩石剥落，常见菱形网和焊接网，运维关注搭接长度和连接质量</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">无直接IT关联，但喷浆机器人需识别金属网位置</div>
+</div>
+<div class="term-card" data-search="W钢带 W-Shaped Steel Strap 截面呈W形的钢带，连接锚杆形成整体支护 W钢带将多根锚杆串联成组合支护体系，提高整体承载能力，运维关注变形和断裂 无直接IT关联">
+<div><span class="term-name">W钢带</span><span class="term-en">W-Shaped Steel Strap</span></div>
+<div class="term-def">截面呈W形的钢带，连接锚杆形成整体支护</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">W钢带将多根锚杆串联成组合支护体系，提高整体承载能力，运维关注变形和断裂</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">无直接IT关联</div>
+</div>
+<div class="term-card" data-search="U型钢棚 U-Steel Arch Set U形截面型钢制作的拱形支架 用于高地压、松软岩层巷道的架棚支护，运维关注棚距、搭接量和卡缆紧固 巷道收敛监测数据反馈U棚变形趋势，指导补强方案">
+<div><span class="term-name">U型钢棚</span><span class="term-en">U-Steel Arch Set</span></div>
+<div class="term-def">U形截面型钢制作的拱形支架</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">用于高地压、松软岩层巷道的架棚支护，运维关注棚距、搭接量和卡缆紧固</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">巷道收敛监测数据反馈U棚变形趋势，指导补强方案</div>
+</div>
+<div class="term-card" data-search="喷浆 Shotcrete 向巷道表面喷射混凝土的支护方式 封闭围岩防止风化剥落，厚度50-150mm，运维关注回弹率和厚度均匀性 喷浆机器人（自动化掘进配套）需精确控制喷射轨迹和厚度">
+<div><span class="term-name">喷浆</span><span class="term-en">Shotcrete</span></div>
+<div class="term-def">向巷道表面喷射混凝土的支护方式</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">封闭围岩防止风化剥落，厚度50-150mm，运维关注回弹率和厚度均匀性</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">喷浆机器人（自动化掘进配套）需精确控制喷射轨迹和厚度</div>
+</div>
+<div class="term-card" data-search="注浆加固 Grouting Reinforcement 向围岩裂隙注入水泥浆或化学浆液 用于加固破碎围岩、封堵涌水，运维需记录注浆压力、注入量和浆液配比 注浆参数自动采集系统，数据纳入地质治理数据库">
+<div><span class="term-name">注浆加固</span><span class="term-en">Grouting Reinforcement</span></div>
+<div class="term-def">向围岩裂隙注入水泥浆或化学浆液</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">用于加固破碎围岩、封堵涌水，运维需记录注浆压力、注入量和浆液配比</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">注浆参数自动采集系统，数据纳入地质治理数据库</div>
+</div>
+<div class="term-card" data-search="临时支护 Temporary Support 掘进工作面迎头使用的可移动支护装置 保障空顶区作业安全，常见前探梁和机载临时支护，运维关键是及时前移和有效接顶 智能掘进系统中临时支护与掘进机联动控制">
+<div><span class="term-name">临时支护</span><span class="term-en">Temporary Support</span></div>
+<div class="term-def">掘进工作面迎头使用的可移动支护装置</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">保障空顶区作业安全，常见前探梁和机载临时支护，运维关键是及时前移和有效接顶</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">智能掘进系统中临时支护与掘进机联动控制</div>
+</div>
+<div class="term-card" data-search="永久支护 Permanent Support 巷道正式使用的长期支护体系 锚网索+喷浆联合支护是主流永久支护方案，运维按设计参数施工和验收 支护参数数字化管理，作为巷道全生命周期档案的一部分">
+<div><span class="term-name">永久支护</span><span class="term-en">Permanent Support</span></div>
+<div class="term-def">巷道正式使用的长期支护体系</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">锚网索+喷浆联合支护是主流永久支护方案，运维按设计参数施工和验收</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">支护参数数字化管理，作为巷道全生命周期档案的一部分</div>
+</div>
+<div class="term-card" data-search="矩形断面 Rectangular Cross-Section 巷道截面呈矩形的断面形式 断面利用率最高，适合锚网支护，广泛应用于煤巷，运维关注两帮移近量 断面尺寸是通风阻力计算和运输设备选型的基础数据">
+<div><span class="term-name">矩形断面</span><span class="term-en">Rectangular Cross-Section</span></div>
+<div class="term-def">巷道截面呈矩形的断面形式</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">断面利用率最高，适合锚网支护，广泛应用于煤巷，运维关注两帮移近量</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">断面尺寸是通风阻力计算和运输设备选型的基础数据</div>
+</div>
+<div class="term-card" data-search="梯形断面 Trapezoidal Cross-Section 巷道截面呈梯形的断面形式 适用于顶板压力较大的岩巷，上窄下宽有利于顶板稳定 断面参数纳入通风网络解算模型">
+<div><span class="term-name">梯形断面</span><span class="term-en">Trapezoidal Cross-Section</span></div>
+<div class="term-def">巷道截面呈梯形的断面形式</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">适用于顶板压力较大的岩巷，上窄下宽有利于顶板稳定</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">断面参数纳入通风网络解算模型</div>
+</div>
+<div class="term-card" data-search="拱形断面 Arch Cross-Section 顶部为拱形的巷道断面 适用于高地压和松软围岩条件，拱形顶板承载力优于平顶 断面形状影响通风面积和摩擦阻力系数">
+<div><span class="term-name">拱形断面</span><span class="term-en">Arch Cross-Section</span></div>
+<div class="term-def">顶部为拱形的巷道断面</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">适用于高地压和松软围岩条件，拱形顶板承载力优于平顶</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">断面形状影响通风面积和摩擦阻力系数</div>
+</div>
+<div class="term-card" data-search="锚杆预紧力 Bolt Pretension 锚杆安装后施加的初始拉伸力（kN） 预紧力（通常≥100kN）决定锚杆主动支护效果，运维必须使用扭矩扳手或液压预紧器逐根检测 预紧力数据录入掘进质量管理系统，不达标自动标记返工">
+<div><span class="term-name">锚杆预紧力</span><span class="term-en">Bolt Pretension</span></div>
+<div class="term-def">锚杆安装后施加的初始拉伸力（kN）</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">预紧力（通常≥100kN）决定锚杆主动支护效果，运维必须使用扭矩扳手或液压预紧器逐根检测</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">预紧力数据录入掘进质量管理系统，不达标自动标记返工</div>
+</div>
+<div class="term-card" data-search="锚固力 Anchoring Force 锚杆与围岩之间的粘结或机械锚固力 锚固力是锚杆支护效果的直接指标，设计值一般≥80kN，运维需定期抽检 拉拔试验数据纳入支护质量数据库">
+<div><span class="term-name">锚固力</span><span class="term-en">Anchoring Force</span></div>
+<div class="term-def">锚杆与围岩之间的粘结或机械锚固力</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">锚固力是锚杆支护效果的直接指标，设计值一般≥80kN，运维需定期抽检</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">拉拔试验数据纳入支护质量数据库</div>
+</div>
+<div class="term-card" data-search="拉拔试验 Pull-out Test 对锚杆施加拉力检测其锚固性能的试验 每300根锚杆至少抽检1组（3根），试验荷载为设计锚固力的90%，运维必须留存试验报告 试验数据自动上传至掘进管理系统，形成锚杆支护质量档案">
+<div><span class="term-name">拉拔试验</span><span class="term-en">Pull-out Test</span></div>
+<div class="term-def">对锚杆施加拉力检测其锚固性能的试验</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">每300根锚杆至少抽检1组（3根），试验荷载为设计锚固力的90%，运维必须留存试验报告</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">试验数据自动上传至掘进管理系统，形成锚杆支护质量档案</div>
+</div>
+<div class="term-card" data-search="锚杆钻机 Roof Bolter 用于钻锚杆孔和安装锚杆的专用钻机 分为气动、液压和电动型，掘进效率的关键制约因素，运维关注钻机扭矩和推进力 智能化快掘工作面使用机载锚杆钻机，与掘进机协同作业">
+<div><span class="term-name">锚杆钻机</span><span class="term-en">Roof Bolter</span></div>
+<div class="term-def">用于钻锚杆孔和安装锚杆的专用钻机</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">分为气动、液压和电动型，掘进效率的关键制约因素，运维关注钻机扭矩和推进力</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">智能化快掘工作面使用机载锚杆钻机，与掘进机协同作业</div>
+</div>
+<div class="term-card" data-search="湿式掘进 Wet Drilling 钻孔时用水降尘的掘进方式 煤矿强制要求湿式打眼，防止煤尘飞扬引发尘肺病和爆炸，运维需保证供水压力和流量 掘进面粉尘浓度传感器监测降尘效果">
+<div><span class="term-name">湿式掘进</span><span class="term-en">Wet Drilling</span></div>
+<div class="term-def">钻孔时用水降尘的掘进方式</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">煤矿强制要求湿式打眼，防止煤尘飞扬引发尘肺病和爆炸，运维需保证供水压力和流量</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">掘进面粉尘浓度传感器监测降尘效果</div>
+</div>
+<div class="term-card" data-search="除尘风机 Dust Extraction Fan 掘进面用于抽排粉尘的通风设备 配合风筒使用，除尘效率要求≥90%，运维需定期清理滤网和检查风量 除尘风机运行状态纳入掘进面环境监测系统">
+<div><span class="term-name">除尘风机</span><span class="term-en">Dust Extraction Fan</span></div>
+<div class="term-def">掘进面用于抽排粉尘的通风设备</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">配合风筒使用，除尘效率要求≥90%，运维需定期清理滤网和检查风量</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">除尘风机运行状态纳入掘进面环境监测系统</div>
+</div>
+<div class="term-card" data-search="掘进工序循环图 Driving Cycle Chart 掘进各工序（打眼-装药-爆破-通风-支护）的时间安排图 循环进尺（1.5-2.0m/循环）和循环时间是掘进效率的核心指标，运维按循环图表组织施工 循环图表数字化后纳入智能掘进调度系统，实时监控循环完成率">
+<div><span class="term-name">掘进工序循环图</span><span class="term-en">Driving Cycle Chart</span></div>
+<div class="term-def">掘进各工序（打眼-装药-爆破-通风-支护）的时间安排图</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">循环进尺（1.5-2.0m/循环）和循环时间是掘进效率的核心指标，运维按循环图表组织施工</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">循环图表数字化后纳入智能掘进调度系统，实时监控循环完成率</div>
+</div>
+<div class="term-card" data-search="炮掘 Drill-and-Blast Driving 钻眼爆破法掘进巷道 适用于硬岩巷道和地质条件复杂区域，工序多、效率低、安全风险高，运维重点在爆破安全和通风排烟 爆破参数（孔数、孔深、装药量）纳入爆破设计管理系统">
+<div><span class="term-name">炮掘</span><span class="term-en">Drill-and-Blast Driving</span></div>
+<div class="term-def">钻眼爆破法掘进巷道</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">适用于硬岩巷道和地质条件复杂区域，工序多、效率低、安全风险高，运维重点在爆破安全和通风排烟</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">爆破参数（孔数、孔深、装药量）纳入爆破设计管理系统</div>
+</div>
+<div class="term-card" data-search="机掘 Mechanical Driving 使用掘进机或采掘一体机直接截割掘进 适合中硬以下煤层和半煤岩巷道，连续作业效率高，运维关注截割头磨损和冷却系统 掘进机运行数据（截割电流、推进速度）接入设备状态监测平台">
+<div><span class="term-name">机掘</span><span class="term-en">Mechanical Driving</span></div>
+<div class="term-def">使用掘进机或采掘一体机直接截割掘进</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">适合中硬以下煤层和半煤岩巷道，连续作业效率高，运维关注截割头磨损和冷却系统</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">掘进机运行数据（截割电流、推进速度）接入设备状态监测平台</div>
+</div>
+<div class="term-card" data-search="综掘 Fully Mechanized Driving 掘进机+锚杆钻机+运煤设备的全机械化掘进 快速掘进系统的标准配置，月进尺可达1000m以上，运维重点是设备配套和工序衔接 综掘面所有设备数据统一接入智能掘进管控平台，实现远程监控和自动化调度">
+<div><span class="term-name">综掘</span><span class="term-en">Fully Mechanized Driving</span></div>
+<div class="term-def">掘进机+锚杆钻机+运煤设备的全机械化掘进</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">快速掘进系统的标准配置，月进尺可达1000m以上，运维重点是设备配套和工序衔接</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">综掘面所有设备数据统一接入智能掘进管控平台，实现远程监控和自动化调度</div>
+</div>
+</div></div>
+<div class="term-group" id="gcat3" style="display:none">
+<div class="term-grid">
+<div class="term-card" data-search="中央并列式通风 Central Overlapping Ventilation 进回风井均位于井田中央且位置相近 适用于走向长度较小的矿井，通风线路短但漏风大，运维需关注进回风短路问题 通风网络解算模型的基础参数，影响传感器布点规划">
+<div><span class="term-name">中央并列式通风</span><span class="term-en">Central Overlapping Ventilation</span></div>
+<div class="term-def">进回风井均位于井田中央且位置相近</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">适用于走向长度较小的矿井，通风线路短但漏风大，运维需关注进回风短路问题</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">通风网络解算模型的基础参数，影响传感器布点规划</div>
+</div>
+<div class="term-card" data-search="中央分列式通风 Central Split Ventilation 进风井在中央，回风井在井田边界 通风线路较长但阻力小，适用于走向长度大的矿井，运维关注回风井位置的安全性 与智能通风系统联动，自动调节风门和风窗">
+<div><span class="term-name">中央分列式通风</span><span class="term-en">Central Split Ventilation</span></div>
+<div class="term-def">进风井在中央，回风井在井田边界</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">通风线路较长但阻力小，适用于走向长度大的矿井，运维关注回风井位置的安全性</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">与智能通风系统联动，自动调节风门和风窗</div>
+</div>
+<div class="term-card" data-search="两翼对角式通风 Two-Wing Diagonal Ventilation 进风井在中央，两个回风井分别在两翼边界 适用于大型矿井或高瓦斯矿井，通风线路长但各采区独立回风，安全性好 双翼风机独立变频控制，数据接入智能通风管理平台">
+<div><span class="term-name">两翼对角式通风</span><span class="term-en">Two-Wing Diagonal Ventilation</span></div>
+<div class="term-def">进风井在中央，两个回风井分别在两翼边界</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">适用于大型矿井或高瓦斯矿井，通风线路长但各采区独立回风，安全性好</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">双翼风机独立变频控制，数据接入智能通风管理平台</div>
+</div>
+<div class="term-card" data-search="分区对角式通风 Zone Diagonal Ventilation 每个采区设独立回风井形成分区通风 大型矿井的标准化通风方式，各采区互不干扰，运维管理复杂但安全系数最高 分区通风网络是智能通风系统最复杂的解算场景">
+<div><span class="term-name">分区对角式通风</span><span class="term-en">Zone Diagonal Ventilation</span></div>
+<div class="term-def">每个采区设独立回风井形成分区通风</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">大型矿井的标准化通风方式，各采区互不干扰，运维管理复杂但安全系数最高</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">分区通风网络是智能通风系统最复杂的解算场景</div>
+</div>
+<div class="term-card" data-search="通风网络 Ventilation Network 矿井所有通风支路构成的网络系统 通风网络解算（类似电路分析）是矿井通风管理的核心，运维需定期更新网络模型 智能通风系统基于通风网络实时解算，优化风机运行和风量分配">
+<div><span class="term-name">通风网络</span><span class="term-en">Ventilation Network</span></div>
+<div class="term-def">矿井所有通风支路构成的网络系统</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">通风网络解算（类似电路分析）是矿井通风管理的核心，运维需定期更新网络模型</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">智能通风系统基于通风网络实时解算，优化风机运行和风量分配</div>
+</div>
+<div class="term-card" data-search="风门 Ventilation Door 控制风流方向的可开关设施 行人和运输车辆通过时必须关闭，防止风流短路，运维需保证密闭性和联锁功能 风门开闭状态传感器接入安全监控系统，异常开启触发报警">
+<div><span class="term-name">风门</span><span class="term-en">Ventilation Door</span></div>
+<div class="term-def">控制风流方向的可开关设施</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">行人和运输车辆通过时必须关闭，防止风流短路，运维需保证密闭性和联锁功能</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">风门开闭状态传感器接入安全监控系统，异常开启触发报警</div>
+</div>
+<div class="term-card" data-search="风桥 Air Crossing / Air Bridge 进回风交叉处使两股风流隔离的立体交叉构筑物 确保进回风不混合，运维关注桥体密闭性和结构安全 无直接IT关联，但风桥位置是通风网络建模的关键节点">
+<div><span class="term-name">风桥</span><span class="term-en">Air Crossing / Air Bridge</span></div>
+<div class="term-def">进回风交叉处使两股风流隔离的立体交叉构筑物</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">确保进回风不混合，运维关注桥体密闭性和结构安全</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">无直接IT关联，但风桥位置是通风网络建模的关键节点</div>
+</div>
+<div class="term-card" data-search="风窗 Air Regulator Window 安装在风门或密闭墙上的可调面积窗口 用于调节分支巷道风量，运维按测风数据定期调整开口面积 智能通风系统可自动控制电动风窗开度，实现按需调风">
+<div><span class="term-name">风窗</span><span class="term-en">Air Regulator Window</span></div>
+<div class="term-def">安装在风门或密闭墙上的可调面积窗口</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">用于调节分支巷道风量，运维按测风数据定期调整开口面积</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">智能通风系统可自动控制电动风窗开度，实现按需调风</div>
+</div>
+<div class="term-card" data-search="密闭墙 Sealing Wall / Stop 完全封堵不需要通风的巷道或采空区的墙体 分为永久密闭和临时密闭，防止瓦斯积聚和漏风，运维定期检查密闭完好性 密闭墙内气体采样管连接至束管监测系统，实时分析CO和瓦斯浓度">
+<div><span class="term-name">密闭墙</span><span class="term-en">Sealing Wall / Stop</span></div>
+<div class="term-def">完全封堵不需要通风的巷道或采空区的墙体</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">分为永久密闭和临时密闭，防止瓦斯积聚和漏风，运维定期检查密闭完好性</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">密闭墙内气体采样管连接至束管监测系统，实时分析CO和瓦斯浓度</div>
+</div>
+<div class="term-card" data-search="测风站 Wind Measurement Station 固定设置的风量测定位置 矿井每10天至少全面测风一次，高瓦斯矿井每班测风，运维需确保测风站断面规整、无杂物 超声波自动测风装置数据接入安全监控系统，实现连续测风">
+<div><span class="term-name">测风站</span><span class="term-en">Wind Measurement Station</span></div>
+<div class="term-def">固定设置的风量测定位置</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">矿井每10天至少全面测风一次，高瓦斯矿井每班测风，运维需确保测风站断面规整、无杂物</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">超声波自动测风装置数据接入安全监控系统，实现连续测风</div>
+</div>
+<div class="term-card" data-search="低瓦斯矿井 Low Gas Mine 相对瓦斯涌出量≤10m³/t且绝对涌出量≤40m³/min 安全管理等级最低，但仍需配备瓦斯监测系统，运维重点是保证监测不间断 瓦斯监测数据实时上传至安全监控平台和政府监管系统">
+<div><span class="term-name">低瓦斯矿井</span><span class="term-en">Low Gas Mine</span></div>
+<div class="term-def">相对瓦斯涌出量≤10m³/t且绝对涌出量≤40m³/min</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">安全管理等级最低，但仍需配备瓦斯监测系统，运维重点是保证监测不间断</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">瓦斯监测数据实时上传至安全监控平台和政府监管系统</div>
+</div>
+<div class="term-card" data-search="高瓦斯矿井 High Gas Mine 相对瓦斯涌出量>10m³/t或绝对涌出量>40m³/min 必须建立瓦斯抽采系统，采掘工作面瓦斯浓度限值更严格，运维成本显著增加 瓦斯抽采在线监测系统与抽采泵站PLC联动">
+<div><span class="term-name">高瓦斯矿井</span><span class="term-en">High Gas Mine</span></div>
+<div class="term-def">相对瓦斯涌出量>10m³/t或绝对涌出量>40m³/min</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">必须建立瓦斯抽采系统，采掘工作面瓦斯浓度限值更严格，运维成本显著增加</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">瓦斯抽采在线监测系统与抽采泵站PLC联动</div>
+</div>
+<div class="term-card" data-search="突出矿井 Outburst Mine 发生过煤与瓦斯突出或经鉴定有突出危险的矿井 安全管理最高等级，必须执行区域和局部 two-level 防突措施，采掘前必须进行效果检验 防突参数（瓦斯压力、瓦斯含量、钻屑量）数字化管理，自动判定是否达标">
+<div><span class="term-name">突出矿井</span><span class="term-en">Outburst Mine</span></div>
+<div class="term-def">发生过煤与瓦斯突出或经鉴定有突出危险的矿井</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">安全管理最高等级，必须执行区域和局部 two-level 防突措施，采掘前必须进行效果检验</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">防突参数（瓦斯压力、瓦斯含量、钻屑量）数字化管理，自动判定是否达标</div>
+</div>
+<div class="term-card" data-search="煤尘爆炸指数 Coal Dust Explosion Index (Ct) 煤尘中挥发分含量决定的爆炸危险程度指标 Ct>10%即有爆炸危险，运维需定期撒布岩粉或设置隔爆设施 无直接IT关联，但煤尘浓度监测传感器是粉尘防治系统的一部分">
+<div><span class="term-name">煤尘爆炸指数</span><span class="term-en">Coal Dust Explosion Index (Ct)</span></div>
+<div class="term-def">煤尘中挥发分含量决定的爆炸危险程度指标</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">Ct>10%即有爆炸危险，运维需定期撒布岩粉或设置隔爆设施</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">无直接IT关联，但煤尘浓度监测传感器是粉尘防治系统的一部分</div>
+</div>
+<div class="term-card" data-search="煤层自然发火期 Spontaneous Combustion Period 煤层从暴露到自燃的最短时间（月） 发火期越短越危险（最短仅1-3个月），运维需控制采空区漏风并注氮/灌浆 自然发火标志气体（CO、C₂H₄）监测数据接入安全监控系统，趋势预警">
+<div><span class="term-name">煤层自然发火期</span><span class="term-en">Spontaneous Combustion Period</span></div>
+<div class="term-def">煤层从暴露到自燃的最短时间（月）</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">发火期越短越危险（最短仅1-3个月），运维需控制采空区漏风并注氮/灌浆</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">自然发火标志气体（CO、C₂H₄）监测数据接入安全监控系统，趋势预警</div>
+</div>
+<div class="term-card" data-search="绝对瓦斯涌出量 Absolute Gas Emission Rate 单位时间涌入矿井的瓦斯体积（m³/min） 决定矿井通风量和瓦斯抽采规模的关键参数 实时监测数据上传至安全监控平台">
+<div><span class="term-name">绝对瓦斯涌出量</span><span class="term-en">Absolute Gas Emission Rate</span></div>
+<div class="term-def">单位时间涌入矿井的瓦斯体积（m³/min）</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">决定矿井通风量和瓦斯抽采规模的关键参数</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">实时监测数据上传至安全监控平台</div>
+</div>
+<div class="term-card" data-search="相对瓦斯涌出量 Relative Gas Emission Rate 平均日产一吨煤涌出的瓦斯体积（m³/t） 是矿井瓦斯等级划分的核心指标 通过瓦斯监测数据和产量数据自动计算">
+<div><span class="term-name">相对瓦斯涌出量</span><span class="term-en">Relative Gas Emission Rate</span></div>
+<div class="term-def">平均日产一吨煤涌出的瓦斯体积（m³/t）</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">是矿井瓦斯等级划分的核心指标</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">通过瓦斯监测数据和产量数据自动计算</div>
+</div>
+<div class="term-card" data-search="瓦斯抽采 Gas Drainage / Gas Extraction 通过钻孔将煤层中的瓦斯预先或边采边抽出 高瓦斯和突出矿井的强制要求，抽采率需达到规定标准方可采掘，运维关注钻孔封孔质量和抽采负压 抽采泵站PLC监控流量、浓度、负压，数据自动上传至瓦斯抽采监管平台">
+<div><span class="term-name">瓦斯抽采</span><span class="term-en">Gas Drainage / Gas Extraction</span></div>
+<div class="term-def">通过钻孔将煤层中的瓦斯预先或边采边抽出</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">高瓦斯和突出矿井的强制要求，抽采率需达到规定标准方可采掘，运维关注钻孔封孔质量和抽采负压</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">抽采泵站PLC监控流量、浓度、负压，数据自动上传至瓦斯抽采监管平台</div>
+</div>
+<div class="term-card" data-search="区域防突措施 Regional Outburst Prevention 在大面积范围内消除煤层突出危险的措施 包括开采保护层、预抽煤层瓦斯等，效果检验达标后方可进行采掘作业 防突参数管理系统，自动判定区域措施效果是否达标">
+<div><span class="term-name">区域防突措施</span><span class="term-en">Regional Outburst Prevention</span></div>
+<div class="term-def">在大面积范围内消除煤层突出危险的措施</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">包括开采保护层、预抽煤层瓦斯等，效果检验达标后方可进行采掘作业</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">防突参数管理系统，自动判定区域措施效果是否达标</div>
+</div>
+<div class="term-card" data-search="局部防突措施 Local Outburst Prevention 在工作面前方局部范围内消除突出危险的措施 包括超前钻孔排放、松动爆破等，每次采掘前必须执行并检验 措施执行记录自动关联采掘作业许可审批流程">
+<div><span class="term-name">局部防突措施</span><span class="term-en">Local Outburst Prevention</span></div>
+<div class="term-def">在工作面前方局部范围内消除突出危险的措施</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">包括超前钻孔排放、松动爆破等，每次采掘前必须执行并检验</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">措施执行记录自动关联采掘作业许可审批流程</div>
+</div>
+<div class="term-card" data-search="煤与瓦斯突出 Coal and Gas Outburst 地应力和瓦斯压力共同作用下煤体突然抛出 煤矿最严重的安全威胁之一，突出瞬间可抛出数百吨煤和数十万立方米瓦斯 微震监测系统可监测突出前兆信号，与瓦斯监测系统联动预警">
+<div><span class="term-name">煤与瓦斯突出</span><span class="term-en">Coal and Gas Outburst</span></div>
+<div class="term-def">地应力和瓦斯压力共同作用下煤体突然抛出</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">煤矿最严重的安全威胁之一，突出瞬间可抛出数百吨煤和数十万立方米瓦斯</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">微震监测系统可监测突出前兆信号，与瓦斯监测系统联动预警</div>
+</div>
+<div class="term-card" data-search="安全防护措施 Protective Measures 防止突出造成人员伤亡的最后一道防线 包括避难硐室、压风自救、隔离式自救器等，运维确保随时可用 避难硐室环境监控（O₂、CO₂、温度）数据接入安全监控平台">
+<div><span class="term-name">安全防护措施</span><span class="term-en">Protective Measures</span></div>
+<div class="term-def">防止突出造成人员伤亡的最后一道防线</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">包括避难硐室、压风自救、隔离式自救器等，运维确保随时可用</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">避难硐室环境监控（O₂、CO₂、温度）数据接入安全监控平台</div>
+</div>
+<div class="term-card" data-search="隔爆水棚 Explosion Barrier Water Trough 悬挂在巷道顶部的盛水槽，爆炸时被冲击波掀翻形成水幕 阻断煤尘爆炸传播的关键设施，按煤尘爆炸指数设置，运维定期检查水量和完好性 无直接IT关联，但水棚位置和数量是通风安全GIS标注的重要内容">
+<div><span class="term-name">隔爆水棚</span><span class="term-en">Explosion Barrier Water Trough</span></div>
+<div class="term-def">悬挂在巷道顶部的盛水槽，爆炸时被冲击波掀翻形成水幕</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">阻断煤尘爆炸传播的关键设施，按煤尘爆炸指数设置，运维定期检查水量和完好性</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">无直接IT关联，但水棚位置和数量是通风安全GIS标注的重要内容</div>
+</div>
+<div class="term-card" data-search="岩粉棚 Rock Dust Barrier 放置岩粉的棚架，爆炸时扬起岩粉抑制火焰 隔爆水棚的替代方案，适用于水量不足的区域 同隔爆水棚">
+<div><span class="term-name">岩粉棚</span><span class="term-en">Rock Dust Barrier</span></div>
+<div class="term-def">放置岩粉的棚架，爆炸时扬起岩粉抑制火焰</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">隔爆水棚的替代方案，适用于水量不足的区域</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">同隔爆水棚</div>
+</div>
+<div class="term-card" data-search="反风演习 Reverse Wind Drill 定期测试矿井主要通风机反风能力的演练 进风井口附近发生火灾时需反风，要求10min内完成反风且风量≥正常40% 反风演习数据（反风时间、风量变化）记录存档，风机控制系统需具备一键反风功能">
+<div><span class="term-name">反风演习</span><span class="term-en">Reverse Wind Drill</span></div>
+<div class="term-def">定期测试矿井主要通风机反风能力的演练</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">进风井口附近发生火灾时需反风，要求10min内完成反风且风量≥正常40%</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">反风演习数据（反风时间、风量变化）记录存档，风机控制系统需具备一键反风功能</div>
+</div>
+<div class="term-card" data-search="通风阻力测定 Ventilation Resistance Measurement 测量矿井各段巷道通风阻力的技术工作 阻力测定结果用于优化通风网络和降低能耗，每3年至少测定一次 测定数据更新通风网络模型，智能通风系统据此优化风机运行工况点">
+<div><span class="term-name">通风阻力测定</span><span class="term-en">Ventilation Resistance Measurement</span></div>
+<div class="term-def">测量矿井各段巷道通风阻力的技术工作</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">阻力测定结果用于优化通风网络和降低能耗，每3年至少测定一次</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">测定数据更新通风网络模型，智能通风系统据此优化风机运行工况点</div>
+</div>
+</div></div>
+<div class="term-group" id="gcat4" style="display:none">
+<div class="term-grid">
+<div class="term-card" data-search="移动变电站 Mobile Substation 安装在轨道或拖撬上可随工作面移动的变电设备 为综采面设备供电（1140V/3300V），随工作面推进前移，运维关注绝缘和防潮 移动变电站综保装置（微机保护）数据通过通信接口接入电力监控系统">
+<div><span class="term-name">移动变电站</span><span class="term-en">Mobile Substation</span></div>
+<div class="term-def">安装在轨道或拖撬上可随工作面移动的变电设备</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">为综采面设备供电（1140V/3300V），随工作面推进前移，运维关注绝缘和防潮</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">移动变电站综保装置（微机保护）数据通过通信接口接入电力监控系统</div>
+</div>
+<div class="term-card" data-search="高压开关柜 High Voltage Switchgear 6kV/10kV供电系统中的开关和保护设备 矿井地面和井下中央变电所的核心设备，运维关注继电保护整定和断路器寿命 智能开关柜集成在线监测（触头温度、局放、机械特性），数据上传至电力SCADA">
+<div><span class="term-name">高压开关柜</span><span class="term-en">High Voltage Switchgear</span></div>
+<div class="term-def">6kV/10kV供电系统中的开关和保护设备</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">矿井地面和井下中央变电所的核心设备，运维关注继电保护整定和断路器寿命</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">智能开关柜集成在线监测（触头温度、局放、机械特性），数据上传至电力SCADA</div>
+</div>
+<div class="term-card" data-search="矿用隔爆型变压器 Flameproof Transformer 外壳能承受内部爆炸且不传导至外部的变压器 井下必须使用隔爆型电气设备，运维关注温升、绝缘和隔爆面完好性 变压器运行数据（温度、负载率）接入电力监控系统">
+<div><span class="term-name">矿用隔爆型变压器</span><span class="term-en">Flameproof Transformer</span></div>
+<div class="term-def">外壳能承受内部爆炸且不传导至外部的变压器</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">井下必须使用隔爆型电气设备，运维关注温升、绝缘和隔爆面完好性</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">变压器运行数据（温度、负载率）接入电力监控系统</div>
+</div>
+<div class="term-card" data-search="变频器 VFD (Variable Frequency Drive) 通过改变频率调节电动机转速的电力电子设备 用于皮带机、风机、水泵等设备的调速节能，运维关注散热和谐波治理 变频器通信接口（Modbus/Profinet）接入PLC集控系统">
+<div><span class="term-name">变频器</span><span class="term-en">VFD (Variable Frequency Drive)</span></div>
+<div class="term-def">通过改变频率调节电动机转速的电力电子设备</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">用于皮带机、风机、水泵等设备的调速节能，运维关注散热和谐波治理</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">变频器通信接口（Modbus/Profinet）接入PLC集控系统</div>
+</div>
+<div class="term-card" data-search="软启动器 Soft Starter 通过可控硅逐步升高电压实现电机平稳启动 减小大惯量设备（皮带机、刮板机）启动冲击，保护机械和电气设备 软启动器状态信号接入设备集控系统">
+<div><span class="term-name">软启动器</span><span class="term-en">Soft Starter</span></div>
+<div class="term-def">通过可控硅逐步升高电压实现电机平稳启动</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">减小大惯量设备（皮带机、刮板机）启动冲击，保护机械和电气设备</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">软启动器状态信号接入设备集控系统</div>
+</div>
+<div class="term-card" data-search="PLC控制系统 PLC Control System 基于可编程逻辑控制器的自动化控制核心 矿井地面生产系统（选煤厂、提升、排水）和井下关键设备的标准控制方式，运维关注程序备份和电池 PLC通过工业以太网接入矿井集控中心，支持远程监控和程序下载">
+<div><span class="term-name">PLC控制系统</span><span class="term-en">PLC Control System</span></div>
+<div class="term-def">基于可编程逻辑控制器的自动化控制核心</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">矿井地面生产系统（选煤厂、提升、排水）和井下关键设备的标准控制方式，运维关注程序备份和电池</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">PLC通过工业以太网接入矿井集控中心，支持远程监控和程序下载</div>
+</div>
+<div class="term-card" data-search="SCADA系统 SCADA (Supervisory Control and Data Acquisition) 数据采集与监视控制系统 矿井地面生产系统的核心监控平台，实时采集设备状态、工艺参数并执行控制指令 SCADA与IT网络融合是智慧矿山的核心架构，需关注网络安全隔离">
+<div><span class="term-name">SCADA系统</span><span class="term-en">SCADA (Supervisory Control and Data Acquisition)</span></div>
+<div class="term-def">数据采集与监视控制系统</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">矿井地面生产系统的核心监控平台，实时采集设备状态、工艺参数并执行控制指令</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">SCADA与IT网络融合是智慧矿山的核心架构，需关注网络安全隔离</div>
+</div>
+<div class="term-card" data-search="乳化液泵站 Emulsion Pump Station 为液压支架提供高压乳化液的成套设备 通常3泵2箱（2用1备），泵站压力（31.5MPa）直接决定支架初撑力，运维关注泵阀密封和液质 泵站PLC集成压力、液位、温度监测，数据上传至工作面集控系统">
+<div><span class="term-name">乳化液泵站</span><span class="term-en">Emulsion Pump Station</span></div>
+<div class="term-def">为液压支架提供高压乳化液的成套设备</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">通常3泵2箱（2用1备），泵站压力（31.5MPa）直接决定支架初撑力，运维关注泵阀密封和液质</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">泵站PLC集成压力、液位、温度监测，数据上传至工作面集控系统</div>
+</div>
+<div class="term-card" data-search="喷雾降尘系统 Spray Dust Suppression System 通过高压水雾抑制和沉降粉尘的系统 采煤机、掘进机、转载点等产尘点的标配降尘设施，运维关注喷嘴堵塞和水压 喷雾系统与采煤机/掘进机联动启停">
+<div><span class="term-name">喷雾降尘系统</span><span class="term-en">Spray Dust Suppression System</span></div>
+<div class="term-def">通过高压水雾抑制和沉降粉尘的系统</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">采煤机、掘进机、转载点等产尘点的标配降尘设施，运维关注喷嘴堵塞和水压</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">喷雾系统与采煤机/掘进机联动启停</div>
+</div>
+<div class="term-card" data-search="胶带输送机 Belt Conveyor 使用橡胶输送带连续运煤的设备 井下主运煤大巷和地面运煤系统的核心设备，运维关注胶带跑偏、撕裂和托辊更换 皮带保护（跑偏、撕裂、烟雾、温度、速度）信号接入集控系统，AI视频分析检测大块和异物">
+<div><span class="term-name">胶带输送机</span><span class="term-en">Belt Conveyor</span></div>
+<div class="term-def">使用橡胶输送带连续运煤的设备</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">井下主运煤大巷和地面运煤系统的核心设备，运维关注胶带跑偏、撕裂和托辊更换</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">皮带保护（跑偏、撕裂、烟雾、温度、速度）信号接入集控系统，AI视频分析检测大块和异物</div>
+</div>
+<div class="term-card" data-search="无轨胶轮车 Trackless Rubber-Tired Vehicle 在巷道中行驶的轮胎式运输车辆 辅助运输（人员、物料、设备）的主力车型，运维关注防爆柴油机和尾气处理 车辆定位（UWB/RFID）纳入人员定位系统">
+<div><span class="term-name">无轨胶轮车</span><span class="term-en">Trackless Rubber-Tired Vehicle</span></div>
+<div class="term-def">在巷道中行驶的轮胎式运输车辆</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">辅助运输（人员、物料、设备）的主力车型，运维关注防爆柴油机和尾气处理</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">车辆定位（UWB/RFID）纳入人员定位系统</div>
+</div>
+<div class="term-card" data-search="单轨吊车 Monorail Crane / Suspended Rail Car 悬挂在巷道顶部单轨上运行的运输设备 适用于大倾角和底板条件差的巷道，运载液压支架等大型设备 单轨吊运行状态和位置可通过通信系统监控">
+<div><span class="term-name">单轨吊车</span><span class="term-en">Monorail Crane / Suspended Rail Car</span></div>
+<div class="term-def">悬挂在巷道顶部单轨上运行的运输设备</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">适用于大倾角和底板条件差的巷道，运载液压支架等大型设备</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">单轨吊运行状态和位置可通过通信系统监控</div>
+</div>
+<div class="term-card" data-search="电机车 Electric Locomotive 沿轨道行驶的电力驱动牵引列车 架线式（直流250V/550V）或蓄电池式，用于轨道运输大巷 电机车运行状态通过轨道电路和通信系统监控">
+<div><span class="term-name">电机车</span><span class="term-en">Electric Locomotive</span></div>
+<div class="term-def">沿轨道行驶的电力驱动牵引列车</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">架线式（直流250V/550V）或蓄电池式，用于轨道运输大巷</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">电机车运行状态通过轨道电路和通信系统监控</div>
+</div>
+<div class="term-card" data-search="矿车 Mine Car 在轨道上运行的运煤/运料车辆 标准矿车1t、1.5t、3t，运维关注连接装置和轮对磨损 无直接IT关联">
+<div><span class="term-name">矿车</span><span class="term-en">Mine Car</span></div>
+<div class="term-def">在轨道上运行的运煤/运料车辆</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">标准矿车1t、1.5t、3t，运维关注连接装置和轮对磨损</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">无直接IT关联</div>
+</div>
+<div class="term-card" data-search="提升机（摩擦式） Friction Hoist 利用摩擦轮与钢丝绳之间的摩擦力提升容器 大型矿井主井提升的主力设备，运维关注钢丝绳探伤和制动系统可靠性 提升机综合保护装置（过速、过卷、松绳）接入安全监控系统，PLC控制启停">
+<div><span class="term-name">提升机（摩擦式）</span><span class="term-en">Friction Hoist</span></div>
+<div class="term-def">利用摩擦轮与钢丝绳之间的摩擦力提升容器</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">大型矿井主井提升的主力设备，运维关注钢丝绳探伤和制动系统可靠性</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">提升机综合保护装置（过速、过卷、松绳）接入安全监控系统，PLC控制启停</div>
+</div>
+<div class="term-card" data-search="提升机（缠绕式） Drum Hoist 将钢丝绳缠绕在卷筒上实现提升 适用于浅井和副井提升，运维关注卷筒磨损和制动系统 同摩擦式提升机">
+<div><span class="term-name">提升机（缠绕式）</span><span class="term-en">Drum Hoist</span></div>
+<div class="term-def">将钢丝绳缠绕在卷筒上实现提升</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">适用于浅井和副井提升，运维关注卷筒磨损和制动系统</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">同摩擦式提升机</div>
+</div>
+<div class="term-card" data-search="箕斗 Skip 专门用于提升煤炭的容器 主井箕斗提升，配合定量装仓实现自动化运行 箕斗到位信号和装载量数据接入提升控制系统">
+<div><span class="term-name">箕斗</span><span class="term-en">Skip</span></div>
+<div class="term-def">专门用于提升煤炭的容器</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">主井箕斗提升，配合定量装仓实现自动化运行</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">箕斗到位信号和装载量数据接入提升控制系统</div>
+</div>
+<div class="term-card" data-search="罐笼 Cage 用于提升人员、物料和设备的容器 副井提升的核心设备，可载人、料车和设备，运维关注防坠器和安全门 罐笼运行状态（位置、速度、载荷）接入提升监控系统">
+<div><span class="term-name">罐笼</span><span class="term-en">Cage</span></div>
+<div class="term-def">用于提升人员、物料和设备的容器</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">副井提升的核心设备，可载人、料车和设备，运维关注防坠器和安全门</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">罐笼运行状态（位置、速度、载荷）接入提升监控系统</div>
+</div>
+<div class="term-card" data-search="给煤机 Coal Feeder 将煤仓中的煤定量放出的设备 常见振动给煤机和带式给煤机，运维关注给料均匀性和堵煤处理 给煤机运行状态接入煤仓管理系统，配合定量装仓">
+<div><span class="term-name">给煤机</span><span class="term-en">Coal Feeder</span></div>
+<div class="term-def">将煤仓中的煤定量放出的设备</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">常见振动给煤机和带式给煤机，运维关注给料均匀性和堵煤处理</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">给煤机运行状态接入煤仓管理系统，配合定量装仓</div>
+</div>
+<div class="term-card" data-search="定量装仓 Quantitative Loading 按预设重量自动装车/装箕斗的系统 实现精准装载，防止超载和欠载，运维关注称重传感器精度 装车数据（车号、煤量、煤质）自动上传至产销管理系统">
+<div><span class="term-name">定量装仓</span><span class="term-en">Quantitative Loading</span></div>
+<div class="term-def">按预设重量自动装车/装箕斗的系统</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">实现精准装载，防止超载和欠载，运维关注称重传感器精度</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">装车数据（车号、煤量、煤质）自动上传至产销管理系统</div>
+</div>
+<div class="term-card" data-search="智能装车系统 Intelligent Loading System 集成自动称重、配煤、装车、数据管理的系统 实现无人值守装车，自动识别车辆、按配比装煤、自动结算 与矿井产销一体化平台对接，数据上传至集团ERP和地磅系统">
+<div><span class="term-name">智能装车系统</span><span class="term-en">Intelligent Loading System</span></div>
+<div class="term-def">集成自动称重、配煤、装车、数据管理的系统</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">实现无人值守装车，自动识别车辆、按配比装煤、自动结算</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">与矿井产销一体化平台对接，数据上传至集团ERP和地磅系统</div>
+</div>
+</div></div>
+<div class="term-group" id="gcat5" style="display:none">
+<div class="term-grid">
+<div class="term-card" data-search="矿用阻燃光缆 Flame-Retardant Mining Optical Cable 具有阻燃和抗静电性能的矿井专用光缆 光缆护套必须通过MT/T标准阻燃测试，防止光缆成为火灾传播介质，运维需注意光缆选型和敷设规范 光缆损耗监测（OTDR）纳入通信线路管理系统">
+<div><span class="term-name">矿用阻燃光缆</span><span class="term-en">Flame-Retardant Mining Optical Cable</span></div>
+<div class="term-def">具有阻燃和抗静电性能的矿井专用光缆</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">光缆护套必须通过MT/T标准阻燃测试，防止光缆成为火灾传播介质，运维需注意光缆选型和敷设规范</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">光缆损耗监测（OTDR）纳入通信线路管理系统</div>
+</div>
+<div class="term-card" data-search="矿用隔爆型接线盒 Flameproof Junction Box 外壳能承受内部爆炸的电缆连接设备 井下电缆接续必须使用隔爆接线盒，运维关注隔爆面间隙和密封 无直接IT关联">
+<div><span class="term-name">矿用隔爆型接线盒</span><span class="term-en">Flameproof Junction Box</span></div>
+<div class="term-def">外壳能承受内部爆炸的电缆连接设备</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">井下电缆接续必须使用隔爆接线盒，运维关注隔爆面间隙和密封</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">无直接IT关联</div>
+</div>
+<div class="term-card" data-search="本安型交换机 Intrinsically Safe Switch 电路能量限制在安全范围内的工业以太网交换机 安装在采掘工作面等高危区域，输出端口连接本安设备，运维关注供电功率和端口数 本安交换机是井下工业以太网的核心节点，构成万兆/千兆环网">
+<div><span class="term-name">本安型交换机</span><span class="term-en">Intrinsically Safe Switch</span></div>
+<div class="term-def">电路能量限制在安全范围内的工业以太网交换机</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">安装在采掘工作面等高危区域，输出端口连接本安设备，运维关注供电功率和端口数</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">本安交换机是井下工业以太网的核心节点，构成万兆/千兆环网</div>
+</div>
+<div class="term-card" data-search="矿用WiFi基站 Mining WiFi Access Point 矿井专用防爆无线接入点 提供工作面、顺槽等区域无线覆盖，支持人员定位和移动终端通信，运维关注信号覆盖和切换 WiFi基站接入无线网络控制器（AC），纳入矿井通信管理系统">
+<div><span class="term-name">矿用WiFi基站</span><span class="term-en">Mining WiFi Access Point</span></div>
+<div class="term-def">矿井专用防爆无线接入点</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">提供工作面、顺槽等区域无线覆盖，支持人员定位和移动终端通信，运维关注信号覆盖和切换</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">WiFi基站接入无线网络控制器（AC），纳入矿井通信管理系统</div>
+</div>
+<div class="term-card" data-search="工业以太网交换机（环网节点） Industrial Ethernet Ring Switch 支持环网协议的高可靠性工业交换机 矿井通信骨干网的核心设备，支持ERPS/RSTP环网保护（<50ms倒换），运维关注环网拓扑和冗余 网管系统（SNMP）监控各节点状态、流量、告警">
+<div><span class="term-name">工业以太网交换机（环网节点）</span><span class="term-en">Industrial Ethernet Ring Switch</span></div>
+<div class="term-def">支持环网协议的高可靠性工业交换机</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">矿井通信骨干网的核心设备，支持ERPS/RSTP环网保护（<50ms倒换），运维关注环网拓扑和冗余</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">网管系统（SNMP）监控各节点状态、流量、告警</div>
+</div>
+<div class="term-card" data-search="光纤收发器 Fiber Optic Transceiver 实现光电转换的传输设备 用于非以太网设备接入光纤网络，运维关注光功率和传输距离 光功率监测纳入通信线路管理">
+<div><span class="term-name">光纤收发器</span><span class="term-en">Fiber Optic Transceiver</span></div>
+<div class="term-def">实现光电转换的传输设备</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">用于非以太网设备接入光纤网络，运维关注光功率和传输距离</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">光功率监测纳入通信线路管理</div>
+</div>
+<div class="term-card" data-search="PoE供电 Power over Ethernet 通过网线同时传输数据和电力的技术 为井下摄像头、WiFi基站、传感器等终端供电，减少电源布线，运维关注功率预算和供电距离 PoE交换机管理纳入网络运维平台">
+<div><span class="term-name">PoE供电</span><span class="term-en">Power over Ethernet</span></div>
+<div class="term-def">通过网线同时传输数据和电力的技术</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">为井下摄像头、WiFi基站、传感器等终端供电，减少电源布线，运维关注功率预算和供电距离</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">PoE交换机管理纳入网络运维平台</div>
+</div>
+<div class="term-card" data-search="ERPS协议 Ethernet Ring Protection Switching ITU-T G.8032定义的以太网环网保护协议 矿井工业环网的核心保护协议，环网断裂自动倒换<50ms，保证视频和控制系统不中断 ERPS状态和倒换事件纳入网管系统监控">
+<div><span class="term-name">ERPS协议</span><span class="term-en">Ethernet Ring Protection Switching</span></div>
+<div class="term-def">ITU-T G.8032定义的以太网环网保护协议</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">矿井工业环网的核心保护协议，环网断裂自动倒换<50ms，保证视频和控制系统不中断</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">ERPS状态和倒换事件纳入网管系统监控</div>
+</div>
+<div class="term-card" data-search="RSTP协议 Rapid Spanning Tree Protocol IEEE 802.1w快速生成树协议 部分矿井网络使用RSTP作为环网保护方案，收敛时间2-5s，适用于对倒换速度要求不高的场景 同ERPS">
+<div><span class="term-name">RSTP协议</span><span class="term-en">Rapid Spanning Tree Protocol</span></div>
+<div class="term-def">IEEE 802.1w快速生成树协议</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">部分矿井网络使用RSTP作为环网保护方案，收敛时间2-5s，适用于对倒换速度要求不高的场景</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">同ERPS</div>
+</div>
+<div class="term-card" data-search="PRP/HSR协议 Parallel Redundancy Protocol / High-availability Seamless Redundancy IEC 62439定义的零丢包冗余协议 用于安全要求极高的控制网络（如提升机控制），实现零延时冗余切换 零丢包特性适用于安全监控系统的数据传输保障">
+<div><span class="term-name">PRP/HSR协议</span><span class="term-en">Parallel Redundancy Protocol / High-availability Seamless Redundancy</span></div>
+<div class="term-def">IEC 62439定义的零丢包冗余协议</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">用于安全要求极高的控制网络（如提升机控制），实现零延时冗余切换</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">零丢包特性适用于安全监控系统的数据传输保障</div>
+</div>
+<div class="term-card" data-search="OPC UA协议 OPC Unified Architecture 工业自动化领域通用通信标准 实现不同厂商设备（PLC、DCS、SCADA）之间的互联互通，是智慧矿山数据融合的关键协议 OPC UA Server/Agent部署在各类设备上，数据汇聚至工业互联网平台">
+<div><span class="term-name">OPC UA协议</span><span class="term-en">OPC Unified Architecture</span></div>
+<div class="term-def">工业自动化领域通用通信标准</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">实现不同厂商设备（PLC、DCS、SCADA）之间的互联互通，是智慧矿山数据融合的关键协议</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">OPC UA Server/Agent部署在各类设备上，数据汇聚至工业互联网平台</div>
+</div>
+<div class="term-card" data-search="Modbus协议 Modbus Protocol 经典的工业串行通信协议 大量矿用传感器、仪表使用Modbus RTU/TCP通信，运维关注通信速率和从站地址管理 通过Modbus网关将数据转换为OPC UA接入上层平台">
+<div><span class="term-name">Modbus协议</span><span class="term-en">Modbus Protocol</span></div>
+<div class="term-def">经典的工业串行通信协议</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">大量矿用传感器、仪表使用Modbus RTU/TCP通信，运维关注通信速率和从站地址管理</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">通过Modbus网关将数据转换为OPC UA接入上层平台</div>
+</div>
+<div class="term-card" data-search="工业视频编码（H.265/AI） H.265 / AI Video Analytics 高效视频编码和智能分析技术 矿用摄像机支持H.265编码节省带宽，AI功能实现人员行为识别、皮带异物检测等 视频数据通过工业环网传输至智维中心，AI分析结果推送报警">
+<div><span class="term-name">工业视频编码（H.265/AI）</span><span class="term-en">H.265 / AI Video Analytics</span></div>
+<div class="term-def">高效视频编码和智能分析技术</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">矿用摄像机支持H.265编码节省带宽，AI功能实现人员行为识别、皮带异物检测等</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">视频数据通过工业环网传输至智维中心，AI分析结果推送报警</div>
+</div>
+<div class="term-card" data-search="人员定位系统 Personnel Positioning System 实时跟踪井下人员位置的系统 技术路线包括UWB（精度0.3m）、ZigBee（精度3-5m）、RFID（区域定位），是安全强制要求 定位基站通过工业环网回传数据至定位服务器，与电子矿图联动显示">
+<div><span class="term-name">人员定位系统</span><span class="term-en">Personnel Positioning System</span></div>
+<div class="term-def">实时跟踪井下人员位置的系统</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">技术路线包括UWB（精度0.3m）、ZigBee（精度3-5m）、RFID（区域定位），是安全强制要求</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">定位基站通过工业环网回传数据至定位服务器，与电子矿图联动显示</div>
+</div>
+<div class="term-card" data-search="IP广播系统 IP Broadcasting System 基于IP网络的矿井广播通信系统 支持分区广播、紧急喊话、背景音乐，运维关注网络延时和优先级抢占 IP广播终端接入工业以太网，与应急联动系统对接">
+<div><span class="term-name">IP广播系统</span><span class="term-en">IP Broadcasting System</span></div>
+<div class="term-def">基于IP网络的矿井广播通信系统</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">支持分区广播、紧急喊话、背景音乐，运维关注网络延时和优先级抢占</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">IP广播终端接入工业以太网，与应急联动系统对接</div>
+</div>
+<div class="term-card" data-search="调度通信系统 Dispatch Communication System 矿井生产调度的专用通信系统 矿用程控交换机+调度台组成，支持强插、强拆、组呼等调度功能 调度通信系统与广播系统、无线通信系统互联互通">
+<div><span class="term-name">调度通信系统</span><span class="term-en">Dispatch Communication System</span></div>
+<div class="term-def">矿井生产调度的专用通信系统</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">矿用程控交换机+调度台组成，支持强插、强拆、组呼等调度功能</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">调度通信系统与广播系统、无线通信系统互联互通</div>
+</div>
+<div class="term-card" data-search="应急广播 Emergency Broadcasting 紧急情况下向井下人员发布指令的广播系统 与安全监控系统联动，灾害发生时自动触发应急广播，指导人员撤离 应急广播触发信号来自安全监控系统，需保证供电和通信可靠性">
+<div><span class="term-name">应急广播</span><span class="term-en">Emergency Broadcasting</span></div>
+<div class="term-def">紧急情况下向井下人员发布指令的广播系统</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">与安全监控系统联动，灾害发生时自动触发应急广播，指导人员撤离</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">应急广播触发信号来自安全监控系统，需保证供电和通信可靠性</div>
+</div>
+</div></div>
+<div class="term-group" id="gcat6" style="display:none">
+<div class="term-grid">
+<div class="term-card" data-search="点检（日常点检） Daily Inspection 由操作人员每班对设备进行的例行检查 检查设备运行声音、温度、振动、泄漏等异常，是设备管理的第一道防线 点检数据通过移动终端录入设备管理系统，异常自动生成缺陷工单">
+<div><span class="term-name">点检（日常点检）</span><span class="term-en">Daily Inspection</span></div>
+<div class="term-def">由操作人员每班对设备进行的例行检查</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">检查设备运行声音、温度、振动、泄漏等异常，是设备管理的第一道防线</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">点检数据通过移动终端录入设备管理系统，异常自动生成缺陷工单</div>
+</div>
+<div class="term-card" data-search="定期点检 Periodic Inspection 由维修人员按周期进行的专项检查 使用仪器测量振动、温度、绝缘等参数，与基准值对比判断设备劣化趋势 点检数据趋势分析纳入预测性维护系统">
+<div><span class="term-name">定期点检</span><span class="term-en">Periodic Inspection</span></div>
+<div class="term-def">由维修人员按周期进行的专项检查</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">使用仪器测量振动、温度、绝缘等参数，与基准值对比判断设备劣化趋势</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">点检数据趋势分析纳入预测性维护系统</div>
+</div>
+<div class="term-card" data-search="专项点检 Special Inspection 针对特定故障模式进行的深度检查 如钢丝绳探伤、齿轮箱油液分析、电气绝缘测试等 专项检查报告数字化存档，关键参数纳入设备健康档案">
+<div><span class="term-name">专项点检</span><span class="term-en">Special Inspection</span></div>
+<div class="term-def">针对特定故障模式进行的深度检查</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">如钢丝绳探伤、齿轮箱油液分析、电气绝缘测试等</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">专项检查报告数字化存档，关键参数纳入设备健康档案</div>
+</div>
+<div class="term-card" data-search="预防性维护 Preventive Maintenance (PM) 按固定周期执行的维护计划 基于时间或运行量的定期更换、润滑、调整，减少突发故障 PM计划录入EAM/CMMS系统，自动生成工单并跟踪执行">
+<div><span class="term-name">预防性维护</span><span class="term-en">Preventive Maintenance (PM)</span></div>
+<div class="term-def">按固定周期执行的维护计划</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">基于时间或运行量的定期更换、润滑、调整，减少突发故障</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">PM计划录入EAM/CMMS系统，自动生成工单并跟踪执行</div>
+</div>
+<div class="term-card" data-search="预测性维护 Predictive Maintenance (PdM) 基于设备状态监测数据预测故障并安排维护 通过振动、温度、油液等在线监测数据，利用算法预测设备剩余寿命，精准安排维修 PdM是智慧矿山设备管理的核心方向，传感器数据→AI模型→维护决策→工单执行全链路数字化">
+<div><span class="term-name">预测性维护</span><span class="term-en">Predictive Maintenance (PdM)</span></div>
+<div class="term-def">基于设备状态监测数据预测故障并安排维护</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">通过振动、温度、油液等在线监测数据，利用算法预测设备剩余寿命，精准安排维修</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">PdM是智慧矿山设备管理的核心方向，传感器数据→AI模型→维护决策→工单执行全链路数字化</div>
+</div>
+<div class="term-card" data-search="MTBF Mean Time Between Failures 平均故障间隔时间（h） 衡量设备可靠性的核心指标，MTBF越长说明设备越可靠，运维目标是持续提升MTBF MTBF数据从设备故障台账自动计算，是设备选型和大修决策的重要依据">
+<div><span class="term-name">MTBF</span><span class="term-en">Mean Time Between Failures</span></div>
+<div class="term-def">平均故障间隔时间（h）</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">衡量设备可靠性的核心指标，MTBF越长说明设备越可靠，运维目标是持续提升MTBF</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">MTBF数据从设备故障台账自动计算，是设备选型和大修决策的重要依据</div>
+</div>
+<div class="term-card" data-search="MTTR Mean Time To Repair 平均修复时间（h） 衡量维修效率的指标，MTTR越短说明故障恢复越快，运维需优化备件和维修流程 MTTR从工单系统自动统计，是运维KPI考核的关键指标">
+<div><span class="term-name">MTTR</span><span class="term-en">Mean Time To Repair</span></div>
+<div class="term-def">平均修复时间（h）</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">衡量维修效率的指标，MTTR越短说明故障恢复越快，运维需优化备件和维修流程</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">MTTR从工单系统自动统计，是运维KPI考核的关键指标</div>
+</div>
+<div class="term-card" data-search="OEE Overall Equipment Effectiveness 设备综合效率（%） OEE = 可用率 × 性能率 × 合格率，综合衡量设备利用效率，综采面OEE一般要求≥80% OEE数据采集需整合生产、设备、质量三个维度的数据，是MES/EAM的核心KPI">
+<div><span class="term-name">OEE</span><span class="term-en">Overall Equipment Effectiveness</span></div>
+<div class="term-def">设备综合效率（%）</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">OEE = 可用率 × 性能率 × 合格率，综合衡量设备利用效率，综采面OEE一般要求≥80%</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">OEE数据采集需整合生产、设备、质量三个维度的数据，是MES/EAM的核心KPI</div>
+</div>
+<div class="term-card" data-search="TPM Total Productive Maintenance 全面生产维护 全员参与的设备管理理念，强调"自主保全+专业保全"相结合，目标是零故障、零缺陷 TPM管理平台支持自主保全检查、OEE统计、改善提案等功能">
+<div><span class="term-name">TPM</span><span class="term-en">Total Productive Maintenance</span></div>
+<div class="term-def">全面生产维护</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">全员参与的设备管理理念，强调"自主保全+专业保全"相结合，目标是零故障、零缺陷</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">TPM管理平台支持自主保全检查、OEE统计、改善提案等功能</div>
+</div>
+<div class="term-card" data-search="RCM Reliability-Centered Maintenance 以可靠性为中心的维修 根据设备功能重要性、故障模式和后果，制定差异化维护策略 RCM分析结果录入EAM系统，指导PM/PdM策略制定">
+<div><span class="term-name">RCM</span><span class="term-en">Reliability-Centered Maintenance</span></div>
+<div class="term-def">以可靠性为中心的维修</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">根据设备功能重要性、故障模式和后果，制定差异化维护策略</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">RCM分析结果录入EAM系统，指导PM/PdM策略制定</div>
+</div>
+<div class="term-card" data-search="备件ABC分类法 ABC Classification 按备件重要性和价值分为A/B/C三类的管理方法 A类（关键备件，如采煤机截割电机）必须保持库存；B类适度储备；C类按需采购 ABC分类数据与EAM系统集成，驱动库存策略和安全库存计算">
+<div><span class="term-name">备件ABC分类法</span><span class="term-en">ABC Classification</span></div>
+<div class="term-def">按备件重要性和价值分为A/B/C三类的管理方法</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">A类（关键备件，如采煤机截割电机）必须保持库存；B类适度储备；C类按需采购</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">ABC分类数据与EAM系统集成，驱动库存策略和安全库存计算</div>
+</div>
+<div class="term-card" data-search="安全库存 Safety Stock 为防止缺料而设定的最低库存量 关键备件（如提升机制动器摩擦片）的安全库存直接影响停机风险，运维需定期评估和调整 EAM系统根据消耗速率、采购周期和安全库存自动触发采购申请">
+<div><span class="term-name">安全库存</span><span class="term-en">Safety Stock</span></div>
+<div class="term-def">为防止缺料而设定的最低库存量</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">关键备件（如提升机制动器摩擦片）的安全库存直接影响停机风险，运维需定期评估和调整</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">EAM系统根据消耗速率、采购周期和安全库存自动触发采购申请</div>
+</div>
+<div class="term-card" data-search="设备报废标准 Equipment Decommissioning Criteria 设备达到技术或经济寿命后强制退出使用的规定 煤矿设备有明确的报废年限和技术指标（如提升机主轴探伤不合格即报废），运维需建立报废台账 设备报废流程在EAM系统中完成审批，触发采购替换流程">
+<div><span class="term-name">设备报废标准</span><span class="term-en">Equipment Decommissioning Criteria</span></div>
+<div class="term-def">设备达到技术或经济寿命后强制退出使用的规定</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">煤矿设备有明确的报废年限和技术指标（如提升机主轴探伤不合格即报废），运维需建立报废台账</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">设备报废流程在EAM系统中完成审批，触发采购替换流程</div>
+</div>
+<div class="term-card" data-search="设备周转率 Equipment Turnover Rate 设备在不同工作面之间调转使用的频率 综采设备搬家倒面是大型矿井的常态，周转率高说明产能紧张但也增加设备损耗 设备周转计划纳入生产调度系统，搬家倒面方案需提前3个月规划">
+<div><span class="term-name">设备周转率</span><span class="term-en">Equipment Turnover Rate</span></div>
+<div class="term-def">设备在不同工作面之间调转使用的频率</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">综采设备搬家倒面是大型矿井的常态，周转率高说明产能紧张但也增加设备损耗</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">设备周转计划纳入生产调度系统，搬家倒面方案需提前3个月规划</div>
+</div>
+<div class="term-card" data-search="大修周期 Overhaul Cycle 设备两次大修之间的运行时间 采煤机大修周期一般为过煤量200-500万吨，液压支架大修周期5-8年，运维需精确跟踪 大修计划由EAM系统根据累计运行量自动触发，与生产计划协调">
+<div><span class="term-name">大修周期</span><span class="term-en">Overhaul Cycle</span></div>
+<div class="term-def">设备两次大修之间的运行时间</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">采煤机大修周期一般为过煤量200-500万吨，液压支架大修周期5-8年，运维需精确跟踪</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">大修计划由EAM系统根据累计运行量自动触发，与生产计划协调</div>
+</div>
+<div class="term-card" data-search="项修 Item Overhaul / Component Repair 针对设备特定项目（部件）的修理 不如大修全面，仅修理或更换达到极限状态的部件，如采煤机截割部项修 项修工单纳入EAM管理，记录修理内容和更换配件">
+<div><span class="term-name">项修</span><span class="term-en">Item Overhaul / Component Repair</span></div>
+<div class="term-def">针对设备特定项目（部件）的修理</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">不如大修全面，仅修理或更换达到极限状态的部件，如采煤机截割部项修</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">项修工单纳入EAM管理，记录修理内容和更换配件</div>
+</div>
+<div class="term-card" data-search="临修 Emergency Repair 设备突发故障后的紧急抢修 临修是运维最想减少的维修类型，每次临修都要做故障分析报告（RCFA） 临修工单从告警/报修自动生成，要求最快响应，事后必须录入故障原因和整改措施">
+<div><span class="term-name">临修</span><span class="term-en">Emergency Repair</span></div>
+<div class="term-def">设备突发故障后的紧急抢修</div>
+<div class="term-label">运维含义</div>
+<div class="term-def">临修是运维最想减少的维修类型，每次临修都要做故障分析报告（RCFA）</div>
+<div class="term-label">IT关联点</div>
+<div class="term-it">临修工单从告警/报修自动生成，要求最快响应，事后必须录入故障原因和整改措施</div>
+</div>
+</div></div>
+
+</div>
+</div>
+
+<!-- TAB 3: 运维流程 -->
+<div class="tab-content" id="process">
+<div class="card">
+<div class="card-title">煤矿IT运维流程图谱（10个核心流程）</div>
+<p style="color:var(--text-secondary);margin-bottom:12px">每个流程包含：流程目的、参与角色、详细步骤、关键控制点、常见故障处置、KPI指标、流程图。点击展开/折叠查看。</p>
+</div>
+
+<div class="collapsible">
+<div class="coll-header open" onclick="toggleColl(this)">
+<span>流程1：1. 综采工作面IT设备安装与部署流程</span>
+<span class="arrow">▸</span>
+</div>
+<div class="coll-body" style="display:block">
+<div class="highlight-box"><strong>流程目的：</strong>规范新工作面IT基础设施从方案设计到上线运行的全过程，确保设备选型合理、安装规范、系统联调达标，实现工作面"网络全覆盖、视频无盲区、定位精准化、传感可靠化"的智能化运行基础。</div>
+<div style="margin:12px 0"><strong>关键控制点：</strong><ol style="margin:6px 0 0 16px;font-size:.85rem;color:var(--text-secondary)"><li><strong>入井前地面联调</strong>：未做地面联调直接入井安装，会导致井下发现问题后设备升井维修，运输周期长（单次4-8小时），严重影响工期</li><li><strong>防爆安全检查</strong>：防爆设备失检入井，可能导致安全事故，属于红线问题</li><li><strong>光缆弯曲半径</strong>：弯曲半径不足会导致光纤断裂或损耗增大，后期排查困难</li><li><strong>VLAN/IP规划一致性</strong>：地面规划与井下实际配置不一致会导致网络不通或环网环路</li><li><strong>传感器标定</strong>：未标定直接投用会导致数据不准，影响安全判断</li></ol></div><div class="card-subtitle">流程图</div><div class="flow-box">需求分析与现场勘查
+    ↓
+方案设计 → [评审通过?]
+    ├─ 否 → 修改方案 → 重新评审
+    └─ 是 → 设备选型与到货验收
+              ↓
+         [MA/防爆检查合格?]
+              ├─ 否 → 退换设备
+              └─ 是 → 入井前地面联调
+                        ↓
+                   [联调全部通过?]
+                        ├─ 否 → 地面整改/更换设备 → 重新联调
+                        └─ 是 → 入井安全检测与运输
+                                  ↓
+                              安装布线（光缆/网线/设备/供电）
+                                  ↓
+                              系统调试（网络/视频/定位/传感/通信）
+                                  ↓
+                              [调试全部达标?]
+                                  ├─ 否 → 问题整改 → 重新调试
+                                  └─ 是 → 72小时联合试运转
+                                            ↓
+                                       [试运转合格?]
+                                            ├─ 否 → 整改 → 重新试运转（72h重计）
+                                            └─ 是 → 验收移交 → 进入日常运维</div>
+</div></div>
+
+<div class="collapsible">
+<div class="coll-header" onclick="toggleColl(this)">
+<span>流程2：2. 综采工作面回撤与迁移流程</span>
+<span class="arrow">▸</span>
+</div>
+<div class="coll-body" style="display:none">
+<div class="highlight-box"><strong>流程目的：</strong>规范工作面回采结束后IT设备的有序回撤、分类处理和资产台账更新，确保可复用设备完好率最大化、资产数据实时准确、回撤过程安全高效。</div>
+<div style="margin:12px 0"><strong>关键控制点：</strong><ol style="margin:6px 0 0 16px;font-size:.85rem;color:var(--text-secondary)"><li><strong>回撤顺序</strong>：过早拆除核心交换设备会导致其他设备失去网络监控，必须按"先末端后核心"顺序</li><li><strong>设备清点差异</strong>：升井后清点数量与台账不符，必须查明原因（遗漏井下/运输途中丢失），不允许直接平账</li><li><strong>防爆设备保护</strong>：回撤过程中隔爆面磕碰损伤，会导致设备防爆性能降低，再次入井存在安全隐患</li><li><strong>台账同步更新</strong>：台账未及时更新会导致新工作面部署时使用已损坏设备，造成二次返工</li></ol></div><div class="card-subtitle">流程图</div><div class="flow-box">接到矿方回撤通知
+    ↓
+回撤计划制定（设备清单/顺序/运输/分类预案）
+    ↓
+设备断电与线缆回收（先末端后核心）
+    ↓
+设备升井运输
+    ↓
+逐台清点与外观检查 → [数量/台账一致?]
+    ├─ 否 → 追查差异原因 → 补充清点
+    └─ 是 → 设备分类功能检测
+              ↓
+         ┌─ A类(可复用) → 入库"可用设备库" → 台账更新"库存-可复用"
+         ├─ B类(需维修) → 转入维修 → 维修后入库 → 台账更新"维修中"→"库存"
+         ├─ C类(需保养) → 保养后入库 → 台账更新"保养中"→"库存"
+         └─ D类(已报废) → 报废审批 → 台账更新"已报废"</div>
+</div></div>
+
+<div class="collapsible">
+<div class="coll-header" onclick="toggleColl(this)">
+<span>流程3：3. 掘进面设备迁移流程</span>
+<span class="arrow">▸</span>
+</div>
+<div class="coll-body" style="display:none">
+<div class="highlight-box"><strong>流程目的：</strong>规范掘进面IT设备随工作面推进的周期性迁移作业，确保迁移期间业务中断时间最短化（≤30分钟/次），设备安全零损坏，迁移后系统功能100%恢复。</div>
+<div style="margin:12px 0"><strong>关键控制点：</strong><ol style="margin:6px 0 0 16px;font-size:.85rem;color:var(--text-secondary)"><li><strong>"先建后拆"策略</strong>：不采用先拆后建会导致业务中断时间延长至2-4小时，严重影响掘进作业和安全监控</li><li><strong>IP地址冲突</strong>：新设备安装时若提前接入网络，新旧设备IP冲突会导致网络异常</li><li><strong>定位基站坐标更新</strong>：坐标不及时更新会导致定位系统显示人员位置偏移，影响安全管控</li><li><strong>传感器前移时机</strong>：传感器必须随掘进迎头及时前移，否则监控区域出现盲区，违反《煤矿安全规程》</li></ol></div><div class="card-subtitle">流程图</div><div class="flow-box">获取掘进进尺计划 → 确认迁移需求
+    ↓
+迁移前准备（工具/材料/新位置条件确认）
+    ↓
+新位置设备安装布线（先建，暂不接入网络）
+    ↓
+确认安全间隙 → 业务切换（≤30min）
+    ↓
+[各系统恢复正常?]
+    ├─ 否 → 排查故障 → 恢复 → 重新确认
+    └─ 是 → 旧位置设备拆除回收
+              ↓
+          台账与系统更新（位置/拓扑/坐标/巡检点）</div>
+</div></div>
+
+<div class="collapsible">
+<div class="coll-header" onclick="toggleColl(this)">
+<span>流程4：4. 日常巡检标准化流程</span>
+<span class="arrow">▸</span>
+</div>
+<div class="coll-body" style="display:none">
+<div class="highlight-box"><strong>流程目的：</strong>建立分级（日/周/月）标准化巡检体系，实现设备隐患早发现、早处置，保障智能化系统可用率≥99.5%，将故障消灭在萌芽状态。</div>
+<div style="margin:12px 0"><strong>关键控制点：</strong><ol style="margin:6px 0 0 16px;font-size:.85rem;color:var(--text-secondary)"><li><strong>巡检漏项</strong>：关键设备未被巡检到导致隐患未发现，需要通过巡检路线标准化和APP强制逐项确认来控制</li><li><strong>异常处置闭环</strong>：上报后未及时处置导致故障扩大，需要工单系统跟踪闭环</li><li><strong>纸质巡检造假</strong>：纸质记录可能造假，需要电子巡检（GPS定位+时间戳+拍照）+ 不定期抽查</li><li><strong>安全专项检查走过场</strong>：防爆检查不认真导致安全隐患，需要专项检查表逐项打钩+拍照留痕</li></ol></div><div class="card-subtitle">流程图</div><div class="flow-box">┌─ 日巡检 ─────────────────────────────────────┐
+│ 巡检准备 → 机房硐室巡检 → 线路末端设备巡检    │
+│     → 异常记录上报 → 异常工单处置 → 闭环确认   │
+└──────────────────────────────────────────────┘
+         ↓（每周汇总）
+┌─ 周巡检 ─────────────────────────────────────┐
+│ 网络设备性能检查 → 系统功能深度验证            │
+│     → 日巡检记录审核 → 根因分析 → 周检报告     │
+└──────────────────────────────────────────────┘
+         ↓（每月汇总）
+┌─ 月巡检 ─────────────────────────────────────┐
+│ 设备健康度评估 → 安全专项检查 → 备件消耗分析   │
+│     → 采购需求 → 月度综合报告 → 改进计划       │
+└──────────────────────────────────────────────┘</div>
+</div></div>
+
+<div class="collapsible">
+<div class="coll-header" onclick="toggleColl(this)">
+<span>流程5：5. 故障三级响应处置流程</span>
+<span class="arrow">▸</span>
+</div>
+<div class="coll-body" style="display:none">
+<div class="highlight-box"><strong>流程目的：</strong>建立"一级（驻矿现场）→二级（远程专家）→三级（厂商/集成商）"分级响应体系，确保故障在最短时间内得到最有效处置，核心系统可用率≥99.9%。</div>
+<div style="margin:12px 0"><strong>关键控制点：</strong><ol style="margin:6px 0 0 16px;font-size:.85rem;color:var(--text-secondary)"><li><strong>P1故障响应时效</strong>：核心系统中断超过30分钟可能影响安全生产，必须保证5分钟响应、30分钟恢复（或启用备用）</li><li><strong>升级时机判断</strong>：一级死磕不升级导致错过最佳处置窗口，必须严格执行时限升级机制</li><li><strong>工单记录完整性</strong>：记录不完整导致同类故障重复排查，浪费资源</li><li><strong>重复故障根因分析</strong>：同一设备/同一类型故障反复发生必须找到根因，不允许反复"重启恢复"了事</li></ol></div><div class="card-subtitle">流程图</div><div class="flow-box">故障发现（告警/报修/巡检/AI预警）
+    ↓
+工单生成 → 自动分级 → [P等级判定]
+    ↓
+┌─ P1/P2 → 一级响应（驻矿现场）
+│    ↓
+│   现场诊断与处置 → [30min/1h内解决?]
+│    ├─ 是 → 验证恢复 → 记录评价 → 归档
+│    └─ 否 → 升级至二级
+├─ P3 → 一级响应（运维员处置）→ [8h内解决?]
+│    ├─ 是 → 验证恢复 → 记录评价 → 归档
+│    └─ 否 → 升级至二级
+└─ P4 → 记录 → 巡检时处理
+    ↓
+二级响应（远程专家）→ 远程诊断与指导
+    ↓
+[解决?]
+    ├─ 是 → 验证恢复 → 记录评价 → 归档
+    └─ 否 → 升级至三级
+    ↓
+三级响应（厂商/集成商）→ 远程或现场处置
+    ↓
+验证恢复 → 故障分析报告 → 记录评价 → 归档 → 知识沉淀</div>
+</div></div>
+
+<div class="collapsible">
+<div class="coll-header" onclick="toggleColl(this)">
+<span>流程6：6. 光缆故障处理流程</span>
+<span class="arrow">▸</span>
+</div>
+<div class="coll-body" style="display:none">
+<div class="highlight-box"><strong>流程目的：</strong>规范井下光缆故障的定位、抢修、熔接和恢复全过程，确保光缆故障处置时效达标（主干光缆≤2小时恢复），熔接质量满足传输要求。</div>
+<div style="margin:12px 0"><strong>关键控制点：</strong><ol style="margin:6px 0 0 16px;font-size:.85rem;color:var(--text-secondary)"><li><strong>OTDR测试准确性</strong>：距离换算不准确会导致在错误位置开挖，浪费时间</li><li><strong>熔接损耗控制</strong>：单芯损耗>0.2dB会导致该通道误码率升高，影响视频质量或数据传输</li><li><strong>井下瓦斯监测</strong>：熔接机放电产生电弧，在瓦斯浓度超标环境下可能引发爆炸</li><li><strong>接头盒密封</strong>：密封不良导致进水，会加速光纤劣化，3-6个月后再次出现高损耗</li><li><strong>弯曲半径</strong>：储纤盘中弯曲半径不足会导致宏弯损耗，影响传输质量</li></ol></div><div class="card-subtitle">流程图</div><div class="flow-box">光路告警 → 初步判断（故障光路/范围/类型）
+    ↓
+OTDR测试定位 → 双向测试取平均 → 距离换算 → 确定巷道位置
+    ↓
+抢修准备（工具/材料/安全确认）→ 入井到达故障点
+    ↓
+现场确认故障 → 光缆开剥 → 裸光纤制备
+    ↓
+逐芯熔接 → [每芯损耗≤0.1dB?]
+    ├─ 否 → 重新熔接
+    └─ 是 → 热缩保护 → 盘纤入接头盒
+              ↓
+          OTDR复测 + 光功率测试 → [指标合格?]
+              ├─ 否 → 排查问题 → 重新熔接
+              └─ 是 → 网管确认业务恢复 → 接头盒封装 → 标识更新
+                        ↓
+                    记录归档 → 光缆管理系统更新</div>
+</div></div>
+
+<div class="collapsible">
+<div class="coll-header" onclick="toggleColl(this)">
+<span>流程7：7. 设备全生命周期管理流程</span>
+<span class="arrow">▸</span>
+</div>
+<div class="coll-body" style="display:none">
+<div class="highlight-box"><strong>流程目的：</strong>建立设备从采购到报废的全生命周期管理体系，通过设备电子身份证（一机一档）实现每台设备的完整履历追踪，结合健康度评估模型实现预测性维护，最大化设备利用率和使用寿命。</div>
+<div style="margin:12px 0"><strong>关键控制点：</strong><ol style="margin:6px 0 0 16px;font-size:.85rem;color:var(--text-secondary)"><li><strong>电子身份证信息实时更新</strong>：信息滞后会导致决策失误（如使用已超期未检的防爆设备）</li><li><strong>健康度评估客观性</strong>：不能凭主观判断，必须基于数据模型</li><li><strong>预防性维护执行率</strong>：C级设备的预防性维修计划执行不到位会导致D级故障频发</li><li><strong>MA/防爆证书有效期管理</strong>：证书过期设备严禁继续使用，系统需设置到期预警</li><li><strong>报废设备数据清除</strong>：涉及敏感配置数据的设备报废前需清除数据</li></ol></div><div class="card-subtitle">流程图</div><div class="flow-box">采购需求 → 到货验收 → [合格?]
+    ├─ 否 → 退换货
+    └─ 是 → 录入电子身份证 → 入库
+              ↓
+          领用申请 → 审批 → 出库 → 安装 → 状态"运行中"
+              ↓
+          ┌─── 运行期管理（循环）───┐
+          │ 点检 → 保养 → 维修     │
+          │ 性能监测 → 数据采集     │
+          └─────────┬───────────────┘
+                    ↓
+            设备健康度评估（A/B/C/D）
+                    ↓
+            ┌─ A/B → 继续正常运行
+            ├─ C → 制定维修/更换计划 → 执行
+            └─ D → 立即维修/更换
+                    ↓
+            [达到报废条件?]
+                ├─ 否 → 继续运行管理
+                └─ 是 → 报废鉴定 → 审批 → 处置 → 状态"已报废"</div>
+</div></div>
+
+<div class="collapsible">
+<div class="coll-header" onclick="toggleColl(this)">
+<span>流程8：8. 备件管理流程</span>
+<span class="arrow">▸</span>
+</div>
+<div class="coll-body" style="display:none">
+<div class="highlight-box"><strong>流程目的：</strong>建立科学的备件管理体系，确保关键备件在需要时可及时供应，同时控制库存成本，实现"井下急需30分钟到位、地面备件当日到位"的保障目标。</div>
+<div style="margin:12px 0"><strong>关键控制点：</strong><ol style="margin:6px 0 0 16px;font-size:.85rem;color:var(--text-secondary)"><li><strong>安全库存执行</strong>：关键备件低于安全库存不及时补货，一旦故障无备件更换导致系统长时间瘫痪</li><li><strong>紧急领用后补手续</strong>：紧急领用不补手续会导致库存数据不准确，影响后续补货决策</li><li><strong>备件质量把控</strong>：使用不合格备件会导致二次故障，必须验收检验</li><li><strong>账实一致性</strong>：账实不符会导致以为有库存实际没有的情况，必须定期盘点</li><li><strong>井下备件库环境</strong>：井下潮湿环境可能导致备件存储期间受潮损坏</li></ol></div><div class="card-subtitle">流程图</div><div class="flow-box">需求预测（历史数据+健康度+项目计划）
+    ↓
+安全库存设定 → 库存监控 → [低于安全线?]
+    ├─ 否 → 正常监控
+    └─ 是 → 触发采购申请
+              ↓
+          采购执行（常规15天/紧急3天）
+              ↓
+          到货验收 → 入库 → 库存更新
+              ↓
+          领用需求 → [紧急?]
+              ├─ 是 → 先领用（15min内）→ 2h内补工单
+              └─ 否 → 审批 → 出库 → 使用反馈
+              ↓
+          月度/季度盘点 → 消耗分析 → 优化库存策略</div>
+</div></div>
+
+<div class="collapsible">
+<div class="coll-header" onclick="toggleColl(this)">
+<span>流程9：9. 网络安全运维流程</span>
+<span class="arrow">▸</span>
+</div>
+<div class="coll-body" style="display:none">
+<div class="highlight-box"><strong>流程目的：</strong>依托网络安全态势感知平台，建立覆盖7630个网络资产的常态化安全运维体系，实现安全威胁"实时监测→快速预警→分级响应→有效处置→持续改进"的闭环管理，确保满足等保合规要求。</div>
+<div style="margin:12px 0"><strong>关键控制点：</strong><ol style="margin:6px 0 0 16px;font-size:.85rem;color:var(--text-secondary)"><li><strong>态势感知平台告警疲劳</strong>：告警太多导致安全管理员忽视真正威胁，需要优化告警规则减少误报</li><li><strong>工控系统补丁风险</strong>：未经测试直接打补丁可能导致工控系统异常，影响安全生产</li><li><strong>等保合规底线</strong>：等保测评不通过可能导致矿井被责令整改甚至停产</li><li><strong>日志保存完整性</strong>：日志被篡改或丢失会导致安全事件无法追溯</li><li><strong>内部威胁管控</strong>：内部人员的违规操作可能比外部攻击更危险</li></ol></div><div class="card-subtitle">流程图</div><div class="flow-box">态势感知平台实时监测 → 安全告警
+    ↓
+告警分析 → [真实威胁?]
+    ├─ 否 → 优化规则（白名单/阈值调整）
+    └─ 是 → 安全事件分级（S1-S4）
+              ↓
+          ┌─ S1/S2 → 15-30min响应 → 隔离 → 深度分析 → 处置 → 报告
+          ├─ S3 → 1h响应 → 隔离杀毒 → 补丁修复 → 恢复观察
+          └─ S4 → 4h响应 → 封禁IP → 加强监控
+              ↓
+          漏洞管理（周扫描 → 评估 → 测试 → 修补 → 复测）
+              ↓
+          日志审计（日分析 → 周报表 → 月深度审计）
+              ↓
+          等保合规（季度自查 → 年度测评 → 整改跟踪）</div>
+</div></div>
+
+<div class="collapsible">
+<div class="coll-header" onclick="toggleColl(this)">
+<span>流程10：10. 数据备份与灾备流程</span>
+<span class="arrow">▸</span>
+</div>
+<div class="coll-body" style="display:none">
+<div class="highlight-box"><strong>流程目的：</strong>建立覆盖所有关键业务系统的数据备份与灾备体系，确保数据在硬件故障、人为误操作、勒索攻击等场景下可快速恢复，RPO（恢复点目标）和RTO（恢复时间目标）满足煤矿安全生产要求。</div>
+<div style="margin:12px 0"><strong>关键控制点：</strong><ol style="margin:6px 0 0 16px;font-size:.85rem;color:var(--text-secondary)"><li><strong>安全监测数据零丢失</strong>：瓦斯、CO等安全监测数据一旦丢失会影响安全追溯，必须保证实时同步+本地缓存双保险</li><li><strong>备份数据有效性</strong>：备份成功≠可以恢复，必须通过定期恢复演练验证备份有效性</li><li><strong>RPO/RTO达标</strong>：实际RPO/RTO超过目标值意味着灾难发生时数据丢失量或恢复时间不可接受</li><li><strong>备份数据安全性</strong>：备份数据被篡改或删除（如勒索病毒同时加密在线数据和备份数据），必须有离线/不可变备份</li><li><strong>存储空间管理</strong>：存储空间耗尽会导致后续备份全部失败，必须有容量预警和自动扩容机制</li></ol></div><div class="card-subtitle">流程图</div><div class="flow-box">数据资产分类 → 备份策略制定（RPO/RTO目标）
+    ↓
+┌─ 实时同步（安全监测/定位数据）
+├─ 定时备份（每日增量/每周全量）
+├─ 触发备份（配置变更后自动）
+└─ 日志归档（实时采集+每日归档）
+    ↓
+备份执行 → 自动校验 → [校验通过?]
+    ├─ 否 → 排查原因 → 重新备份
+    └─ 是 → 三级存储（在线→近线→异地离线）
+              ↓
+          每日监控（成功率/存储空间）
+              ↓
+          季度恢复演练 → [RPO/RTO达标?]
+              ├─ 否 → 优化策略/升级基础设施
+              └─ 是 → 演练报告归档 → 持续改进</div>
+</div></div>
+</div>
+
+<!-- TAB 4: 培训框架 -->
+<div class="tab-content" id="training">
+
+<div class="card">
+<div class="card-title">7天售前培训框架（每天30分钟）</div>
+<p style="color:var(--text-secondary);margin-bottom:12px">每天30分钟，按3/10/11/6分钟切：业务锚点(3min) → 核心数字(10min) → 逻辑链条(11min) → 自测3题(6min)。目标：能在客户会议室用对方的词汇体系对话。</p>
+</div>
+
+<!-- Day 1 -->
+<div class="day-card">
+<div class="day-header"><div class="day-num">D1</div><div class="day-info"><h3>客户是谁：从陕煤集团到运维分公司</h3><p>30秒画出组织链路，说清运维分公司的商业模式</p></div></div>
+<div class="day-body">
+<div class="card-subtitle">业务锚点（3min）</div>
+<p style="font-size:.85rem;margin:6px 0">客户说："我们是运维分公司的，服务五家单位六对矿井。" → 五家=红柳林、柠条塔、张家峁、韩家湾、涌鑫；六对矿井含涌鑫安山、沙梁。</p>
+<div class="card-subtitle">必须记住的5个数字（10min）</div>
+<div class="table-wrap"><table>
+<thead><tr><th>#</th><th>数字</th><th>含义</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>2021-12-16</td><td>运维分公司成立日期</td></tr>
+<tr><td>2</td><td>约125人</td><td>机关21 + 智维中心104</td></tr>
+<tr><td>3</td><td>5家单位6对矿井</td><td>服务范围</td></tr>
+<tr><td>4</td><td>17项/4大类</td><td>智能化煤矿运维团体标准</td></tr>
+<tr><td>5</td><td>2025-11</td><td>"五维"运维模式获全煤管理创新成果一等奖</td></tr>
+</tbody></table></div>
+<div class="card-subtitle">今天要说出口的一句话</div>
+<div class="highlight-box">"你们做的不只是运维，是把运维做成了标准和产品。"</div>
+</div>
+</div>
+
+<!-- Day 2 -->
+<div class="day-card">
+<div class="day-header"><div class="day-num">D2</div><div class="day-info"><h3>煤在哪、怎么采：地质赋存与采煤方法</h3><p>听懂"浅埋深、薄基岩、大采高、易自燃、低瓦斯"</p></div></div>
+<div class="day-body">
+<div class="card-subtitle">业务锚点（3min）</div>
+<p style="font-size:.85rem;margin:6px 0">客户说："我们是浅埋深、薄基岩、大采高，Ⅰ类容易自燃。" → 这五个词决定所有系统设计的出发点。</p>
+<div class="card-subtitle">必须记住的5个数字（10min）</div>
+<div class="table-wrap"><table>
+<thead><tr><th>#</th><th>数字</th><th>含义</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>延安组含煤18层/可采3-7层</td><td>榆神府矿区含煤地层</td></tr>
+<tr><td>2</td><td>最大单层厚度12.8m</td><td>煤层厚度上限</td></tr>
+<tr><td>3</td><td>浅部矿井开采深度多70-100m</td><td>浅埋深</td></tr>
+<tr><td>4</td><td>煤层倾角一般＜3°</td><td>近水平煤层</td></tr>
+<tr><td>5</td><td>红柳林7m、张家峁8m</td><td>客户主力采高</td></tr>
+</tbody></table></div>
+<div class="card-subtitle">今天要说出口的一句话</div>
+<div class="highlight-box">"你们的煤层条件是国内最好的那一档，所以智能化走得最快；但浅埋深薄基岩的采动影响加上Ⅰ类容易自燃，决定了你们的线和监测系统不能只按机房标准管。"</div>
+</div>
+</div>
+
+<!-- Day 3 -->
+<div class="day-card">
+<div class="day-header"><div class="day-num">D3</div><div class="day-info"><h3>采：综采工作面五大工序与"三机一架"</h3><p>说出五大工序、三机角色、智能化综采的典型动作</p></div></div>
+<div class="day-body">
+<div class="card-subtitle">业务锚点（3min）</div>
+<p style="font-size:.85rem;margin:6px 0">客户说："25216综采工作面4G信号断了，一刀煤2000吨就没了。" → 采煤机连续作业，停机时间=产量损失。</p>
+<div class="card-subtitle">必须记住的5个数字（10min）</div>
+<div class="table-wrap"><table>
+<thead><tr><th>#</th><th>数字</th><th>含义</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>五大工序</td><td>破煤、装煤、运煤、支护顶板、采空区处理</td></tr>
+<tr><td>2</td><td>截深0.6-1.0m</td><td>一个循环推进量</td></tr>
+<tr><td>3</td><td>液压支架占投资＞45%</td><td>投资结构最大头</td></tr>
+<tr><td>4</td><td>智能化综采面每班≤5人</td><td>行业验收红线</td></tr>
+<tr><td>5</td><td>割煤7m/min、自动化90%+</td><td>客户成绩单</td></tr>
+</tbody></table></div>
+<div class="card-subtitle">今天要说出口的一句话</div>
+<div class="highlight-box">"你们的智能化综采已经常态化跑通了——5人一班、割煤7米每分钟、自动化开机率90%以上。这套东西最大的风险不是'会不会用'，而是'哪一段链路断了它就不转'。"</div>
+</div>
+</div>
+
+<!-- Day 4 -->
+<div class="day-card">
+<div class="day-header"><div class="day-num">D4</div><div class="day-info"><h3>掘：快速掘进与"采掘失衡"</h3><p>区分四大快速掘进系统，理解"掘锚同步"</p></div></div>
+<div class="day-body">
+<div class="card-subtitle">业务锚点（3min）</div>
+<p style="font-size:.85rem;margin:6px 0">客户说："15212胶运顺槽快掘面单月2702米。" → 三个关键词：顺槽、快掘面、单月进尺。</p>
+<div class="card-subtitle">必须记住的5个数字（10min）</div>
+<div class="table-wrap"><table>
+<thead><tr><th>#</th><th>数字</th><th>含义</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>四大类快速掘进系统</td><td>连采机、掘锚一体机、掘锚机、TBM</td></tr>
+<tr><td>2</td><td>全国掘进平均速度约200m/月</td><td>行业基线</td></tr>
+<tr><td>3</td><td>全国每年需掘1.3万km</td><td>工程量量级</td></tr>
+<tr><td>4</td><td>张家峁：单班65m/单日120m/单月2702m</td><td>客户成绩</td></tr>
+<tr><td>5</td><td>神东3088m/月（2014）</td><td>行业天花板</td></tr>
+</tbody></table></div>
+<div class="card-subtitle">今天要说出口的一句话</div>
+<div class="highlight-box">"掘进面是运维最难的一块——设备跟着工作面走，基站、摄像头、线缆一个月挪一次。固定机房的资产测绘逻辑在掘进面基本失效。"</div>
+</div>
+</div>
+
+<!-- Day 5 -->
+<div class="day-card">
+<div class="day-header"><div class="day-num">D5</div><div class="day-info"><h3>机与维：设备全生命周期管理</h3><p>讲清点检-包机-检修分级-电子履历这条链</p></div></div>
+<div class="day-body">
+<div class="card-subtitle">业务锚点（3min）</div>
+<p style="font-size:.85rem;margin:6px 0">客户说："我们有'二维码+数据库'的电子身份证，故障诊断从2小时压到35分钟。"</p>
+<div class="card-subtitle">必须记住的5个数字（10min）</div>
+<div class="table-wrap"><table>
+<thead><tr><th>#</th><th>数字</th><th>含义</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>四级责任</td><td>职能部门监管/专业科室主抓/区队班组落实/岗位包机负责</td></tr>
+<tr><td>2</td><td>十字作业法</td><td>润滑、紧固、清洁、调整、防腐</td></tr>
+<tr><td>3</td><td>小修10-20%/中修20-30%/大修30-50%+</td><td>检修成本（占整机造价）</td></tr>
+<tr><td>4</td><td>煤机设计寿命5-8年</td><td>更换周期</td></tr>
+<tr><td>5</td><td>7630个网络资产</td><td>态势感知保护数</td></tr>
+</tbody></table></div>
+<div class="card-subtitle">今天要说出口的一句话</div>
+<div class="highlight-box">"你们的电子身份证把故障诊断压到35分钟，这一步很扎实。但二维码是'人扫'——设备挪一次、换一次、报废一台，台账就得人跟着改。下一步要解决的是'不用人贴、不用人录，台账自己准'。"</div>
+</div>
+</div>
+
+<!-- Day 6 -->
+<div class="day-card">
+<div class="day-header"><div class="day-num">D6</div><div class="day-info"><h3>通与网：井下信息基础设施（我方主场）</h3><p>画出井下四层架构，说出关键设备与指标</p></div></div>
+<div class="day-body">
+<div class="card-subtitle">业务锚点（3min）</div>
+<p style="font-size:.85rem;margin:6px 0">客户说："我们井下五套万兆环网交换机、138台融合基站、293台工业视频。"</p>
+<div class="card-subtitle">必须记住的5个数字（10min）</div>
+<div class="table-wrap"><table>
+<thead><tr><th>#</th><th>数字</th><th>含义</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>四层架构</td><td>感知→传输→平台→应用</td></tr>
+<tr><td>2</td><td>UWB定位精度优于30cm</td><td>定位能力基线</td></tr>
+<tr><td>3</td><td>5G单站覆盖半径约200m</td><td>3.5GHz频段</td></tr>
+<tr><td>4</td><td>定位基站覆盖是通信基站2-3倍</td><td>间隔部署原因</td></tr>
+<tr><td>5</td><td>红柳林5套万兆+138台融合+293台视频</td><td>客户现状</td></tr>
+</tbody></table></div>
+<div class="card-subtitle">今天要说出口的一句话</div>
+<div class="highlight-box">"你们井下已经是一张多业务的网——万兆环网打底，4G融合基站138台、工业视频293台、7630个网络资产在态势感知里管着。这套网的资产清单，现在靠人维护。"</div>
+</div>
+</div>
+
+<!-- Day 7 -->
+<div class="day-card">
+<div class="day-header"><div class="day-num">D7</div><div class="day-info"><h3>安与标准：一通三防、新版规程、17项团标与AI落点</h3><p>把前6天收口成三句话，给出三个AI切口</p></div></div>
+<div class="day-body">
+<div class="card-subtitle">业务锚点（3min）</div>
+<p style="font-size:.85rem;margin:6px 0">新版《煤矿安全规程》2026年2月1日施行。客户正处在宣贯期——最好的对话时机。</p>
+<div class="card-subtitle">必须记住的5个数字（10min）</div>
+<div class="table-wrap"><table>
+<thead><tr><th>#</th><th>数字</th><th>含义</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>2026-02-01</td><td>新版《煤矿安全规程》施行日</td></tr>
+<tr><td>2</td><td>777条/新增56条/修改353条</td><td>修订幅度</td></tr>
+<tr><td>3</td><td>"智能"3次/"无人"23次/"远程"11次</td><td>智能化条款密度</td></tr>
+<tr><td>4</td><td>17项/4大类</td><td>客户团标</td></tr>
+<tr><td>5</td><td>采煤面≤3个、掘进面≤9个</td><td>工作面数量红线</td></tr>
+</tbody></table></div>
+<div class="card-subtitle">AI三个落地切口</div>
+<div class="table-wrap"><table>
+<thead><tr><th>切口</th><th>接在客户已有机制上</th><th>价值</th></tr></thead>
+<tbody>
+<tr><td>资产测绘与台账自愈</td><td>电子身份证+7630个网络资产+等保台账</td><td>从"人贴二维码"到"设备自报"</td></tr>
+<tr><td>故障分级响应与工单闭环</td><td>工单驱动三级协同+团标故障分级时限</td><td>70%常见故障挡在第一级</td></tr>
+<tr><td>知识沉淀与能力对标</td><td>运维知识库+育人才+五维模式</td><td>老师傅经验从手艺活变可检索知识</td></tr>
+</tbody></table></div>
+<div class="card-subtitle">今天要说出口的一句话</div>
+<div class="highlight-box">"新版规程说得很清楚：固定场所实现自动化、集中监控的，可以不配专人值守，但必须实行巡检制度。你们已经把巡检标准和故障分级写进了17项团标——现在缺的是让标准被系统自动执行的那一层。"</div>
+</div>
+</div>
+
+</div>
+
+<!-- TAB 5: 锐捷方案对接 -->
+<div class="tab-content" id="solution">
+
+<div class="card">
+<div class="card-title">锐捷产品映射表（8大产品线）</div>
+<p style="color:var(--text-secondary);margin-bottom:12px">将锐捷现有产品/方案与客户实际需求场景对接，明确切入点与价值主张。</p>
+<div class="table-wrap"><table>
+<thead><tr><th>锐捷产品/方案</th><th>煤矿应用场景</th><th>客户痛点</th><th>价值主张（客户语言）</th><th>竞品差异点</th></tr></thead>
+<tbody>
+<tr><td><strong>工业交换机<br>（万兆环网）</strong></td><td>井下主干传输网络；红柳林已有5套万兆环网交换机；六大系统汇聚传输</td><td>环网一断六系统同时降级；浅埋深薄基岩导致光缆被采动压断频率高；设备老化需替换</td><td>"环网自愈时间决定停产时长。我们的工业环网在采动影响区域的可靠性，可以用你们的实际拓扑做实测对比"</td><td>工业级宽温设计、ERPS/RSTP多协议支持、实测自愈数据可查</td></tr>
+<tr><td><strong>无线产品<br>（4G/5G CPE/WiFi6/7）</strong></td><td>综采面/掘进面无线覆盖；138台融合基站覆盖区域补充</td><td>4G信号中断=停产（一刀煤2000吨=上百万损失）；掘进面每月挪基站跟不上进尺</td><td>"25216面那个4G断了停产的案例——我们的融合方案可以把通信+定位+数据合一，减少设备数量和迁移工作量"</td><td>融合基站三合一能力、WiFi7高密度场景、矿用本安认证</td></tr>
+<tr><td><strong>物联网关<br>（传感器接入/协议转换）</strong></td><td>多厂商传感器数据汇聚；束管监测/注氮系统数据采集</td><td>"不同系统与厂商设备的语言障碍"（客户团标原文）；协议不统一导致数据孤岛</td><td>"你们17项团标要解决跨厂商协同——物联网关在网络层把协议统一掉，让上层平台不用管底层说的是什么话"</td><td>多协议兼容（Modbus/OPC UA/MQTT等）、边缘计算能力、与锐捷网管联动</td></tr>
+<tr><td><strong>网络安全<br>（防火墙/态势感知/准入控制）</strong></td><td>等保分级防护；7630个网络资产防护扩展；井下终端准入</td><td>已有360态势感知但终端准入能力待加强；井下设备MA标志+失爆检查+网络安全三重合规</td><td>"你们已经做到7630个资产零入侵——准入控制可以补上'入井设备身份核验'这一环"</td><td>与360做增量互补而非替换、网络准入+零信任融合、等保合规一站式</td></tr>
+<tr><td><strong>IT运维管理<br>（资产管理/工单/监控）</strong></td><td>7630个网络资产动态台账；工单三级协同优化；92个在用系统统一监控</td><td>"二维码是人扫"台账靠人维护；掘进面资产每月挪动无法实时追踪</td><td>"你们已经用AIOps+ITIL了——我们做的是在这个基础上，让资产自己报、工单自己分、故障自己定位到端口"</td><td>SNMP自动发现+拓扑自维护、AI工单分级、与锐捷网络设备深度联动</td></tr>
+<tr><td><strong>数据中心<br>（超融合/存储）</strong></td><td>MEC边缘云升级；92个在用系统后端承载；"1+8"管控平台存储扩容</td><td>数据量持续增长（视频293台+传感器海量数据）；边缘计算需本地化处理</td><td>"关键数据不出矿井这个方向你们已经走在前面了——超融合架构可以让存储和计算在矿端弹性扩展"</td><td>超融合一体机快速部署、矿用环境适配、与MEC边缘云架构兼容</td></tr>
+<tr><td><strong>智慧矿山解决方案</strong></td><td>智能化综合管控平台集成；安全监控+人员定位+调度通信一体化</td><td>多系统分散管理、跨系统联动困难；新版规程要求"远程""视频监视"替代人工巡检</td><td>"新版规程说固定场所可以不配专人但必须巡检——智慧矿山方案把'远程监控+自动巡检+异常推送'串起来"</td><td>锐捷网络+安全+IoT全栈能力、与17项团标对接、行业案例积累</td></tr>
+<tr><td><strong>AI大模型相关方案</strong></td><td>工单智能分级与知识检索；设备故障预测；运维知识库自动沉淀</td><td>"老师傅经验是手艺活"难以复制；专家是稀缺资源被70%常见问题消耗</td><td>"三个方向：资产自己准、工单自己分、知识自己长。在你们已有的AIOps+ITIL基础上，AI大模型多做这一层"</td><td>锐捷乐享大模型能力、行业知识训练、与运维平台API对接而非替换</td></tr>
+</tbody></table></div>
+</div>
+
+<div class="card">
+<div class="card-title">售前必知三件套</div>
+
+<div class="card-subtitle">① 客户怎么称呼系统</div>
+<div class="table-wrap"><table>
+<thead><tr><th>客户称呼</th><th>真实含义</th><th>你该怎么接</th></tr></thead>
+<tbody>
+<tr><td>智维中心</td><td>驻矿运维队伍</td><td>"四个智维中心的人员配置一样吗？"</td></tr>
+<tr><td>工单/派工单</td><td>服务工单（有矿方评分）</td><td>"工单里的故障现象是结构化录入还是自由文本？"</td></tr>
+<tr><td>电子身份证</td><td>二维码+数据库的设备档案</td><td>"扫码之后，数据回写到哪儿？"</td></tr>
+<tr><td>五维运维</td><td>做标准·强服务·搭平台·育人才·创价值</td><td>"'搭平台'这块下一步想补什么能力？"</td></tr>
+<tr><td>万兆环网</td><td>井下主干工业环网</td><td>"环网现在是几套、覆盖哪些盘区？"</td></tr>
+<tr><td>融合基站</td><td>通信+定位+数据三合一基站</td><td>"138台里4G和5G各占多少？"</td></tr>
+<tr><td>一刀煤/进一刀</td><td>采煤机走一趟，截深0.6-1.0m</td><td>"掉一刀煤，按你们的产能大概多少吨？"</td></tr>
+<tr><td>顺槽（回风巷/胶运巷）</td><td>通向工作面的巷道</td><td>"顺槽这段的光缆是走顶板还是帮上？"</td></tr>
+<tr><td>失爆</td><td>防爆性能失效（严重隐患）</td><td>"新增设备入场前的失爆检查流程是谁签字？"</td></tr>
+</tbody></table></div>
+
+<div class="card-subtitle">② 客户怎么汇报工作</div>
+<div class="highlight-box">
+• <strong>KPI一定包含：</strong>响应时效、故障处置时长、设备完好率、矿方满意度评分<br>
+• <strong>"工单如同病历本"</strong>——全程记录故障现象、处理过程、备件使用、处理结果及矿方评价<br>
+• <strong>四级响应分级：</strong>常见故障分钟/小时级响应 → 疑难问题升级后端远程专家团队<br>
+• <strong>设备完好率目标：</strong>行业标杆95%以上，客户视频保障班提升11.2个百分点<br>
+• <strong>2025年认定685项创新项目，创效超2000万元</strong>
+</div>
+
+<div class="card-subtitle">③ 客户怎么评估运维</div>
+<div class="table-wrap"><table>
+<thead><tr><th>评估维度</th><th>关键指标</th><th>客户实际值</th></tr></thead>
+<tbody>
+<tr><td>响应速度</td><td>故障平均处置时间</td><td>2小时→35分钟</td></tr>
+<tr><td>资产管控</td><td>网络安全纳管资产数</td><td>7630个，零入侵</td></tr>
+<tr><td>设备管理</td><td>设备完好率</td><td>提升11.2个百分点</td></tr>
+<tr><td>成本控制</td><td>线缆浪费/办公耗材</td><td>线缆500m→100m/月，耗材降15%</td></tr>
+<tr><td>创新价值</td><td>创新项目数/创效金额</td><td>685项/2000万+</td></tr>
+</tbody></table></div>
+</div>
+
+<div class="card">
+<div class="card-title">客户常见Q&A（10个标准应答）</div>
+
+<details class="qa"><summary>Q1: "你们的设备和我们现有的华为/中兴/360能兼容吗？"</summary><div class="answer"><strong>标准应答：</strong>"我们不是来替换你们已有体系的。红柳林的万兆环网、138台融合基站、360态势感知——这些是你们的底座。我们做的是在这个底座上补'自动发现、自动分级、知识沉淀'这几块能力。设备层面，标准协议（SNMP/Modbus/OPC UA）对接，不存在兼容性问题。"</div></details>
+
+<details class="qa"><summary>Q2: "你们懂煤矿吗？井下和地面园区网完全不一样。"</summary><div class="answer"><strong>标准应答：</strong>"所以我们今天不是来推销设备的，是来对语言的。我知道你们井下有三条硬约束：MA标志准入、失爆检查、三专两闭锁。浅埋深薄基岩会压断光缆，Ⅰ类容易自燃要求监测系统不能断。锐捷在矿山行业有专门的矿用产品线，MA认证齐全。"</div></details>
+
+<details class="qa"><summary>Q3: "我们已经有AIOps和ITIL了，你们还能做什么？"</summary><div class="answer"><strong>标准应答：</strong>"你们的AIOps+ITIL基础在行业里属于第一梯队。我们不是来替代的，是在这个基础上做三件事：第一，资产台账从'人扫二维码'变成'设备自报'；第二，工单分级规则从人工定义变成AI持续优化；第三，老师傅的经验从脑子里变成可检索的知识库。"</div></details>
+
+<details class="qa"><summary>Q4: "停产损失你们怎么算？"</summary><div class="answer"><strong>标准应答：</strong>"按你们的公开数据：红柳林单面日产3.5万吨，25216面那个案例是一刀煤2000吨，现场电工说'上百万的损失'。我们不做虚的承诺——算的是：如果把故障诊断从35分钟再压缩到15分钟，一年能减少多少小时的通讯中断。用你们自己的数字算，不用我们编。"</div></details>
+
+<details class="qa"><summary>Q5: "掘进面的设备一个月挪一次，你们怎么解决？"</summary><div class="answer"><strong>标准应答：</strong>"这正是我们想聊的场景。掘进面设备跟着工作面走，基站、摄像头、线缆每月迁移——固定机房的资产测绘逻辑在这里失效。我们的方案是：设备上线自动注册到资产管理平台，迁移后网络拓扑自动更新，不用人一条条改。"</div></details>
+
+<details class="qa"><summary>Q6: "你们的方案和竞品有什么区别？"</summary><div class="answer"><strong>标准应答：</strong>"三句话：第一，锐捷是做网络出身的——网络设备+安全+IoT+运维是一家的，不存在跨厂商协调问题。第二，我们不做替换做增量——你们的360态势感知、华为环网我们兼容。第三，我们有矿山行业的MA认证产品线，不是拿园区网方案硬套。"</div></details>
+
+<details class="qa"><summary>Q7: "新版规程对你们的产品有什么影响？"</summary><div class="answer"><strong>标准应答：</strong>"2026年2月1日施行的新版规程，核心取向是'无人则安'——固定场所自动化后可以不配专人，但必须巡检。这意味着你们需要一套系统来承接巡检能力。我们的方案就是让标准被系统自动执行。"</div></details>
+
+<details class="qa"><summary>Q8: "你们的售后怎么保障？我们在陕北神木。"</summary><div class="answer"><strong>标准应答：</strong>"锐捷在陕西有本地服务团队。更重要的是，我们的运维方案和你们的'三级协同'模式对接——我们提供设备级和平台级的远程诊断能力，相当于给你们后端专家团队多一个工具。"</div></details>
+</div>
+
+<div class="card">
+<div class="card-title">价值量化公式（5个）</div>
+
+<div class="formula">
+<div class="formula-name">公式1 · 通讯中断损失</div>
+<div class="formula-expr">年损失 = 单次中断时长(h) × 中断频次(次/年) × 单面时产(t/h) × 煤价(元/t)</div>
+<div class="formula-example">示例：2h × 12次 × 4375t/h × 600元/t ≈ 6264万元/年（仅单面）</div>
+</div>
+
+<div class="formula">
+<div class="formula-name">公式2 · 故障诊断提效收益</div>
+<div class="formula-expr">年节省 = (当前诊断时间 - 目标时间) × 故障次数/年 × 单位时间停产成本</div>
+<div class="formula-example">示例：(35min - 15min) × 145次 × 3万元/min停机成本 ≈ 可量化收益</div>
+</div>
+
+<div class="formula">
+<div class="formula-name">公式3 · 资产台账人力节省</div>
+<div class="formula-expr">年节省人力 = 当前台账维护人时/月 × 12 × 人力成本 × 自动化率</div>
+<div class="formula-example">示例：台账自动发现替代60%人工 → 4个智维中心×2人×4h/天×250天 = 5000人时/年可释放</div>
+</div>
+
+<div class="formula">
+<div class="formula-name">公式4 · 一网多业务承载降本</div>
+<div class="formula-expr">年节省 = (原网络套数 - 1) × 单套设备折旧 + 光纤维护工作量减少 × 人力成本</div>
+<div class="formula-example">示例：井下原来4张网→1张物理切片网，设备/光纤/维护各降60%+</div>
+</div>
+
+<div class="formula">
+<div class="formula-name">公式5 · 知识沉淀ROI</div>
+<div class="formula-expr">ROI = (新人上手周期缩短月数 × 培训成本/人 × 新人批次) + 专家时间释放价值</div>
+<div class="formula-example">示例：新人上手从6个月→3个月 × 年招10人 × 培训期间工资 ≈ 直接节省</div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-title">⚠️ 绝对不能说的话（10条禁忌）</div>
+
+<div class="warn-box"><p><span class="wrong">✗ "你们的IT部门……"</span></p><p>他们不是IT部门，是煤矿智能化运维服务商，已经做成了标准和产品。</p><p><span class="right">✓ "你们运维团队……"</span></p></div>
+
+<div class="warn-box"><p><span class="wrong">✗ "工业互联网平台"（泛泛而谈）</span></p><p>他们已有"1+8"管控云平台、92个系统集成，不缺概念。</p><p><span class="right">✓ 先问"现在平台里最难管的是哪一类数据"</span></p></div>
+
+<div class="warn-box"><p><span class="wrong">✗ "我们支持毫秒级"（无实测/无出处）</span></p><p>环网倒换时间协议差异极大，讲了会被现场问穿。</p><p><span class="right">✓ "具体倒换时间取决于协议和现场拓扑，我可以安排一次实测"</span></p></div>
+
+<div class="warn-box"><p><span class="wrong">✗ 拿消费品/园区运维案例直接套</span></p><p>煤矿有安标、失爆、井下防爆等独占约束，硬套显得外行。</p><p><span class="right">✓ 先说"井下和我们平时做的园区网，有三条硬约束不一样"</span></p></div>
+
+<div class="warn-box"><p><span class="wrong">✗ "AI能替代运维人员"</span></p><p>他们最自豪的就是队伍建设——4个技能大师工作室、17名技能大师、13名全国技术能手。</p><p><span class="right">✓ "AI把重复劳动接走，让人去做判断和处置"</span></p></div>
+
+<div class="warn-box"><p><span class="wrong">✗ 把客户提效数字说成"我们实现的"</span></p><p>2小时→35分钟是客户自己的成果，张冠李戴会立刻失去信任。</p><p><span class="right">✓ "你们已经把诊断压到35分钟，下一步可以压到多少？"</span></p></div>
+
+<div class="warn-box"><p><span class="wrong">✗ "业内唯一/第一"（无出处）</span></p><p>客户自己就是多个"全国第一"，没出处的宣称只会被质疑。</p><p><span class="right">✓ 有出处才说，并注明来源与口径</span></p></div>
+
+<div class="warn-box"><p><span class="wrong">✗ "你们的网络太老了，该全换了"</span></p><p>他们的万兆环网、融合基站才部署几年，直接否定会激怒客户。</p><p><span class="right">✓ "现有网络基础很扎实，我们在上面做增量——哪些点位最需要加固？"</span></p></div>
+
+<div class="warn-box"><p><span class="wrong">✗ 把停产损失的4000吨和2000吨混用</span></p><p>两个口径来自不同场景（25214面 vs 25216面"一刀煤"），混用会被认为不严谨。</p><p><span class="right">✓ 引用时明确场景和出处，不混用</span></p></div>
+
+<div class="warn-box"><p><span class="wrong">✗ "你们用的是什么协议/频段？"（第一次见面就问）</span></p><p>这是现场技术细节，第一次见面应该聊业务痛点而非技术参数。</p><p><span class="right">✓ 先聊业务场景和价值，技术问题留到方案阶段或第二次拜访</span></p></div>
+</div>
+
+<div class="card">
+<div class="card-title">知识关联关系图谱</div>
+<div class="table-wrap"><table>
+<thead><tr><th>上游知识</th><th>下游知识</th><th>关联逻辑</th></tr></thead>
+<tbody>
+<tr><td>地质条件（浅埋深/薄基岩/大采高/易自燃）</td><td>信息基础设施设计</td><td>地质风险→采动裂缝→光缆被压断→环网冗余设计需求</td></tr>
+<tr><td>大采高智能化</td><td>通讯依赖度排序</td><td>5人一班+自动化90%→通讯中断=停产→采煤机信号>电液控>视频</td></tr>
+<tr><td>采掘接续硬约束</td><td>掘进面IT运维</td><td>掘进慢=全矿慢→掘进面设备每月迁移→固定资产测绘逻辑失效</td></tr>
+<tr><td>17项团标</td><td>AI运维落地</td><td>标准已立→需要系统自动执行→三个AI切口（资产/工单/知识）</td></tr>
+<tr><td>新版规程（无人则安）</td><td>巡检能力系统承接</td><td>可以不配专人但必须巡检→AI运维=巡检能力的系统替代</td></tr>
+<tr><td>一网多业务承载</td><td>运维降本</td><td>多张网→一张切片网→设备/光纤/维护三者同时下降</td></tr>
+<tr><td>客户商业模式（建管维训标准输出）</td><td>锐捷切入策略</td><td>做增量不做替换→接AIOps/ITIL基础→三个闭环方向</td></tr>
+<tr><td>7630个网络资产+态势感知</td><td>资产管理需求</td><td>已有安全纳管→台账准确性+实时性→自动发现+SNMP联动</td></tr>
+<tr><td>停产损失锚点</td><td>ROI量化</td><td>单面日产3.5万吨→通讯中断时长×时产×煤价=可计算损失</td></tr>
+</tbody></table></div>
+</div>
+
+</div>
+
+<script>
+// Tab switching
+document.querySelectorAll('.tab-btn').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active')});
+    document.querySelectorAll('.tab-content').forEach(function(c){c.classList.remove('active')});
+    btn.classList.add('active');
+    var tabId=btn.getAttribute('data-tab');
+    document.getElementById(tabId).classList.add('active');
+    window.location.hash=tabId;
+  });
+});
+
+// Hash navigation
+if(window.location.hash){
+  var hash=window.location.hash.substring(1);
+  var btn=document.querySelector('.tab-btn[data-tab="'+hash+'"]');
+  if(btn)btn.click();
+}
+
+// Glossary sub-tabs
+document.querySelectorAll('.sub-tab').forEach(function(tab){
+  tab.addEventListener('click',function(){
+    document.querySelectorAll('.sub-tab').forEach(function(t){t.classList.remove('active')});
+    document.querySelectorAll('.term-group').forEach(function(g){g.style.display='none'});
+    tab.classList.add('active');
+    var target=tab.getAttribute('data-target');
+    document.getElementById(target).style.display='block';
+  });
+});
+
+// Glossary search
+document.getElementById('termSearch').addEventListener('input',function(e){
+  var query=e.target.value.toLowerCase();
+  document.querySelectorAll('.term-card').forEach(function(card){
+    var searchText=card.getAttribute('data-search').toLowerCase();
+    card.style.display=searchText.indexOf(query)>-1?'':'none';
+  });
+  // Show all groups when searching
+  if(query.length>0){
+    document.querySelectorAll('.term-group').forEach(function(g){g.style.display='block'});
+  }
+});
+
+// Collapsible
+function toggleColl(header){
+  var body=header.nextElementSibling;
+  header.classList.toggle('open');
+  if(body.style.display==='none'||!body.style.display){
+    body.style.display='block';
+    body.classList.add('open');
+  }else{
+    body.style.display='none';
+    body.classList.remove('open');
+  }
+}
+</script>
+</body>
+</html>
